@@ -1,0 +1,10 @@
+# 비밀 정보 (rules/common.md 7장: API 키는 리포에 넣지 않는다)
+.env
+.env.*
+*.key
+*.pem
+credentials*.json
+.claude/settings.local.json
+
+# macOS
+.DS_Store
