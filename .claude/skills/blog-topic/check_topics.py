@@ -4,7 +4,10 @@
 1. 머리(front matter)와 후보마다 필수 항목
 2. 점수 1~5 정수, 총점 = 가중합 재계산과 일치 (전환 35 / 자료부족 20 / 수요 20 / 경험 15 / 수명 10)
 3. 서브 키워드 3~5개, 속보는 마감 필수
-4. 순위표 3개(속보 AI / 속보 보안·개발 / 일반): 표마다 최대 5개, 축 일치, 총점 내림차순, 상세와 값 일치
+4. 순위표: 아침(am) = 속보 AI / 속보 보안·개발 / 깊이 새 글 / 깊이 개편, 저녁(pm) = 속보 2개.
+   표마다 최대 5개, 축·경로 일치, 총점 내림차순, 상세와 값 일치
+6. 추천 ○: 표마다 1개 (속보는 한쪽 표가 비면 다른 쪽 2개). 고른 뒤(☑ 있음)에는 경고만
+7. 「실습」 값, ○ 행은 「추천」 이유 필수, 개편 표는 「[更新]」 가제목만, 「이월」 칸 형식
 5. URL이 모두 후보 파일·검색 결과 URL 목록·기존 글 목록에 있는지 (짐작한 URL 방지)
 
 사용법:
@@ -13,6 +16,7 @@
 종료 코드 0 = 통과, 1 = 문제 있음 (경고만 있으면 0)
 """
 import argparse
+import datetime
 import json
 import re
 import sys
@@ -21,7 +25,13 @@ from pathlib import Path
 WEIGHTS = {"전환": 35, "자료부족": 20, "수요": 20, "경험": 15, "수명": 10}
 FRONT = ["made_at", "slot", "candidates", "counts"]
 FIELDS = ["경로", "원 후보", "주제 축", "글 종류", "가제목", "메인 키워드", "서브 키워드", "키워드 근거",
-          "점수", "점수 근거", "일본어 상위 결과", "1키워드1글", "마감", "원문 URL"]
+          "점수", "점수 근거", "일본어 상위 결과", "1키워드1글", "마감", "원문 URL", "실습"]
+TRIALS = {"에이전트 가능", "사람 필요", "해당 없음"}
+MARKS = {"☐", "○", "☑"}
+# (표 제목, 경로, AI 축이어야 하나(None=상관없음), 개편 표인가)
+TABLES_AM = [("## 속보 순위 — AI", "속보", True, False), ("## 속보 순위 — 보안·개발", "속보", False, False),
+             ("## 깊이 새 글 순위", "일반", None, False), ("## 깊이 개편 순위", "일반", None, True)]
+TABLES_PM = TABLES_AM[:2]
 ROUTES = {"속보", "일반"}
 AXES = {"AI", "보안", "개발"}
 TYPES = {"AI 속보", "AI 사용법", "AI 업무 활용", "AI 도입 가이드", "보안 사고 해설",
@@ -110,12 +120,17 @@ def main():
                 errs.append(f"{tid}: 총점 {sm.group(6)} ≠ 계산값 {tot}")
         if f.get("경로") == "속보" and not re.search(r"\d{4}-\d{2}-\d{2}", f.get("마감", "")):
             errs.append(f"{tid}: 속보는 마감 날짜 필요 (발표 + 72시간)")
-        details[tid] = {"axis": f.get("주제 축"), "route": f.get("경로"), "total": tot, "title": tt, "type": f.get("글 종류")}
+        if f.get("실습") and not any(f["실습"].startswith(t) for t in TRIALS):
+            errs.append(f"{tid}: 실습 값 '{f['실습']}' (에이전트 가능 / 사람 필요 / 해당 없음 으로 시작)")
+        details[tid] = {"axis": f.get("주제 축"), "route": f.get("경로"), "total": tot, "title": tt,
+                        "type": f.get("글 종류"), "rec": f.get("추천", "").strip(),
+                        "trial": f.get("실습", "")}
 
     # 순위표
-    # 속보는 AI 몫과 보안·개발 몫을 따로 (D28: 한 순위면 전환 1점인 AI 속보가 늘 밀린다)
-    for route, title, ai in (("속보", "## 속보 순위 — AI", True), ("속보", "## 속보 순위 — 보안·개발", False),
-                             ("일반", "## 일반 글 순위", None)):
+    tables = TABLES_PM if front.get("slot") == "pm" else TABLES_AM
+    picked = "☑" in text
+    marks = {}
+    for title, route, ai, upd in tables:
         mm = re.search(re.escape(title) + r"[^\n]*\n((?:\|.*\n)+)", text)
         if not mm:
             errs.append(f"순위표 없음: {title}")
@@ -124,20 +139,31 @@ def main():
         if len(rows) > 5:
             errs.append(f"{title}: {len(rows)}개 (최대 5개)")
         prev = 999
+        marks[title] = 0
         for r in rows:
-            c = [x.strip() for x in r.strip("|").split("|")]
-            if len(c) < 9:
-                errs.append(f"{title}: 칸 수 부족 '{r[:40]}'")
+            c = [x.strip() for x in r.strip().strip("|").split("|")]
+            if len(c) < 10:
+                errs.append(f"{title}: 칸 수 부족(10칸: …1키워드1글 | 이월) '{r[:40]}'")
                 continue
-            tid, tot = c[2], c[6]
+            mark, tid, tot, carry = c[0], c[2], c[6], c[9]
+            if mark not in MARKS:
+                errs.append(f"{title}: {tid} 선택 값 '{mark}' (☐ ○ ☑)")
+            if mark in ("○", "☑"):
+                marks[title] += 1
+            if carry != "-" and not re.match(r"topics/[\w.-]+\.md T\d+$", carry):
+                errs.append(f"{title}: {tid} 이월 칸 형식 '{carry}' (- 또는 'topics/파일.md T03')")
             d = details.get(tid)
             if not d:
                 errs.append(f"{title}: {tid} 상세 없음")
                 continue
+            if mark == "○" and not d["rec"]:
+                errs.append(f"{title}: {tid}는 ○인데 상세에 「추천:」 이유가 없음")
             if d["route"] != route:
                 errs.append(f"{title}: {tid}의 경로는 {d['route']}")
             if ai is not None and (d["axis"] == "AI") != ai:
                 errs.append(f"{title}: {tid}의 주제 축은 {d['axis']}")
+            if upd != d["title"].startswith("[更新]"):
+                errs.append(f"{title}: {tid} — 개편 표에는 「[更新]」 글만, 새 글 표에는 새 글만")
             if str(d["total"]) != tot:
                 errs.append(f"{title}: {tid} 총점 {tot} ≠ 상세 {d['total']}")
             if c[3] != d["title"]:
@@ -146,6 +172,30 @@ def main():
                 if int(tot) > prev:
                     errs.append(f"{title}: 총점 내림차순이 아님 ({tid})")
                 prev = int(tot)
+        marks[title] = (marks[title], len(rows))
+    # 화·목 아침: 깊이 새 글 표는 AI 실습 후보만 (D35). 후보가 없을 수 있어 경고
+    dm = re.search(r"(\d{4})-(\d{2})-(\d{2})-am", Path(a.file).name)
+    if dm and datetime.date(*map(int, dm.groups())).weekday() in (1, 3):
+        mm = re.search(r"## 깊이 새 글 순위[^\n]*\n((?:\|.*\n)+)", text)
+        for r in (mm.group(1).splitlines()[2:] if mm else []):
+            c = [x.strip() for x in r.strip().strip("|").split("|")]
+            d = details.get(c[2]) if len(c) > 2 else None
+            if d and (d["axis"] != "AI" or d["trial"].startswith("해당 없음")):
+                warns.append(f"화·목 아침 깊이 새 글 표에 AI 실습이 아닌 후보 {c[2]} — AI 실습 후보가 없을 때만 (추천에 이유)")
+    # 추천 ○ 개수: 표마다 1개, 속보는 한쪽이 비면 다른 쪽 2개
+    names = [t[0] for t in tables]
+    for i, title in enumerate(names):
+        if title not in marks:
+            continue
+        n, rows = marks[title]
+        want = 1 if rows else 0
+        if i < 2:
+            other = marks.get(names[1 - i], (0, 0))
+            if rows and other[1] == 0:
+                want = 2 if rows >= 2 else 1
+        if n != want:
+            msg = f"{title}: 추천 ○ {n}개 (기대 {want}개)"
+            (warns if picked else errs).append(msg)
 
     # URL
     for u in sorted(set(URL_RE.findall(text))):

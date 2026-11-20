@@ -4,6 +4,7 @@
 - 사이트맵(https://atatakaidigital.com/sitemap.xml)에서 /ja/blog/<slug>를 찾고, 각 글의 <title>과
   meta description을 가져온다
 - 이미 목록에 있는 글은 다시 가져오지 않는다 (--refresh로 전부 다시). 동시 접속 2, 요청 사이 0.3초
+- 사이트맵의 lastmod(마지막 수정일)는 매번 갱신한다 → existing_posts.stale.txt에 오래된 순 목록 (개편 후보 찾기용)
 - Python 표준 라이브러리 + curl만 쓴다
 
 사용법:
@@ -82,6 +83,9 @@ def main():
     with cf.ThreadPoolExecutor(max_workers=2) as ex:
         for r in ex.map(run, todo):
             old[r["slug"]] = r
+    for slug, _, lastmod in urls:  # 수정일은 이미 있는 글도 갱신
+        if slug in old:
+            old[slug]["lastmod"] = lastmod
 
     live = {u[0] for u in urls}
     posts = sorted((p for s, p in old.items() if s in live), key=lambda p: p["slug"])
@@ -97,6 +101,11 @@ def main():
     # 한 줄 목록 (컨텍스트 절약용)
     lines = [f"{p['slug']}\t{p['title']}" for p in posts]
     out.with_suffix(".titles.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    # 오래 고치지 않은 순 (개편 후보 찾기용)
+    stale = sorted(posts, key=lambda p: p.get("lastmod") or "")
+    out.with_suffix(".stale.txt").write_text(
+        "\n".join(f"{(p.get('lastmod') or '-')[:10]}\t{p['slug']}\t{p['title']}" for p in stale) + "\n",
+        encoding="utf-8")
 
 
 if __name__ == "__main__":
