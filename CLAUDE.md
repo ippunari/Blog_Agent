@@ -17,6 +17,7 @@
   - 예 → 표의 상태를 ☑로 바꾸고, 다음 스킬은 새 세션에서 시작하도록 안내한다 (컨텍스트 절약)
   - 아니요 → 고칠 점을 듣고 계속 다듬는다
 - 사용자의 확인 없이 ☑로 바꾸지 않는다
+- 스킬을 만들거나 고치면(입력·출력·상태·스크립트·◆ 지점) `docs/skills-map.html`의 해당 카드도 같이 고친다 — 사람이 고칠 때 보는 지도
 
 ## 철칙 (어느 단계에서든 항상)
 1. 대표(ヤン)의 경험·의견을 지어내지 않는다. 대표 한마디가 없으면 대표 의견 없이 쓴다. 필자 ヒカリちゃん의 「써 봤어요」는 실제로 한 실습(에이전트·사람)만
@@ -31,6 +32,7 @@
 - `topics/` 주제 후보 순위표(시트 대신), `topics/existing_posts.json` 기존 글 목록
 - `briefs/<slug>.md` 진행 중인 주제 카드 (blog-research로 넘김). 발행 완료는 `briefs/done/YYYY-MM/`, 중단은 `briefs/dropped/` (BlogAgent.md 「주제 카드의 상태와 정리」)
 - `research/<slug>.md` 조사 노트, `outlines/<slug>.md` 설계안, `drafts/<slug>.md` 초안, `factcheck/<slug>.md` 사실 대조 보고서 — 발행 완료는 각 폴더의 `done/YYYY-MM/`, 중단은 `dropped/` (카드와 함께 옮긴다)
+- `publish/<slug>/` Ghost에 붙일 발행 파일(임시 방식) — 발행 완료는 `publish/done/YYYY-MM/` (D50)
 - `reports/` 주간 리포트
 - 이 작업 데이터는 **로컬 폴더에만** 둔다. git에는 프로그램(`.claude/skills/`)·규칙·문서·폴더 구조(`.gitkeep`)만 올린다 (D42)
 

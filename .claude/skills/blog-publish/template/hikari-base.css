@@ -1,0 +1,192 @@
+
+
+/* HowtoAI 記事テンプレート。構成は watareru.com/blog の事例記事（case-article.css）に合わせる。
+   色は HowtoAI 用に固定し、サイト本体の色とは切り離す。 */
+.ondi-article .hta{
+  --ink: #18394b; --paper: #f7f5ef; --orange: #df7138; --muted: #58696c;
+  --line: #d5dcd6; --soft: #e7ebe3; --mint: #dde9e3; --cream: #fbf6ea;
+  --sand: #f3eadb; --green: #4e6b4e;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.95;
+}
+.ondi-article .hta *,.ondi-article .hta *::before,.ondi-article .hta *::after{ box-sizing: border-box; }
+.ondi-article .hta .hta-w{ width: min(59rem, 100% - 48px); margin-inline: auto; }
+.ondi-article .hta .en{ font-family: 'Inter', 'Helvetica Neue', sans-serif; }
+
+/* 頭: シリーズ名・タグ・記事情報 */
+.ondi-article .hta .hta-top{ background: var(--mint); border-radius: 0 0 60px 60px; padding: 36px 0 40px; margin-bottom: 40px; }
+.ondi-article .hta .cs-crumb{ font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--green); font-weight: 700; text-transform: uppercase; margin: 0; }
+.ondi-article .hta .cs-crumb b{ color: var(--orange); }
+.ondi-article .hta .cs-tags{ display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 16px; }
+.ondi-article .hta .cs-cat{ display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 14px; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+.ondi-article .hta .cs-cat i{ width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+.ondi-article .hta .cs-no{ font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 12px; font-weight: 900; letter-spacing: 2px; color: #fff; background: var(--ink); border-radius: 999px; padding: 7px 14px; }
+.ondi-article .hta .cs-info{ display: flex; flex-wrap: wrap; margin-top: 20px; font-size: 13px; font-weight: 700; }
+.ondi-article .hta .cs-info span{ padding: 0 14px; border-left: 1.5px solid rgba(24, 57, 75, .35); }
+.ondi-article .hta .cs-info span:first-child{ padding-left: 0; border-left: 0; }
+
+/* この記事はこんな方に / わかること */
+.ondi-article .hta .cs-readers{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+.ondi-article .hta .cs-rc{ border: 1px solid var(--ink); border-radius: 8px; padding: 22px 24px; background: #fff; }
+.ondi-article .hta .cs-rc.out{ background: var(--mint); }
+.ondi-article .hta .rc-title{ font-size: 13px; font-weight: 900; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+.ondi-article .hta .rc-title i{ width: 22px; height: 22px; border-radius: 50%; background: var(--orange); display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 11px; font-style: normal; font-weight: 900; flex: none; }
+.ondi-article .hta .cs-rc ul{ list-style: none; margin: 0; padding: 0; }
+.ondi-article .hta .cs-rc li{ font-size: 14px; line-height: 1.7; padding: 6px 0 6px 18px; margin: 0; position: relative; }
+.ondi-article .hta .cs-rc li::before{ content: ""; position: absolute; left: 0; top: 14px; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+
+/* 目次 + 本文の2段 */
+.ondi-article .hta .cs-wrap{ display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; padding-bottom: 40px; }
+.ondi-article .hta .cs-side{ position: sticky; top: 96px; align-self: start; }
+.ondi-article .hta .cs-toc{ border: 1px solid var(--ink); border-radius: 8px; padding: 18px 20px; background: #fff; }
+.ondi-article .hta .toc-title{ font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--green); font-weight: 700; margin: 0 0 8px; }
+.ondi-article .hta .cs-toc ol{ list-style: none; margin: 0; padding: 0; counter-reset: t; }
+.ondi-article .hta .cs-toc li{ margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.ondi-article .hta .cs-toc li:first-child{ border-top: 0; }
+.ondi-article .hta .cs-toc li a{ display: grid; grid-template-columns: 26px 1fr; gap: 6px; padding: 9px 0; font-size: 13px; font-weight: 700; line-height: 1.5; color: var(--ink); text-decoration: none; counter-increment: t; }
+.ondi-article .hta .cs-toc li a::before{ content: "0" counter(t); font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; color: var(--orange); font-weight: 900; padding-top: 2px; }
+.ondi-article .hta .cs-toc li a:hover{ color: var(--orange); }
+.ondi-article .hta .cs-sidecta{ margin-top: 16px; background: var(--cream); border: 1px solid var(--ink); border-radius: 8px; padding: 18px 20px; }
+.ondi-article .hta .cs-sidecta b{ display: block; font-size: 14px; font-weight: 900; line-height: 1.5; }
+.ondi-article .hta .cs-sidecta p{ font-size: 12px; color: var(--muted); margin: 8px 0 0; line-height: 1.7; }
+
+.ondi-article .hta .btn{ display: inline-flex; align-items: center; gap: 18px; padding: 14px 20px; border-radius: 4px; background: var(--ink); color: #fff; font-weight: 700; font-size: 14px; text-decoration: none; }
+.ondi-article .hta .btn:hover{ background: #28546b; color: #fff; }
+.ondi-article .hta .cs-sidecta .btn{ margin-top: 14px; padding: 11px 16px; font-size: 13px; }
+
+.ondi-article .hta .cs-body p{ margin: 0 0 20px; }
+.ondi-article .hta .cs-body h3{ font-size: 19px; line-height: 1.5; margin: 28px 0 10px; }
+/* 本文のリンク色はボタンには当てない（.cs-body a が .btn より強く、白文字が紺になる） */
+.ondi-article .hta .cs-body a:not(.btn){ color: var(--ink); text-underline-offset: 4px; }
+
+.ondi-article .hta .cs-sec{ padding: 36px 0 12px; border-top: 1px solid var(--line); scroll-margin-top: 96px; }
+.ondi-article .hta .cs-sec:first-child{ border-top: 0; padding-top: 0; }
+.ondi-article .hta .cs-num{ display: inline-flex; align-items: center; gap: 10px; font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--green); font-weight: 700; text-transform: uppercase; }
+.ondi-article .hta .cs-num b{ width: 34px; height: 34px; border-radius: 50%; background: var(--orange); border: 2px solid var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; letter-spacing: 0; flex: none; }
+.ondi-article .hta .cs-sec h2{ font-size: 28px; line-height: 1.45; margin: 12px 0 18px; padding: 0; border: 0; letter-spacing: 0; }
+
+.ondi-article .hta .cs-facts{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 22px; }
+.ondi-article .hta .cs-fact{ background: var(--cream); border: 1px solid var(--ink); border-radius: 8px; padding: 18px 18px 16px; }
+.ondi-article .hta .cs-fact b{ display: block; font-size: 22px; font-weight: 900; line-height: 1.2; }
+.ondi-article .hta .cs-fact span{ display: block; font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.6; }
+
+.ondi-article .hta .cs-key{ background: #fff; border: 1px solid var(--ink); border-left: 6px solid var(--orange); border-radius: 8px; padding: 18px 22px 18px 24px; margin: 6px 0 24px; font-size: 15px; line-height: 1.8; }
+.ondi-article .hta .cs-key b{ display: block; font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--orange); margin-bottom: 6px; }
+.ondi-article .hta .cs-lim{ background: var(--sand); border: 1.5px dashed var(--ink); border-radius: 8px; padding: 16px 20px; font-size: 14px; line-height: 1.7; margin: 4px 0 24px; }
+.ondi-article .hta .cs-lim strong{ font-weight: 900; }
+.ondi-article .hta blockquote.cs-q{ margin: 8px 0 24px; padding: 24px 26px 20px 34px; background: var(--mint); border-radius: 16px; position: relative; font-size: 18px; line-height: 1.7; font-weight: 700; border: 0; font-style: normal; color: var(--ink); }
+.ondi-article .hta blockquote.cs-q::before{ content: "\201C"; position: absolute; left: 14px; top: -6px; font-family: 'Inter', serif; font-size: 60px; color: var(--orange); line-height: 1; }
+
+.ondi-article .hta .cs-chk{ counter-reset: c; margin: 4px 0 22px; padding: 0; list-style: none; }
+.ondi-article .hta .cs-chk li{ display: grid; grid-template-columns: 30px 1fr; gap: 12px; margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.7; counter-increment: c; }
+.ondi-article .hta .cs-chk li::before{ content: counter(c); width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--ink); display: inline-flex; align-items: center; justify-content: center; font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 12px; font-weight: 900; margin-top: 2px; }
+.ondi-article .hta .cs-chk li strong{ font-weight: 900; }
+
+.ondi-article .hta .cs-fig{ margin: 8px 0 40px; }
+.ondi-article .hta .cs-fig img{ display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: top; border: 1px solid var(--ink); border-radius: 12px; margin: 0; }
+.ondi-article .hta .cs-fig figcaption{ margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.7; text-align: left; }
+.ondi-article .hta .cs-fig figcaption b{ display: block; margin: 0 0 4px; color: var(--orange); font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; }
+
+/* 表 */
+.ondi-article .hta .hta-table{ overflow-x: auto; margin: 4px 0 24px; border: 1px solid var(--ink); border-radius: 8px; background: #fff; }
+.ondi-article .hta .hta-table table{ width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.7; margin: 0; }
+.ondi-article .hta .hta-table th{ text-align: left; background: var(--cream); font-weight: 900; padding: 12px 16px; border-bottom: 1px solid var(--ink); white-space: nowrap; }
+.ondi-article .hta .hta-table td{ padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.ondi-article .hta .hta-table tr:last-child td{ border-bottom: 0; }
+.ondi-article .hta .hta-table td:first-child{ font-weight: 700; white-space: nowrap; }
+.ondi-article .hta .hta-table.check td:first-child{ white-space: normal; }
+.ondi-article .hta .hta-j{ display: inline-block; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 900; white-space: nowrap; border: 1.5px solid var(--ink); }
+.ondi-article .hta .hta-j.ok{ background: var(--mint); }
+.ondi-article .hta .hta-j.half{ background: var(--cream); }
+.ondi-article .hta .hta-j.ng{ background: #f6dcc9; }
+
+/* ツール3つ */
+.ondi-article .hta .hta-tools{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 8px 0 22px; }
+.ondi-article .hta .hta-tool{ background: #fff; border: 1px solid var(--ink); border-radius: 8px; padding: 18px 18px 16px; }
+.ondi-article .hta .hta-tool b{ display: block; font-size: 17px; font-weight: 900; line-height: 1.4; }
+.ondi-article .hta .hta-tool .p{ display: block; margin-top: 6px; font-size: 13px; font-weight: 700; color: var(--orange); }
+.ondi-article .hta .hta-tool p{ font-size: 13px; line-height: 1.7; color: var(--muted); margin: 10px 0 0; }
+
+/* FAQ・出典 */
+.ondi-article .hta .cs-faq{ margin-top: 24px; padding-top: 36px; border-top: 1px solid var(--line); }
+.ondi-article .hta .kicker{ font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--green); }
+.ondi-article .hta .cs-faq h2{ font-size: 26px; margin: 10px 0 18px; padding: 0; border: 0; }
+.ondi-article .hta .cs-faq details{ border: 1px solid var(--ink); border-radius: 8px; background: #fff; margin-bottom: 10px; overflow: hidden; }
+.ondi-article .hta .cs-faq summary{ list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 20px; font-weight: 900; font-size: 15px; line-height: 1.6; cursor: pointer; }
+.ondi-article .hta .cs-faq summary::-webkit-details-marker{ display: none; }
+.ondi-article .hta .cs-faq summary::after{ content: "▾"; width: 26px; height: 26px; border-radius: 50%; background: var(--mint); flex: none; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; transition: transform .2s; }
+.ondi-article .hta .cs-faq details[open] summary{ background: var(--cream); }
+.ondi-article .hta .cs-faq details[open] summary::after{ transform: rotate(180deg); }
+.ondi-article .hta .cs-faq details p{ padding: 0 20px 18px; margin: 0; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.ondi-article .hta .cs-faq details[open] p{ padding-top: 14px; }
+
+.ondi-article .hta .cs-src{ margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--line); }
+.ondi-article .hta .cs-src h2{ font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--green); margin: 0 0 12px; padding: 0; border: 0; font-weight: 700; }
+.ondi-article .hta .cs-src ol{ list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.ondi-article .hta .cs-src li{ font-size: 13px; line-height: 1.7; margin: 0; padding: 6px 0; display: grid; grid-template-columns: 22px 1fr; gap: 8px; counter-increment: s; }
+.ondi-article .hta .cs-src li::before{ content: counter(s); font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; color: var(--orange); font-weight: 900; padding-top: 3px; }
+.ondi-article .hta .cs-src a{ color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); word-break: break-all; }
+.ondi-article .hta .cs-src a:hover{ color: var(--orange); }
+
+/* シリーズ案内と相談 */
+.ondi-article .hta .hta-series{ margin-top: 36px; background: var(--cream); border: 1px solid var(--ink); border-radius: 8px; padding: 22px 24px; font-size: 14px; line-height: 1.8; }
+.ondi-article .hta .hta-series p{ margin: 0; }
+.ondi-article .hta .hta-series .kicker{ display: block; margin-bottom: 6px; color: var(--orange); }
+.ondi-article .hta .cs-cta{ margin-top: 40px; background: var(--mint); border: 1px solid var(--ink); border-radius: 16px; padding: 40px 40px; }
+.ondi-article .hta .cs-cta h2{ font-size: 26px; line-height: 1.45; margin: 10px 0 0; padding: 0; border: 0; }
+.ondi-article .hta .cs-cta p{ margin: 14px 0 0; line-height: 1.9; }
+.ondi-article .hta .cs-cta .btn{ margin-top: 22px; }
+
+/* ヒカリちゃんの案内。watareru.com のブログと同じキャラクター・配色。
+   冒頭の案内カード、各セクション末の吹き出し、最後の相談ボックスの3か所だけに出す。 */
+.ondi-article .hta .hta-hikari{ display: grid; grid-template-columns: 150px minmax(0, 1fr); border: 1px solid var(--ink); border-radius: 8px; background: var(--cream); box-shadow: 7px 7px 0 var(--mint); overflow: hidden; margin: 0 0 44px; }
+.ondi-article .hta .hta-hikari-fig{ display: grid; place-items: end center; background: var(--mint); border-right: 1px solid var(--ink); padding: 16px 8px 0; }
+.ondi-article .hta .hta-hikari-fig img{ display: block; width: 94px; height: 184px; object-fit: contain; object-position: center bottom; margin: 0; border: 0; border-radius: 0; }
+.ondi-article .hta .hta-hikari-copy{ align-self: center; padding: 24px 28px; }
+.ondi-article .hta .hta-hikari-copy .kicker{ color: var(--orange); }
+.ondi-article .hta .hta-hikari-copy .hi{ margin: 8px 0 0; font-size: 19px; font-weight: 900; line-height: 1.5; }
+.ondi-article .hta .hta-hikari-copy p{ margin: 8px 0 0; font-size: 15px; line-height: 1.85; }
+.ondi-article .hta .hta-say{ display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 16px; align-items: start; margin: 8px 0 26px; }
+.ondi-article .hta .hta-say img{ display: block; width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--mint); margin: 0; }
+.ondi-article .hta .hta-say-b{ position: relative; background: #fff; border: 1px solid var(--ink); border-radius: 12px; padding: 14px 20px 16px; font-size: 15px; line-height: 1.85; }
+.ondi-article .hta .hta-say-b::before{ content: ""; position: absolute; left: -8px; top: 22px; width: 14px; height: 14px; background: #fff; border-left: 1px solid var(--ink); border-bottom: 1px solid var(--ink); transform: rotate(45deg); }
+.ondi-article .hta .hta-say-b b{ display: block; font-size: 11px; font-weight: 900; letter-spacing: 1.5px; color: var(--orange); margin-bottom: 4px; }
+.ondi-article .hta .cs-cta.has-hikari{ display: grid; grid-template-columns: minmax(0, 1fr) 140px; gap: 24px; padding-bottom: 0; }
+.ondi-article .hta .cs-cta.has-hikari .cs-cta-copy{ padding-bottom: 40px; }
+.ondi-article .hta .cs-cta-hikari{ align-self: end; display: grid; place-items: end center; height: 214px; background: var(--cream); border: 1px solid var(--ink); border-bottom: 0; border-radius: 100px 100px 0 0; overflow: hidden; }
+.ondi-article .hta .cs-cta-hikari img{ display: block; width: 104px; height: 200px; object-fit: contain; object-position: center bottom; margin: 0; border: 0; border-radius: 0; }
+@media (max-width: 760px){
+  .ondi-article .hta .hta-hikari{ grid-template-columns: 1fr; }
+  .ondi-article .hta .hta-hikari-fig{ border-right: 0; border-bottom: 1px solid var(--ink); }
+  .ondi-article .hta .hta-hikari-fig img{ width: 82px; height: 160px; }
+  .ondi-article .hta .hta-hikari-copy{ padding: 20px 20px 22px; }
+  .ondi-article .hta .hta-say{ grid-template-columns: 48px minmax(0, 1fr); gap: 12px; }
+  .ondi-article .hta .hta-say img{ width: 48px; height: 48px; }
+  .ondi-article .hta .cs-cta.has-hikari{ grid-template-columns: 1fr; gap: 0; }
+  .ondi-article .hta .cs-cta-hikari{ order: -1; justify-self: start; width: 140px; height: 170px; margin-bottom: 18px; border-bottom: 1px solid var(--ink); border-radius: 70px 70px 8px 8px; }
+  .ondi-article .hta .cs-cta-hikari img{ width: 84px; height: 160px; }
+  .ondi-article .hta .cs-cta.has-hikari .cs-cta-copy{ padding-bottom: 28px; }
+}
+
+@media (max-width: 900px){
+  .ondi-article .hta .cs-wrap{ display: block; }
+  .ondi-article .hta .cs-side{ position: static; margin-bottom: 28px; }
+  .ondi-article .hta .cs-sidecta{ display: none; }
+}
+@media (max-width: 760px){
+  .ondi-article .hta{ font-size: 15px; }
+  .ondi-article .hta .hta-w{ width: calc(100% - 36px); }
+  .ondi-article .hta .hta-top{ border-radius: 0 0 40px 40px; padding: 28px 0 32px; }
+  .ondi-article .hta .cs-info{ display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; }
+  .ondi-article .hta .cs-info span,.ondi-article .hta .cs-info span:first-child{ padding: 8px 12px; border: 0; background: rgba(255, 255, 255, .7); border-radius: 8px; }
+  .ondi-article .hta .cs-readers,.ondi-article .hta .cs-facts,.ondi-article .hta .hta-tools{ grid-template-columns: 1fr; }
+  .ondi-article .hta .cs-sec h2{ font-size: 22px; }
+  .ondi-article .hta .cs-cta{ padding: 28px 22px; }
+  .ondi-article .hta .cs-cta h2{ font-size: 22px; }
+}
+
+/* ondi.jp column spec — same escape the reference article uses. */
+.ondi-article.ondi-article{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);width:100vw;max-width:100vw}
+.ondi-article.ondi-article img{max-width:100%;height:auto}
+

@@ -337,6 +337,8 @@ def main():
             E(f"{no} 쓸 사실이 없음 (S번호 또는 실습 기록)")
         mm = re.search(r"\d+", length.replace(",", ""))
         total += int(mm.group()) if mm else 0
+        if mm and ids and r in body and int(mm.group()) / len(ids) < 100:
+            W(f"{no} 분량 {mm.group()}자에 사실 {len(ids)}개 — 사실당 100자 미만. 사실을 빼거나 옮긴다 (「무엇 + 그래서」 두 박자, D58)")
     if body and with_kw * 2 < len(body):
         E(f"키워드가 든 본문 H2 {with_kw}/{len(body)} (규칙: 절반 이상)")
     rng = re.findall(r"\d+", f["length"].replace(",", ""))
@@ -357,21 +359,20 @@ def main():
         tr = dict(LENGTH_RANGE).get(key) if key else None
         if not tr:
             W(f"글 종류 「{f['type']}」의 분량 범위를 모름 — rules/blog-outline.md 표 확인")
-        elif lo < tr[0] or hi > tr[1]:
-            E(f"length {lo}-{hi}가 글 종류 범위 {tr[0]}-{tr[1]} 밖 ({key})")
-        if route != "속보":
+        vm0 = re.search(r"^## 상위 글 분량[^\n]*\n(.*?)(?=^## |\Z)", note, re.S | re.M)
+        has_med = bool(vm0 and re.search(r"중앙값:\s*[\d,]+", vm0.group(1)))
+        if tr and not has_med and (lo < tr[0] or hi > tr[1]):
+            E(f"length {lo}-{hi}가 글 종류 범위 {tr[0]}-{tr[1]} 밖 ({key}) — 노트에 상위 글 중앙값이 없을 때의 임시 기준")
+        if True:   # 모든 글: 같은 유형 상위 글 중앙값 기준 (D58)
             vm = re.search(r"^## 상위 글 분량[^\n]*\n(.*?)(?=^## |\Z)", note, re.S | re.M)
             mm2 = re.search(r"중앙값:\s*([\d,]+)", vm.group(1)) if vm else None
             if not mm2:
-                E("일반 글인데 노트에 「상위 글 분량」 중앙값이 없음 — blog-research로 (D47)")
-            elif tr:
+                E("노트에 「상위 글 분량」 중앙값이 없음 — blog-research로 (D47, D58: 속보도)")
+            else:
                 med = int(mm2.group(1).replace(",", ""))
-                want_lo = max(tr[0], round(med * 0.8, -2))
-                want_hi = min(tr[1], round(med * 1.2, -2))
-                if want_lo > want_hi:
-                    want_lo, want_hi = (tr[0], tr[0]) if med < tr[0] else (tr[1], tr[1])
-                if abs(lo - want_lo) > 200 or abs(hi - want_hi) > 200:
-                    W(f"length {lo}-{hi} ≠ 상위 글 중앙값 {med}자 × 0.8~1.2를 범위로 자른 {int(want_lo)}-{int(want_hi)} — 다르면 이유를 메모에")
+                want_lo, want_hi = round(med * 0.8, -2), round(med * 1.2, -2)
+                if abs(lo - want_lo) > want_lo * 0.1 or abs(hi - want_hi) > want_hi * 0.1:
+                    E(f"length {lo}-{hi} ≠ 상위 글 중앙값 {med}자 × 0.8~1.2 = {int(want_lo)}-{int(want_hi)} (D58 — 글 종류 범위로 자르지 않는다)")
         fx = FIXED["속보" if route == "속보" else "일반"]
         n_matome = len([r for r in body if "FAQ" not in r[2] and "よくある質問" not in r[2]])
         n_cta = len([r for r in table(sec.get("CTA", [])) if len(r) >= 3])
@@ -560,7 +561,8 @@ def main():
         W("「쓰지 않을 것」이 비어 있음 — 노트 「아직 확인하지 못한 사항」을 옮긴다")
 
     # 판 번호·범위
-    memo = "\n".join(sec["초안에 넘길 메모"])
+    # 「〜は書かない / 넓히지 않는다」 같은 금지 지시 줄은 범위 검사에서 뺀다 (D54 — 금지 예시를 적으면 걸렸다)
+    memo = "\n".join(l for l in sec["초안에 넘길 메모"] if not re.search(r"쓰지 않|넓히지 않|금지|✕|書かない|しない", l))
     jp_fields = ([r[1] for r in rows if len(r) > 1] + [meta] + [r[2] + " " + r[4] for r in toc if len(r) >= 5]
                  + [" ".join(r) for r in faq] + [sns])
     scope_txt = " ".join(jp_fields + [memo])

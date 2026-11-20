@@ -24,6 +24,8 @@ factcheck/*
 !factcheck/.gitkeep
 outlines/*
 !outlines/.gitkeep
+publish/*
+!publish/.gitkeep
 reports/*
 !reports/.gitkeep
 

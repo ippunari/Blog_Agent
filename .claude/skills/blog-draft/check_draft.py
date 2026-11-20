@@ -148,6 +148,7 @@ def main():
             E(f"머리 `{k}:`가 설계안과 다름 (설계안: {of.get(k)})")
 
     main_txt, src_txt, memo = split_draft(text)
+    OFF = text[:text.find(main_txt)].count("\n") if main_txt in text else 0   # 메시지 줄 번호 = 파일 줄 번호 (D54)
     lines = main_txt.splitlines()
 
     # --- 제목·메타
@@ -169,11 +170,11 @@ def main():
             if open_box is None:
                 typ = t.split()[0] if t else ""
                 if typ not in BOX_TYPES:
-                    E(f"{i+1}행 상자 종류 「{typ}」 — {sorted(BOX_TYPES)} 중 하나")
+                    E(f"{i+1+OFF}행 상자 종류 「{typ}」 — {sorted(BOX_TYPES)} 중 하나")
                 open_box = {"type": typ, "label": t[len(typ):].strip(), "start": i, "lines": []}
             else:
                 if t:
-                    E(f"{i+1}행: 상자 「{open_box['label']}」가 닫히기 전에 새 상자 — 「:::」 한 줄로 닫는다")
+                    E(f"{i+1+OFF}행: 상자 「{open_box['label']}」가 닫히기 전에 새 상자 — 「:::」 한 줄로 닫는다")
                 boxes.append(open_box)
                 open_box = None
             in_box[i] = True
@@ -317,11 +318,11 @@ def main():
     for i, l in body_lines:
         t = re.sub(r"https?://\S+", "", l)
         if ZEN_DIGIT.search(t):
-            E(f"{i+1}행 전각 숫자 — 반각으로")
+            E(f"{i+1+OFF}행 전각 숫자 — 반각으로")
         if re.search(r"(?<![\d.])\d{4}[/-]\d{1,2}[/-]\d{1,2}|(?<![\d./])\d{1,2}/\d{1,2}(?![\d/])", t):
-            E(f"{i+1}행 날짜 형식 — 「2026年11月19日」")
+            E(f"{i+1+OFF}행 날짜 형식 — 「2026年11月19日」")
         if re.search(r"\d+(?:\.\d+)?系以前|系以前", t):
-            W(f"{i+1}행 「系以前」 — 범위가 원문보다 넓어지지 않았는지 (D44 ⑨)")
+            W(f"{i+1+OFF}행 「系以前」 — 범위가 원문보다 넓어지지 않았는지 (D44 ⑨)")
     note_n = unicodedata.normalize("NFKC", note)
     for v in sorted(set(re.findall(r"(?<![\d.])\d+\.\d+(?:\.\d+)?(?![\d.])", strip_tags(body_join)))):
         if v not in note_n:
@@ -352,6 +353,61 @@ def main():
         for ek in [x.strip() for x in f["event_keywords"].split("/") if x.strip() and x.strip() != "-"]:
             if not has_kw(head, ek):
                 E(f"첫 문단 200자 안에 사건 검색어 「{ek}」가 없음 (속보)")
+    # --- 훅은 리드 첫 1~2문장에 (rules/blog-draft.md, D53)
+    hook_txt = " ".join(osec.get("훅", []))
+    hook_s = set(S_RE.findall(hook_txt))
+    lead_sents = [x.strip() for x in re.findall(r"[^。]*。(?:\s*\[S\d+\])*", lead) if x.strip()]
+    if hook_s and lead_p:
+        first2 = set(S_RE.findall(" ".join(lead_sents[:2])))
+        if not hook_s & first2:
+            E(f"리드 첫 1~2문장에 설계안 「훅」이 없음 (훅 근거 {', '.join(sorted(hook_s))} 중 하나가 리드 앞 2문장에) — "
+              "사실 나열이 아니라 독자가 멈춰 읽을 문장으로 시작 (D53)")
+
+    # --- 서브 키워드 퍼뜨리기 (common.md 6장 키워드 배치, D53)
+    main_toks = {norm(t) for t in f["main_keyword"].split()}
+    def core(kw):   # 서브 키워드에서 메인 키워드 낱말을 뺀 핵심어. 「〜方法」「〜手順」은 앞말만 봐도 된다
+        return [re.sub(r"(方法|手順|やり方)$", "", norm(t)) or norm(t) for t in kw.split() if norm(t) not in main_toks]
+    subs = [x.strip() for x in f["sub_keywords"].split("/") if x.strip() and x.strip() != "-"]
+    non_h2 = norm("\n".join(plain(l) for i, l in enumerate(lines) if not l.startswith("#") and not l.startswith("<!--")))
+    meta_n = norm(f.get("meta", ""))
+    any_lead = any_meta = False
+    for k in subs:
+        toks = core(k)
+        miss = [t for t in toks if t not in non_h2]
+        if toks and len(miss) == len(toks):
+            E(f"서브 키워드 「{k}」의 핵심어({'·'.join(toks)})가 H2 밖 본문에 하나도 없음 — 독자가 검색하는 말을 본문에도 (D53)")
+        elif miss:
+            W(f"서브 키워드 「{k}」의 핵심어 {'·'.join(miss)}가 H2 밖 본문에 없음")
+        any_lead |= any(t in norm(lead_p[:200]) for t in toks)
+        any_meta |= any(t in meta_n for t in toks)
+    # 검색어를 쉬운 말로 바꿔 쓰지 않았는지 (voice-hikari.md 7-2 예외, D54 — 규칙만으로는 새 초안에서도 「版の番号」가 나왔다)
+    SUBST = {"バージョン": ["版の番号", "版番号"], "アップデート": ["更新"], "パッチ": ["修正版"], "確認": ["確かめ"]}
+    kw_all = norm(f["main_keyword"] + " " + f["sub_keywords"])
+    for term, alts in SUBST.items():
+        if norm(term) in kw_all:
+            n_t = non_h2.count(norm(term))
+            n_a = sum(non_h2.count(norm(x)) for x in alts)
+            if n_t < 2 and n_a > n_t:   # 검색어가 본문에 거의 없고 쉬운 말로 대신한 경우만 (確かめる 등은 부드러운 일본어로 써도 된다, D49)
+                W(f"검색어 「{term}」 대신 「{'/'.join(alts)}」를 더 많이 씀 ({n_a} > {n_t}) — 독자가 검색하는 말을 쓴다 (D54)")
+    if subs and lead_p and not any_lead:
+        W("리드 200자 안에 서브 키워드 핵심어가 하나도 없음 (D53)")
+    if subs and not any_meta:
+        W("메타 설명에 서브 키워드 핵심어가 하나도 없음 (D53)")
+
+    # --- 리드와 3行まとめ가 같은 말을 되풀이하지 않게 (D53)
+    def bigr(x):
+        x = re.sub(r"\[S\d+\]|\s|[、。・（）「」]", "", x)
+        return {x[i:i + 2] for i in range(len(x) - 1)}
+    for b_ in boxes:
+        if b_["type"] == "box" and "3行まとめ" in b_["label"]:
+            for it in b_["lines"]:
+                ib = bigr(re.sub(r"^\s*\d+\.\s*", "", it))
+                for ls in lead_sents:
+                    lb = bigr(ls)
+                    if ib and lb and len(ib & lb) / min(len(ib), len(lb)) > 0.6:
+                        W(f"3行まとめ 「{it.strip()[:25]}…」가 리드 「{ls.strip()[:25]}…」와 거의 같은 말 — "
+                          "3行まとめ는 리드에 없는 판단 기준·할 일로 (D53)")
+
     for k in [f["main_keyword"]] + [x.strip() for x in f["sub_keywords"].split("/")]:
         if "とは" in k:
             term = k.replace("とは", "").strip().split()[0]
@@ -387,7 +443,7 @@ def main():
     if n < lo:
         E(f"분량 {n}자 — 하한 {lo} 미만. 늘려 쓰지 말고 초안 메모 「조사 보충 필요」로 (D47)")
     elif n > cap:
-        E(f"분량 {n}자 — 초안은 상한 {hi}의 90%({cap}) 이하 (D47)")
+        W(f"분량 {n}자 — 상한 {hi}의 90%({cap})를 넘음. 다듬기에서 늘 여유가 적다 (D47, D58: 오류는 상한 초과만)")
 
     # --- 인용·전재
     quotes = [l for l in lines if l.startswith(">")]
@@ -442,13 +498,13 @@ def main():
         for s in sentences(lp):
             p = plain(s) if not re.match(r"^\d+\.\d", s.strip()) else strip_tags(s).replace("**", "").strip()
             if len(p) > 80:
-                long_s.append(f"{i+1}행 {len(p)}자 「{p[:20]}…」")
+                long_s.append(f"{i+1+OFF}행 {len(p)}자 「{p[:20]}…」")
             if in_box[i] and any(b["type"] in ("guide", "cta") and b["start"] < i for b in boxes
                                  if b["start"] < i <= b["start"] + len(b["lines"])):
                 continue
             if not TAG_RE.search(s) and re.search(r"\d|[A-Za-z]{3,}|「[^」]{4,}」", strip_tags(p)) \
                     and not l.lstrip().startswith(("**",)) and not re.search(r"\]\(https?://", s):
-                cand.append(f"{i+1}행 「{p[:24]}…」")
+                cand.append(f"{i+1+OFF}행 「{p[:24]}…」")
     if long_s:
         W(f"80자 넘는 문장 {len(long_s)}개 — 나눈다: " + " / ".join(long_s[:5]))
     ex = body_join.count("！")
@@ -506,14 +562,14 @@ def main():
             if has_s and (has_t or not need_table):
                 good = True
             elif not has_s:
-                E(f"{i_+1}행 차별 {n_}: 표시 아래 블록에 근거 S번호({', '.join(sorted(sids))})가 없음")
+                E(f"{i_+1+OFF}행 차별 {n_}: 표시 아래 블록에 근거 S번호({', '.join(sorted(sids))})가 없음")
             else:
-                E(f"{i_+1}행 차별 {n_}: 판정표·표 항목인데 표시 아래 블록이 표가 아님")
+                E(f"{i_+1+OFF}행 차별 {n_}: 판정표·표 항목인데 표시 아래 블록이 표가 아님")
         ok += good
     for n_, lst in marks.items():
         for i_, sec_h, _ in lst:
             if not any(re.match(rf"\s*{n_}\.", r[0]) for r in table(osec.get("차별 포인트 배치", [])) if r):
-                E(f"{i_+1}행 <!-- 차별 {n_} -->: 설계안에 그 번호가 없음")
+                E(f"{i_+1+OFF}행 <!-- 차별 {n_} -->: 설계안에 그 번호가 없음")
     if not placed:
         E("설계안 「차별 포인트 배치」에 섹션을 정한 항목이 없음 — blog-outline으로 (D47)")
     elif not ok:
@@ -526,9 +582,9 @@ def main():
             continue
         p_ = plain(l)
         if DEICTIC.match(p_) and not in_box[i]:
-            deictic.append(f"{i+1}행 「{p_[:12]}…」")
+            deictic.append(f"{i+1+OFF}행 「{p_[:12]}…」")
         if WARN_WORDS.search(p_) and not ACTION_WORDS.search(p_) and not l.startswith(">"):
-            alarm.append(f"{i+1}행 「{p_[:16]}…」")
+            alarm.append(f"{i+1+OFF}행 「{p_[:16]}…」")
     if deictic:
         W(f"앞 문단에 기대는 시작 {len(deictic)}개 — 주어를 다시 쓴다 (AI 인용): " + " / ".join(deictic[:5]))
     if alarm:

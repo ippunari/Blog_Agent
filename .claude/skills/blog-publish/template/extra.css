@@ -1,0 +1,22 @@
+
+/* blog-publish 보충분 (hikari-base.css = 사이트 HowtoAI 記事テンプレート 그대로 뒤에 붙인다).
+   cs-key·sup.fn·cta-sub·faq-i 는 사이트 PHPフリー 템플릿(php-vulnerability-fix-guide)에서 그대로 가져왔다.
+   cs-lead·cs-readers.single·cs-midcta 는 blog-publish가 새로 더한 것 (D50). */
+.ondi-article .hta .cs-lead{ margin: 0 0 22px; }
+.ondi-article .hta .cs-lead p{ margin: 0 0 14px; font-size: 16px; line-height: 1.95; }
+.ondi-article .hta .cs-key{ background: #fff; border: 1px solid var(--ink); border-left: 6px solid var(--orange); border-radius: 8px; padding: 18px 22px 18px 24px; margin: 6px 0 24px; font-size: 15px; line-height: 1.8; }
+.ondi-article .hta .cs-key b{ display: block; font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--orange); margin-bottom: 6px; }
+.ondi-article .hta .cs-key ol{ margin: 0; padding-left: 1.4em; }
+.ondi-article .hta .cs-key li{ margin: 0; padding: 2px 0; }
+.ondi-article .hta .cs-readers.single{ grid-template-columns: 1fr; }
+/* FAQ 는 접지 않는다 (AEO-10: 답을 <details> 안에 숨기지 않는다) */
+.ondi-article .hta .cs-faq .faq-i{ border: 1px solid var(--ink); border-radius: 8px; background: #fff; margin-bottom: 10px; overflow: hidden; }
+.ondi-article .hta .cs-faq .faq-i h3{ margin: 0; padding: 14px 20px; background: var(--cream); border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 900; line-height: 1.6; }
+.ondi-article .hta .cs-faq .faq-i h3::before{ content: "Q. "; color: var(--orange); }
+.ondi-article .hta .cs-faq .faq-i p{ margin: 0; padding: 14px 20px 16px; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.ondi-article .hta sup.fn{ font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 10px; font-weight: 900; color: var(--orange); margin-left: 1px; }
+.ondi-article .hta .cs-cta p.cta-sub{ margin: 14px 0 0; font-size: 13px; color: var(--muted); }
+.ondi-article .hta .cs-cta p.cta-sub a{ color: var(--ink); text-underline-offset: 4px; }
+.ondi-article .hta .cs-midcta{ background: var(--cream); border: 1px solid var(--ink); border-radius: 8px; padding: 18px 22px; margin: 6px 0 26px; }
+.ondi-article .hta .cs-midcta .kicker{ display: block; font-family: 'Inter', 'Helvetica Neue', sans-serif; font-size: 11px; letter-spacing: 2px; color: var(--orange); font-weight: 700; margin-bottom: 6px; }
+.ondi-article .hta .cs-midcta p{ margin: 0 0 12px; font-size: 15px; }

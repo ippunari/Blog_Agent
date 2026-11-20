@@ -12,6 +12,11 @@ rules:
     pattern: に関して
   - expected: についての
     pattern: に関する
+  # 7-2-3 요즘 일상어 (D57) — 사이트 용어집도 「初期設定」
+  - expected: 初期設定
+    pattern: /既定の設定|既定設定|既定(?=では|のまま|で|の状態|とは)/
+  - expected: 初期値
+    pattern: 既定値
   # 7-1 ひらく
   - expected: さまざま
     pattern: 様々

@@ -152,17 +152,21 @@ def main():
         errs.append("일반 글: 일본어 경쟁 글 분석에 URL 3개 이상 (상위 3~5개)")
     if route == "일반" and "차별 포인트" not in text:
         errs.append("일반 글: 「차별 포인트」 없음")
-    # 상위 글 분량 (D47): 일반 글은 URL·글자 수 3개 이상 + 중앙값
-    vol = re.search(r"^## 상위 글 분량\s*\n(.*?)(?=^## |\Z)", text, re.S | re.M)
-    if route == "일반":
+    # 상위 글 분량 (D47, D58): 모든 글 — 같은 유형 URL·글자 수 3개 이상 + 기준 유형 + 중앙값, 우리 사이트 글 제외
+    vol = re.search(r"^## 상위 글 분량[^\n]*\n(.*?)(?=^## |\Z)", text, re.S | re.M)
+    if True:
         if not vol:
-            errs.append("일반 글: 「## 상위 글 분량」 절 없음 — body_chars.py로 경쟁 글 본문 글자 수와 중앙값 (D47)")
+            errs.append("「## 상위 글 분량」 절 없음 — body_chars.py로 같은 유형 상위 글 본문 글자 수와 중앙값 (D47, D58: 속보도)")
         else:
             rows_v = [l for l in vol.group(1).splitlines() if URL_RE.search(l) and re.search(r"\|\s*\d+\s*\|", l)]
             if len(rows_v) < 3:
                 errs.append("「상위 글 분량」: URL | 글자 수 행이 3개 이상이어야 함")
             if not re.search(r"중앙값:\s*\d+", vol.group(1)):
                 errs.append("「상위 글 분량」: 「중앙값: n자」 줄 없음")
+            if not re.search(r"기준 유형:", vol.group(1)):
+                errs.append("「상위 글 분량」: 「기준 유형: 뉴스 / 해설·가이드」 줄 없음 (D58)")
+            if "atatakaidigital.com" in vol.group(1):
+                errs.append("「상위 글 분량」에 우리 사이트 글이 있음 — 기준에서 뺀다 (D58)")
 
     print(f"사실 {len(rows)}행 / 가져온 페이지 {len(set(pages.values()))}개")
     for w in warns:

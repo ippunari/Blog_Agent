@@ -147,6 +147,7 @@ python3 -I .claude/skills/blog-draft/check_draft.py drafts/<slug>.md --write-sou
 - 용어집에 없는 전문 용어를 「용어집 추가 후보」에 적는다
 
 ## 5. 카드 갱신과 보고
+- 카드 끝 「## 다음 단계」 절도 새 단계로 고쳐 쓴다 (예전 단계 문구를 남기지 않는다, D54)
 - 카드 머리: `status: 대조 대기`, `draft: drafts/<slug>.md (YYYY-MM-DD)` 추가
 - **사람 확인 지점이 아니다** — 보고하고 기다리지 않는다 (최종 확인은 blog-publish 미리보기)
 - 보고 (한국어, 짧게): 초안 경로 / 제목 / 분량 / S번호 수·[?] 수 / 조사 보충 필요 / 용어집 추가 후보 / 남은 경고와 이유 / 마감 / 다음 단계 blog-factcheck. **초안 전체는 사람이 요청할 때만** 보여 준다

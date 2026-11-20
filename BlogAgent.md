@@ -87,6 +87,7 @@
 | [rules/blog-newsletter.md](rules/blog-newsletter.md) | 뉴스레터 |
 | [rules/blog-measure.md](rules/blog-measure.md) | 측정 |
 | [decisions.md](decisions.md) | 규칙을 정한 이유 (규칙을 바꾸기 전에 확인) |
+| [docs/skills-map.html](docs/skills-map.html) | 스킬 지도 — 스킬별 입력·출력·상태·사람 할 일·스크립트·고칠 곳 (브라우저로 열기) |
 
 ## 작업 파일 위치
 > 아래 작업 데이터는 **이 컴퓨터의 폴더에만** 있다. git에는 폴더(`.gitkeep`)만 올라간다 (D42). 백업은 컴퓨터 백업에 기댄다
@@ -98,13 +99,14 @@
 - `outlines/<slug>.md` 설계안 (D44)
 - `drafts/<slug>.md` 초안 (다듬기 뒤: 머리에 메타, 끝에 「다듬기 메모」 — 체크리스트·바꾼 것)
 - `factcheck/<slug>.md` 대조 보고서
+- `publish/<slug>/` Ghost에 붙일 발행 파일 (임시 방식: HTML 카드 2개·미리보기·입력값·대표 이미지·역링크 조각, D50)
 - `reports/YYYY-Www.md` 주간 리포트
 
 ### 주제 카드의 상태와 정리 (D40)
 - 한눈에 보기: `/blog-status` — 진행 중 카드의 상태·마감·노트/설계/초안/대조 유무를 표로 (읽기 전용)
 - 카드 머리 `status:` 를 각 단계 스킬이 바꾼다: 조사 대기 → 설계 대기 → (실습 대기 — 사람 실습 카드만, D45) → 초안 대기 → 대조 대기 → 다듬기 대기 → 발행 준비(◆ 미리보기 대기) → 발행 완료 (개편 글은 첫 상태가 「기존 글 업데이트」)
-- **발행 완료**: 9번 blog-publish가 카드에 `published_at`·`url`을 적고 `briefs/done/YYYY-MM/`로 옮긴다. 같은 slug의 research·outlines·drafts·factcheck도 각 폴더의 `done/YYYY-MM/`로
-- **중단**: 마감이 지나 접거나 사람이 취소하면 `status: 중단`과 이유를 적고 `briefs/dropped/`로. 같은 slug의 research·outlines·drafts·factcheck도 각 폴더의 `dropped/`로 (마감이 지난 속보는 먼저 깊이 있는 글로 돌린다 — D34. 이때는 중단이 아니므로 노트를 옮기지 않고 이어서 쓴다)
+- **발행 완료**: 9번 blog-publish가 카드에 `published_at`·`url`을 적고 `briefs/done/YYYY-MM/`로 옮긴다. 같은 slug의 research·outlines·drafts·factcheck·publish도 각 폴더의 `done/YYYY-MM/`로
+- **중단**: 마감이 지나 접거나 사람이 취소하면 `status: 중단`과 이유를 적고 `briefs/dropped/`로. 같은 slug의 research·outlines·drafts·factcheck·publish도 각 폴더의 `dropped/`로 (마감이 지난 속보는 먼저 깊이 있는 글로 돌린다 — D34. 이때는 중단이 아니므로 노트를 옮기지 않고 이어서 쓴다)
 - **수집·순위표**: `candidates/`·`topics/`는 한 달이 지나면 `YYYY-MM/` 폴더로 옮긴다 (이월은 최근 1주만 보므로 영향 없음). 옮길 때 다른 파일의 경로 참조는 고치지 않는다 — git 이력과 폴더 이름으로 찾는다
 - 지우지 않는다. 기록은 로컬 폴더에 남긴다. **git에는 프로그램·규칙·폴더 구조만** — 작업 데이터는 `.gitignore`로 뺀다 (D42)
 
@@ -155,6 +157,9 @@
 - [x] 사람 실습 체크리스트 전달 방식 → 공유 드라이브 `03_Blog/trials`에 카드당 실습 문서, 카드 상태 「실습 대기」 (2026-11-20, D45)
 - [ ] 「PHP Free」(사이트)·「PHPフリー」(기존 글 일부) 표기 통일 여부
 - [ ] AI 도입 지원 서비스 페이지가 생기면 CTA 버튼 링크 교체 (rules/common.md 1장)
+- [ ] ⚠ 사이트에 **뉴스레터 구독 입구가 없다** (2026-11-20 확인) — 뉴스레터가 주 CTA인 AI 글(속보·사용법·업무 활용)은 발행 파일을 만들 수 없다. 구독 페이지·폼이 생기면 `.claude/skills/blog-publish/cta.json`·common.md 1장 링크를 채운다 (D50)
+- [ ] 사이트 저자 표시: ヒカリちゃん 글도 저자·구조화 데이터 저자가 「Jeensuk Yang」 — Ghost 스태프 계정(ヒカリちゃん)·필자 프로필과 함께 (D38, D50)
+- [ ] ⚠ 이미지 권리 확인 (대표 + 기술 보안팀): 본문 이미지 잠정 규칙(편집부 그림·미국 연방 PD·Wikimedia CC, D55) 승인 / 공식 화면 캡처·프레스킷을 쓸지 / 사진을 원본 주소로 쓰는 임시 방식
 - [ ] 13번 전체 연결에서: 실습 기한(⚠1일 안·⚠지남)·속보 마감을 정해진 시각에 알리는 방법 (지금은 /blog-status를 실행해야 보임)
 
 ## 변경 이력
@@ -167,3 +172,5 @@
 - 2026-11-20: 분량은 상위 글 중앙값 기준 + 글 종류 범위, 글 뼈대 고정(3行まとめ는 상자), 초안 상한 90%, 차별 포인트 필수, 문단 독립성·경고 문장·용어 수준 점검 (D47)
 - 2026-11-20: 사실 대조 — 다른 눈·핵심 문장은 원문 페이지까지·속보는 출처 전부 다시 열기·틀린 문장만 고침·SOURCES는 URL별 번호·다듬기 뒤 `--recheck` (D48)
 - 2026-11-20: 부드러운 일본어(ひらく·쉬운 말·리듬·AI 문투·경어, 「〜ね/〜ですよ」 금지), 다듬기 — textlint·재대조는 서브 에이전트·메타는 초안 머리 (D49)
+- 2026-11-20: 본문 이미지 — 에이전트가 찾아 넣고 사람은 남김/뺌만 (D55)
+- 2026-11-20: 발행 — 파일 출력·사이트 기사 템플릿·FAQ JSON-LD·대표 이미지 프롬프트·공개 글 점검 (D50)

@@ -39,7 +39,17 @@ INVISIBLE = re.compile("[ ­᠎​-‏  ‪-‮⁠-⁤﻿︀-️"
 FRIENDLY_END = re.compile(r"(ね|よ|よね|ですよ|わ)。$")
 AI_PHRASES = ["と言っても過言ではありません", "と言っても過言では", "が不可欠です", "が求められます", "多岐にわたる", "徹底解説",
               "いかがでしたか", "について解説します", "をご紹介します", "をご紹介していきます", "見ていきましょう"]
-AI_PATTERNS = [(re.compile(r"まずは.{0,20}から始めてみましょう"), "「まずは〜から始めてみましょう」 상투 결말")]
+AI_PATTERNS = [(re.compile(r"まず(は)?.{0,25}から始め(て(み)?)?ましょう"), "「まず〜から始めましょう」 상투 결말 (7-5)"),
+               # 번역투 (voice-hikari.md 7-2-2, D56) — 말한 쪽을 숨기는 보고 동사 수동, require 직역
+               (re.compile(r"(説明|指摘|予告|発表|報告|言及|推奨)され(て(い)?)?(ました|ます|た|る|ている|ていました)"),
+                "번역투 — 「〜と説明されました」처럼 누가 말했는지 숨긴 수동. 「〇〇は〜と説明していました」 (7-2-2)"),
+               (re.compile(r"が条件(だ|です|と|に|で)"), "번역투 — 「〜が条件だ」(require 직역). 「〜のときだけ影響します」 (7-2-2)"),
+               (re.compile(r"一般的でない構成|一般的ではない構成"), "번역투 — 「一般的でない構成」(uncommon setups). 「あまり使われない構成」 (7-2-2)"),
+               (re.compile(r"には[^。]{0,25}(条件|もの)が必要(です|とされ)"), "번역투 — 「〜には条件が必要です」(require 직역). 「〜できるのは〜がそろった場合です」 (7-2-2, D57)"),
+               (re.compile(r"最初から(使う|使われ|無効|有効|入って)"), "default 직역 「最初から〜」 → 「初期設定で〜」 (7-2-3, D57)"),
+               # 해야 할 일을 흐리는 말 (voice-hikari.md 7-4-2, D52)
+               (re.compile(r"(の|こと)が基本(です|になります|となります)|(対応|対策|対処)の基本は"),
+                "해야 할 일을 「基本」으로 흐림 → 「〜する必要があります」 (출처가 하라고 한 대책일 때, 7-4-2)")]
 JUDGE = [(re.compile(r"を行(う|い|っ|わ|え)"), "「〜を行う」 → 「〜する」로 쓸 수 있는지"),
          (re.compile(r"(?<!す)ることが(可能|でき)"), "「〜ることが可能です / できます」 → 「〜られます / できます」"),
          (re.compile(r"において"), "「〜において」 → 「〜で」"),
@@ -47,7 +57,11 @@ JUDGE = [(re.compile(r"を行(う|い|っ|わ|え)"), "「〜を行う」 → �
          (re.compile(r"実施|把握|留意"), "관청 말투 (実施→行う / 把握→確かめる / 留意→気をつける)"),
          (re.compile(r"ないわけでは(ない|ありません)"), "이중 부정"),
          (re.compile(r"(推奨|要求|期待)されます"), "수동태 — 능동으로 (「〜しましょう」)"),
-         (re.compile(r"させていただ"), "경어 과잉 「させていただく」")]
+         (re.compile(r"させていただ"), "경어 과잉 「させていただく」"),
+         (re.compile(r"[一-龯ァ-ヶー」）A-Za-z0-9]は[、「（A-Za-z0-9一-龯ぁ-んァ-ヶ][^。]*?[一-龯ァ-ヶー」）A-Za-z0-9]は[、\s]"), "「〜は、〜は、」 は가 두 번 — 하나를 「〜が」「〜について」로 바꾸거나 두 문장으로 (7-2-3)"),
+         (re.compile(r"(?<!と)としています|としていました"), "문서 말투 「〜としています」 — 「〜と書かれています」「〜と説明しています」 (7-2-2, D57)"),
+         (re.compile(r"(?<!その)ときだけ|のときに限り"), "조건은 「〜場合」가 자연스럽다 (「〜場合に限られます」「〜場合だけです」) (7-2-3)"),
+         (re.compile(r"とよいでしょう|が望ましい(です)?|(?<!が)基本です"), "해야 할 일이면 「〜する必要があります」, 선택이면 「〜がおすすめです」 (7-4-2)")]
 OK_END = set("すんうたるだかぬねよ")  # です·ます·ません·でしょう·ました·ある… 로 끝나면 体言止め 아님
 # 「い」로 끝나는 말: 형용사·ない·たい·ください는 괜찮고, 「違い」「扱い」 같은 명사는 体言止め
 I_OK = re.compile(r"(な|た|し|さ|く|す|か|ご|る|ら|き|よ|い|ぽ|ど|高|多|早|速|安|低|遅|広|狭|近|遠|強|弱|古|深|浅|重|軽|長|短|若|痛|辛|甘|細|太|丸|黒|白|赤|青|良|悪|怖|鋭|厚|薄|固|硬|暗|明|温|寒|暑|熱|冷|緩|淡|濃|醜|美|偉|幼|賢|鈍)い$")
@@ -206,6 +220,9 @@ def check_meta(f, text, E, W):
             ss = re.sub(r"\s", "", s).rstrip("。")
             if ss in checked:
                 continue
+            frags = [x for x in re.split(r"[、，,｜|？?！!。：:]", ss) if x]
+            if frags and all(x in checked or x in re.sub(r"\s", "", h1) for x in frags):
+                continue   # 제목·메타·본문 조각을 이어 붙인 것 (D54)
             if re.search(r"\d|[A-Za-z]{2,}", ss):
                 E(f"`{k}`의 「{s[:30]}」 — 숫자·고유명사가 든 새 문장. 제목·메타·본문에서 대조된 문장을 쓰거나 "
                   "blog-factcheck 재대조 기록에 더한다 (철칙 4)")
@@ -215,6 +232,9 @@ def check_meta(f, text, E, W):
         v = f.get(k, "")
         if v and FRIENDLY_END.search(v):
             E(f"`{k}` 「〜ね/〜よ」 끝맺음")
+        for rx, why in AI_PATTERNS[1:]:   # 번역투·「基本」 (D52, D56) — 메타·excerpt에도
+            if v and rx.search(v):
+                E(f"`{k}` {why}")
     slug = f.get("slug", "")
     if not re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+){2,4}", slug):
         E(f"slug 「{slug}」 — 영어 소문자·하이픈 3~5단어")
@@ -233,6 +253,17 @@ def check(a, root):
         if INVISIBLE.search(l):
             E(f"{n}행 보이지 않는 특수 문자 {[hex(ord(c)) for c in INVISIBLE.findall(l)]} — --strip-invisible")
     bl = body_lines(text)
+
+    # 0. excerpt는 사이트 글 머리(제목 아래)에 보인다 → 본문 리드와 같은 문장이면 연달아 두 번 읽힌다 (D52)
+    body_md = re.split(r"(?m)^## SOURCES", text.split("\n---\n", 1)[-1])[0]
+    # 글 머리 = 첫 H2 앞 전부 (리드 + 3行まとめ·こんな方に·わかること·案内 상자) — 페이지에서 excerpt 바로 아래에 보인다 (D54)
+    lead_md = re.split(r"(?m)^(<!--|## )", re.sub(r"(?m)^(# .*|:::.*|\d+\.\s*|-\s*)", "", body_md), maxsplit=1)[0]
+    norm = lambda x: re.sub(r"\[(S\d+|EXP|OP|\?)\]|\s", "", x).rstrip("。")
+    lead_s = {norm(x) for x in re.split(r"(?<=。)", lead_md) if norm(x)}
+    for x in re.split(r"(?<=。)", f.get("excerpt", "")):
+        if norm(x) and norm(x) in lead_s:
+            E(f"`excerpt`의 「{x.strip()[:30]}…」가 글 머리(리드·3行まとめ 등 상자)와 같은 문장 — 사이트는 제목 아래에 excerpt를 보여 줘서 "
+              "바로 아래에서 두 번 읽힌다. 메타 설명 문장이나 글 소개 문장(「〜をまとめました」)으로 (rules/blog-polish.md 메타 정보)")
 
     # 1. textlint
     msgs, err = run_textlint(root, lint_copy(text, bl))
@@ -322,7 +353,8 @@ def checklist(text, f, root):
     main, _, _ = split_draft(text)
     lines = main.splitlines()
     h2 = [l[3:].strip() for l in lines if l.startswith("## ")]
-    h2q = [h for h in h2 if h not in ("FAQ",)]
+    is_faq = lambda h: h.strip().upper() == "FAQ" or "よくある質問" in h or "（FAQ）" in h   # D54
+    h2q = [h for h in h2 if not is_faq(h)]
     h3_before = any(l.startswith("### ") for l in lines[:next((i for i, l in enumerate(lines) if l.startswith("## ")), 0)])
     kw = f.get("main_keyword", "")
     subs = [s.strip() for s in f.get("sub_keywords", "").split("/") if s.strip()]
@@ -333,7 +365,7 @@ def checklist(text, f, root):
     outer = [(t, u) for t, u in links if "atatakaidigital.com" not in u]
     answers = []
     for i, l in enumerate(lines):
-        if l.startswith("## ") and l[3:].strip() != "FAQ":
+        if l.startswith("## ") and not is_faq(l[3:]):
             nxt = next((x for x in lines[i + 1:] if x.strip() and not x.startswith("<!--")), "")
             if nxt.startswith("**"):
                 answers.append(width(plain(nxt)))
@@ -366,12 +398,12 @@ def checklist(text, f, root):
          f"본문 {len(inner)}개, 「こちら」 앵커 없음 / 기존 글에서 새 글로 역링크는 blog-publish 뒤"),
         ("SEO 8 외부 링크", "통과" if not outer else "사람 확인", f"본문 외부 링크 {len(outer)}개 / 출처는 SOURCES(사실 대조 통과)"),
         ("SEO 9 이미지", "blog-publish", "대표 이미지 1200×630·WebP·alt"),
-        ("SEO 10 구조화 데이터", "blog-publish", "BlogPosting·저자·BreadcrumbList" + (" / FAQPage (FAQ 있음)" if "FAQ" in h2 else "")),
+        ("SEO 10 구조화 데이터", "blog-publish", "BlogPosting·저자·BreadcrumbList" + (" / FAQPage (FAQ 있음)" if any(is_faq(h) for h in h2) else "")),
         ("SEO 11 날짜·갱신", "blog-publish", "발행일·최종 업데이트일"),
         ("SEO 12 태그", ok("태그" in osec), "설계안 「태그」"),
         ("AEO 직답", ok(answers and all(40 <= w <= 80 for w in answers)), "H2 직답 전각 " + ", ".join(f"{w:g}" for w in answers)),
         ("AEO 목록·표", ok(any(re.match(r"^\d+\.\s", l) for l in lines) or any(l.startswith("|") for l in lines)), "순서는 번호 목록, 비교는 표"),
-        ("AEO FAQ", ok("FAQ" in h2 and any(l.startswith("### ") for l in lines)), "FAQ H3 = 실제 검색 질문 (설계안)"),
+        ("AEO FAQ", ok(any(is_faq(h) for h in h2) and any(l.startswith("### ") for l in lines)), "FAQ H3 = 실제 검색 질문 (설계안)"),
         ("AIO 문단 독립", "초안 점검", "check_draft.py 문단 독립성"),
         ("AIO 수치 출처", "사실 대조", "factcheck 보고서·SOURCES 확인일"),
         ("AIO 1차 정보", "초안 점검", "차별 포인트 표시 (D47)"),

@@ -1,0 +1,8 @@
+{
+  "_note": "rules/common.md 1장 「CTA 버튼」 표의 사본 (원본은 common.md — 바뀌면 같이 고친다). kicker = 사이트 서비스 이름 표기. link가 null이면 사이트에 입구가 없다 → 발행 파일을 만들지 않고 사람에게 묻는다",
+  "60분 무료 상담": {"kicker": "オンライン60分の相談 · 無料", "button": "ホームページの不安を60分無料で相談する", "link": "/ja#contact"},
+  "PHP Free 30초 점검": {"kicker": "PHP Free 30秒の無料チェック", "button": "PHP Freeで30秒チェック（無料）", "link": "/ja/phpfree"},
+  "견적·상담 문의": {"kicker": "迅速開発 · 60分の相談は何度でも無料", "button": "つくりたいものを60分相談する（無料）", "link": "/ja#contact"},
+  "AI 도입 상담": {"kicker": "AI導入の相談 · 無料", "button": "AI導入を60分相談する（無料）", "link": "/ja#contact"},
+  "뉴스레터 구독": {"kicker": "ニュースレター · 毎週金曜", "button": "毎週金曜のニュースレターを受け取る（無料）", "link": null}
+}
