@@ -1,0 +1,56 @@
+# ヒカリちゃん 표기 사전 (rules/voice-hikari.md 7장, D49)
+# 기계적으로 바꿔도 뜻이 같은 것만 둔다. 판단이 필요한 것(〜を行う, 〜において 등)은 check_polish.py 경고
+# 운영하며 늘린다: 사람이 「이 말 딱딱해」하면 한 항목 추가
+version: 1
+rules:
+  # 7-2 쉬운 말
+  - expected: できます
+    pattern: /することが可能です|することが出来ます/
+  - expected: できる
+    pattern: /することが可能(?!性)|することが出来る/
+  - expected: について
+    pattern: に関して
+  - expected: についての
+    pattern: に関する
+  # 7-1 ひらく
+  - expected: さまざま
+    pattern: 様々
+  - expected: できる
+    pattern: 出来る
+  - expected: でき$1
+    pattern: /出来(ます|ません|ない|た|て)/
+  - expected: すでに
+    pattern: 既に
+  - expected: ほとんど
+    pattern: 殆ど
+  - expected: および
+    pattern: 及び
+  - expected: または
+    pattern: 又は
+  - expected: ただし
+    pattern: 但し
+  - expected: あり$1
+    pattern: /有り(ます|ません)/
+  - expected: ください
+    pattern: 下さい
+  - expected: いただ$1
+    pattern: /頂(き|く|け)/
+  # 7-1 가타카나 업계어
+  - expected: 解決策
+    pattern: ソリューション
+  - expected: 根拠
+    pattern: エビデンス
+  - expected: 仕組み
+    pattern: スキーム
+  # 7-7 경어
+  - expected: します
+    pattern: させていただきます
+  - expected: おっしゃ
+    pattern: おっしゃられ
+  - expected: 拝見し
+    pattern: 拝見させていただ
+  # 7-1 형식명사 (ja-hiragana-keishikimeishi가 놓치는 꼴)
+  - expected: $1こと
+    pattern: /(この|その|あの|どの|ある|する|した|いう|ない|な)事(?![件業例務情前後実])/
+  - expected: $1ため$2
+    pattern: /(の|る|た|い)為(に|の|です)/

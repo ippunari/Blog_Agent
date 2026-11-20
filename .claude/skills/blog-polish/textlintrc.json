@@ -1,0 +1,35 @@
+{
+  "rules": {
+    "preset-japanese": {
+      "sentence-length": false,
+      "max-ten": {
+        "max": 3
+      },
+      "no-doubled-joshi": {
+        "min_interval": 1,
+        "allow": [
+          "も",
+          "や",
+          "か",
+          "と"
+        ]
+      }
+    },
+    "ja-hiragana-keishikimeishi": true,
+    "ja-hiragana-hojodoushi": true,
+    "ja-hiragana-fukushi": true,
+    "max-kanji-continuous-len": {
+      "max": 6,
+      "allow": [
+        "情報処理推進機構"
+      ]
+    },
+    "ja-no-redundant-expression": true,
+    "ja-no-successive-word": true,
+    "prh": {
+      "rulePaths": [
+        "./prh-hikari.yml"
+      ]
+    }
+  }
+}
