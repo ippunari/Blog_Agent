@@ -553,6 +553,11 @@ def main():
             W(f"용어집에 없는 전문어 {len(jargon)}개 (상한 {cap_t}) — 빼기·행동으로 바꾸기·괄호 풀이, 남기면 초안 메모 「용어집 추가 후보」: {', '.join(jargon[:12])}")
 
     # --- SOURCES
+    # 사실 대조(blog-factcheck) 뒤에는 URL별 번호 형식 「1. 제목 | … | S4, S6」 (D48) — 그 뒤로는 여기서 덮어쓰지 않는다
+    grouped = [l.strip() for l in src_txt.splitlines() if re.match(r"^\d+\.\s", l.strip())]
+    if a.write_sources and grouped:
+        print("[SOURCES] 이미 사실 대조 형식(URL별 번호) — 덮어쓰지 않음. check_factcheck.py --write-sources 로")
+        a.write_sources = False
     if a.write_sources:
         src_lines = []
         for s in used:
@@ -570,7 +575,11 @@ def main():
         m = re.match(r"^-\s*(S\d+)\b", l.strip())
         if m:
             src_ids.append(m.group(1))
-    if "## SOURCES" not in text:
+    if grouped:
+        g_ids = set(S_RE.findall(" ".join(l.rsplit("|", 1)[-1] for l in grouped)))
+        if g_ids != set(used):
+            E(f"SOURCES(URL별)의 S번호가 본문과 다름 — check_factcheck.py --write-sources\n   본문만: {', '.join(sorted(set(used) - g_ids))}\n   SOURCES만: {', '.join(sorted(g_ids - set(used)))}")
+    elif "## SOURCES" not in text:
         E("「## SOURCES」 절이 없음")
     elif src_ids != used:
         E(f"SOURCES가 본문에서 쓴 S번호(처음 나온 순서)와 다름 — --write-sources 로 채운다\n   본문: {', '.join(used)}\n   SOURCES: {', '.join(src_ids)}")
