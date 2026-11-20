@@ -93,15 +93,16 @@
 - `topics/YYYY-MM-DD-am|pm.md` 주제 후보 순위표(상세 기록) → 공유 드라이브 `03_Blog/topics`에 확인용 시트 (최신 1장, 지난 시트는 `지난 시트`)
 - `briefs/<slug>.md` 주제 카드 — **진행 중인 것만**. `briefs/done/YYYY-MM/` 발행 완료, `briefs/dropped/` 중단
 - `research/<slug>.md` 조사 노트
+- `outlines/<slug>.md` 설계안 (D44)
 - `drafts/<slug>.md` 초안
 - `factcheck/<slug>.md` 대조 보고서
 - `reports/YYYY-Www.md` 주간 리포트
 
 ### 주제 카드의 상태와 정리 (D40)
-- 한눈에 보기: `/blog-status` — 진행 중 카드의 상태·마감·노트/초안/대조 유무를 표로 (읽기 전용)
-- 카드 머리 `status:` 를 각 단계 스킬이 바꾼다: 조사 대기 → 설계 대기 → 초안 대기 → 대조 대기 → 다듬기 대기 → 발행 준비(◆ 미리보기 대기) → 발행 완료 (개편 글은 첫 상태가 「기존 글 업데이트」)
-- **발행 완료**: 9번 blog-publish가 카드에 `published_at`·`url`을 적고 `briefs/done/YYYY-MM/`로 옮긴다. 같은 slug의 research·drafts·factcheck도 각 폴더의 `done/YYYY-MM/`로
-- **중단**: 마감이 지나 접거나 사람이 취소하면 `status: 중단`과 이유를 적고 `briefs/dropped/`로. 같은 slug의 research·drafts·factcheck도 각 폴더의 `dropped/`로 (마감이 지난 속보는 먼저 깊이 있는 글로 돌린다 — D34. 이때는 중단이 아니므로 노트를 옮기지 않고 이어서 쓴다)
+- 한눈에 보기: `/blog-status` — 진행 중 카드의 상태·마감·노트/설계/초안/대조 유무를 표로 (읽기 전용)
+- 카드 머리 `status:` 를 각 단계 스킬이 바꾼다: 조사 대기 → 설계 대기 → (실습 대기 — 사람 실습 카드만, D45) → 초안 대기 → 대조 대기 → 다듬기 대기 → 발행 준비(◆ 미리보기 대기) → 발행 완료 (개편 글은 첫 상태가 「기존 글 업데이트」)
+- **발행 완료**: 9번 blog-publish가 카드에 `published_at`·`url`을 적고 `briefs/done/YYYY-MM/`로 옮긴다. 같은 slug의 research·outlines·drafts·factcheck도 각 폴더의 `done/YYYY-MM/`로
+- **중단**: 마감이 지나 접거나 사람이 취소하면 `status: 중단`과 이유를 적고 `briefs/dropped/`로. 같은 slug의 research·outlines·drafts·factcheck도 각 폴더의 `dropped/`로 (마감이 지난 속보는 먼저 깊이 있는 글로 돌린다 — D34. 이때는 중단이 아니므로 노트를 옮기지 않고 이어서 쓴다)
 - **수집·순위표**: `candidates/`·`topics/`는 한 달이 지나면 `YYYY-MM/` 폴더로 옮긴다 (이월은 최근 1주만 보므로 영향 없음). 옮길 때 다른 파일의 경로 참조는 고치지 않는다 — git 이력과 폴더 이름으로 찾는다
 - 지우지 않는다. 기록은 로컬 폴더에 남긴다. **git에는 프로그램·규칙·폴더 구조만** — 작업 데이터는 `.gitignore`로 뺀다 (D42)
 
@@ -114,7 +115,7 @@
 | 2 | blog-topic | Google Sheets 칸 구성 | 회차마다 추천 ○를 넣은 시트를 Drive에 올려 사람이 확인 | ☑ |
 | 3 | ~~blog-perspective~~ | — | 폐지 (D37) — 대표 한마디는 2번 시트에서 받음 | — |
 | 4 | blog-research | — | — | ☑ |
-| 5 | blog-outline | — | — | ☐ |
+| 5 | blog-outline | — | — | ☑ |
 | 6 | blog-draft | **ひかりちゃん 목소리 가이드, 용어집** | — | ☐ |
 | 7 | blog-factcheck | — | — | ☐ |
 | 8 | blog-polish | 자동 교정 도구 설치 | — | ☐ |
@@ -143,10 +144,16 @@
 - [x] 1번 blog-collect 완성 (2026-11-19) → 다음: 2번 blog-topic
 - [x] 2번 blog-topic 완성 (2026-11-20) → 다음: 4번 blog-research (3번은 폐지, D37)
 - [x] 4번 blog-research 완성 (2026-11-20) → 다음: 5번 blog-outline
-- [ ] 5번 blog-outline에서: 속보의 서브 키워드가 질문형이 아닐 때(예: 「php 脆弱性 11月19日」) H2에 어떻게 배치할지 정한다 (D43: 속보 서브 키워드는 사건 검색어 1~2 + 질문형 2 이상)
-- [ ] 사람 실습 체크리스트 전달 방식 (첫 `trial: 사람` 카드 때 정한다. 그전에는 대화창 보고로)
+- [x] 5번 blog-outline 완성 (2026-11-20) → 다음: 6번 blog-draft (먼저: ひかりちゃん 목소리 가이드·용어집 — 사이트 용어집 /ja/glossary를 출발점으로)
+- [x] 5번 blog-outline에서: 속보의 서브 키워드가 질문형이 아닐 때 H2 배치 → 제목·첫 문단·「何が起きた？」 H2에 녹인다 (2026-11-20, D44)
+- [x] 사람 실습 체크리스트 전달 방식 → 공유 드라이브 `03_Blog/trials`에 카드당 실습 문서, 카드 상태 「실습 대기」 (2026-11-20, D45)
+- [ ] 「PHP Free」(사이트)·「PHPフリー」(기존 글 일부) 표기 통일 여부
+- [ ] AI 도입 지원 서비스 페이지가 생기면 CTA 버튼 링크 교체 (rules/common.md 1장)
+- [ ] 13번 전체 연결에서: 실습 기한(⚠1일 안·⚠지남)·속보 마감을 정해진 시각에 알리는 방법 (지금은 /blog-status를 실행해야 보임)
 
 ## 변경 이력
 - 2026-11-19 v1: 규칙 1~17 확정
 - 2026-11-20: 하루 6편 운영(D31), 대표 질문 단계 폐지(D37), 필자 ひかりちゃん 통일(D38)
 - 2026-11-20: 직접 찾은 주제 흐름(D41), git에는 프로그램·규칙·폴더 구조만 — 작업 데이터는 로컬 폴더에만(D42), 중단 때 노트·초안·보고서도 dropped/ (D40 보강), 진행 현황 `/blog-status` 추가, 키워드 무료 신호 보강(D43)
+- 2026-11-20: 설계안 `outlines/` 별도 파일·속보 사건 검색어 배치·속보 × 글 종류 목차·설계 때 D43 키워드 확인 (D44)
+- 2026-11-20: 설계 보강(개편·역링크·검색 의도·태그 등), CTA 버튼 일본어 표기, 실습 대기·Drive 실습 문서 (D45)

@@ -40,13 +40,16 @@
 - 하루 게시 상한을 둔다 (오작동 대비)
 
 ### 발행 후
-- 기존 관련 글 2개 이상에 새 글 링크 추가
+- 기존 관련 글 2개 이상에 새 글 링크 추가 — 설계안 `outlines/<slug>.md` 「역링크」 표대로 (D45)
+  - 넣기 직전에 `check_outline.py outlines/<slug>.md --verify-links`로 다시 확인한다 (설계 뒤에 기존 글의 소제목이 바뀌었을 수 있다). 없어진 H2는 그 글의 비슷한 위치를 사람에게 묻는다
+  - Ghost 연동 전(임시 방식)에는 「기존 글 URL / H2 / 넣을 문장·앵커」를 파일로 만들어 사람이 붙인다
 - Search Console에 색인 요청
 - 시트에 발행 기록
-- 주제 카드에 `published_at`·`url`을 적고 `status: 발행 완료` → `briefs/done/YYYY-MM/`로 옮긴다. 같은 slug의 research·drafts·factcheck도 각 폴더의 `done/YYYY-MM/`로 (D40)
+- 주제 카드에 `published_at`·`url`을 적고 `status: 발행 완료` → `briefs/done/YYYY-MM/`로 옮긴다. 같은 slug의 research·outlines·drafts·factcheck도 각 폴더의 `done/YYYY-MM/`로 (D40, D44)
 
 ## 변경 이력
 - 2026-11-19 v1
 - 2026-11-20 v1.1: 마감이 지난 속보는 깊이 있는 글로 돌린다 (D34)
 - 2026-11-20 v1.2: 필자 계정 ひかりちゃん 1개 (D38)
 - 2026-11-20 v1.3: 발행 후 주제 카드·작업 파일을 done 폴더로 옮김 (D40)
+- 2026-11-20 v1.4: 옮기는 폴더에 outlines 추가 (D44), 역링크는 설계안 표대로 (D45)

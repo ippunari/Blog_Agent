@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """blog-status: 주제 카드 진행 현황을 표 하나로 보여 준다 (읽기 전용 — 파일을 바꾸지 않는다).
 
-briefs/*.md(진행 중) 카드 머리를 읽어 slug / 경로 / 상태 / 마감 / 노트·초안·대조 보고서 유무를 표로 낸다.
+briefs/*.md(진행 중) 카드 머리를 읽어 slug / 경로 / 상태 / 마감 / 노트·설계·초안·대조 보고서 유무를 표로 낸다.
 done/·dropped/는 건수만 센다 (--all 이면 목록도).
 
 사용법:
@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 JST = timezone(timedelta(hours=9))
-ORDER = ["조사 대기", "기존 글 업데이트", "설계 대기", "초안 대기", "대조 대기", "다듬기 대기", "발행 준비", "발행 완료", "중단"]
+ORDER = ["조사 대기", "기존 글 업데이트", "설계 대기", "실습 대기", "초안 대기", "대조 대기", "다듬기 대기", "발행 준비", "발행 완료", "중단"]
 
 
 def front(path):
@@ -79,8 +79,8 @@ def main():
             "slug": slug, "route": route, "kind": kind, "type": f.get("type", "?"),
             "status": status_name(f.get("status")), "dl": dl, "dl_txt": dl_txt,
             "origin": f.get("origin", "시트"), "trial": f.get("trial", "-").split("|")[0].strip() or "-",
-            "sel": f.get("selected_at", ""),
-            "r": mark(root, "research", slug), "d": mark(root, "drafts", slug), "c": mark(root, "factcheck", slug),
+            "sel": f.get("selected_at", ""), "trial_doc": f.get("trial_doc", ""), "trial_due": f.get("trial_due", ""),
+            "r": mark(root, "research", slug), "o": mark(root, "outlines", slug), "d": mark(root, "drafts", slug), "c": mark(root, "factcheck", slug),
         })
 
     far = datetime.max.replace(tzinfo=JST)
@@ -88,17 +88,30 @@ def main():
 
     print(f"# 진행 현황 ({now.strftime('%Y-%m-%d %H:%M')} JST) — 진행 중 {len(rows)}건")
     print()
-    print("| slug | 경로 | 글 종류 | 상태 | 마감 | 노트 | 초안 | 대조 | 실습 | 출처 |")
-    print("|---|---|---|---|---|---|---|---|---|---|")
+    print("| slug | 경로 | 글 종류 | 상태 | 마감 | 노트 | 설계 | 초안 | 대조 | 실습 | 출처 |")
+    print("|---|---|---|---|---|---|---|---|---|---|---|")
     for r in rows:
         route = r["route"] + (f"·{r['kind']}" if r["kind"] and r["kind"] != r["route"] else "")
-        print(f"| {r['slug']} | {route} | {r['type']} | {r['status']} | {r['dl_txt']} | {r['r']} | {r['d']} | {r['c']} | {r['trial']} | {r['origin']} |")
+        print(f"| {r['slug']} | {route} | {r['type']} | {r['status']} | {r['dl_txt']} | {r['r']} | {r['o']} | {r['d']} | {r['c']} | {r['trial']} | {r['origin']} |")
 
     print()
     counts = {}
     for r in rows:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
     print("상태별: " + " / ".join(f"{s} {counts[s]}" for s in ORDER + sorted(set(counts) - set(ORDER)) if s in counts))
+
+    todo = [r for r in rows if r["status"] == "실습 대기"]
+    if todo:
+        print()
+        print("사람이 할 일 (실습 대기):")
+        for r in todo:
+            due, _ = parse_deadline(r["trial_due"])
+            if due:
+                h = (due - now).total_seconds() / 3600
+                due_txt = due.strftime("%m/%d %H:%M") + (" ⚠지남 → 연장 / 실습 없이 쓰기 / 중단 중에서 정한다" if h < 0 else " ⚠1일 안" if h < 24 else "")
+            else:
+                due_txt = "(기한 없음)"
+            print(f"- {r['slug']}: 기한 {due_txt} / 실습 문서 {r['trial_doc'] or '(링크 없음 — blog-research에서 올리지 못함)'} → 끝나면 「실습 끝났어 {r['slug']}」")
 
     done = sorted((root / "briefs" / "done").glob("*/*.md"))
     dropped = sorted((root / "briefs" / "dropped").glob("*.md"))
@@ -113,9 +126,10 @@ def main():
 
     # 노트만 남은 것 (카드가 없는 research 파일) — 정리 누락 점검
     cards = {r["slug"] for r in rows}
-    orphans = [p.stem for p in (root / "research").glob("*.md") if p.stem not in cards]
-    if orphans:
-        print("⚠ 카드 없이 남은 조사 노트 (done/·dropped/로 옮겨야 할 수 있음): " + ", ".join(orphans))
+    for folder, name in [("research", "조사 노트"), ("outlines", "설계안")]:
+        orphans = [p.stem for p in (root / folder).glob("*.md") if p.stem not in cards]
+        if orphans:
+            print(f"⚠ 카드 없이 남은 {name} (done/·dropped/로 옮겨야 할 수 있음): " + ", ".join(orphans))
     return 0
 
 
