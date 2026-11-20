@@ -28,6 +28,8 @@
 
 ## 작업 폴더
 - `candidates/` 수집 후보 원본
+- `topics/` 주제 후보 순위표(시트 대신), `topics/existing_posts.json` 기존 글 목록
+- `briefs/<slug>.md` 선택된 주제 카드 (blog-perspective로 넘김)
 - `research/<slug>.md` 조사 노트
 - `drafts/<slug>.md` 초안
 - `factcheck/<slug>.md` 사실 대조 보고서

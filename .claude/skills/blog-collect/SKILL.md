@@ -118,8 +118,22 @@ python3 -I .claude/skills/blog-collect/check_candidates.py candidates/<파일>.m
 - 필수 항목 누락, 등급·주제 축·글 종류 값, 요약 길이, **수집 데이터에 없는 URL**을 잡는다
 - 「통과」가 나올 때까지 고친다. URL은 절대 짐작해서 쓰지 않는다 — 모르면 「미확인」 또는 「없음」
 
+## 7-2. 공유 드라이브에 보기용 사본 올리기 (점검 통과 후 자동)
+원본은 로컬 md다. Drive에는 팀원이 읽고 댓글을 다는 **Google 문서 사본**만 올린다 (rules/blog-collect.md 출력, D30)
+```bash
+python3 -I .claude/skills/blog-collect/export_doc.py candidates/<파일>.md --out "$SP/candidates_doc.md"
+shasum -a 256 "$SP/candidates_doc.md"
+```
+- 맨 위에 「보기용 사본 — 고쳐도 반영되지 않음, 의견은 댓글로」 한 줄이 붙고, 머리의 `---` 블록은 「수집 정보」 목록으로 바뀐다 (Google 문서 변환 때 깨지지 않게)
+- Google Drive `create_file`: title 「BlogAgent 수집 후보 YYYY-MM-DD am|pm」, contentMimeType `text/markdown`, base64Content = `sha256:<해시>:<candidates_doc.md 절대 경로>`, **`disableConversionToGoogleType`은 넣지 않는다** (Google 문서로 바뀌어야 함)
+  - 올릴 곳: 회사 공유 드라이브 「Atatakai Digital」 › `03_Blog/candidates` (`parentId: 1_szlCyOdkcvOINDT6EE9b9u72HUhkKb_`). 개인 드라이브에 올리지 않는다. 폴더를 못 찾으면 멈추고 사람에게 묻는다
+  - 같은 제목의 문서가 이미 있으면(같은 회차를 다시 수집) 새로 만들기 전에 사람에게 묻는다
+- 받은 문서 ID를 후보 파일 머리에 `doc: <ID>`로 적는다 (점검 스크립트를 다시 돌릴 필요는 없다)
+- **공유 설정은 바꾸지 않는다.** 공유 드라이브 멤버가 그대로 볼 수 있다 (rules/common.md 7장 D)
+- 실패하면 로컬 파일은 그대로 두고 보고에 「Drive 업로드 실패: 이유」를 적는다
+
 ## 8. 마무리 보고 (한국어, 짧게)
-- 저장한 파일 경로, 후보 건수(축별), 질문 건수
+- 저장한 파일 경로, Drive 문서 링크, 후보 건수(축별), 질문 건수
 - 실패한 출처, 뺀 것(상한 초과·지시문 의심)
 - 눈에 띄는 후보 3개 (속보 후보 표시)
 - 다음 단계: blog-topic (파일을 보고 사람이 고른다)

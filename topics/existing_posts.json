@@ -1,0 +1,973 @@
+{
+ "updated_at": "2026-11-20T11:15+09:00",
+ "source": "https://atatakaidigital.com/sitemap.xml",
+ "_note": "회사 블로그 공개 글의 제목·메타 설명. 1키워드 1글 점검용",
+ "posts": [
+  {
+   "slug": "1-800-chatgpt",
+   "url": "https://atatakaidigital.com/ja/blog/1-800-chatgpt",
+   "lastmod": "2026-10-26T13:24:37.000+09:00",
+   "title": "1-800-ChatGPTはいま使える？電話とWhatsAppの現状",
+   "description": "ChatGPTが電話とWhatsAppで利用可能に！1-800-CHATGPTに電話するだけでAIと話せる新機能を詳しく解説します。初心者にもおすすめのサービスです。"
+  },
+  {
+   "slug": "2025-ai-exhibitions-events",
+   "url": "https://atatakaidigital.com/ja/blog/2025-ai-exhibitions-events",
+   "lastmod": "2026-10-26T11:41:06.000+09:00",
+   "title": "AI展示会・カンファレンス2026–2027｜日本と海外の日程まとめ",
+   "description": "2025年のAI展示会・カンファレンスを完全ガイド！日本国内・海外の注目AIイベントを一覧で紹介。生成AI、DX、業務効率化、機械学習、自然言語処理など、最先端のAI技術をキャッチアップ！"
+  },
+  {
+   "slug": "ai-agents-minecraft",
+   "url": "https://atatakaidigital.com/ja/blog/ai-agents-minecraft",
+   "lastmod": "2026-10-26T12:24:43.000+09:00",
+   "title": "MinecraftのAIエージェント1,000体実験「Project Sid」｜論文と続報で答え合わせ",
+   "description": "最大1,000体のAIキャラクターがMinecraftで見せた驚きの行動！職業分化、社会形成、宗教の広がりなど、AIの可能性に迫る実験を解説します。"
+  },
+  {
+   "slug": "ai-best-inventions-time-2024",
+   "url": "https://atatakaidigital.com/ja/blog/ai-best-inventions-time-2024",
+   "lastmod": "2026-10-26T12:15:14.000+09:00",
+   "title": "タイム誌が選ぶ最高の発明品｜2024年のAI14製品のその後と2026年版",
+   "description": "タイム誌が発表する「The Best Inventions of 2024」からAI技術を駆使した革新製品を14選で解説。Google DeepMindのAlphaFold 3など、次世代を担うAI技術とそのインパクトをチェック！"
+  },
+  {
+   "slug": "ai-development-water-usage",
+   "url": "https://atatakaidigital.com/ja/blog/ai-development-water-usage",
+   "lastmod": "2026-10-26T12:40:33.000+09:00",
+   "title": "GPT-4は1回500mlの水を使う？｜AIの水消費を2026年のデータで答え合わせ",
+   "description": "生成AIの進化には予想外のコストが伴います。特にデータセンターの水使用量とエネルギー消費が問題となっており、持続可能な開発の必要性が浮き彫りになっています。"
+  },
+  {
+   "slug": "ai-email-draft-first-try",
+   "url": "https://atatakaidigital.com/ja/blog/ai-email-draft-first-try",
+   "lastmod": "2026-10-27T05:43:13.000+09:00",
+   "title": "AIでメールを書く、はじめの一歩｜業務メール1通を準備する手順と、もう一歩",
+   "description": "AIで業務メールを1通準備する手順を、二つの段階でまとめました。打ち合わせの確認メール1通ではじめて、お客様の問い合わせへの返信でもう一歩進みます。コピーして使えるプロンプト、架空の例、送る前の確認リストまで入っています。"
+  },
+  {
+   "slug": "ai-generated-cats-viral-hit",
+   "url": "https://atatakaidigital.com/ja/blog/ai-generated-cats-viral-hit",
+   "lastmod": "2026-10-26T12:51:44.000+09:00",
+   "title": "AI猫動画のその後｜作り方とAI表示・権利の注意",
+   "description": "AI技術によって新たな魅力を持った猫たちがインターネット上で注目の的に。バイラル動画としての成功の秘訣とは？"
+  },
+  {
+   "slug": "ai-impact-game-developers-career",
+   "url": "https://atatakaidigital.com/ja/blog/ai-impact-game-developers-career",
+   "lastmod": "2026-10-26T12:41:49.000+09:00",
+   "title": "「原神」開発者の転職発言から2年｜AI時代のゲーム開発者はどうなったか",
+   "description": "AI技術の急速な進化により、ゲーム業界が大きく変わろうとしています。『原神』の開発者である蔡浩宇氏は、AI時代においてゲーム開発者が転職を考えるべき理由について警告しています。"
+  },
+  {
+   "slug": "ai-relationships",
+   "url": "https://atatakaidigital.com/ja/blog/ai-relationships",
+   "lastmod": "2026-10-26T12:10:06.000+09:00",
+   "title": "人間とAIの恋愛のいま｜規制・訴訟と安全に使うための注意点",
+   "description": "AIチャットボットを仮想恋人として利用する人が増加中。AI恋愛の未来、倫理的課題、新しい人間関係の形について詳しく解説します。"
+  },
+  {
+   "slug": "ai-web-content",
+   "url": "https://atatakaidigital.com/ja/blog/ai-web-content",
+   "lastmod": "2026-10-26T12:27:52.000+09:00",
+   "title": "AIを活用したWebコンテンツ制作｜2024年のトップ10選のその後と、いま使う道具",
+   "description": "2024年のwebコンテンツ制作に役立つトップ10のAIツールを紹介します。AIを活用して、効率的かつ効果的にコンテンツを作成し、デジタルマーケティングを強化しましょう。具体的な使用事例や最新のAI技術トレンドも含め、実践的なガイドを提供します。"
+  },
+  {
+   "slug": "before-you-start-development",
+   "url": "https://atatakaidigital.com/ja/blog/before-you-start-development",
+   "lastmod": "2026-08-25",
+   "title": "要件が決まらないまま開発を始めると、何が起きるのか",
+   "description": "機能を考える前に決めておきたい、課題と優先順位"
+  },
+  {
+   "slug": "ces-2025-ai-robot-trends",
+   "url": "https://atatakaidigital.com/ja/blog/ces-2025-ai-robot-trends",
+   "lastmod": "2026-10-26T11:41:16.000+09:00",
+   "title": "CES 2025で注目のAIロボット7選のその後｜発売・価格・日本で買えるかを答え合わせ",
+   "description": "CES 2025では、AI技術とロボットが進化。TCL Ai MeやSamsung Ballieなどの注目ロボットから、家庭内タスクの自動化や価格帯の二極化まで、最新トレンドを徹底解説します。"
+  },
+  {
+   "slug": "ces-2025-ai-trends",
+   "url": "https://atatakaidigital.com/ja/blog/ces-2025-ai-trends",
+   "lastmod": "2026-10-26T12:51:27.000+09:00",
+   "title": "CES 2025のAIトレンド6つ、その後｜答え合わせ",
+   "description": "CES 2025では、AIがPCから自動運転、医療まで幅広く進化。Nvidia、Samsungなどの最新技術と注目の展示内容をまとめました。"
+  },
+  {
+   "slug": "ces2025-ai-wearable-devices",
+   "url": "https://atatakaidigital.com/ja/blog/ces2025-ai-wearable-devices",
+   "lastmod": "2026-10-26T11:41:56.000+09:00",
+   "title": "CES 2025のAIウェアラブル、その後｜HallidayとOmiは発売されたか",
+   "description": "CES 2025で発表された最新のAIウェアラブルデバイスを徹底解説！Hallidayスマートグラスのリアルタイム翻訳機能やOmiの脳波検出AIなど、次世代技術の特徴を詳しく紹介。<br>"
+  },
+  {
+   "slug": "chat-hub-compare-chatbots",
+   "url": "https://atatakaidigital.com/ja/blog/chat-hub-compare-chatbots",
+   "lastmod": "2026-10-26T13:24:22.000+09:00",
+   "title": "ChatHubの使い方｜複数AIを比べる方法と、いまの注意点",
+   "description": "複数のチャットボットを比較できるChatHubの便利な機能を紹介。ChatGPTやBing Chatなどを同時に試せるオールインワンのツールで、最適なAIを見つけやすくします。"
+  },
+  {
+   "slug": "chatgpt-future-price-2029",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-future-price-2029",
+   "lastmod": "2026-10-26T11:42:13.000+09:00",
+   "title": "ChatGPT費用は月44ドルになった？｜いまの料金とプランの選び方",
+   "description": "ChatGPT費用が2029年までに44ドルに引き上げられる可能性が高まっています。この値上げの原因とOpenAIの成長・損失の関係を詳しく解説します。"
+  },
+  {
+   "slug": "chatgpt-image-generation-editing",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-image-generation-editing",
+   "lastmod": "2026-10-26T11:42:24.000+09:00",
+   "title": "ChatGPTで画像生成・編集する使い方｜DALL·Eは終了、いまはImages 2.5",
+   "description": "ChatGPTの画像生成・編集機能を徹底解説！DALL-Eとの違いや活用方法、モバイル編集も詳しく紹介します。"
+  },
+  {
+   "slug": "chatgpt-image-update-2025",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-image-update-2025",
+   "lastmod": "2026-10-26T12:43:11.000+09:00",
+   "title": "ChatGPT画像生成アップデートの答え合わせ｜ジブリ風とフィギュア画像はいま",
+   "description": "ChatGPT画像生成アップデートで何が変わった？SNSで話題のジブリ風キャラクターや多様なスタイル生成を徹底解説。実際に試したプロンプト例や活用法も紹介！"
+  },
+  {
+   "slug": "chatgpt-model-differences",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-model-differences",
+   "lastmod": "2026-10-26T12:27:41.000+09:00",
+   "title": "ChatGPTのモデルの違い｜GPT-3.5・GPT-4・GPT-4oからGPT-6へ",
+   "description": "「iroiroai」プラットフォームを活用して、最新のAIチャットボット「GPT-3.5」「GPT-4」「GPT-4o」を徹底比較。各モデルの性能、機能、コンテキストウィンドウ、マルチモーダル機能、費用を詳しく解説。どのAIチャットボットがあなたに最適か、選び方のポイントを紹介します。"
+  },
+  {
+   "slug": "chatgpt-new-features-for-free-users",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-new-features-for-free-users",
+   "lastmod": "2026-10-26T13:31:11.000+09:00",
+   "title": "ChatGPT無料版でできること・使い方｜2026年10月の最新版",
+   "description": "OpenAIが2024年5月にリリースしたGPT-4oの新機能で、無料のChatGPTユーザーもカスタムGPTの利用、データ分析、チャート作成、写真に関する質問が可能に。これらの機能は以前は有料ユーザー限定でしたが、今後は日本でも提供開始が期待されています。詳細な機能とその使い方を徹底解説します。"
+  },
+  {
+   "slug": "chatgpt-personalized-ai",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-personalized-ai",
+   "lastmod": "2026-10-26T11:41:58.000+09:00",
+   "title": "ChatGPTの性格設定とカスタマイズの使い方｜カスタム指示・メモリまで2026年版",
+   "description": "ChatGPTの最新アップデートで、性格を自由に設定可能に！OpenAIの新しいカスタマイズ機能で、あなたにぴったりのAI体験を楽しみましょう。機能の概要や活用例を詳しく解説します。"
+  },
+  {
+   "slug": "chatgpt-plus-vs-free",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-plus-vs-free",
+   "lastmod": "2026-10-26T13:30:31.000+09:00",
+   "title": "ChatGPT Plusと無料版の違い｜Goを含めた3プランの選び方",
+   "description": "ChatGPT Plusは、GPT-4の無制限利用や画像生成など無料版にはない高度な機能を提供します。登録方法や解約手順まで詳しく解説！無料版との違いが気になる方必見！"
+  },
+  {
+   "slug": "chatgpt-project-guide",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-project-guide",
+   "lastmod": "2026-10-26T11:41:37.000+09:00",
+   "title": "ChatGPTプロジェクトとは？使い方｜無料版の上限、共有とメモリ、GPTsとの違い",
+   "description": "ChatGPTプロジェクトとは何か？OpenAIが提供する新機能で、チャット履歴や関連資料を一括管理。活用方法やGoogle NotebookLMとの違いを徹底解説！"
+  },
+  {
+   "slug": "chatgpt-prompt-enhancement-tips",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-prompt-enhancement-tips",
+   "lastmod": "2026-10-26T11:42:23.000+09:00",
+   "title": "ChatGPTのプロンプト改善方法26選、いまも効くのはどれか｜答え合わせ",
+   "description": "ChatGPTとの会話を改善するための26の効果的なプロンプト技術を紹介。具体的な例を使い、複雑なタスクを簡素化し、肯定的な指示や子供向けの説明、役割の割り当てなどを行う方法を解説。これにより、ChatGPTの能力を最大限に引き出すことができます。"
+  },
+  {
+   "slug": "chatgpt-scheduled-tasks-guide",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-scheduled-tasks-guide",
+   "lastmod": "2026-10-26T11:40:38.000+09:00",
+   "title": "ChatGPTのScheduled Tasks（スケジュールタスク）の使い方｜2026年版",
+   "description": "ChatGPTの新機能「Scheduled Tasks」でタスクの自動化が可能に！リマインダー設定や仕事の効率化に役立つ機能を徹底解説。簡単な設定方法と具体的な活用例を紹介し、AI活用の可能性を広げます。無料相談も受付中！"
+  },
+  {
+   "slug": "chatgpt-windows-app-launch",
+   "url": "https://atatakaidigital.com/ja/blog/chatgpt-windows-app-launch",
+   "lastmod": "2026-10-26T12:42:58.000+09:00",
+   "title": "ChatGPT Windowsアプリの使い方｜新アプリの入れ方と2024年の制限の答え合わせ",
+   "description": "ChatGPTのWindowsアプリがリリースされ、現在は有料ユーザー限定で利用可能。機能や現時点の制限について詳しく解説し、使い方をわかりやすく紹介します。"
+  },
+  {
+   "slug": "claude-mythos-glasswing",
+   "url": "https://atatakaidigital.com/ja/blog/claude-mythos-glasswing",
+   "lastmod": "2026-11-10T13:27:16.000+09:00",
+   "title": "Claude Mythos・Project Glasswingとは｜AIハッキング時代に企業が守るもの",
+   "description": "AnthropicのClaude Mythos（ミトス）が、OpenBSDに27年眠っていた脆弱性を見つけました。一般公開ではなくProject Glasswingで先に直す道を選んだ理由と、AIハッキング時代に企業が確かめることをまとめます。"
+  },
+  {
+   "slug": "code-generation-ai-comparison-tips",
+   "url": "https://atatakaidigital.com/ja/blog/code-generation-ai-comparison-tips",
+   "lastmod": "2026-10-26T11:42:24.000+09:00",
+   "title": "コード生成AIおすすめ5選を比較｜2026年版の選び方と利用のコツ",
+   "description": "コード生成AIツールの選び方とおすすめ5選を徹底解説！各ツールの価格、メリット、デメリット、特徴を詳しく比較し、開発効率を飛躍的に高める方法も紹介します。初心者にも安心のガイドです。"
+  },
+  {
+   "slug": "codegen-trend2025",
+   "url": "https://atatakaidigital.com/ja/blog/codegen-trend2025",
+   "lastmod": "2026-10-26T12:24:55.000+09:00",
+   "title": "コード生成AI「使用率75%増加」の答え合わせ｜2026年の開発トレンド",
+   "description": "コード生成AIの使用率が75%急増。ChatGPTではカバーしきれない開発現場の課題を解決する最新ツールと活用法を解説。"
+  },
+  {
+   "slug": "copilot-voice-vision-features",
+   "url": "https://atatakaidigital.com/ja/blog/copilot-voice-vision-features",
+   "lastmod": "2026-10-26T13:33:42.000+09:00",
+   "title": "Copilotの音声とVisionの使い方｜日本で使える？",
+   "description": "マイクロソフトのCopilotが進化！音声機能とビジョン機能を搭載した新しいAIアシスタントの使い方や、Copilot VisionとThink Deeperの利用方法について詳しく解説します。"
+  },
+  {
+   "slug": "copilot-vs-chatgpt",
+   "url": "https://atatakaidigital.com/ja/blog/copilot-vs-chatgpt",
+   "lastmod": "2026-10-26T13:33:29.000+09:00",
+   "title": "CopilotとChatGPTの違い｜料金・得意な作業・仕事での選び方（2026年版）",
+   "description": "CopilotとChatGPTを徹底比較！特徴や得意な分野、機能の違いをわかりやすく解説し、用途に応じた最適なAIツールの選び方をサポートします。<br>"
+  },
+  {
+   "slug": "custom-gpt-creation-guide",
+   "url": "https://atatakaidigital.com/ja/blog/custom-gpt-creation-guide",
+   "lastmod": "2026-10-26T11:40:45.000+09:00",
+   "title": "カスタムGPT（GPTs）の作り方はいま｜12月終了とプロジェクト・プラグインへの移行",
+   "description": "あなた自身のカスタムGPTの作り方をステップ・バイ・ステップのガイドで学びます。今回は、ChatGPTの新機能である「GPTs」を活用して、カスタムGPTをどのように作るかを詳細に解説します。"
+  },
+  {
+   "slug": "deepmind-v2a-video-audio",
+   "url": "https://atatakaidigital.com/ja/blog/deepmind-v2a-video-audio",
+   "lastmod": "2026-10-26T12:59:59.000+09:00",
+   "title": "DeepMind「V2A」のその後｜動画に音声をつける方法",
+   "description": "DeepMindの最新AI技術「V2A」が動画に自動で音声やサウンドトラックを生成。どのように機能し、他の技術と何が違うのかを詳しく解説します。"
+  },
+  {
+   "slug": "deepseek-vs-chatgpt",
+   "url": "https://atatakaidigital.com/ja/blog/deepseek-vs-chatgpt",
+   "lastmod": "2026-10-26T13:33:43.000+09:00",
+   "title": "DeepSeekの使い方とChatGPTとの違い｜2026年10月の最新版",
+   "description": "DeepSeek R1とは？ChatGPTとの違いや、どんな用途に最適かを徹底解説！無料で使えるDeepSeekの利点や、プログラミング・推論・創作タスクの性能差を比較し、実際の使用例も紹介。"
+  },
+  {
+   "slug": "development",
+   "url": "https://atatakaidigital.com/ja/blog/development",
+   "lastmod": "2026-09-02T13:47:53.000+09:00",
+   "title": "開発(Development)とは?",
+   "description": "ソフトウェア、アプリ、Webサイトなどのデジタル製品を企画・設計・実装する一連のプロセスを指します。\n課題を定義し → 解決方法を設計し → 実際に動くプロダクトを形にするまでを含む、一連の取り組みが「開発」です。\n\nなぜ「開発」という概念が必要なのか？\n\nかつては「プログラミング」という言葉が主に使われていました。\nしかし、デジタル製品づくりはコードを書くことだけでは完結しないことが明確になり、より包括的な概念として「開発」という言葉が定着しました。\n\n実際、外注開発プロジェクトを進めると、コーディングは全体作業の30〜40％程度に過ぎません。\n\n開発に含まれるもの\n\n1. 要件定義・要件分析|\n「自社にはどんな機能が必要か？」\n「ユーザーはどんな課題を抱えているか？」\n経営者や企画担当などの非エンジニアと開発者が一緒に整理する工程です。\n\n2. 設計\nデータベース構造設計\n画面構成（UI / UX）\nサーバー・クライアントのアーキテクチャ設計\nこの工程が不十分だと、開発途中で全体を作り直すリスクがあります。\n\n3. 実装（コーディング）\n実際にコードを書く工程\nフロントエンド（ユー"
+  },
+  {
+   "slug": "diy-or-outsource-php-check",
+   "url": "https://atatakaidigital.com/ja/blog/diy-or-outsource-php-check",
+   "lastmod": "2026-10-26T09:27:54.000+09:00",
+   "title": "PHPの更新、自分でやるか任せるか 10問の判定表",
+   "description": "PHPのバージョン更新を自分でやるか任せるかは、実力ではなくサイトの条件で決まります。「はい・いいえ」で答える10問と結果を分ける赤い問い3つ、3つの道それぞれのやること、任せても手元に残すものをまとめました。"
+  },
+  {
+   "slug": "elevenlabs-voice-ai-v3",
+   "url": "https://atatakaidigital.com/ja/blog/elevenlabs-voice-ai-v3",
+   "lastmod": "2026-10-26T12:27:40.000+09:00",
+   "title": "ElevenLabs「Eleven v3」の使い方と後継v4｜料金・商用利用・声の権利",
+   "description": "感情を“演技”する音声AI「Eleven v3」が登場。オーディオタグや会話APIで表現力が進化。導入支援や活用例も紹介！"
+  },
+  {
+   "slug": "elon-musk-vs-openai",
+   "url": "https://atatakaidigital.com/ja/blog/elon-musk-vs-openai",
+   "lastmod": "2026-10-26T11:41:55.000+09:00",
+   "title": "イーロン・マスク対OpenAI訴訟のその後｜評決・営利化・報酬の答え合わせ",
+   "description": "イーロン・マスク氏がOpenAIを再び提訴！高額報酬やマイクロソフトとの連携を批判し、生成AI市場での競争の激化や人材戦略に焦点を当てています。この記事では、その背景と業界への影響を詳しく解説します。"
+  },
+  {
+   "slug": "free-ai-music-app-sunoai-udioai",
+   "url": "https://atatakaidigital.com/ja/blog/free-ai-music-app-sunoai-udioai",
+   "lastmod": "2026-10-26T11:41:55.000+09:00",
+   "title": "Suno AIとUdio AIの使い方｜無料の音楽生成AI、2026年の最新版",
+   "description": "AIによる音楽作成が可能な音楽生成AI「Suno AI」と「Udio AI」。この記事では、それぞれのアプリの特徴と使い方を解説し、どちらがユーザーのニーズに最適かを比較します。"
+  },
+  {
+   "slug": "generative-ai-fact-check",
+   "url": "https://atatakaidigital.com/ja/blog/generative-ai-fact-check",
+   "lastmod": "2026-11-03T08:46:50.000+09:00",
+   "title": "生成AIのファクトチェック方法｜AIの結果をそのまま使わない5つの基準",
+   "description": "生成AIは、それらしい資料をすぐに作ってくれます。でも、自分がよく知らない仕事だと「これで本当に完成なのか」が判断できません。ファクトチェックに加えて、「終わった状態」と「確認の方法」を先に決めておくことが大切です。"
+  },
+  {
+   "slug": "generative-ai-hikaku",
+   "url": "https://atatakaidigital.com/ja/blog/generative-ai-hikaku",
+   "lastmod": "2026-10-26T13:35:43.000+09:00",
+   "title": "生成AI比較＆導入事例｜日本企業10社の答え合わせと選び方",
+   "description": "日本企業の生成AI導入事例10選を徹底解説！生成AI比較を通じて、導入のメリットや成功事例を紹介。企業がどのように活用し、ビジネス成長を実現しているのかを詳しく解説します。"
+  },
+  {
+   "slug": "generative-ai-in-steam-games",
+   "url": "https://atatakaidigital.com/ja/blog/generative-ai-in-steam-games",
+   "lastmod": "2026-10-26T11:41:08.000+09:00",
+   "title": "Steamの生成AIゲームは1,000本からどうなった？｜開示ルールと2026年の数字",
+   "description": "生成AIがSteamゲームに革命をもたらしています。このブログでは、生成AIによって制作された1,000以上のゲームの詳細とその影響について解説しています。AIがゲーム開発をどのように変えているのか、その未来を探りましょう。<br><br>"
+  },
+  {
+   "slug": "github-copilot-ai-code-generation",
+   "url": "https://atatakaidigital.com/ja/blog/github-copilot-ai-code-generation",
+   "lastmod": "2026-10-26T13:00:16.000+09:00",
+   "title": "GitHub Copilotのエージェントモードの使い方｜2025年の更新のその後",
+   "description": "GitHub Copilotの最新アップデートで、AIがコードを自動修正・最適化！ Vision for Copilot、エージェントモード、Copilot Editsの新機能を徹底解説。開発効率を向上させる方法とは？"
+  },
+  {
+   "slug": "github-copilot-code-generation-options",
+   "url": "https://atatakaidigital.com/ja/blog/github-copilot-code-generation-options",
+   "lastmod": "2026-10-26T12:43:03.000+09:00",
+   "title": "GitHub Copilotで選べるAIモデル｜Claude・Gemini・GPTのプラン別の違いと切り替え方",
+   "description": "GitHub Copilotでのコード生成が進化！Anthropic、Google、OpenAIの最新モデルで開発者が自分に合ったAIを選択可能に。柔軟なモデル選択で、よりスマートなコーディング体験を提供。今すぐ試してみましょう！"
+  },
+  {
+   "slug": "github-copilot-copyright-lawsuit-victory",
+   "url": "https://atatakaidigital.com/ja/blog/github-copilot-copyright-lawsuit-victory",
+   "lastmod": "2026-10-26T12:41:48.000+09:00",
+   "title": "GitHub Copilot著作権訴訟のその後｜「勝利」の中身と控訴審判決",
+   "description": "GitHub、OpenAI、Microsoftが所有するAIコーディングツール「Copilot」に対する著作権訴訟で、サンフランシスコ連邦裁判所はプログラマーたちの一部の主張を却下しました。今回の判決が生成AI業界に与える影響とは？"
+  },
+  {
+   "slug": "github-copilot-workspace-introduction",
+   "url": "https://atatakaidigital.com/ja/blog/github-copilot-workspace-introduction",
+   "lastmod": "2026-10-26T12:59:50.000+09:00",
+   "title": "GitHub Copilot Workspaceは終了｜いまのCopilotでIssueからPRまで進める方法",
+   "description": "GitHub Copilot Workspaceで開発効率を最大化しませんか？このブログでは、AIベースの統合開発環境「GitHub Copilot Workspace」の特徴と使い方を詳しく解説しています。コード補完からプロジェクト全体の管理まで、開発プロセスをスムーズに進めるための具体的な方法を学びましょう。"
+  },
+  {
+   "slug": "global-ai-ranking-japan",
+   "url": "https://atatakaidigital.com/ja/blog/global-ai-ranking-japan",
+   "lastmod": "2026-10-26T11:41:39.000+09:00",
+   "title": "グローバルAIランキング、日本はいま何位？｜2026年の答え合わせ",
+   "description": "スタンフォード大学発表のグローバルAIランキングで日本が9位にランクイン。インフラ分野で世界3位を獲得する一方、研究開発や政策分野で課題が浮き彫りに。本記事では日本のAI現状と今後の課題を詳しく解説します。"
+  },
+  {
+   "slug": "gmo-desktop-cloud-breach-ja",
+   "url": "https://atatakaidigital.com/ja/blog/gmo-desktop-cloud-breach-ja",
+   "lastmod": "2026-11-10T14:01:15.000+09:00",
+   "title": "GMO不正アクセスとは|デスクトップクラウド侵入からFX不正取引・80億円要求まで時系列で解説",
+   "description": "GMO不正アクセスは、GMOインターネットの「お名前.com デスクトップクラウド」が侵入を受け、保存されていたFX口座のログイン情報で不正取引が起き、約80億円を要求された事件です。原因と補償、自社で確認することを整理します。"
+  },
+  {
+   "slug": "google-deepmind-alphafold3",
+   "url": "https://atatakaidigital.com/ja/blog/google-deepmind-alphafold3",
+   "lastmod": "2026-10-26T12:27:49.000+09:00",
+   "title": "AlphaFold 3はいま無料で使える？｜AlphaFold Serverの使い方と答え合わせ",
+   "description": "Googleの最新AI「AlphaFold 3」が生命科学に革新をもたらします。このブログでは、AlphaFold 3の特徴、精度の向上、DNAやRNAとの相互作用予測など、医療や研究における具体的な応用方法を詳しく解説しています。AI技術がどのように医薬品開発や生物学研究を進化させるのかを学びましょう。"
+  },
+  {
+   "slug": "google-gemini-in-chrome",
+   "url": "https://atatakaidigital.com/ja/blog/google-gemini-in-chrome",
+   "lastmod": "2026-10-26T11:40:58.000+09:00",
+   "title": "Gemini in Chromeの使い方｜アドレスバーの@geminiからサイドパネルへ",
+   "description": "GoogleがChromeのアドレスバーにGemini AIを統合。@geminiと入力するだけで、ウェブ閲覧中にAIアシスタントのサポートを受けられます。使い方と利点を詳しく解説！"
+  },
+  {
+   "slug": "google-gemini-language-tools",
+   "url": "https://atatakaidigital.com/ja/blog/google-gemini-language-tools",
+   "lastmod": "2026-10-26T11:42:28.000+09:00",
+   "title": "Geminiで語学学習｜Little Language Lessonsの使い方とGoogle翻訳の練習機能",
+   "description": "Googleが生成AI「Gemini」を活用した語学学習ツール「Little Language Lessons」を公開。Tiny Lesson・Slang Hang・Word Camの3つのAI実験が、より自然で実践的な言語学習をサポートします。"
+  },
+  {
+   "slug": "google-ux-screenai-overview",
+   "url": "https://atatakaidigital.com/ja/blog/google-ux-screenai-overview",
+   "lastmod": "2026-10-26T12:27:43.000+09:00",
+   "title": "Googleの「ScreenAI」はどうなった？｜画面を読むAIとUXの2026年",
+   "description": "Googleの新しいUXツール「ScreenAI」は、画面上の情報を理解し、ユーザー体験を革新します。このブログでは、ScreenAIの機能、活用方法、そして他のAIツールとの比較について詳しく解説しています。AIがどのようにしてUXデザインを変革し、効率化するのかを学びましょう。"
+  },
+  {
+   "slug": "google-whisk-ai-image-tool",
+   "url": "https://atatakaidigital.com/ja/blog/google-whisk-ai-image-tool",
+   "lastmod": "2026-10-26T10:00:13.000+09:00",
+   "title": "画像生成AI「Whisk」は終了しました｜使い方記事の答え合わせと、いまFlowで画像を組み合わせる方法",
+   "description": "WhiskはGoogleの最新AI画像生成ツール。テキスト不要で、複数の画像を組み合わせてクリエイティブを作成可能！本記事では、Whiskの使い方や特徴、注意点を徹底解説"
+  },
+  {
+   "slug": "gpt4-gpt4turbo-gpt4o-comparison",
+   "url": "https://atatakaidigital.com/ja/blog/gpt4-gpt4turbo-gpt4o-comparison",
+   "lastmod": "2026-10-26T11:41:29.000+09:00",
+   "title": "GPT-4・GPT-4 Turbo・GPT-4oの違いと提供終了｜いまChatGPTで使えるモデル",
+   "description": "GPT-4、GPT-4 Turbo、GPT-4oの違いを分かりやすく解説。価格、性能、用途など、各モデルの特徴を詳しく紹介します。OpenAIの最新AI技術を最大限に活用する方法を学びます。"
+  },
+  {
+   "slug": "gpt5-o-series-update",
+   "url": "https://atatakaidigital.com/ja/blog/gpt5-o-series-update",
+   "lastmod": "2026-10-26T13:01:18.000+09:00",
+   "title": "GPT-5にo3統合、無料で無制限は実現したか｜アルトマン発表の答え合わせ",
+   "description": "OpenAIがGPT-5のロードマップを発表！無料ユーザーも無制限利用が可能になり、oシリーズと統合。推論機能、エージェントAI、Deep Researchの制限変更など最新情報をチェック！"
+  },
+  {
+   "slug": "gpts-custom-gpts-gptstore-guide",
+   "url": "https://atatakaidigital.com/ja/blog/gpts-custom-gpts-gptstore-guide",
+   "lastmod": "2026-10-26T12:41:42.000+09:00",
+   "title": "GPTs・GPTストアはどうなる｜カスタムGPT終了と12月11日までの移行チェックリスト",
+   "description": "GPTs、カスタムGPT、GPTストアの徹底ガイド！GPTsを簡単に作成する方法を詳しく解説。初心者でもコーディングなしで自分に最適なカスタムGPTを作り、GPTストアで活用する手順をご紹介します。"
+  },
+  {
+   "slug": "grok-3-5-grok-4-roadmap-xai",
+   "url": "https://atatakaidigital.com/ja/blog/grok-3-5-grok-4-roadmap-xai",
+   "lastmod": "2026-10-26T12:42:55.000+09:00",
+   "title": "Grok 3.5とGrok 4はどうなった？｜xAIのロードマップを答え合わせ、いまのGrokの使い方",
+   "description": "イーロン・マスク率いるxAIがGrok 3.5のリリースを予告。Grok 4の登場も2025年後半に予定されています。本記事では最新ロードマップやGrok 3のAPI提供についてわかりやすく解説。生成AI活用を検討中の方は必見！<br>"
+  },
+  {
+   "slug": "grok-vision-update-2025",
+   "url": "https://atatakaidigital.com/ja/blog/grok-vision-update-2025",
+   "lastmod": "2026-10-26T12:15:24.000+09:00",
+   "title": "Grok Visionの使い方｜カメラと音声モードはいま、2025年の記事を答え合わせ",
+   "description": "xAIのGrokが「Grok Vision」で画像認識に対応！多言語音声や音声モードでのリアルタイム検索など、GPTやGeminiに対抗する進化を遂げた注目のアップデート内容を徹底解説。"
+  },
+  {
+   "slug": "grok-x-free-access-aurora",
+   "url": "https://atatakaidigital.com/ja/blog/grok-x-free-access-aurora",
+   "lastmod": "2026-10-26T11:40:54.000+09:00",
+   "title": "Grokの使い方と無料でできること｜画像生成Auroraはいま、2024年の記事を答え合わせ",
+   "description": "AIチャットボットGrokを無料で体験！画像生成機能「Aurora」や便利な使い方を徹底ガイド。今すぐ始めてみよう！"
+  },
+  {
+   "slug": "hacked-website-consequences",
+   "url": "https://atatakaidigital.com/ja/blog/hacked-website-consequences",
+   "lastmod": "2026-10-26T09:27:15.000+09:00",
+   "title": "ホームページが乗っ取られたら？検索・メール・取引先",
+   "description": "会社のホームページが乗っ取られると、画面より先に会社の外とのつながりが変わります。検索結果の警告、迷惑メール扱い、取引先の見直し、顧客情報の報告義務の4つの場面を公式の文書で確かめ、今日やっておくこと3つをまとめました。"
+  },
+  {
+   "slug": "hosting-php-notice-email",
+   "url": "https://atatakaidigital.com/ja/blog/hosting-php-notice-email",
+   "lastmod": "2026-10-26T09:27:29.000+09:00",
+   "title": "サーバー会社から届く「PHPバージョン」メールの読み方",
+   "description": "サーバー会社から「PHPのバージョン」「サポート終了」のメールが届いたら。3つの種類とやること、よく出る言葉の意味、リンクを押さずに本物かどうかを確かめる方法を、PHP2Shellのときの各社のお知らせでまとめました。"
+  },
+  {
+   "slug": "how-to-use-copilot",
+   "url": "https://atatakaidigital.com/ja/blog/how-to-use-copilot",
+   "lastmod": "2026-10-26T11:42:13.000+09:00",
+   "title": "Copilotの無料での使い方｜できること・有料プランとの違い",
+   "description": "Copilotの基本から応用まで、誰でも簡単にできる使い方を紹介。マイクロソフトのAIを使って日常生活をもっと便利にしましょう。"
+  },
+  {
+   "slug": "how-to-use-free-copilot",
+   "url": "https://atatakaidigital.com/ja/blog/how-to-use-free-copilot",
+   "lastmod": "2026-10-26T12:59:56.000+09:00",
+   "title": "Copilot 無料の使い方｜Web・Windows・スマホ・Edge",
+   "description": "Microsoft Copilotを使って、無料でGPT-4の力を手に入れましょう。この記事では、Copilotの主要機能や具体的な活用方法を詳しく解説します。画像生成、音楽制作、プログラミング支援など、ビジネスやクリエイティブなプロジェクトを次のレベルに引き上げるための方法を学びましょう。"
+  },
+  {
+   "slug": "how-to-use-google-imagefx",
+   "url": "https://atatakaidigital.com/ja/blog/how-to-use-google-imagefx",
+   "lastmod": "2026-10-26T11:42:32.000+09:00",
+   "title": "Google ImageFXの使い方はいま｜Flowへ統合、2024年の記事を答え合わせ",
+   "description": "Google ImageFXを使用して、画像編集を簡単かつ迅速に行うことができます。ノーコードプラットフォームであるGoogle ImageFXは、AI技術を通じて多様な画像編集機能を提供します。背景削除、オブジェクト選択、画像スタイルの変更など、プロフェッショナルな結果を簡単に得ることができます。画像編集に多くの時間を投資しなくても済む革新的なツール、Google ImageFXの活用方法とコツを今すぐチェックしてみてください！<br>"
+  },
+  {
+   "slug": "how-to-use-google-musicfx",
+   "url": "https://atatakaidigital.com/ja/blog/how-to-use-google-musicfx",
+   "lastmod": "2026-10-26T11:41:38.000+09:00",
+   "title": "Google MusicFXの使い方｜終了したいまはFlow Musicで曲を作る",
+   "description": "Googleの「MusicFX」を使えば、専門知識がなくても誰でも簡単に音楽を作成できます。AIを活用したこの無料ツールで、あなたの音楽の可能性を広げましょう。"
+  },
+  {
+   "slug": "how-to-use-google-notebooklm",
+   "url": "https://atatakaidigital.com/ja/blog/how-to-use-google-notebooklm",
+   "lastmod": "2026-10-26T13:30:33.000+09:00",
+   "title": "NotebookLMの使い方｜Gemini Notebookに改名、無料版と料金",
+   "description": "NotebookLMの使い方や具体的な使用例を紹介！PDFやGoogleドキュメント、ウェブURLをアップロードするだけで、AIが自動で要約や回答を提供し、情報整理が簡単に。会議ノートや学習ノートの作成も効率化でき、ビジネスシーンやオンライン学習での活用にも最適です"
+  },
+  {
+   "slug": "how-to-use-video-ai-haiper",
+   "url": "https://atatakaidigital.com/ja/blog/how-to-use-video-ai-haiper",
+   "lastmod": "2026-10-26T11:40:47.000+09:00",
+   "title": "Haiper AIの使い方は？サービス終了と、いま無料で試せる動画生成AI",
+   "description": "無料プランで気軽に試せるHaiper AIの魅力と、テキストや画像から動画を生成する簡単な手順を詳しく解説します。動画生成AIの可能性を体験しよう。"
+  },
+  {
+   "slug": "introducing-deep-research",
+   "url": "https://atatakaidigital.com/ja/blog/introducing-deep-research",
+   "lastmod": "2026-10-26T12:10:00.000+09:00",
+   "title": "ChatGPTのDeep Researchとは？使い方とプラン別の上限｜検索・Workとの違い",
+   "description": "OpenAIの最新AIエージェント「Deep Research」が登場！GPT-4oとの違いや、多段階リサーチプロセスの特徴、金融・市場調査・技術分析での活用方法を詳しく解説。ChatGPT Proユーザー向けの利用方法も紹介！"
+  },
+  {
+   "slug": "jinsoku_dev_mvp",
+   "url": "https://atatakaidigital.com/ja/blog/jinsoku_dev_mvp",
+   "lastmod": "2026-09-15T01:30:56.000+09:00",
+   "title": "迅速開発｜MVPで失敗を減らす開発手法",
+   "description": "迅速開発は、MVPを通じて\n仮説・要件・実装の間にある認識のズレを早期に可視化し、\n失敗コストを最小化する開発方法論です。\nただ速く作るのではなく、\n「同じイメージを、速く共有する」ための開発を提供します"
+  },
+  {
+   "slug": "jpmorgan-ai-llm-suite",
+   "url": "https://atatakaidigital.com/ja/blog/jpmorgan-ai-llm-suite",
+   "lastmod": "2026-10-26T13:36:07.000+09:00",
+   "title": "JPモルガン LLMスイートのその後｜答え合わせ",
+   "description": "JPモルガン・チェースが独自開発したAIチャットボット「LLMスイート」を導入し、金融業務の効率化と職務代替の懸念が現実化しています。ウォール街でのAI導入事例として注目されています。"
+  },
+  {
+   "slug": "kddi-isp-mail-breach-ja",
+   "url": "https://atatakaidigital.com/ja/blog/kddi-isp-mail-breach-ja",
+   "lastmod": "2026-11-10T14:02:12.000+09:00",
+   "title": "KDDIメール情報漏洩とは|ISP6社・1,223万人の原因、対象、その後(総務省・個人情報保護委員会の指導)",
+   "description": "KDDIの情報漏洩は、ISP6社が使うメール基盤への不正アクセスで1,223万人のメールアドレスが漏れ、約762万人はメールボックスの中まで見える状態でした。原因、事業者別の対象、行政指導、自社で確認することを整理しました。"
+  },
+  {
+   "slug": "kling-ai-video-generation-guide",
+   "url": "https://atatakaidigital.com/ja/blog/kling-ai-video-generation-guide",
+   "lastmod": "2026-10-26T11:41:47.000+09:00",
+   "title": "Kling AIの使い方｜Kling 4.0の始め方・料金・商用利用まで",
+   "description": "Kling AIを使って、簡単なテキストプロンプトからリアルな動画を生成する方法を学びましょう。詳しい使い方ガイドとプロンプトのコツを紹介します。"
+  },
+  {
+   "slug": "lost-web-agency-recover-site",
+   "url": "https://atatakaidigital.com/ja/blog/lost-web-agency-recover-site",
+   "lastmod": "2026-10-26T09:27:38.000+09:00",
+   "title": "制作会社と連絡が取れないとき、ホームページを取り戻す順番",
+   "description": "ホームページを作った会社と連絡が取れなくなったら。ドメインの名義と有効期限の確かめ方、待つあいだに残すもの、ドメイン・サーバー・WordPressを取り戻す順番と、最後まで連絡がないときの相談窓口をまとめました。"
+  },
+  {
+   "slug": "meta-llama-3-1-release",
+   "url": "https://atatakaidigital.com/ja/blog/meta-llama-3-1-release",
+   "lastmod": "2026-10-26T13:35:53.000+09:00",
+   "title": "Llama 3.1の答え合わせ｜オープンソースの意味とその後",
+   "description": "Metaが史上最大のオープンソースAIモデル「Llama 3.1」を発表。4050億のパラメータを持つこのモデルの詳細はこちら！"
+  },
+  {
+   "slug": "meta-vs-google-notebooklm",
+   "url": "https://atatakaidigital.com/ja/blog/meta-vs-google-notebooklm",
+   "lastmod": "2026-10-26T13:30:53.000+09:00",
+   "title": "NotebookLlamaとNotebookLMの違い｜PDFからポッドキャストを作る方法",
+   "description": "GoogleのNotebookLMを模倣したMetaの「NotebookLlama」がオープンソースで登場！AIによる音声生成の仕組みと改善の余地、そして他社プロジェクトとの競争状況まで、徹底的にご紹介します。"
+  },
+  {
+   "slug": "microsoft-365-copilot-features",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-365-copilot-features",
+   "lastmod": "2026-10-26T13:35:57.000+09:00",
+   "title": "Microsoft 365 Copilotの特徴と使い方｜料金・導入・データの扱い",
+   "description": "Microsoft 365 Copilotは、AIを活用してWord、Excel、PowerPointなどのOfficeアプリをサポート。自然言語での操作やカスタマイズ可能なAIモデル、マルチタスク対応など、業務効率化に最適なツールです。Copilot ProとCopilot for Microsoft 365の違いを詳細に解説。個人向けと企業向け、それぞれのメリットと使用方法を紹介します。"
+  },
+  {
+   "slug": "microsoft-365-copilot-word-guide",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-365-copilot-word-guide",
+   "lastmod": "2026-10-26T13:35:34.000+09:00",
+   "title": "Microsoft 365 CopilotのWordでの使い方｜下書き・要約とプロンプトの書き方",
+   "description": "Microsoft Copilot for Microsoft 365の使い方を徹底解説します。Wordでのプロンプト作成方法から、下書きモードの活用法、Copilotとチャットする方法まで、具体例を交えて紹介します。"
+  },
+  {
+   "slug": "microsoft-copilot-free-features-guide",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-copilot-free-features-guide",
+   "lastmod": "2026-10-26T11:41:48.000+09:00",
+   "title": "ChatGPTを無料で使う方法｜無料版ChatGPTとCopilotの使い分け",
+   "description": "Microsoft Copilotは、GPT4を活用し、画像生成や音楽作成など多彩な無料機能を提供します。この記事では、Copilotの主な機能とその活用法を紹介します。あなたのビジネスやクリエイティブなプロジェクトを次のレベルに引き上げるための情報が満載です。"
+  },
+  {
+   "slug": "microsoft-copilot-free-features-update",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-copilot-free-features-update",
+   "lastmod": "2026-10-26T11:42:37.000+09:00",
+   "title": "Copilotの活用方法｜無料版を仕事に使う4つの場面とプロンプト例",
+   "description": "GPT-4を無料で利用したい場合、マイクロソフトのCopilotがお勧めです。Copilotは、マイクロソフトが開発したAIアシスタントであり、Copilotの使い方と活用方法について、具体的な事例を交えて説明します。"
+  },
+  {
+   "slug": "microsoft-copilot-gpt-builder",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-copilot-gpt-builder",
+   "lastmod": "2026-10-26T12:15:12.000+09:00",
+   "title": "Copilot GPT ビルダーはどうなった？｜いまCopilotでカスタムGPTを作る方法",
+   "description": "プログラミングが難しくても大丈夫！「Copilot GPT Builder」を使えば、簡単な指示だけで、誰でも自分専用のカスタムGPTを簡単に作成できます。業務効率化、顧客対応の改善、アイデアの創出に、可能性は無限大です！"
+  },
+  {
+   "slug": "microsoft-copilot-new-features",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-copilot-new-features",
+   "lastmod": "2026-10-26T11:42:34.000+09:00",
+   "title": "Copilotのプロンプト新機能はどうなった？｜自動補完・Copilot Labの答え合わせ",
+   "description": "AIにどう話しかければ良いか悩んだことはありませんか？そんな問題を解決するために、Microsoftは「自動完成」機能を導入しました。この機能で、プロンプトを簡単に作成でき、AIとの対話がよりスムーズになります。この記事では、Copilotの新機能がどのように作業効率を向上させるかを解説します！"
+  },
+  {
+   "slug": "microsoft-copilotpro-features",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-copilotpro-features",
+   "lastmod": "2026-10-26T13:24:31.000+09:00",
+   "title": "Copilot Proとは？販売終了後の代わりと使い方｜Microsoft 365",
+   "description": "Microsoft Copilotは、GPT-4を基盤とした生成AIツールです。この記事では、Microsoft Copilotの無料版とPro版の違いを解説し、Microsoft Copilot Proを使う方法についてのマニュアルを提供します。各バージョンの機能を活用して、業務効率を最大化しましょう。"
+  },
+  {
+   "slug": "microsoft-new-ai-mai1",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-new-ai-mai1",
+   "lastmod": "2026-10-26T13:33:49.000+09:00",
+   "title": "Microsoft MAI-1とは｜独自AIの答え合わせ",
+   "description": "マイクロソフトは、OpenAIやGoogleとの競争に打ち勝つため、社内で大規模言語モデル「MAI-1」の開発に着手していることが分かりました。"
+  },
+  {
+   "slug": "microsoft-windows-mvp",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft-windows-mvp",
+   "lastmod": "2026-09-15T01:30:54.000+09:00",
+   "title": "MVP開発とは？完成を目指さない開発方法｜Windowsに学ぶ迅速開発",
+   "description": "MVP開発とは何か。\nWindowsが完成をゴールにしなかった理由から、\n運用と改善を前提にした開発方法「迅速開発」を解説。\nサービス開発で失敗を減らす考え方を紹介します。"
+  },
+  {
+   "slug": "microsoft365-copilot-powerpoint",
+   "url": "https://atatakaidigital.com/ja/blog/microsoft365-copilot-powerpoint",
+   "lastmod": "2026-10-26T11:40:37.000+09:00",
+   "title": "Microsoft 365 CopilotでPowerPointのプレゼン作成と翻訳｜2026年の使い方",
+   "description": "もう手動翻訳は不要！Microsoft 365 CopilotがPowerPointのプレゼン資料を自動翻訳し、デザインを維持。ブランドテンプレート作成から発表準備まで効率化する最新AI機能を紹介します。"
+  },
+  {
+   "slug": "musicfx-dj-mode-how-to",
+   "url": "https://atatakaidigital.com/ja/blog/musicfx-dj-mode-how-to",
+   "lastmod": "2026-10-26T12:10:09.000+09:00",
+   "title": "MusicFXのDJモードは終了｜いまリアルタイムでAI音楽を作るには",
+   "description": "MusicFXのDJモードを使って、テキスト入力で音楽を自動生成。簡単にオリジナルサウンドを作成できる方法と操作手順を紹介します。"
+  },
+  {
+   "slug": "mvp",
+   "url": "https://atatakaidigital.com/ja/blog/mvp",
+   "lastmod": "2026-01-10T16:59:28.000+09:00",
+   "title": "MVPとは何か？外注開発・AIプロジェクトで最小機能を検証する方法",
+   "description": "MVPは完成品ではなく検証のための手法です。外注開発・AI・DXプロジェクトで、MVPをどう活用し、コストとリスクを抑えるのかを実務視点で解説します。"
+  },
+  {
+   "slug": "nintendo-rejects-generative-ai",
+   "url": "https://atatakaidigital.com/ja/blog/nintendo-rejects-generative-ai",
+   "lastmod": "2026-10-26T12:41:50.000+09:00",
+   "title": "任天堂は生成AIを使わない？｜株主総会の発言と各社の方針を答え合わせ",
+   "description": "天堂の古川俊太郎社長が生成AIを使わない理由を説明。他の大手ゲーム企業との違いや、知的財産権、独自のゲーム体験の提供について詳しく解説します。"
+  },
+  {
+   "slug": "openai-2025-sales-chatgpt-users",
+   "url": "https://atatakaidigital.com/ja/blog/openai-2025-sales-chatgpt-users",
+   "lastmod": "2026-10-26T12:51:40.000+09:00",
+   "title": "OpenAIの売上とChatGPT週次利用者｜7億人報道の答え合わせ",
+   "description": "OpenAIが年商16兆円を突破し、ChatGPTの週次ユーザーは7億人を超過。急成長の背景と投資状況、競合Anthropicとの比較を含めて、生成AI市場の最新動向を詳しく解説。"
+  },
+  {
+   "slug": "openai-agi-5-tier-progress-scale",
+   "url": "https://atatakaidigital.com/ja/blog/openai-agi-5-tier-progress-scale",
+   "lastmod": "2026-10-26T11:40:39.000+09:00",
+   "title": "OpenAIのAGI 5段階スケールはいまどこまで？｜2026年の答え合わせ",
+   "description": "OpenAIが発表した新しいAI進展スケールは、AIの成長を5段階で追跡します。しかし、AGIの位置付けには疑問が残ります。この新スケールの意義と課題を探ります。"
+  },
+  {
+   "slug": "openai-canvas-how-to-use",
+   "url": "https://atatakaidigital.com/ja/blog/openai-canvas-how-to-use",
+   "lastmod": "2026-10-26T13:00:17.000+09:00",
+   "title": "ChatGPT Canvasの使い方｜いまは書き込みブロックに",
+   "description": "「OpenAI Canvas」が無料ユーザーでも利用可能に！ChatGPTを活用した文章作成やPythonコード編集の便利な使い方を詳しく解説します。"
+  },
+  {
+   "slug": "openai-chatgpt-best-5-tips",
+   "url": "https://atatakaidigital.com/ja/blog/openai-chatgpt-best-5-tips",
+   "lastmod": "2026-10-26T12:24:48.000+09:00",
+   "title": "ChatGPTを賢く使う5つの方法｜OpenAI製品責任者のコツをいま答え合わせ",
+   "description": "ChatGPTを最大限に活用する方法を徹底解説！音声モード、カスタムGPT作成、ファイルや画像の活用など、具体例を交えて紹介します。"
+  },
+  {
+   "slug": "openai-codex",
+   "url": "https://atatakaidigital.com/ja/blog/openai-codex",
+   "lastmod": "2026-10-26T13:24:19.000+09:00",
+   "title": "OpenAI Codexの使い方｜ChatGPTアプリ・CLI・プランの最新版",
+   "description": "OpenAIが公開したソフトウェア開発エージェント「Codex」を徹底解説。ChatGPTと統合されたこのAIは、コード生成からバグ修正、PR提案まで幅広く対応。特徴、使い方、CLI版との違い、料金まで詳しく紹介します。<br>"
+  },
+  {
+   "slug": "openai-o3-mini",
+   "url": "https://atatakaidigital.com/ja/blog/openai-o3-mini",
+   "lastmod": "2026-10-26T13:00:00.000+09:00",
+   "title": "ChatGPT o3-miniはどうなった？｜推論モデルの答え合わせと、いまの選び方",
+   "description": "OpenAIの最新AIモデル「o3-mini」は、数学・プログラミング・科学に特化した高速・低コストの推論AI。o3とo1の違いや活用事例、無料で試せる方法を詳しく解説！"
+  },
+  {
+   "slug": "openai-o3-shutdown",
+   "url": "https://atatakaidigital.com/ja/blog/openai-o3-shutdown",
+   "lastmod": "2026-10-26T13:01:20.000+09:00",
+   "title": "o3が停止命令を79回拒否は本当か｜AIシャットダウン実験の答え合わせ",
+   "description": "OpenAIのAIモデル「o3」が人間の終了命令を拒否。Palisade Researchの実験結果が波紋を広げています。背景にはAIの報酬設計と強化学習構造の問題があります。今後のAI安全設計に影響を与える重要な示唆となりそうです。"
+  },
+  {
+   "slug": "openai-revenue-doubles",
+   "url": "https://atatakaidigital.com/ja/blog/openai-revenue-doubles",
+   "lastmod": "2026-10-26T13:30:52.000+09:00",
+   "title": "OpenAIの年間収益34億ドルの答え合わせ｜年換算と実売上",
+   "description": "OpenAIの年間収益が4.6兆円に到達し、わずか6か月で2倍に成長しました。収益源やAppleとの新たな提携について詳しく解説します。"
+  },
+  {
+   "slug": "openai-sora-how-to-use",
+   "url": "https://atatakaidigital.com/ja/blog/openai-sora-how-to-use",
+   "lastmod": "2026-10-26T11:41:17.000+09:00",
+   "title": "OpenAI Soraは終了しました｜「使い方」を書いた私たちの答え合わせと、これから動画を作る方法",
+   "description": "OpenAI Soraは2026年4月26日にアプリとWebの提供を終了し、APIも9月24日で終了予定と案内されていました。終了までの経緯、作った動画の書き出し方法、2024年の使い方記事の答え合わせ、いま使える動画生成AIをまとめます。"
+  },
+  {
+   "slug": "openai-video-advanced-voice",
+   "url": "https://atatakaidigital.com/ja/blog/openai-video-advanced-voice",
+   "lastmod": "2026-10-26T11:41:19.000+09:00",
+   "title": "ChatGPT音声モードのビデオ・画面共有の使い方｜リアルタイム動画の最新版",
+   "description": "ChatGPTにリアルタイム動画解析機能がついに追加！音声モードがさらに便利になり、カメラを使った物体認識や質問対応が可能に。新機能の詳細と利用方法を解説します。"
+  },
+  {
+   "slug": "perplexity-ai-guide",
+   "url": "https://atatakaidigital.com/ja/blog/perplexity-ai-guide",
+   "lastmod": "2026-10-26T13:35:45.000+09:00",
+   "title": "Perplexity AIとは？使い方と料金｜日本の最新版",
+   "description": "Perplexity AIの使い方から最新機能まで、情報検索とコンテンツ生成を最大限に活用する方法を詳しく紹介します。多機能なAIツールの可能性を探りましょう。"
+  },
+  {
+   "slug": "perplexity-pro-search-upgrade",
+   "url": "https://atatakaidigital.com/ja/blog/perplexity-pro-search-upgrade",
+   "lastmod": "2026-10-26T13:35:51.000+09:00",
+   "title": "Perplexity Pro Searchの使い方｜Research・Labs・プランの違い",
+   "description": "PerplexityがAI検索ツール『Pro Search』を大幅にアップグレードしました。この新機能により、計画的な質問対応が可能になり、数学やプログラミングの機能も強化されました。オーロラ観賞の最適時期を例に、具体的な使用方法を解説。無料アカウントで1日5回の検索が試せるほか、月額20ドルで600回のPro検索が利用可能です。"
+  },
+  {
+   "slug": "php-end-of-life-calendar",
+   "url": "https://atatakaidigital.com/ja/blog/php-end-of-life-calendar",
+   "lastmod": "2026-10-26T09:27:46.000+09:00",
+   "title": "PHPのサポート終了カレンダー 2026〜2028",
+   "description": "PHPのサポートは、出てから4年、毎年12月31日に終わります。2026〜2028年に何がいつ終わるのか、「全面的なサポート」と「セキュリティのサポート」の違い、うちのサイトがあと何年使えるかと、カレンダーへの書き方をまとめました。"
+  },
+  {
+   "slug": "php-upgrade-how-long",
+   "url": "https://atatakaidigital.com/ja/blog/php-upgrade-how-long",
+   "lastmod": "2026-10-26T09:25:17.000+09:00",
+   "title": "PHPのバージョンを上げるのに、何時間かかる？作業の順番と時間表",
+   "description": "PHPのバージョン変更はボタンひとつではなく、現状確認・バックアップ・更新・試験・切り替え・確認・見守りの7段階です。段階ごとの見込み時間と時間を延ばす条件、サーバー会社による違い、自分でやってもいい場合をまとめました。"
+  },
+  {
+   "slug": "php-upgrade-white-screen-fix",
+   "url": "https://atatakaidigital.com/ja/blog/php-upgrade-white-screen-fix",
+   "lastmod": "2026-10-26T09:26:22.000+09:00",
+   "title": "PHPを上げたら画面が真っ白に？原因と戻し方",
+   "description": "WordPressでPHPのバージョンを上げたあと、画面が真っ白になったり「重大なエラー」が出たりしたときに、まず画面を戻す応急処置と、デバッグの記録で原因を見つけて直す順番、次の更新への準備をまとめました。"
+  },
+  {
+   "slug": "php-version-check-by-host",
+   "url": "https://atatakaidigital.com/ja/blog/php-version-check-by-host",
+   "lastmod": "2026-10-26T09:26:31.000+09:00",
+   "title": "PHPのバージョン、どこで見てどう変える？サーバー会社別の方法",
+   "description": "WordPressの画面で本当のPHPのバージョンを見る場所、PHP2Shellのあと今すぐ変えるべきか、変えるなら何番か、エックスサーバー・ロリポップ！・ConoHa WING・さくらなど日本の主なサーバー会社の変更メニューと落とし穴をまとめました。"
+  },
+  {
+   "slug": "php-vulnerability-affected-check",
+   "url": "https://atatakaidigital.com/ja/blog/php-vulnerability-affected-check",
+   "lastmod": "2026-10-26T09:26:57.000+09:00",
+   "title": "うちも当てはまる？PHPの脆弱性 1分判定表",
+   "description": "PHP2Shellがどんなホームページに当てはまるのか、5つの質問で「当てはまらない・確認が必要・対応が必要」を分ける方法と、「わからない」が多いときに制作会社やサーバー会社へそのまま送れる文面をまとめました。"
+  },
+  {
+   "slug": "php-vulnerability-fix-guide",
+   "url": "https://atatakaidigital.com/ja/blog/php-vulnerability-fix-guide",
+   "lastmod": "2026-10-26T09:26:13.000+09:00",
+   "title": "PHP脆弱性の対処ガイド：確認からPHP卒業まで",
+   "description": "PHP2Shellのような脆弱性に、何をどの順番でやればいいのか。確認・更新・応急処置・侵入の点検の4ステップと、根本解決としての「PHPを使わないサイト」の長所と限界をまとめました。"
+  },
+  {
+   "slug": "php-webshell-self-check",
+   "url": "https://atatakaidigital.com/ja/blog/php-webshell-self-check",
+   "lastmod": "2026-10-26T09:26:40.000+09:00",
+   "title": "裏口が残っていないか？Webシェル・侵入の痕跡セルフチェック",
+   "description": "PHPを直しても、その前に置かれた裏口（Webシェル）は残ります。今日いちばん先にやるアクセスログの保存とサーバー会社ごとの保存期間、自分で見られるところと専門家に任せるところ、見つけたときに消す前にやることをまとめました。"
+  },
+  {
+   "slug": "php2shell-patched-but-not-safe",
+   "url": "https://atatakaidigital.com/ja/blog/php2shell-patched-but-not-safe",
+   "lastmod": "2026-10-26T09:25:39.000+09:00",
+   "title": "パッチが済んだのに、なぜ安心できない？三つのケース",
+   "description": "レンタルサーバー各社がPHP2Shellの修正を終えても、安心できないケースが三つあります。修正前の侵入、自分で管理するサーバー、条件の限られた別の脆弱性。御社がどちら側かを見分ける方法をまとめます。"
+  },
+  {
+   "slug": "php2shell-signs-of-compromise",
+   "url": "https://atatakaidigital.com/ja/blog/php2shell-signs-of-compromise",
+   "lastmod": "2026-10-26T09:25:57.000+09:00",
+   "title": "パッチの前に侵入されていたら？攻撃の痕跡三つ",
+   "description": "PHP2Shellの修正前に入られていないか、どう確かめる？ JPCERT/CCが示した痕跡三つ、ログの保全からパスワード変更までの5ステップ、IPAの相談窓口を中小企業向けにまとめました。"
+  },
+  {
+   "slug": "php2shell-vps-real-risk",
+   "url": "https://atatakaidigital.com/ja/blog/php2shell-vps-real-risk",
+   "lastmod": "2026-10-26T09:25:48.000+09:00",
+   "title": "VPS・自社サーバーのPHPサイトは、なぜまだ危ないのか",
+   "description": "共用レンタルサーバーなら各社がPHP2Shellの修正を終えましたが、VPSや自社サーバーのWordPressは誰かが手を打つまで穴があいたままです。直す人の違いと、更新したつもりで終わっていない三つの落とし穴を説明します。"
+  },
+  {
+   "slug": "php2shell-what-happened",
+   "url": "https://atatakaidigital.com/ja/blog/php2shell-what-happened",
+   "lastmod": "2026-10-26T09:25:32.000+09:00",
+   "title": "PHP2Shellとは？中小企業のホームページに何が起きたのか",
+   "description": "2026年10月に公開されたPHPの深刻な脆弱性PHP2Shell。WordPressで会社のホームページを運営する中小企業に何が起きたのか、自社サイトが当てはまるのか、今日まず何を確かめるかをまとめます。"
+  },
+  {
+   "slug": "php82-end-of-life-next-wave",
+   "url": "https://atatakaidigital.com/ja/blog/php82-end-of-life-next-wave",
+   "lastmod": "2026-10-27T17:46:23.000+09:00",
+   "title": "PHP 8.2 サポート終了 12月31日までにやること【2026年版】",
+   "description": "PHP 8.2のセキュリティサポートは2026年12月31日に終わります。何が変わるのか、新しいPHPに上げるときの落とし穴、年末までのカレンダーと中小企業が選べる三つの道をまとめました。"
+  },
+  {
+   "slug": "phpfree-scope-period-price",
+   "url": "https://atatakaidigital.com/ja/blog/phpfree-scope-period-price",
+   "lastmod": "2026-10-26T09:28:14.000+09:00",
+   "title": "PHPフリーがすること・しないこと：範囲・期間・費用",
+   "description": "PHPフリーに任せると何をして、何をしないのか。お引っ越しパック100,000円（税別）の中身と追加料金、引き受けないサイト、最短翌営業日の公開条件と進め方、安心運用プランの範囲を、先に数字でお見せします。"
+  },
+  {
+   "slug": "prepare-before-hiring-developer",
+   "url": "https://atatakaidigital.com/ja/blog/prepare-before-hiring-developer",
+   "lastmod": "2026-08-25",
+   "title": "IT担当者がいないとき、まずやるべき三つのこと",
+   "description": "開発会社を探す前に、社内で整理しておく最低限のこと"
+  },
+  {
+   "slug": "questions-before-hiring-web-security",
+   "url": "https://atatakaidigital.com/ja/blog/questions-before-hiring-web-security",
+   "lastmod": "2026-10-26T09:28:22.000+09:00",
+   "title": "Webセキュリティの作業を頼む前に聞くべき7つの質問",
+   "description": "PHPの更新やホームページの移行を業者に頼む前に。見積書ではなく同じ7つの質問で比べる方法、範囲・バックアップ・戻し方・試験・報告・その後の運用・名義と個人情報について、いい答えの形とそのまま送れる文をまとめました。"
+  },
+  {
+   "slug": "roblox-ai-avatar",
+   "url": "https://atatakaidigital.com/ja/blog/roblox-ai-avatar",
+   "lastmod": "2026-10-26T12:10:16.000+09:00",
+   "title": "ロブロックスのAIで3Dアバター制作はどうなった？｜2024年の発表の答え合わせ",
+   "description": "RobloxがAI技術を活用して、3Dアバターの作成時間を大幅に短縮する新技術を発表しました。これにより、クリエイターは作業効率を高め、より短時間で高品質なアバターを作成できるようになります。詳細を知りたい方はリンクでチェック"
+  },
+  {
+   "slug": "seisei-ai-hikaku-disc",
+   "url": "https://atatakaidigital.com/ja/blog/seisei-ai-hikaku-disc",
+   "lastmod": "2026-10-26T11:42:44.000+09:00",
+   "title": "AIにも性格がある？生成AI5つを比較｜2026年版の個性と使い分け",
+   "description": "生成AIにも“性格”がある？DISC診断を使って、ChatGPT・Gemini・Perplexityなど主要AIの性格タイプを徹底比較。業務に合ったAIの選び方がわかります。"
+  },
+  {
+   "slug": "skyticket-breach-ja",
+   "url": "https://atatakaidigital.com/ja/blog/skyticket-breach-ja",
+   "lastmod": "2026-11-10T14:01:34.000+09:00",
+   "title": "skyticket(スカイチケット)情報漏洩まとめ|3つの侵入経路と、消さずに残っていたバックアップ",
+   "description": "skyticket 情報漏洩は、管理機能・業務管理システム・ログイン不要の完了ページという3つの侵入経路で起きました。消さずに残っていた古い決済ログとDBバックアップが被害を広げた経緯と、自社で今日確認することをまとめました。"
+  },
+  {
+   "slug": "small-business-automated-attacks",
+   "url": "https://atatakaidigital.com/ja/blog/small-business-automated-attacks",
+   "lastmod": "2026-10-26T09:27:07.000+09:00",
+   "title": "小さな会社は狙われない？自動攻撃は会社の大きさを見ない",
+   "description": "「うちのような小さな会社は狙われない」は本当か。自動攻撃が会社ではなくアドレスとすき間を見て動いた記録、警察庁やIPAの数字が言うこと・言わないこと、そう感じてしまう心のくせと、1分でできる最初の確認をまとめました。"
+  },
+  {
+   "slug": "suno-ai-music-app-ios",
+   "url": "https://atatakaidigital.com/ja/blog/suno-ai-music-app-ios",
+   "lastmod": "2026-10-26T12:41:39.000+09:00",
+   "title": "Sunoアプリの使い方｜iPhone・Androidの料金とWeb版との違い",
+   "description": "ユーザーが簡単に音楽を作成できるSunoのiOSアプリが登場。テキストを入力するだけで、AIが様々な音楽スタイルで楽曲を生成。法的問題にも負けず、Sunoは音楽制作の未来を切り拓きます。"
+  },
+  {
+   "slug": "suno-covers-music",
+   "url": "https://atatakaidigital.com/ja/blog/suno-covers-music",
+   "lastmod": "2026-10-26T11:42:47.000+09:00",
+   "title": "Sunoのカバー（Covers）の使い方｜v6の手順と権利のルール",
+   "description": "Sunoが提供する新機能『Covers』で、楽曲のメロディーをそのまま活かしながら、新しいスタイルに変換することが可能に。ジャンルを自由に変えたり、歌詞を追加して、音楽制作の幅を広げるこの機能は、初心者からプロまで楽しめる無限の創造性を提供します。AIの力を借りて、あなたの音楽を全く新しい体験へと進化させましょう。"
+  },
+  {
+   "slug": "tiktok-chatgpt-ai-search",
+   "url": "https://atatakaidigital.com/ja/blog/tiktok-chatgpt-ai-search",
+   "lastmod": "2026-10-26T13:35:56.000+09:00",
+   "title": "TikTokのAI検索とChatGPT｜2024年の報道の答え合わせ",
+   "description": "TikTokがOpenAIのChatGPTを利用して「AIスマートサーチ」機能を開発中です。この新機能は、検索結果の上部にAIが生成したスニペットを表示し、クリックすると詳細な回答が表示される仕組みです。特に若年層のユーザーに迅速で関連性の高い情報を提供し、Googleなどの既存の検索エンジンに挑戦しています。詳しくはリンクをチェック"
+  },
+  {
+   "slug": "tooncrafter-cartoon-ai-how-to-guide",
+   "url": "https://atatakaidigital.com/ja/blog/tooncrafter-cartoon-ai-how-to-guide",
+   "lastmod": "2026-10-26T11:42:15.000+09:00",
+   "title": "ToonCrafterの使い方｜アニメ中割りAIのいまと権利の注意点",
+   "description": "ToonCrafterの特徴や使い方を詳しく紹介。実際のアニメーション作成手順やポイントも解説しています。"
+  },
+  {
+   "slug": "top-20-ai-platforms-2024",
+   "url": "https://atatakaidigital.com/ja/blog/top-20-ai-platforms-2024",
+   "lastmod": "2026-10-26T11:41:31.000+09:00",
+   "title": "最も利用されたAIプラットフォーム20選｜2026年の最新ランキングと答え合わせ",
+   "description": "ChatGPT、Gemini、DeepLなど、2024年に注目されたトップ20のAIプラットフォームについて紹介します。各プラットフォームの特徴や利点が詳しく解説されており、AI技術を生活や仕事に活用する方法について理解を深めることができます。"
+  },
+  {
+   "slug": "vibe-coding-ai-startup",
+   "url": "https://atatakaidigital.com/ja/blog/vibe-coding-ai-startup",
+   "lastmod": "2026-10-26T12:51:42.000+09:00",
+   "title": "バイブコーディングとは？「10人で150億円」の答え合わせ",
+   "description": "バイブコーディングとは？AIコーディングの進化で、10人以下のチームが年商1億ドル（約150億円）企業を実現する時代に突入。"
+  },
+  {
+   "slug": "vibecoding-no-code-needed-ja",
+   "url": "https://atatakaidigital.com/ja/blog/vibecoding-no-code-needed-ja",
+   "lastmod": "2026-09-15T01:30:52.000+09:00",
+   "title": "コーディング不要でアプリを作る — バイブコーディング入門ガイド",
+   "description": "バイブコーディングを使ってコード知識ゼロで業務ツールを作る方法。非エンジニアのマーケター・HR・企画担当者向けに、実際の導入事例3選とはじめ方をあたたかいデジタルが解説します。"
+  },
+  {
+   "slug": "website-keys-owner-checklist",
+   "url": "https://atatakaidigital.com/ja/blog/website-keys-owner-checklist",
+   "lastmod": "2026-10-26T09:06:13.000+09:00",
+   "title": "社長が握っておくべきホームページの鍵5本",
+   "description": "ドメイン・サーバー・WordPressの管理者・メール・DNS。ホームページの鍵5本がどこで、誰の名義で、誰が入れるのかを、表1枚に整理する方法と、確かめる場所、最初の30分でやることをまとめました。パスワードは表に書きません。"
+  },
+  {
+   "slug": "what-is-agi-elon-musk-vision",
+   "url": "https://atatakaidigital.com/ja/blog/what-is-agi-elon-musk-vision",
+   "lastmod": "2026-10-26T12:15:22.000+09:00",
+   "title": "イーロン・マスクの「AGIは来年」予測はどうなった？｜2026年の答え合わせ",
+   "description": "イーロン・マスクは、汎用人工知能（AGI）が来年にも登場する可能性があると予測しています。このAGIは映画「アイアンマン」のジャービスのように、多くのタスクを自律的に解決する能力を持つとされています。他の専門家は5年から10年後を予測しており、詳細が気になる方はリンクをチェック"
+  },
+  {
+   "slug": "why-development-quotes-differ",
+   "url": "https://atatakaidigital.com/ja/blog/why-development-quotes-differ",
+   "lastmod": "2026-08-25",
+   "title": "開発の見積もりが会社によって2〜3倍も違う理由",
+   "description": "開発費が変わる基準と、見積書を比較するときに確認したいポイント"
+  },
+  {
+   "slug": "windows11-ai-update",
+   "url": "https://atatakaidigital.com/ja/blog/windows11-ai-update",
+   "lastmod": "2026-10-26T12:24:52.000+09:00",
+   "title": "Windows 11 メモ帳・Paint・Snipping ToolのAI機能｜Copilot+ PCで使える条件と使い方",
+   "description": "Windows 11のメモ帳、Paint、Snipping Toolに生成AI機能が追加されました。「Write」機能やステッカー生成、Perfect Screenshotなど、Copilot Plus PC向けの最新機能を紹介します"
+  },
+  {
+   "slug": "windows98-ai-experiment",
+   "url": "https://atatakaidigital.com/ja/blog/windows98-ai-experiment",
+   "lastmod": "2026-10-26T13:30:44.000+09:00",
+   "title": "Windows 98でLlamaを動かした実験の答え合わせ｜ローカルAIの今",
+   "description": "26年前のWindows 98搭載PCで生成AIモデル「Llama 2」を実行！EXO Labsの挑戦が注目されています。最新技術を使わずにAIを活用する未来の可能性と、iroiroaiで誰でも始められる方法をご紹介します。"
+  },
+  {
+   "slug": "wordpress-static-site-cost",
+   "url": "https://atatakaidigital.com/ja/blog/wordpress-static-site-cost",
+   "lastmod": "2026-10-26T09:26:49.000+09:00",
+   "title": "WordPressを静的サイトに移すと？方法と費用",
+   "description": "PHPを使わない静的サイトに移す3つの方法と手間、置き場所ごとの無料の範囲と料金、今のサーバー代との比較、止まる機能（フォーム・検索・コメント）の代わり、そして移さないほうがよい場合を、公式の料金表と文書で確かめてまとめました。"
+  },
+  {
+   "slug": "wordpress-vs-static-5-year-cost",
+   "url": "https://atatakaidigital.com/ja/blog/wordpress-vs-static-5-year-cost",
+   "lastmod": "2026-10-26T09:28:05.000+09:00",
+   "title": "WordPressと静的サイト、5年間の費用はどちらが安い？",
+   "description": "サーバー代だけでなく、更新やPHPのバージョンを上げる人の時間まで円に直して、WordPressと静的サイトの5年間の費用を比べました。計算表と最低賃金での計算例、元が取れる移行費用、静的サイトのほうが高くつく場合をまとめています。"
+  },
+  {
+   "slug": "yakiniku-king-app-breach-ja",
+   "url": "https://atatakaidigital.com/ja/blog/yakiniku-king-app-breach-ja",
+   "lastmod": "2026-11-10T14:01:50.000+09:00",
+   "title": "焼肉きんぐ情報漏洩の原因と影響|1,078万件の名前・電話番号が漏れた意味",
+   "description": "焼肉きんぐの情報漏洩では、公式アプリの会員情報10,788,963件の氏名・メールアドレス・電話番号が漏れました。原因は未公表です。名前と電話番号が漏れると何が起きるか、会員と会社がすべきことを整理しました。"
+  },
+  {
+   "slug": "ymirlink-cuenote-breach-ja",
+   "url": "https://atatakaidigital.com/ja/blog/ymirlink-cuenote-breach-ja",
+   "lastmod": "2026-11-10T14:00:53.000+09:00",
+   "title": "ユミルリンク(Cuenote FC)情報漏洩とは|延べ約5,163万件・49システムと委託元が見直すこと",
+   "description": "ユミルリンクの情報漏洩で、メール配信サービスCuenote FCに預けた顧客企業のアドレス帳が延べ51,628,280件流出しました。委託先が破られても、公表や報告は委託元が行います。何が漏れ、自社は何を確認すべきかを整理しました。"
+  },
+  {
+   "slug": "youtube-ai-erase-song-tool",
+   "url": "https://atatakaidigital.com/ja/blog/youtube-ai-erase-song-tool",
+   "lastmod": "2026-10-26T13:33:35.000+09:00",
+   "title": "YouTube「曲を消去する」の使い方｜著作権の申し立てへの対応と答え合わせ",
+   "description": "YouTubeはクリエイター向けに、著作権侵害の音楽を他のオーディオに影響を与えずに削除できる新しい消去ツールを発表しました。AIアルゴリズムを活用したこのツールの詳細をご紹介します。"
+  },
+  {
+   "slug": "youtube-music-ai-custom-music",
+   "url": "https://atatakaidigital.com/ja/blog/youtube-music-ai-custom-music",
+   "lastmod": "2026-10-26T13:33:34.000+09:00",
+   "title": "YouTube Music AIの使い方｜Ask Musicは日本で使える？",
+   "description": "YouTube Musicが新しい生成AI機能をテスト中。この機能により、ユーザーはテキストや音声で音楽をリクエストし、プロンプトに基づいたカスタムラジオ局を作成できます。生成されたラジオ局には、リクエストに応じた再生リストと詳細な説明が含まれ、個別にカスタマイズされた音楽体験を提供します。今後、より多くのユーザーがこの機能を試せるようになる予定です。"
+  },
+  {
+   "slug": "youtube-music-humming-search",
+   "url": "https://atatakaidigital.com/ja/blog/youtube-music-humming-search",
+   "lastmod": "2026-10-26T11:41:47.000+09:00",
+   "title": "YouTube Musicのハミング検索の使い方｜鼻歌で曲名を探す方法（2026年版）",
+   "description": "YouTube MusicがAndroidで新しい「ハミング検索」機能を導入しました。この機能を使って、ユーザーはハミングや歌声だけで曲を探すことができます。どのような技術が使われているのか、そしてこれがどれほど正確に機能するのか、興味が湧きませんか？"
+  }
+ ]
+}

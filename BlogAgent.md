@@ -75,7 +75,8 @@
 | [decisions.md](decisions.md) | 규칙을 정한 이유 (규칙을 바꾸기 전에 확인) |
 
 ## 작업 파일 위치 (예정)
-- `candidates/YYYY-MM-DD-am|pm.md` 수집 후보 원본 → 상위 후보는 Google Sheets(회사 계정 공유)
+- `candidates/YYYY-MM-DD-am|pm.md` 수집 후보 원본 → 공유 드라이브 `03_Blog/candidates`에 보기용 Google 문서 사본 / 상위 후보는 Google Sheets(회사 계정 공유)
+- `topics/YYYY-MM-DD-am|pm.md` 주제 후보 순위표 (시트 연동 전 임시), `briefs/<slug>.md` 선택된 주제 카드
 - `research/<slug>.md` 조사 노트
 - `drafts/<slug>.md` 초안
 - `factcheck/<slug>.md` 대조 보고서
@@ -87,7 +88,7 @@
 | 순서 | 스킬 | 먼저 할 준비 | 연동 전 임시 방식 | 상태 |
 |---|---|---|---|---|
 | 1 | blog-collect | 후보 기록 형식 | 파일로만 저장 | ☑ |
-| 2 | blog-topic | Google Sheets 칸 구성 | 파일을 보고 사람이 선택 | ☐ |
+| 2 | blog-topic | Google Sheets 칸 구성 | 회차마다 새 시트를 Drive에 올려 사람이 선택 | ☐ |
 | 3 | blog-perspective | — | 대표 답을 대화로 받음 | ☐ |
 | 4 | blog-research | — | — | ☐ |
 | 5 | blog-outline | — | — | ☐ |
