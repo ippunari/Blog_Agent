@@ -6,6 +6,7 @@
 3. **원문 문장이 가져온 페이지 텍스트에 실제로 있는지** (공백 무시, 「…」로 나눈 조각마다)
    → 원문을 지어내거나 잘못 옮기는 실수를 막는다 (사실 대조의 증거)
 4. 수치·날짜가 든 사실이 C등급이면 오류 (수치·날짜·인용은 A·B만). A등급이 없으면 경고
+5. 일반 글은 「상위 글 분량」(경쟁 글 본문 글자 수 3개 이상 + 중앙값, D47)
 
 사용법:
   python3 -I check_research.py research/<slug>.md --pages "$SP/pages" [--search-urls "$SP/research_search_urls.txt"]
@@ -151,6 +152,17 @@ def main():
         errs.append("일반 글: 일본어 경쟁 글 분석에 URL 3개 이상 (상위 3~5개)")
     if route == "일반" and "차별 포인트" not in text:
         errs.append("일반 글: 「차별 포인트」 없음")
+    # 상위 글 분량 (D47): 일반 글은 URL·글자 수 3개 이상 + 중앙값
+    vol = re.search(r"^## 상위 글 분량\s*\n(.*?)(?=^## |\Z)", text, re.S | re.M)
+    if route == "일반":
+        if not vol:
+            errs.append("일반 글: 「## 상위 글 분량」 절 없음 — body_chars.py로 경쟁 글 본문 글자 수와 중앙값 (D47)")
+        else:
+            rows_v = [l for l in vol.group(1).splitlines() if URL_RE.search(l) and re.search(r"\|\s*\d+\s*\|", l)]
+            if len(rows_v) < 3:
+                errs.append("「상위 글 분량」: URL | 글자 수 행이 3개 이상이어야 함")
+            if not re.search(r"중앙값:\s*\d+", vol.group(1)):
+                errs.append("「상위 글 분량」: 「중앙값: n자」 줄 없음")
 
     print(f"사실 {len(rows)}행 / 가져온 페이지 {len(set(pages.values()))}개")
     for w in warns:

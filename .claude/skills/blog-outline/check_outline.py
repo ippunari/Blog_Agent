@@ -8,7 +8,8 @@ outlines/<slug>.md 를 읽어 rules/common.md 1·4·6장, rules/blog-outline.md 
  4. slug: 카드 slug와 같음, 형식, 개편이면 기존 글 목록에 있는 slug
  5. 목차: H2 4~8개, 키워드 H2 절반 이상, 직답 40~80자, 형식 칸, 사건 검색어는 「何が起きた」 H2에,
     「とは」 키워드면 「〇〇とは、」 정의 직답
- 6. 쓸 사실 S번호가 조사 노트에 있는지 / 분량 합계가 범위 안인지
+ 6. 쓸 사실 S번호가 조사 노트에 있는지 / 분량: 글 종류 범위·상위 글 중앙값 × 0.8~1.2·섹션 합계 + 고정 부품 ≤ 상한 90% (D47)
+    3行まとめ·代表ヤン은 H2 칸이 아니라 상자
  7. 서브 키워드: 질문형 3개 이상 (속보: 사건 1~2 + 질문형 2 이상), 카드에 D43 키워드 절
  8. CTA: 주·보조가 카드와 같음, 버튼 문구·링크가 common.md 「CTA 버튼」 표와 같음, 속보는 글 끝만
  9. 내부 링크: 3~4개, 기둥 1개, 기존 글 URL, 「こちら」 금지, 다른 사건 이름 경고
@@ -45,6 +46,14 @@ FORBIDDEN = ["絶対", "100%安全", "最強", "神ツール", "革命的", "い
 COMMON_EN = {"wordpress", "php", "ai", "chatgpt", "google", "web", "vps", "https", "html"}
 STOPWORDS = {"a", "an", "the", "of", "and", "or", "to", "in", "for", "on", "with", "how", "what", "is"}
 PENDING = "◆ 실습 대기"
+# 글 종류별 분량 범위 (rules/blog-outline.md 「목차와 분량」, D47). 속보 경로는 글 종류와 관계없이 속보 범위
+LENGTH_RANGE = [("속보", (1500, 3000)), ("사용법", (4000, 8000)), ("업무 활용", (4000, 7000)),
+                ("도입 가이드", (5000, 10000)), ("보안 사고", (3000, 6000)), ("보안 대책", (5000, 10000)),
+                ("개발", (5000, 10000))]
+# 고정 부품 상한 (rules/blog-outline.md 「분량 정하기」): 리드·3行まとめ·こんな方に·わかること·案内 / まとめ 1개 / CTA 1곳
+FIXED = {"속보": (200 + 150 + 0 + 80 + 100, 50, 80), "일반": (200 + 150 + 100 + 100 + 200, 60, 80)}
+DRAFT_RATIO = 0.9
+BOX_ONLY = ("3行まとめ", "代表ヤン")
 S_RE = re.compile(r"S\d+")
 
 
@@ -331,12 +340,45 @@ def main():
     if body and with_kw * 2 < len(body):
         E(f"키워드가 든 본문 H2 {with_kw}/{len(body)} (규칙: 절반 이상)")
     rng = re.findall(r"\d+", f["length"].replace(",", ""))
-    if len(rng) == 2 and not int(rng[0]) <= total <= int(rng[1]):
-        E(f"분량 합계 {total}자가 범위 {f['length']} 밖")
+    if len(rng) == 2 and total > int(rng[1]):
+        E(f"분량 합계 {total}자가 범위 {f['length']} 상한 초과")
     if events and not any(has_kw(r[2], ev) for ev in events for r in toc if len(r) >= 3):
         E("사건 검색어가 어느 H2에도 없음 (「何が起きた？」 H2에 녹인다, D44)")
-    if route == "속보" and not any("3行まとめ" in r[2] for r in toc if len(r) >= 3):
-        W("속보인데 「3行まとめ」 칸이 없음")
+    # 상자로 쓰는 부품이 H2 칸에 있으면 오류 (D47)
+    for r in toc:
+        if len(r) >= 3 and any(b in r[2] for b in BOX_ONLY):
+            E(f"{r[0]} 「{r[2]}」는 H2가 아니라 상자 — 목차에서 빼고 「도입부」(3行まとめ)·「대표 한마디」 절에 (D47)")
+    if "3行まとめ" not in "\n".join(sec.get("도입부", [])):
+        E("「도입부」에 3行まとめ 3줄 메모가 없음 (상자, D47)")
+    # 분량 (D47)
+    if len(rng) == 2:
+        lo, hi = int(rng[0]), int(rng[1])
+        key = "속보" if route == "속보" else next((k for k, _ in LENGTH_RANGE if k in f["type"]), None)
+        tr = dict(LENGTH_RANGE).get(key) if key else None
+        if not tr:
+            W(f"글 종류 「{f['type']}」의 분량 범위를 모름 — rules/blog-outline.md 표 확인")
+        elif lo < tr[0] or hi > tr[1]:
+            E(f"length {lo}-{hi}가 글 종류 범위 {tr[0]}-{tr[1]} 밖 ({key})")
+        if route != "속보":
+            vm = re.search(r"^## 상위 글 분량[^\n]*\n(.*?)(?=^## |\Z)", note, re.S | re.M)
+            mm2 = re.search(r"중앙값:\s*([\d,]+)", vm.group(1)) if vm else None
+            if not mm2:
+                E("일반 글인데 노트에 「상위 글 분량」 중앙값이 없음 — blog-research로 (D47)")
+            elif tr:
+                med = int(mm2.group(1).replace(",", ""))
+                want_lo = max(tr[0], round(med * 0.8, -2))
+                want_hi = min(tr[1], round(med * 1.2, -2))
+                if want_lo > want_hi:
+                    want_lo, want_hi = (tr[0], tr[0]) if med < tr[0] else (tr[1], tr[1])
+                if abs(lo - want_lo) > 200 or abs(hi - want_hi) > 200:
+                    W(f"length {lo}-{hi} ≠ 상위 글 중앙값 {med}자 × 0.8~1.2를 범위로 자른 {int(want_lo)}-{int(want_hi)} — 다르면 이유를 메모에")
+        fx = FIXED["속보" if route == "속보" else "일반"]
+        n_matome = len([r for r in body if "FAQ" not in r[2] and "よくある質問" not in r[2]])
+        n_cta = len([r for r in table(sec.get("CTA", [])) if len(r) >= 3])
+        fixed = fx[0] + fx[1] * n_matome + fx[2] * n_cta
+        cap = int(hi * DRAFT_RATIO)
+        if total + fixed > cap:
+            E(f"섹션 합계 {total} + 고정 부품 {fixed} = {total + fixed}자가 상한 {hi}의 90%({cap}) 초과 — 섹션 분량을 줄인다 (D47)")
     # 「とは」 정의
     for k in [main_kw] + subs:
         if "とは" in k:

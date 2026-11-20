@@ -1,0 +1,3941 @@
+{
+ "updated_at": "2026-11-20T16:28+09:00",
+ "source": "https://atatakaidigital.com/ja/glossary",
+ "_note": "사이트 용어집 사본 (초안 점검용). 원본은 사이트. rules/glossary.md",
+ "count": 437,
+ "terms": [
+  {
+   "term": "アイスタイル",
+   "base": "アイスタイル",
+   "plain": "",
+   "en": "istyle Inc.",
+   "category": "機関・企業",
+   "desc": "コスメの口コミサイト「@cosme」を中心に、店舗・通販とブランドのマーケティング支援を行う日本の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/istyle"
+  },
+  {
+   "term": "曖昧さ回避",
+   "base": "曖昧さ回避",
+   "plain": "",
+   "en": "ambiguity aversion",
+   "category": "脆弱性・インシデント",
+   "desc": "大きさのわかるリスクを、大きさのわからないリスクより選ぶ人の傾向です。価格や範囲がわからないと問い合わせを先延ばしにしがちなので、PHPFreeは価格と範囲を先に示します。",
+   "url": "https://atatakaidigital.com/ja/glossary/ambiguity-aversion"
+  },
+  {
+   "term": "アヴァトレード・ジャパン",
+   "base": "アヴァトレード・ジャパン",
+   "plain": "",
+   "en": "AvaTrade Japan K.K.",
+   "category": "機関・企業",
+   "desc": "日本で登録を受けたFX会社で、店頭の外国為替証拠金取引(FX)を主な業務としています。海外のFXグループAva Tradeが全株式を持つ日本法人です。",
+   "url": "https://atatakaidigital.com/ja/glossary/avatrade-japan"
+  },
+  {
+   "term": "アクセシビリティツリー（画面の構造を文字で表した情報）",
+   "base": "アクセシビリティツリー",
+   "plain": "画面の構造を文字で表した情報",
+   "en": "accessibility tree",
+   "category": "AI用語",
+   "desc": "アクセシビリティツリーは、ブラウザーがページのボタン・リンク・入力欄ごとに名前・役割・状態をまとめた情報です。読み上げソフトやAIエージェントはこれを見てページを理解します。",
+   "url": "https://atatakaidigital.com/ja/glossary/accessibility-tree"
+  },
+  {
+   "term": "アクセス制御",
+   "base": "アクセス制御",
+   "plain": "",
+   "en": "access control",
+   "category": "設定",
+   "desc": "誰がどのシステムやデータに入れるか、使えるかを決めて制限する仕組みです。",
+   "url": "https://atatakaidigital.com/ja/glossary/access-control"
+  },
+  {
+   "term": "アクティブサポートとセキュリティサポート",
+   "base": "アクティブサポートとセキュリティサポート",
+   "plain": "",
+   "en": "active support / security support",
+   "category": "脆弱性・インシデント",
+   "desc": "PHPの各バージョンは、最初の2年間はバグもセキュリティ問題も直し（アクティブサポート）、その後の2年間は重要なセキュリティ問題だけを直します（セキュリティサポート）。セキュリティサポートも終わるとサポート終了です。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-support-periods"
+  },
+  {
+   "term": "朝日新聞社",
+   "base": "朝日新聞社",
+   "plain": "",
+   "en": "The Asahi Shimbun Company",
+   "category": "機関・企業",
+   "desc": "全国紙「朝日新聞」を発行する新聞社です。ニュースサイトや雑誌・書籍の出版、催しの主催も行っています。",
+   "url": "https://atatakaidigital.com/ja/glossary/asahi-shimbun"
+  },
+  {
+   "term": "あさひマーケッツ",
+   "base": "あさひマーケッツ",
+   "plain": "",
+   "en": "Asahi Markets",
+   "category": "機関・企業",
+   "desc": "FX取引サービスの会社です。「Asahi FX」の名前で、MT5を使ったFX取引を個人と法人に提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/asahi-markets"
+  },
+  {
+   "term": "アスマーク",
+   "base": "アスマーク",
+   "plain": "",
+   "en": "Asmarq Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "企業から依頼を受けて、アンケートやインタビューなどの市場調査を行う日本のリサーチ会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/asmarq"
+  },
+  {
+   "term": "アタックサーフェス診断",
+   "base": "アタックサーフェス診断",
+   "plain": "",
+   "en": "attack surface assessment",
+   "category": "脆弱性・インシデント",
+   "desc": "インターネット側から見えるホームページやサーバーのうち、攻撃の入口になりそうな所を探して分析する診断です。韓国では科学技術情報通信部とKISAが中小企業に無料で提供しています（2026年）。",
+   "url": "https://atatakaidigital.com/ja/glossary/attack-surface-assessment"
+  },
+  {
+   "term": "@cosme",
+   "base": "@cosme",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "アイスタイルが運営する、コスメの口コミと買い物のプラットフォームです。",
+   "url": "https://atatakaidigital.com/ja/glossary/cosme"
+  },
+  {
+   "term": "アップロードフォルダ（wp-content/uploads）",
+   "base": "アップロードフォルダ",
+   "plain": "wp-content/uploads",
+   "en": "wp-content/uploads",
+   "category": "サイト・CMS",
+   "desc": "WordPressでアップロードした写真やファイルが集まるフォルダです。本来PHPファイルを置く場所ではないため、PHPファイルがあれば怪しいサインです。",
+   "url": "https://atatakaidigital.com/ja/glossary/uploads-folder"
+  },
+  {
+   "term": "株式会社アドベンチャー",
+   "base": "株式会社アドベンチャー",
+   "plain": "",
+   "en": "Adventure, Inc.",
+   "category": "機関・企業",
+   "desc": "旅行業界の会社で、航空券・ホテル・レンタカーなどをまとめて比較・予約できる旅行サイト・アプリ「skyticket」を運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/adventure-inc"
+  },
+  {
+   "term": "アニメイト",
+   "base": "アニメイト",
+   "plain": "",
+   "en": "animate",
+   "category": "機関・企業",
+   "desc": "アニメやマンガのグッズを扱う専門店チェーンです。店舗と通販サイトを運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/animate"
+  },
+  {
+   "term": "アマゾン ウェブ サービス(AWS)",
+   "base": "アマゾン ウェブ サービス",
+   "plain": "AWS",
+   "en": "Amazon Web Services",
+   "category": "機関・企業",
+   "desc": "AWSは、サーバーや保存容量などのコンピューター資源をインターネット経由で借りられるクラウドサービスです。多くのサイトやアプリがその上で動いています。",
+   "url": "https://atatakaidigital.com/ja/glossary/amazon-web-services"
+  },
+  {
+   "term": "アラーム疲労",
+   "base": "アラーム疲労",
+   "plain": "",
+   "en": "alarm fatigue / alert fatigue",
+   "category": "脆弱性・インシデント",
+   "desc": "警告があまりに頻繁だと感覚が鈍り、大事な安全上の警告まで無視したり、ずれた対応をしてしまう現象です。セキュリティの知らせが続くときは、やるべきことを小さく絞って受け止めるほうが賢明です。",
+   "url": "https://atatakaidigital.com/ja/glossary/alarm-fatigue"
+  },
+  {
+   "term": "アリババクラウド（Alibaba Cloud）",
+   "base": "アリババクラウド",
+   "plain": "Alibaba Cloud",
+   "en": "Alibaba Cloud",
+   "category": "機関・企業",
+   "desc": "中国のクラウド会社です。WebホスティングのPHPバージョンを変えると、約5分後に反映されると案内しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/alibaba-cloud"
+  },
+  {
+   "term": "暗号化",
+   "base": "暗号化",
+   "plain": "",
+   "en": "encryption",
+   "category": "設定",
+   "desc": "決められた鍵がないと読めないように、データを別の形に変えることです。鍵があれば元に戻せます。",
+   "url": "https://atatakaidigital.com/ja/glossary/encryption"
+  },
+  {
+   "term": "安否確認サービス",
+   "base": "安否確認サービス",
+   "plain": "",
+   "en": "safety confirmation service",
+   "category": "業務・取引",
+   "desc": "地震や台風などの災害のとき、会社が社員にメールやSMSで連絡し、無事かどうかを確かめるサービスです。",
+   "url": "https://atatakaidigital.com/ja/glossary/safety-confirmation-service"
+  },
+  {
+   "term": "依拠性（既存の著作物をもとに作ったかどうか）",
+   "base": "依拠性",
+   "plain": "既存の著作物をもとに作ったかどうか",
+   "en": "reliance (dependence on an existing work)",
+   "category": "AI用語",
+   "desc": "依拠性とは、ある成果物が既存の著作物を見て、それをもとに作られたかを問う著作権侵害の判断基準です。類似の程度（実質的類似性）とあわせて両方が認められてはじめて侵害になるため、AI生成物を使うときにも大切です。",
+   "url": "https://atatakaidigital.com/ja/glossary/reliance"
+  },
+  {
+   "term": "委託先・委託元",
+   "base": "委託先・委託元",
+   "plain": "",
+   "en": "contractor / outsourcing client",
+   "category": "業務・取引",
+   "desc": "委託先は会社が仕事を任せた外部の業者、委託元は仕事を任せた側の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/outsourcing-contractor"
+  },
+  {
+   "term": "委託先の監督",
+   "base": "委託先の監督",
+   "plain": "",
+   "en": "supervision of contractors",
+   "category": "法律・制度",
+   "desc": "個人データの取扱いをほかの会社に任せた事業者が、任せた先で安全に扱われているかを監督しなければならないという、個人情報保護法の義務です。",
+   "url": "https://atatakaidigital.com/ja/glossary/contractor-supervision"
+  },
+  {
+   "term": "インシデント",
+   "base": "インシデント",
+   "plain": "",
+   "en": "security incident",
+   "category": "脆弱性・インシデント",
+   "desc": "不正アクセス・情報漏えい・改ざんのようにセキュリティを損なう出来事や、その疑いがあることです。JPCERT/CCはインシデント報告をWebフォームやメールで受け付け、IPAはインシデント対応の専門事業者の一覧を紹介しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/security-incident"
+  },
+  {
+   "term": "インターネットアドレス紛争調停委員会（韓国）",
+   "base": "インターネットアドレス紛争調停委員会",
+   "plain": "韓国",
+   "en": "Internet Address Dispute Resolution Committee (KIDRC)",
+   "category": "機関・企業",
+   "desc": "韓国インターネット振興院が運営する韓国の機関で、.krや.comなど国内外のドメインをめぐる紛争を調停します。申請から決定まで30〜60日で終わると案内しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/kidrc"
+  },
+  {
+   "term": "インプレス",
+   "base": "インプレス",
+   "plain": "",
+   "en": "Impress Corporation",
+   "category": "機関・企業",
+   "desc": "IT・デジタル分野のニュースサイトや書籍・雑誌を手がける日本の出版・メディア企業です。",
+   "url": "https://atatakaidigital.com/ja/glossary/impress"
+  },
+  {
+   "term": "運輸デジタルビジネス協議会(TDBC)",
+   "base": "運輸デジタルビジネス協議会",
+   "plain": "TDBC",
+   "en": "Transport Digital Business Council (TDBC)",
+   "category": "機関・企業",
+   "desc": "運送会社とIT企業が集まり、デジタル技術で運輸業界をより安全で環境にやさしくしようとする一般社団法人です。",
+   "url": "https://atatakaidigital.com/ja/glossary/tdbc"
+  },
+  {
+   "term": "エージェントモード（AIが直接直して実行するチャットの設定）",
+   "base": "エージェントモード",
+   "plain": "AIが直接直して実行するチャットの設定",
+   "en": "Agent mode",
+   "category": "AI用語",
+   "desc": "AIツールのチャットを、答えるだけの状態から、AIがファイルや文書を直接直し、コマンドも実行する状態に切り替える設定です。結果がすぐ反映されるので、変更は人が確かめます。",
+   "url": "https://atatakaidigital.com/ja/glossary/agent-mode"
+  },
+  {
+   "term": "エクスプレス予約",
+   "base": "エクスプレス予約",
+   "plain": "",
+   "en": "Express Reservation",
+   "category": "機関・企業",
+   "desc": "新幹線の座席をインターネットで予約できる年会費制の会員サービスです。会員向けの割安な料金で乗れます。",
+   "url": "https://atatakaidigital.com/ja/glossary/express-yoyaku"
+  },
+  {
+   "term": "エックスサーバー",
+   "base": "エックスサーバー",
+   "plain": "",
+   "en": "XServer",
+   "category": "機関・企業",
+   "desc": "日本の代表的なレンタルサーバー会社です。共用サーバーのPHP 5.6〜8.5に修正を入れ、VPSは利用者が直す必要があると案内しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/xserver"
+  },
+  {
+   "term": "援助要請の回避",
+   "base": "援助要請の回避",
+   "plain": "",
+   "en": "help-seeking avoidance (threat to self-esteem)",
+   "category": "脆弱性・インシデント",
+   "desc": "助けを求めることが「自分は力不足だ」と認めるように感じられ、先延ばしにしてしまう心理です。任せることを実力ではなく条件にもとづく判断と考えると、この負担は軽くなります。",
+   "url": "https://atatakaidigital.com/ja/glossary/help-seeking-avoidance"
+  },
+  {
+   "term": "オープンウェイト（学習済みモデルの重みを公開したモデル。オープンソースとの違い）",
+   "base": "オープンウェイト",
+   "plain": "学習済みモデルの重みを公開したモデル。オープンソースとの違い",
+   "en": "open weights",
+   "category": "AI用語",
+   "desc": "オープンウェイトは、AIが学習で得た重み（数値のかたまり）をだれでもダウンロードできるよう公開したモデルです。学習データや作り方まで公開するオープンソースとは違うので、使う前に利用条件を読みます。",
+   "url": "https://atatakaidigital.com/ja/glossary/open-weights"
+  },
+  {
+   "term": "オープンソース（公開されたソースコード）",
+   "base": "オープンソース",
+   "plain": "公開されたソースコード",
+   "en": "open source",
+   "category": "AI用語",
+   "desc": "オープンソースは、プログラムの設計図であるソースコードを公開し、誰でも使い、直し、配り直せるように許したソフトウェアです。コードが見えるだけではオープンソースとは言えません。",
+   "url": "https://atatakaidigital.com/ja/glossary/open-source"
+  },
+  {
+   "term": "お名前.com デスクトップクラウド",
+   "base": "お名前.com デスクトップクラウド",
+   "plain": "",
+   "en": "Onamae.com Desktop Cloud",
+   "category": "サーバー・ホスティング",
+   "desc": "GMOインターネットが運営する、FX自動売買向けのVPSサービスです。MT4/MT5などの取引ソフトを、遠隔のWindowsパソコンで動かし続けられるように貸し出します。",
+   "url": "https://atatakaidigital.com/ja/glossary/onamae-desktop-cloud"
+  },
+  {
+   "term": "オプトアウト（AI学習への利用拒否）",
+   "base": "オプトアウト",
+   "plain": "AI学習への利用拒否",
+   "en": "opt-out",
+   "category": "AI用語",
+   "desc": "オプトアウトは、自分の文章・画像・会話をAIの学習に使わないでほしいと拒否の意思を示すことです。何もしなければ使われるのが基本なので、自分で設定する必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/opt-out"
+  },
+  {
+   "term": "重み(モデルが学習で得た数値)",
+   "base": "重み",
+   "plain": "モデルが学習で得た数値",
+   "en": "model weights",
+   "category": "AI用語",
+   "desc": "重み(ウェイト)は、AIが学習で得た多数の数値で、答えを計算するとき入力に掛けて使う値です。モデルが学んだ内容が入っているため、公開の条件が大切です。",
+   "url": "https://atatakaidigital.com/ja/glossary/model-weights"
+  },
+  {
+   "term": "オンデバイスAI（端末の中で動くAI）",
+   "base": "オンデバイスAI",
+   "plain": "端末の中で動くAI",
+   "en": "On-device AI",
+   "category": "AI用語",
+   "desc": "オンデバイスAIは、遠くのサーバーではなく手元のスマートフォンやパソコンの中で直接動くAIです。入力した内容が端末の外に出ないので個人情報を守りやすく、インターネットがなくても使えます。",
+   "url": "https://atatakaidigital.com/ja/glossary/on-device-ai"
+  },
+  {
+   "term": "カード情報の非保持化",
+   "base": "カード情報の非保持化",
+   "plain": "",
+   "en": "card data non-retention",
+   "category": "業務・取引",
+   "desc": "お店やサイトがカード番号を自社のサーバーに保存せず、決済代行会社などに任せる方式です。日本ではカード情報の漏えいを防ぐために推奨されています。",
+   "url": "https://atatakaidigital.com/ja/glossary/card-data-non-retention"
+  },
+  {
+   "term": "海外FX会社",
+   "base": "海外FX会社",
+   "plain": "",
+   "en": "offshore FX broker",
+   "category": "業務・取引",
+   "desc": "日本の金融庁に登録せず、海外で登録した会社が日本の顧客にFX取引を提供する業者のことです。国内の業者とは適用される規制が異なります。",
+   "url": "https://atatakaidigital.com/ja/glossary/offshore-fx"
+  },
+  {
+   "term": "外為ファイネスト",
+   "base": "外為ファイネスト",
+   "plain": "",
+   "en": "Gaitame Finest Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "MT4・MT5でのFX取引を提供する、国内登録のFX会社です。自動売買の取引サービスを中心にしています。",
+   "url": "https://atatakaidigital.com/ja/glossary/gaitame-finest"
+  },
+  {
+   "term": "外部送信",
+   "base": "外部送信",
+   "plain": "",
+   "en": "external transmission",
+   "category": "脆弱性・インシデント",
+   "desc": "システム内のデータが、会社の外にある別のコンピューターへ送られることです。流出が「確定」か「おそれ」かを分ける目安にもなります。",
+   "url": "https://atatakaidigital.com/ja/glossary/external-transmission"
+  },
+  {
+   "term": "学習データ（AIの学習データ）",
+   "base": "学習データ",
+   "plain": "AIの学習データ",
+   "en": "Training data (AI training data)",
+   "category": "AI用語",
+   "desc": "学習データは、AIモデルを作るときに読ませて教えるための文章・画像・動画などの資料です。何で学んだかによって、AIの出す結果の質や権利の問題が変わります。",
+   "url": "https://atatakaidigital.com/ja/glossary/training-data"
+  },
+  {
+   "term": "カクヤス",
+   "base": "カクヤス",
+   "plain": "",
+   "en": "KAKUYASU Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "お酒や飲み物を家庭や飲食店に配達して販売する酒類販売の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/kakuyasu"
+  },
+  {
+   "term": "過剰なエージェンシー(AIに任せすぎるリスク)",
+   "base": "過剰なエージェンシー",
+   "plain": "AIに任せすぎるリスク",
+   "en": "excessive agency",
+   "category": "AI用語",
+   "desc": "AIシステムが必要以上の機能・権限・自律性を持ち、想定外の出力に従って害のある行動を取ってしまうリスクです。OWASPの生成AI向けリスク一覧の項目名です。",
+   "url": "https://atatakaidigital.com/ja/glossary/excessive-agency"
+  },
+  {
+   "term": "カスタマイズ（独自のコード）",
+   "base": "カスタマイズ",
+   "plain": "独自のコード",
+   "en": "custom code / customization",
+   "category": "サイト・CMS",
+   "desc": "制作会社がそのサイトのためだけに直したり作ったりした機能やテーマのコードです。新しいPHPに合わせて別に直す必要があることがあり、韓国のCafe24はコード修正の技術サポートはしないとしています。",
+   "url": "https://atatakaidigital.com/ja/glossary/custom-code"
+  },
+  {
+   "term": "画像生成AI",
+   "base": "画像生成AI",
+   "plain": "",
+   "en": "AI image generation",
+   "category": "AI用語",
+   "desc": "画像生成AIは、文章の指示（プロンプト）やアップロードした写真をもとに、新しい絵や写真を作るAIです。チラシやSNS用の画像を手早く作れますが、実在の人物や他人の画風などの権利にも注意が必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/image-generation"
+  },
+  {
+   "term": "仮想マシン",
+   "base": "仮想マシン",
+   "plain": "",
+   "en": "virtual machine",
+   "category": "サーバー・ホスティング",
+   "desc": "実際のコンピューターの中に、ソフトウェアで作り出したもう1台のコンピューターです。1台のサーバーを複数の人で分けて使えます。",
+   "url": "https://atatakaidigital.com/ja/glossary/virtual-machine"
+  },
+  {
+   "term": "かたばみ",
+   "base": "かたばみ",
+   "plain": "",
+   "en": "Katabami Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "観葉植物のレンタルや公園管理などの緑化造園事業と、損害保険の代理店事業を行う会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/katabami"
+  },
+  {
+   "term": "稼働監視",
+   "base": "稼働監視",
+   "plain": "",
+   "en": "uptime monitoring",
+   "category": "サーバー・ホスティング",
+   "desc": "ホームページが止まらずに開けるかを自動で確認し続けることです。PHPFreeの安心運用プランには、サーバー・SSLとあわせて稼働監視が含まれています。",
+   "url": "https://atatakaidigital.com/ja/glossary/uptime-monitoring"
+  },
+  {
+   "term": "韓国インターネット振興院（KISA）",
+   "base": "韓国インターネット振興院",
+   "plain": "KISA",
+   "en": "KISA",
+   "category": "機関・企業",
+   "desc": "韓国のインターネット・情報保護の機関です。企業向けの対応手順と、別の脆弱性への暫定対策を案内しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/kisa"
+  },
+  {
+   "term": "韓国著作権委員会",
+   "base": "韓国著作権委員会",
+   "plain": "",
+   "en": "Korea Copyright Commission",
+   "category": "機関・企業",
+   "desc": "韓国の著作権相談センター（1800-5455）を運営する機関です。個人事業や中小企業には、著作権の教育・相談・法律コンサルティングを無料で提供するとしています。",
+   "url": "https://atatakaidigital.com/ja/glossary/korea-copyright-commission"
+  },
+  {
+   "term": "関西みらい銀行",
+   "base": "関西みらい銀行",
+   "plain": "",
+   "en": "Kansai Mirai Bank, Limited",
+   "category": "機関・企業",
+   "desc": "関西地方を地盤とするりそなグループの銀行です。",
+   "url": "https://atatakaidigital.com/ja/glossary/kansai-mirai-bank"
+  },
+  {
+   "term": "管理画面",
+   "base": "管理画面",
+   "plain": "",
+   "en": "admin dashboard",
+   "category": "サイト・CMS",
+   "desc": "ホームページやサーバーを設定するための管理者用の画面です。PHP2Shellの緊急メンテナンスの際は、サーバー会社の管理画面が一時止まることもありました。",
+   "url": "https://atatakaidigital.com/ja/glossary/admin-screen"
+  },
+  {
+   "term": "管理者アカウント",
+   "base": "管理者アカウント",
+   "plain": "",
+   "en": "admin account",
+   "category": "サイト・CMS",
+   "desc": "サイトのすべてを変えられる権限を持つユーザーです。見覚えのない管理者が増えていたら、侵入を疑う必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/admin-account"
+  },
+  {
+   "term": "機械学習（マシンラーニング）",
+   "base": "機械学習",
+   "plain": "マシンラーニング",
+   "en": "Machine learning (ML)",
+   "category": "AI用語",
+   "desc": "機械学習は、人がルールを一つずつ書く代わりに、プログラムが大量のデータからルールを見つけて予測できるようにするAI技術です。生成AIもこの方法で作られ、何を学んだかが結果の質を左右します。",
+   "url": "https://atatakaidigital.com/ja/glossary/machine-learning"
+  },
+  {
+   "term": "機械的な閲覧(自動収集)",
+   "base": "機械的な閲覧",
+   "plain": "自動収集",
+   "en": "automated viewing",
+   "category": "脆弱性・インシデント",
+   "desc": "人が一つずつ見るのではなく、プログラムがページのアドレスを変えながら自動で大量に閲覧することです。",
+   "url": "https://atatakaidigital.com/ja/glossary/automated-access"
+  },
+  {
+   "term": "基盤モデル（ファウンデーションモデル）",
+   "base": "基盤モデル",
+   "plain": "ファウンデーションモデル",
+   "en": "Foundation model",
+   "category": "AI用語",
+   "desc": "基盤モデルは、とても多くのデータで先に学習させておき、その上にさまざまなサービスや作業を載せて使う土台のAIモデルです。一つのモデルの長所も弱点も、上に載るサービスへ受け継がれます。",
+   "url": "https://atatakaidigital.com/ja/glossary/foundation-model"
+  },
+  {
+   "term": "供給企業・需要企業",
+   "base": "供給企業・需要企業",
+   "plain": "",
+   "en": "supplier / beneficiary company",
+   "category": "機関・企業",
+   "desc": "政府の支援事業でサービスを提供する側（供給企業）と支援を受けて使う側（需要企業）で、需要企業は供給企業の一覧にある製品・サービスだけを支援で導入できます。あたたかいデジタルはこの事業の供給企業ではありません。",
+   "url": "https://atatakaidigital.com/ja/glossary/supplier-beneficiary"
+  },
+  {
+   "term": "行政指導",
+   "base": "行政指導",
+   "plain": "",
+   "en": "administrative guidance",
+   "category": "法律・制度",
+   "desc": "行政機関が法的な強制力を伴わずに、事業者に改善を求めたり勧告したりする措置です。",
+   "url": "https://atatakaidigital.com/ja/glossary/administrative-guidance"
+  },
+  {
+   "term": "行政負担",
+   "base": "行政負担",
+   "plain": "",
+   "en": "administrative burden",
+   "category": "脆弱性・インシデント",
+   "desc": "制度を使おうとする人が払う手間のことで、制度を知る学習コスト、手続きに従う順応コスト、心の負担である心理コストに分けられます。これが積み重なると、支援を受け損ねます。",
+   "url": "https://atatakaidigital.com/ja/glossary/administrative-burden"
+  },
+  {
+   "term": "共同通信社",
+   "base": "共同通信社",
+   "plain": "",
+   "en": "Kyodo News",
+   "category": "機関・企業",
+   "desc": "東京に本社を置く日本の通信社です。国内外のニュースや写真を、加盟する新聞社や放送局に配信しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/kyodo-news"
+  },
+  {
+   "term": "共用レンタルサーバー",
+   "base": "共用レンタルサーバー",
+   "plain": "",
+   "en": "shared hosting",
+   "category": "サーバー・ホスティング",
+   "desc": "1台のサーバーを複数のお客さまで分け合って使うレンタルサーバーです。PHPなどの土台はサーバー会社が管理するため、PHP2Shellの際もサーバー会社が修正を入れました。",
+   "url": "https://atatakaidigital.com/ja/glossary/shared-hosting"
+  },
+  {
+   "term": "緊急メンテナンス",
+   "base": "緊急メンテナンス",
+   "plain": "",
+   "en": "emergency maintenance",
+   "category": "サーバー・ホスティング",
+   "desc": "サービスを一時止めて、急いで直す作業です。PHP2Shellの際は2026年10月21〜22日に、日本のレンタルサーバー各社が相次いで行いました。",
+   "url": "https://atatakaidigital.com/ja/glossary/emergency-maintenance"
+  },
+  {
+   "term": "金融庁",
+   "base": "金融庁",
+   "plain": "",
+   "en": "Financial Services Agency",
+   "category": "機関・企業",
+   "desc": "日本の金融を監督する行政機関です。銀行、証券会社、FX会社などの金融機関の登録を受け付け、監督しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/fsa-japan"
+  },
+  {
+   "term": "計画錯誤",
+   "base": "計画錯誤",
+   "plain": "",
+   "en": "planning fallacy",
+   "category": "脆弱性・インシデント",
+   "desc": "これからの作業にかかる時間を、実際より短く見積もってしまう人の癖です。PHPのバージョン変更を「ボタン一つ」と考えるのもその例で、作業を小さな段階に分けて考えると見積もりが良くなります。",
+   "url": "https://atatakaidigital.com/ja/glossary/planning-fallacy"
+  },
+  {
+   "term": "警察庁",
+   "base": "警察庁",
+   "plain": "",
+   "en": "National Police Agency (Japan)",
+   "category": "機関・企業",
+   "desc": "日本の警察行政の機関です。半年ごとにサイバー脅威の情勢を発表し、2026年上半期の脆弱性探索のアクセスは監視アドレス1つあたり1日13,687件でした。",
+   "url": "https://atatakaidigital.com/ja/glossary/npa-japan"
+  },
+  {
+   "term": "警視庁",
+   "base": "警視庁",
+   "plain": "",
+   "en": "Tokyo Metropolitan Police Department",
+   "category": "機関・企業",
+   "desc": "東京都を受け持つ警察の組織です。日本全体の警察ではなく、東京都の警察本部を指します。",
+   "url": "https://atatakaidigital.com/ja/glossary/tokyo-mpd"
+  },
+  {
+   "term": "決済代行会社",
+   "base": "決済代行会社",
+   "plain": "",
+   "en": "payment processor",
+   "category": "業務・取引",
+   "desc": "お店やサイトに代わって、クレジットカードなどの決済を処理する会社です。カード情報をお店ではなくこの会社が保管することが多くあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/payment-processor"
+  },
+  {
+   "term": "月次(月次報告)",
+   "base": "月次",
+   "plain": "月次報告",
+   "en": "monthly report",
+   "category": "業務・取引",
+   "desc": "上場している外食企業などが毎月発表する営業の数字です。既存店の売上や客数が前の年と比べて増えたか減ったかを示します。",
+   "url": "https://atatakaidigital.com/ja/glossary/monthly-sales-report"
+  },
+  {
+   "term": "厳重注意",
+   "base": "厳重注意",
+   "plain": "",
+   "en": "strict warning",
+   "category": "法律・制度",
+   "desc": "行政機関が事業者の問題を文書などで強く指摘し、改善を求めることです。行政指導の一つの形です。",
+   "url": "https://atatakaidigital.com/ja/glossary/strict-warning"
+  },
+  {
+   "term": "現状維持バイアス",
+   "base": "現状維持バイアス",
+   "plain": "",
+   "en": "status quo bias",
+   "category": "脆弱性・インシデント",
+   "desc": "今の状態をそのまま保とうとする人の傾向です。制作会社と連絡が取れなくなっても「もう少し待ってみよう」と何か月も過ごしてしまうのも、その例です。",
+   "url": "https://atatakaidigital.com/ja/glossary/status-quo-bias"
+  },
+  {
+   "term": "攻撃インフラ",
+   "base": "攻撃インフラ",
+   "plain": "",
+   "en": "attack infrastructure",
+   "category": "脆弱性・インシデント",
+   "desc": "攻撃者が攻撃のために用意したサーバー、ドメイン、ツールなどの設備全体のことです。",
+   "url": "https://atatakaidigital.com/ja/glossary/attack-infrastructure"
+  },
+  {
+   "term": "後方互換性のない変更",
+   "base": "後方互換性のない変更",
+   "plain": "",
+   "en": "backward incompatible changes",
+   "category": "サイト・CMS",
+   "desc": "新しいバージョンで、以前と違う動きをするように変わった点です。PHPの公式ドキュメントがバージョンごとに一覧を載せており、古いプラグインが新しいバージョンで止まる理由になります。",
+   "url": "https://atatakaidigital.com/ja/glossary/backward-incompatible-changes"
+  },
+  {
+   "term": "声のクローン（ボイスクローン）",
+   "base": "声のクローン",
+   "plain": "ボイスクローン",
+   "en": "voice cloning",
+   "category": "AI用語",
+   "desc": "声のクローンは、短い録音をもとにAIがその人に似た声を作り、どんな文章でも読ませる技術です。手軽にナレーションを作れますが、本人の同意なしに使うと規約違反や詐欺につながります。",
+   "url": "https://atatakaidigital.com/ja/glossary/voice-cloning"
+  },
+  {
+   "term": "個人情報",
+   "base": "個人情報",
+   "plain": "",
+   "en": "personal information (personal data)",
+   "category": "AI用語",
+   "desc": "個人情報は、氏名や連絡先、顔写真など、生きている特定の人を識別できる情報です。AIツールに入れると社外のサービスに送られるため、入れる前に消すか設定を確かめます。",
+   "url": "https://atatakaidigital.com/ja/glossary/personal-data"
+  },
+  {
+   "term": "個人情報取扱事業者",
+   "base": "個人情報取扱事業者",
+   "plain": "",
+   "en": "personal information handling business operator",
+   "category": "法律・制度",
+   "desc": "個人情報保護法で、個人情報をデータベースなどにまとめて事業に使っている会社や団体を指す言葉です。",
+   "url": "https://atatakaidigital.com/ja/glossary/personal-information-handling-business-operator"
+  },
+  {
+   "term": "個人情報の取扱いの委託",
+   "base": "個人情報の取扱いの委託",
+   "plain": "",
+   "en": "outsourcing of personal data processing",
+   "category": "脆弱性・インシデント",
+   "desc": "個人情報を扱う業務を他社に任せることです。韓国の個人情報保護法第26条は目的外処理の禁止や保護措置などを文書で定めるよう求めており、ホームページの作業が当たるかは法的な判断が必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/personal-data-outsourcing"
+  },
+  {
+   "term": "個人情報保護委員会（PPC）",
+   "base": "個人情報保護委員会",
+   "plain": "PPC",
+   "en": "Personal Information Protection Commission (PPC)",
+   "category": "機関・企業",
+   "desc": "日本で個人情報保護法を所管する行政機関です。一定の基準にあたる漏えいが起きると、事業者はここに報告する必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/ppc-japan"
+  },
+  {
+   "term": "個人情報保護委員会（韓国）",
+   "base": "個人情報保護委員会",
+   "plain": "韓国",
+   "en": "PIPC (Personal Information Protection Commission, Korea)",
+   "category": "機関・企業",
+   "desc": "韓国で個人情報の保護を担う政府機関です。個人情報漏えいの届出基準を案内し、届出の受付はKISAが担当します。",
+   "url": "https://atatakaidigital.com/ja/glossary/pipc"
+  },
+  {
+   "term": "個人情報保護法",
+   "base": "個人情報保護法",
+   "plain": "",
+   "en": "Act on the Protection of Personal Information (APPI)",
+   "category": "法律・制度",
+   "desc": "会社や機関が個人情報をどう取り扱うべきかを定めた日本の法律です。正式名称は「個人情報の保護に関する法律」です。",
+   "url": "https://atatakaidigital.com/ja/glossary/appi"
+  },
+  {
+   "term": "個人情報漏えいの届出（韓国・72時間）",
+   "base": "個人情報漏えいの届出",
+   "plain": "韓国・72時間",
+   "en": "personal data breach notification",
+   "category": "脆弱性・インシデント",
+   "desc": "韓国で個人情報が漏れたとき、72時間以内に韓国インターネット振興院（KISA）へ届け出る制度です。1,000人以上、機微・固有識別情報、不正な外部アクセスによる漏えいが対象です。",
+   "url": "https://atatakaidigital.com/ja/glossary/breach-notification"
+  },
+  {
+   "term": "国家サイバー統括室",
+   "base": "国家サイバー統括室",
+   "plain": "",
+   "en": "National Cybersecurity Office (Japan)",
+   "category": "機関・企業",
+   "desc": "日本政府のサイバーセキュリティを担当する組織です。10月21日、公開しているWebサイトでPHPを使っているかを確認し、パッチを準備するよう呼びかけました。",
+   "url": "https://atatakaidigital.com/ja/glossary/japan-national-cybersecurity-office"
+  },
+  {
+   "term": "コミュファ光",
+   "base": "コミュファ光",
+   "plain": "",
+   "en": "Commufa Hikari",
+   "category": "サーバー・ホスティング",
+   "desc": "中部テレコミュニケーションが提供する個人向けの光回線サービスです。ネット・電話・テレビをまとめて提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/commufa-hikari"
+  },
+  {
+   "term": "コンテキストウィンドウ",
+   "base": "コンテキストウィンドウ",
+   "plain": "",
+   "en": "context window",
+   "category": "AI用語",
+   "desc": "AIが一度に読み、答えるときに使える文章の最大量です。質問とAIの答えの両方がこの中に入ります。",
+   "url": "https://atatakaidigital.com/ja/glossary/context-window"
+  },
+  {
+   "term": "コンテナ",
+   "base": "コンテナ",
+   "plain": "",
+   "en": "container",
+   "category": "サーバー・ホスティング",
+   "desc": "プログラムと実行環境を一つの箱のようにまとめて動かす方式です。PHPを直すには、新しいPHPで箱を作り直して配備する必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/container"
+  },
+  {
+   "term": "コンピューター・ユース（AIが画面を操作する機能）",
+   "base": "コンピューター・ユース",
+   "plain": "AIが画面を操作する機能",
+   "en": "Computer use",
+   "category": "AI用語",
+   "desc": "AIが画面を撮って見て、マウスのクリックやキーボード入力でソフトやウェブサイトを直接操作する機能です。手間は減りますが、押し間違いもあるので人が見守ります。",
+   "url": "https://atatakaidigital.com/ja/glossary/computer-use"
+  },
+  {
+   "term": "サーバーサイド言語",
+   "base": "サーバーサイド言語",
+   "plain": "",
+   "en": "server-side language",
+   "category": "サーバー・ホスティング",
+   "desc": "ホームページを表示するときに、サーバー側で動くプログラムの言語です。韓国（.kr）のサイトの75.2%がPHPを使っています（W3Techs、2026-10-24）。",
+   "url": "https://atatakaidigital.com/ja/glossary/server-side-language"
+  },
+  {
+   "term": "サーバー環境の変更（データ初期化）",
+   "base": "サーバー環境の変更",
+   "plain": "データ初期化",
+   "en": "server environment change",
+   "category": "サーバー・ホスティング",
+   "desc": "韓国のCafe24やGabiaのように、PHPのバージョンを変えると新しいサーバー環境に移され、既存のファイルとDBが消える方式です。変える前にバックアップと移行計画が必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/server-environment-change"
+  },
+  {
+   "term": "再委託先",
+   "base": "再委託先",
+   "plain": "",
+   "en": "subcontractor",
+   "category": "業務・取引",
+   "desc": "仕事を任された業者が、その仕事をさらに別の業者に任せたときの、その別の業者です。",
+   "url": "https://atatakaidigital.com/ja/glossary/subcontractor"
+  },
+  {
+   "term": "再起動",
+   "base": "再起動",
+   "plain": "",
+   "en": "restart",
+   "category": "サーバー・ホスティング",
+   "desc": "プログラムを止めて、もう一度動かすことです。PHPを更新しても、再起動しなければ古いプログラムが動き続けます。",
+   "url": "https://atatakaidigital.com/ja/glossary/restart"
+  },
+  {
+   "term": "最小権限の原則",
+   "base": "最小権限の原則",
+   "plain": "",
+   "en": "principle of least privilege",
+   "category": "AI用語",
+   "desc": "最小権限の原則は、人でもAIでも、任された仕事に必要な権限だけを与えるセキュリティの考え方です。アカウントが乗っ取られたりAIが誤作動したりしても、被害の範囲が狭くなります。",
+   "url": "https://atatakaidigital.com/ja/glossary/least-privilege"
+  },
+  {
+   "term": "埼玉県",
+   "base": "埼玉県",
+   "plain": "",
+   "en": "Saitama Prefecture",
+   "category": "機関・企業",
+   "desc": "東京都のすぐ北にある県です。",
+   "url": "https://atatakaidigital.com/ja/glossary/saitama-prefecture"
+  },
+  {
+   "term": "埼玉りそな銀行",
+   "base": "埼玉りそな銀行",
+   "plain": "",
+   "en": "Saitama Resona Bank, Limited",
+   "category": "機関・企業",
+   "desc": "埼玉県を地盤とするりそなグループの銀行です。",
+   "url": "https://atatakaidigital.com/ja/glossary/saitama-resona-bank"
+  },
+  {
+   "term": "最低賃金委員会（韓国）",
+   "base": "最低賃金委員会",
+   "plain": "韓国",
+   "en": "Minimum Wage Commission (Korea)",
+   "category": "機関・企業",
+   "desc": "韓国の最低賃金を審議する機関です。同委員会が示した2026年の最低賃金（時給10,320ウォン、月2,156,880ウォン）を、PHPFreeの記事では人の作業時間をもっとも低く見積もる単価として使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/minimum-wage-commission"
+  },
+  {
+   "term": "サイトセキュリティ（エックスサーバー）",
+   "base": "サイトセキュリティ",
+   "plain": "エックスサーバー",
+   "en": "XServer Site Security",
+   "category": "サーバー・ホスティング",
+   "desc": "エックスサーバーが一部のプランで提供している検査機能です。サイトの改ざんとマルウェアを確認し、1サイトまで無料です。",
+   "url": "https://atatakaidigital.com/ja/glossary/xserver-site-security"
+  },
+  {
+   "term": "サイトヘルス",
+   "base": "サイトヘルス",
+   "plain": "",
+   "en": "Site Health",
+   "category": "サイト・CMS",
+   "desc": "WordPressの管理画面で、サーバーやPHPのバージョンなどを表示する機能です。「ツール → サイトヘルス → 情報 → サーバー」でPHPのバージョンを確認できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/site-health"
+  },
+  {
+   "term": "サイボウズ",
+   "base": "サイボウズ",
+   "plain": "",
+   "en": "Cybozu, Inc.",
+   "category": "機関・企業",
+   "desc": "社内で予定や業務、情報を共有するためのソフトウェア(グループウェア)を開発・提供する日本の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/cybozu"
+  },
+  {
+   "term": "さくらインターネット",
+   "base": "さくらインターネット",
+   "plain": "",
+   "en": "SAKURA internet",
+   "category": "機関・企業",
+   "desc": "日本のレンタルサーバー・クラウド会社です。レンタルサーバーのPHPを、サポート終了のバージョンまで修正したと告知しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/sakura"
+  },
+  {
+   "term": "差損",
+   "base": "差損",
+   "plain": "",
+   "en": "trading loss",
+   "category": "業務・取引",
+   "desc": "株やFXなどの取引で、買った値段と売った値段の差によって生じた損失です。手数料などの費用とは別に数えます。",
+   "url": "https://atatakaidigital.com/ja/glossary/trading-loss"
+  },
+  {
+   "term": "さとふる",
+   "base": "さとふる",
+   "plain": "",
+   "en": "Satofull",
+   "category": "機関・企業",
+   "desc": "ふるさと納税の寄附の受け付けやお礼の品の発送などを、自治体に代わって扱うインターネットサービスです。ソフトバンクグループの会社が運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/satofull"
+  },
+  {
+   "term": "サプライチェーン攻撃",
+   "base": "サプライチェーン攻撃",
+   "plain": "",
+   "en": "supply chain attack",
+   "category": "脆弱性・インシデント",
+   "desc": "狙う会社を直接破るのではなく、その会社が使う委託先・ソフトウェア・サービスを先に破り、そこを経由して入り込む攻撃です。",
+   "url": "https://atatakaidigital.com/ja/glossary/supply-chain-attack"
+  },
+  {
+   "term": "サポート終了（EOL）",
+   "base": "サポート終了",
+   "plain": "EOL",
+   "en": "EOL (End of Life)",
+   "category": "脆弱性・インシデント",
+   "desc": "開発チームがそのバージョンをもう直さなくなることです。サポート終了後に穴が見つかっても、原則として修正版は出ません。",
+   "url": "https://atatakaidigital.com/ja/glossary/eol"
+  },
+  {
+   "term": "サンケイリビング新聞社",
+   "base": "サンケイリビング新聞社",
+   "plain": "",
+   "en": "Sankei Living Shimbun Inc.",
+   "category": "機関・企業",
+   "desc": "「リビング新聞」などの無料の生活情報紙(フリーペーパー)を発行する日本の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/sankei-living"
+  },
+  {
+   "term": "サンドボックス（隔離された実行環境）",
+   "base": "サンドボックス",
+   "plain": "隔離された実行環境",
+   "en": "sandbox",
+   "category": "AI用語",
+   "desc": "サンドボックスは、プログラムやAIが決められたフォルダーや資源だけを使うよう囲いをした実行環境です。誤って動いても外のファイルやシステムを守れます。",
+   "url": "https://atatakaidigital.com/ja/glossary/sandbox"
+  },
+  {
+   "term": "自己負担",
+   "base": "自己負担",
+   "plain": "",
+   "en": "co-payment (self-funded share)",
+   "category": "機関・企業",
+   "desc": "支援事業で国が出さない残りを会社が自分で払うお金で、韓国のICT中小企業向け情報保護支援事業では税抜価格の20%と付加価値税です。これを後で返すという提案は不正行為になりえます。",
+   "url": "https://atatakaidigital.com/ja/glossary/co-payment"
+  },
+  {
+   "term": "時事通信",
+   "base": "時事通信",
+   "plain": "",
+   "en": "Jiji Press, Ltd.",
+   "category": "機関・企業",
+   "desc": "日本の通信社です。ニュースを取材し、新聞社や放送局などの報道機関や企業に配信しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/jiji-press"
+  },
+  {
+   "term": "自社サーバー",
+   "base": "自社サーバー",
+   "plain": "",
+   "en": "self-managed server",
+   "category": "サーバー・ホスティング",
+   "desc": "会社や制作会社が自分で用意し、管理するサーバーです。サーバー会社が代わりに直してくれないため、誰が管理するかを決めておく必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/self-managed-server"
+  },
+  {
+   "term": "実現損失",
+   "base": "実現損失",
+   "plain": "",
+   "en": "realized loss",
+   "category": "業務・取引",
+   "desc": "取引を終えて金額が確定した損失です。取引がまだ続いていて値動きで変わる「評価損」とは区別します。",
+   "url": "https://atatakaidigital.com/ja/glossary/realized-loss"
+  },
+  {
+   "term": "実行意図（if-thenプランニング）",
+   "base": "実行意図",
+   "plain": "if-thenプランニング",
+   "en": "implementation intention",
+   "category": "脆弱性・インシデント",
+   "desc": "「いつ・どこで・どうするか」を前もって決めておく計画です（Gollwitzer 1999）。642件の実験をまとめた2025年の分析でも、こうした計画が実際の行動を増やすことが示されています。",
+   "url": "https://atatakaidigital.com/ja/glossary/implementation-intention"
+  },
+  {
+   "term": "実証コード（PoC）",
+   "base": "実証コード",
+   "plain": "PoC",
+   "en": "PoC (proof of concept)",
+   "category": "脆弱性・インシデント",
+   "desc": "脆弱性を実際に悪用できるかを示す実演用のコードです。公開されると攻撃の試みが増え、偽物が混ざっていることもあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/poc"
+  },
+  {
+   "term": "自動売買(EA)",
+   "base": "自動売買",
+   "plain": "EA",
+   "en": "automated trading (Expert Advisor)",
+   "category": "業務・取引",
+   "desc": "あらかじめ決めたルールに従って、プログラムが人の代わりに売買する方式です。MT4・MT5では、このプログラムをEA(エキスパートアドバイザー)と呼びます。",
+   "url": "https://atatakaidigital.com/ja/glossary/auto-trading-ea"
+  },
+  {
+   "term": "重大なエラー（真っ白な画面）",
+   "base": "重大なエラー",
+   "plain": "真っ白な画面",
+   "en": "critical error (white screen)",
+   "category": "サイト・CMS",
+   "desc": "WordPressがプログラムのエラーで止まったときに出る、真っ白な画面や案内文です。多くの場合、データが消えたのではなく、画面を表示できなかっただけです。",
+   "url": "https://atatakaidigital.com/ja/glossary/critical-error"
+  },
+  {
+   "term": "証券コード",
+   "base": "証券コード",
+   "plain": "",
+   "en": "securities code",
+   "category": "業務・取引",
+   "desc": "日本の証券取引所で上場会社ごとに付けられる4桁のコードです。株の売買や会社を探すとき、社名の代わりに使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/securities-code"
+  },
+  {
+   "term": "証拠保全",
+   "base": "証拠保全",
+   "plain": "",
+   "en": "evidence preservation",
+   "category": "脆弱性・インシデント",
+   "desc": "侵入が疑われるとき、消したり再起動したりする前に、アクセスの記録やファイルをそのまま残しておくことです。韓国のKISAとJPCERT/CCが、まずこれを行うよう勧めています。",
+   "url": "https://atatakaidigital.com/ja/glossary/evidence-preservation"
+  },
+  {
+   "term": "情報セキュリティ専任組織",
+   "base": "情報セキュリティ専任組織",
+   "plain": "",
+   "en": "dedicated security team",
+   "category": "脆弱性・インシデント",
+   "desc": "社内で情報セキュリティの業務を専門に担う組織です。韓国の「2025情報保護実態調査」では、情報保護業務を行う企業のうち専任組織がある企業は35.3%でした。",
+   "url": "https://atatakaidigital.com/ja/glossary/dedicated-security-team"
+  },
+  {
+   "term": "情報保護実態調査（韓国）",
+   "base": "情報保護実態調査",
+   "plain": "韓国",
+   "en": "Information Security Survey (Korea)",
+   "category": "機関・企業",
+   "desc": "韓国の科学技術情報通信部が毎年、企業と個人の情報保護の現状を調べて発表する統計です。2025年の調査は2026年3月に発表され、従業員10人以上の事業所5,500か所が対象でした。",
+   "url": "https://atatakaidigital.com/ja/glossary/information-security-survey-kr"
+  },
+  {
+   "term": "蒸留（大きなモデルの力を小さなモデルに移す方法）",
+   "base": "蒸留",
+   "plain": "大きなモデルの力を小さなモデルに移す方法",
+   "en": "Distillation (knowledge distillation)",
+   "category": "AI用語",
+   "desc": "蒸留は、大きなAIモデルが出した答えを教材にして、小さなモデルを学習し直す方法です。高価なサーバーなしでノートPCでも動く軽いモデルを作るときに使われます。",
+   "url": "https://atatakaidigital.com/ja/glossary/distillation"
+  },
+  {
+   "term": "侵害痕跡（IoC）",
+   "base": "侵害痕跡",
+   "plain": "IoC",
+   "en": "IoC (Indicator of Compromise)",
+   "category": "脆弱性・インシデント",
+   "desc": "攻撃を受けた、または侵入されたかもしれないことを示すサインです。PHP2Shellには決定的な目印がまだなく、ふだんと違う動きから推測します。",
+   "url": "https://atatakaidigital.com/ja/glossary/intrusion-traces"
+  },
+  {
+   "term": "人工知能基本法（韓国のAI基本法）",
+   "base": "人工知能基本法",
+   "plain": "韓国のAI基本法",
+   "en": "AI Basic Act (Korea)",
+   "category": "AI用語",
+   "desc": "人工知能基本法は、AIの発展と信頼の両方を扱う韓国の法律で、2026年1月22日に施行されました。生成AIサービスを提供する事業者に、AIで作った結果物の表示などを義務づけます。",
+   "url": "https://atatakaidigital.com/ja/glossary/ai-basic-act"
+  },
+  {
+   "term": "推論モデル（答える前に段階を踏んで考えるモデル、思考の深さ）",
+   "base": "推論モデル",
+   "plain": "答える前に段階を踏んで考えるモデル、思考の深さ",
+   "en": "reasoning model",
+   "category": "AI用語",
+   "desc": "推論モデルは、答える前に問題を段階的に考えるAIです。深く考えさせるほど難問に強くなりますが、時間と費用も増えます。",
+   "url": "https://atatakaidigital.com/ja/glossary/reasoning-model"
+  },
+  {
+   "term": "ステージング環境（テスト用コピー）",
+   "base": "ステージング環境",
+   "plain": "テスト用コピー",
+   "en": "staging",
+   "category": "サイト・CMS",
+   "desc": "本番サイトをコピーして作るテスト用のサイトです。更新をまずここで試し、問題がなければ本番サイトに反映します。",
+   "url": "https://atatakaidigital.com/ja/glossary/staging"
+  },
+  {
+   "term": "スマートEX",
+   "base": "スマートEX",
+   "plain": "",
+   "en": "smart EX",
+   "category": "機関・企業",
+   "desc": "クレジットカードと交通系ICカードを登録すれば、新幹線をネットで予約し、きっぷなしで乗れるサービスです。",
+   "url": "https://atatakaidigital.com/ja/glossary/smart-ex"
+  },
+  {
+   "term": "正式リリース（GA）",
+   "base": "正式リリース",
+   "plain": "GA",
+   "en": "GA (General Availability)",
+   "category": "脆弱性・インシデント",
+   "desc": "試験版（RC）を終えて、誰でも使えるように公開するリリースです。PHP 8.6は2026年11月19日に公開予定ですが、変わることがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/general-availability"
+  },
+  {
+   "term": "脆弱性",
+   "base": "脆弱性",
+   "plain": "",
+   "en": "vulnerability",
+   "category": "脆弱性・インシデント",
+   "desc": "プログラムの作りや設計のミスで生まれた、セキュリティ上の穴です。放っておくと、他人がこっそり入り込んだり情報を盗んだりできます。",
+   "url": "https://atatakaidigital.com/ja/glossary/vulnerability"
+  },
+  {
+   "term": "脆弱性探索（自動攻撃）",
+   "base": "脆弱性探索",
+   "plain": "自動攻撃",
+   "en": "automated scanning",
+   "category": "脆弱性・インシデント",
+   "desc": "プログラムがインターネットのアドレスを順番に調べ、開いているすき間を探す攻撃です。会社の名前や規模より、アドレスとすき間を見ています。",
+   "url": "https://atatakaidigital.com/ja/glossary/automated-scanning"
+  },
+  {
+   "term": "生成AI（文章・画像・音楽・動画を新しく作るAI）",
+   "base": "生成AI",
+   "plain": "文章・画像・音楽・動画を新しく作るAI",
+   "en": "generative AI",
+   "category": "AI用語",
+   "desc": "生成AIは、学習した資料をもとに文章・画像・音楽・動画を新しく作り出すAIです。もっともらしくても間違うことがあるため、確認が必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/generative-ai"
+  },
+  {
+   "term": "静的サイト",
+   "base": "静的サイト",
+   "plain": "",
+   "en": "static site",
+   "category": "サイト・CMS",
+   "desc": "あらかじめ作っておいたページをそのまま見せるホームページです。PHPを使わないため、PHPのサポート終了やPHP2Shellのような穴とは関係がありません。",
+   "url": "https://atatakaidigital.com/ja/glossary/static-site"
+  },
+  {
+   "term": "静的サイトジェネレーター（Astro・Eleventy）",
+   "base": "静的サイトジェネレーター",
+   "plain": "Astro・Eleventy",
+   "en": "static site generator",
+   "category": "サイト・CMS",
+   "desc": "記事のファイルからHTMLのサイトをあらかじめ作ってくれるツールです。AstroやEleventyには、WordPressから移行するための公式ガイドがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/static-site-generator"
+  },
+  {
+   "term": "税抜価格（供給価額）",
+   "base": "税抜価格",
+   "plain": "供給価額",
+   "en": "supply value (price before VAT)",
+   "category": "機関・企業",
+   "desc": "付加価値税を除いた商品・サービスの価格です。韓国のセキュリティ支援事業はこの金額を基準に80%を支援し、付加価値税は会社が別に払います。",
+   "url": "https://atatakaidigital.com/ja/glossary/supply-value"
+  },
+  {
+   "term": "セキュリティコード",
+   "base": "セキュリティコード",
+   "plain": "",
+   "en": "card security code (CVC)",
+   "category": "業務・取引",
+   "desc": "カードの裏面などに書かれた3〜4桁の数字です。ネットでの支払いで、カードを実際に持っている本人かどうかを確かめるのに使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/security-code"
+  },
+  {
+   "term": "セッションハイジャック（セッションの乗っ取り）",
+   "base": "セッションハイジャック",
+   "plain": "セッションの乗っ取り",
+   "en": "session hijacking",
+   "category": "脆弱性・インシデント",
+   "desc": "ログイン後にサーバーが発行する「ログイン中」の証明(セッション)を盗み、パスワードなしで本人になりすまして入ることです。",
+   "url": "https://atatakaidigital.com/ja/glossary/session-hijacking"
+  },
+  {
+   "term": "セッションファイル",
+   "base": "セッションファイル",
+   "plain": "",
+   "en": "session file",
+   "category": "サーバー・ホスティング",
+   "desc": "訪問者の接続状態をサーバーが一時的に書き留めておくファイルです。PHP2Shellの攻撃では、ここにWebシェルを仕込もうとした試みが報告されました。",
+   "url": "https://atatakaidigital.com/ja/glossary/session-file"
+  },
+  {
+   "term": "宣伝会議",
+   "base": "宣伝会議",
+   "plain": "",
+   "en": "Sendenkaigi Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "広告・マーケティング・広報の雑誌や書籍を出し、実務者向けの講座を運営する日本の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/sendenkaigi"
+  },
+  {
+   "term": "潜伏期間（ドウェルタイム）",
+   "base": "潜伏期間",
+   "plain": "ドウェルタイム",
+   "en": "dwell time",
+   "category": "脆弱性・インシデント",
+   "desc": "攻撃者が侵入してから発見されるまで中にとどまった期間です。Mandiantが2025年に調査した侵入では、中央値が14日でした（M-Trends 2026）。",
+   "url": "https://atatakaidigital.com/ja/glossary/dwell-time"
+  },
+  {
+   "term": "送信ドメイン認証（SPF・DKIM・DMARC）",
+   "base": "送信ドメイン認証",
+   "plain": "SPF・DKIM・DMARC",
+   "en": "SPF / DKIM / DMARC",
+   "category": "設定",
+   "desc": "自社の名前で送ったメールが本物だと、受け取る側に証明する設定です。2018年の米国FTCの調査では、DMARCを初期設定で有効にしているホスティングはありませんでした。",
+   "url": "https://atatakaidigital.com/ja/glossary/email-authentication"
+  },
+  {
+   "term": "総務省",
+   "base": "総務省",
+   "plain": "",
+   "en": "Ministry of Internal Affairs and Communications (MIC)",
+   "category": "機関・企業",
+   "desc": "日本の省庁で、地方行政、統計、通信・放送などを担当しています。電話やインターネットなどの通信事業も所管しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/mic-japan"
+  },
+  {
+   "term": "ソースネクスト",
+   "base": "ソースネクスト",
+   "plain": "",
+   "en": "SOURCENEXT CORPORATION",
+   "category": "機関・企業",
+   "desc": "PDF編集や年賀状、セキュリティなどのソフトウェアや、小型のIT機器を販売する日本の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/sourcenext"
+  },
+  {
+   "term": "大規模言語モデル (LLM)",
+   "base": "大規模言語モデル",
+   "plain": "LLM",
+   "en": "large language model (LLM)",
+   "category": "AI用語",
+   "desc": "大規模言語モデルは、大量の文章を学習し、次に来る言葉をつなげて文章を作り答えるAIの頭脳です。ChatGPTのような対話型AIの土台です。",
+   "url": "https://atatakaidigital.com/ja/glossary/llm"
+  },
+  {
+   "term": "多層防御",
+   "base": "多層防御",
+   "plain": "",
+   "en": "defense in depth",
+   "category": "脆弱性・インシデント",
+   "desc": "守りを何重にも重ね、1か所が破られても次の段階で攻撃を止められるようにするセキュリティの考え方です。",
+   "url": "https://atatakaidigital.com/ja/glossary/defense-in-depth"
+  },
+  {
+   "term": "地域情報保護支援センター（韓国）",
+   "base": "地域情報保護支援センター",
+   "plain": "韓国",
+   "en": "Regional Information Security Center (RISC)",
+   "category": "機関・企業",
+   "desc": "韓国インターネット振興院（KISA）が地域の中小企業のセキュリティを支えるため全国16か所に置くセンターです。韓国のICT中小企業向け情報保護支援事業の申請（risc.kisa.or.kr）を受け付け、教育や脆弱性診断レポートを支援します。",
+   "url": "https://atatakaidigital.com/ja/glossary/regional-security-center"
+  },
+  {
+   "term": "変更履歴（チェンジログ）",
+   "base": "変更履歴",
+   "plain": "チェンジログ",
+   "en": "changelog",
+   "category": "サーバー・ホスティング",
+   "desc": "プログラムにどんな修正が入ったかを書いた記録です。ここにCVE番号があれば、その脆弱性が直されたという意味です。",
+   "url": "https://atatakaidigital.com/ja/glossary/changelog"
+  },
+  {
+   "term": "チャットボット（対話型AIプログラム）",
+   "base": "チャットボット",
+   "plain": "対話型AIプログラム",
+   "en": "Chatbot (conversational AI program)",
+   "category": "AI用語",
+   "desc": "チャットボットは、文字や音声で人と会話するように作られたプログラムです。決まった答えを選ぶものとAIモデルで答えを作るものがあり、種類によって任せられる範囲が変わります。",
+   "url": "https://atatakaidigital.com/ja/glossary/chatbot"
+  },
+  {
+   "term": "注意喚起",
+   "base": "注意喚起",
+   "plain": "",
+   "en": "security alert",
+   "category": "セキュリティ用語",
+   "desc": "セキュリティ機関が「こうした危険があるので対策を」と知らせる告知です。PHP2Shellの際にJPCERT/CCが出した告知がこれにあたります。",
+   "url": "https://atatakaidigital.com/ja/glossary/chui-kanki"
+  },
+  {
+   "term": "中部テレコミュニケーション",
+   "base": "中部テレコミュニケーション",
+   "plain": "",
+   "en": "Chubu Telecommunications Co., Inc. (ctc)",
+   "category": "機関・企業",
+   "desc": "中部地方の通信会社です。個人向けの「コミュファ」ブランドと法人向けの通信サービスを提供しており、筆頭株主はKDDIです。",
+   "url": "https://atatakaidigital.com/ja/glossary/chubu-telecommunications"
+  },
+  {
+   "term": "著作権",
+   "base": "著作権",
+   "plain": "",
+   "en": "copyright",
+   "category": "AI用語",
+   "desc": "人が作った文章・絵・音楽・写真・コードなどの創作的な表現について、作った人が使われ方を決められる権利です。AIの生成物が他人の権利にふれるかを考える土台になります。",
+   "url": "https://atatakaidigital.com/ja/glossary/copyright"
+  },
+  {
+   "term": "通信の秘密",
+   "base": "通信の秘密",
+   "plain": "",
+   "en": "secrecy of communications",
+   "category": "法律・制度",
+   "desc": "手紙・電話・メールの内容や、誰が誰と通信したかを他人に知られないよう守る原則です。日本では電気通信事業法が通信事業者に守ることを求めています。",
+   "url": "https://atatakaidigital.com/ja/glossary/secrecy-of-communications"
+  },
+  {
+   "term": "個人情報保護法ガイドライン(通則編)",
+   "base": "個人情報保護法ガイドライン",
+   "plain": "通則編",
+   "en": "Guidelines for the Act on the Protection of Personal Information (General Rules)",
+   "category": "法律・制度",
+   "desc": "個人情報保護委員会が、個人情報保護法を実際にどう守ればよいかを説明した基本の手引きです。",
+   "url": "https://atatakaidigital.com/ja/glossary/ppc-guidelines-general"
+  },
+  {
+   "term": "ディープフェイク（AIによる合成映像）",
+   "base": "ディープフェイク",
+   "plain": "AIによる合成映像",
+   "en": "deepfake",
+   "category": "AI用語",
+   "desc": "ディープフェイクは、AIで作ったり加工したりした映像・写真・音声のうち、実在の人や出来事に見えて本物と思い込みやすいものです。詐欺などに悪用されることがあり、表示を求める法律もあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/deepfake"
+  },
+  {
+   "term": "ディープリサーチ（AIが資料を集めて報告書を書く機能）",
+   "base": "ディープリサーチ",
+   "plain": "AIが資料を集めて報告書を書く機能",
+   "en": "Deep research",
+   "category": "AI用語",
+   "desc": "ディープリサーチは、AIが自分で多くのウェブサイトを読んでまとめ、出典つきの報告書を作ってくれる機能です。数分から数十分かかりますが、人が何時間もかける調べものを代わりに行います。",
+   "url": "https://atatakaidigital.com/ja/glossary/deep-research"
+  },
+  {
+   "term": "ディストリビューション",
+   "base": "ディストリビューション",
+   "plain": "",
+   "en": "Linux distribution",
+   "category": "サーバー・ホスティング",
+   "desc": "UbuntuやRed Hatのように、サーバー用のOSとプログラムをまとめて配布しているところです。番号はそのままで、セキュリティ修正だけを入れることもあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/distribution"
+  },
+  {
+   "term": "データ最小化",
+   "base": "データ最小化",
+   "plain": "",
+   "en": "data minimization",
+   "category": "法律・制度",
+   "desc": "目的に必要な個人情報だけを集め、不要になったら消すという原則です。持っていない情報は漏れることもありません。",
+   "url": "https://atatakaidigital.com/ja/glossary/data-minimization"
+  },
+  {
+   "term": "データセンター（AIの計算施設）",
+   "base": "データセンター",
+   "plain": "AIの計算施設",
+   "en": "Data center (AI computing facility)",
+   "category": "AI用語",
+   "desc": "データセンターは、サーバーというコンピューターを大量に集め、電気・冷却・通信網をそろえて一日中動かす建物や施設です。私たちが使うAIサービスも、多くはここのサーバーで計算されています。",
+   "url": "https://atatakaidigital.com/ja/glossary/data-center"
+  },
+  {
+   "term": "データベース（DB）",
+   "base": "データベース",
+   "plain": "DB",
+   "en": "database (DB)",
+   "category": "サイト・CMS",
+   "desc": "記事・会員・設定など、ホームページの中身が保存される場所です。WordPressのバックアップはデータベースとファイルの二つに分かれ、両方そろって初めてホームページを元に戻せます。",
+   "url": "https://atatakaidigital.com/ja/glossary/database"
+  },
+  {
+   "term": "テーマ（WordPress）",
+   "base": "テーマ",
+   "plain": "WordPress",
+   "en": "theme",
+   "category": "サイト・CMS",
+   "desc": "WordPressサイトの見た目を決めるデザイン用のプログラムです。古いテーマは新しいPHPに対応しておらず、画面が真っ白になることもあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/theme"
+  },
+  {
+   "term": "適時開示",
+   "base": "適時開示",
+   "plain": "",
+   "en": "timely disclosure",
+   "category": "業務・取引",
+   "desc": "上場会社が、投資家の判断に影響する重要なことが起きたときに、すぐに公表する仕組みです。日本では証券取引所の規則で定められています。",
+   "url": "https://atatakaidigital.com/ja/glossary/timely-disclosure"
+  },
+  {
+   "term": "デジタルトランスフォーメーション（DX）",
+   "base": "デジタルトランスフォーメーション",
+   "plain": "DX",
+   "en": "Digital transformation (DX)",
+   "category": "AI用語",
+   "desc": "企業が変化に対応し、データとデジタル技術で製品・サービスや仕事の進め方を変えることです。道具だけでなく、お客さまとの出会い方まで変えて競争力を保ちます。",
+   "url": "https://atatakaidigital.com/ja/glossary/digital-transformation"
+  },
+  {
+   "term": "デバッグログ（debug.log）",
+   "base": "デバッグログ",
+   "plain": "debug.log",
+   "en": "debug.log (WP_DEBUG_LOG)",
+   "category": "サイト・CMS",
+   "desc": "WordPressがエラーの内容を書き込むファイルです。Webアドレスで誰でも開けてしまうため、原因が分かったら設定を戻してファイルを消します。",
+   "url": "https://atatakaidigital.com/ja/glossary/debug-log"
+  },
+  {
+   "term": "デューカスコピー・ジャパン",
+   "base": "デューカスコピー・ジャパン",
+   "plain": "",
+   "en": "Dukascopy Japan K.K.",
+   "category": "機関・企業",
+   "desc": "スイスのネット銀行Dukascopy Bank SAを親会社に持つ日本法人です。FXとCFDの取引サービスを提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/dukascopy-japan"
+  },
+  {
+   "term": "電気通信事業法",
+   "base": "電気通信事業法",
+   "plain": "",
+   "en": "Telecommunications Business Act",
+   "category": "法律・制度",
+   "desc": "電話やインターネットなどの通信事業のルールを定めた日本の法律です。通信事業者が守る義務や、国に報告すべき事故などを定めています。",
+   "url": "https://atatakaidigital.com/ja/glossary/telecommunications-business-act"
+  },
+  {
+   "term": "動画生成AI（文章や画像から短い動画を作るAI）",
+   "base": "動画生成AI",
+   "plain": "文章や画像から短い動画を作るAI",
+   "en": "AI video generation",
+   "category": "AI用語",
+   "desc": "動画生成AIは、文章で書いた説明や画像を入れると、短い動画を新しく作るAIです。サービスの終了や変更も多いので、作った動画は保存し、利用条件を確かめておきましょう。",
+   "url": "https://atatakaidigital.com/ja/glossary/video-generation"
+  },
+  {
+   "term": "東証グロース市場",
+   "base": "東証グロース市場",
+   "plain": "",
+   "en": "Tokyo Stock Exchange Growth Market",
+   "category": "業務・取引",
+   "desc": "東京証券取引所の市場区分の一つで、高い成長をめざす新興企業が主に上場する市場です。2022年4月に始まりました。",
+   "url": "https://atatakaidigital.com/ja/glossary/tse-growth-market"
+  },
+  {
+   "term": "トークン（AIが文章を読み書きする単位）",
+   "base": "トークン",
+   "plain": "AIが文章を読み書きする単位",
+   "en": "token",
+   "category": "AI用語",
+   "desc": "トークンは、AIが文章を読み書きするときの最小の区切りの単位です。利用料金や一度に扱える文章の量は、このトークン数で決まります。",
+   "url": "https://atatakaidigital.com/ja/glossary/token"
+  },
+  {
+   "term": "都道府県",
+   "base": "都道府県",
+   "plain": "",
+   "en": "prefectures",
+   "category": "法律・制度",
+   "desc": "日本の広域自治体47をまとめた呼び方です。東京都、北海道、大阪府・京都府と43の県を合わせたものです。",
+   "url": "https://atatakaidigital.com/ja/glossary/todofuken"
+  },
+  {
+   "term": "ドメイン登録者（名義人）",
+   "base": "ドメイン登録者",
+   "plain": "名義人",
+   "en": "registrant",
+   "category": "サーバー・ホスティング",
+   "desc": "ドメインを法的に持っている人や会社です。更新のお知らせは登録者のメールに届くため、自社名義で、連絡のつくメールかを確認します。",
+   "url": "https://atatakaidigital.com/ja/glossary/registrant"
+  },
+  {
+   "term": "ドメインの期限切れと回復期間",
+   "base": "ドメインの期限切れと回復期間",
+   "plain": "",
+   "en": "domain expiration / Redemption Grace Period",
+   "category": "サーバー・ホスティング",
+   "desc": "更新しなかったドメインは止められた後、削除されます。.comなどの一般ドメインは削除後30日間は回復でき、廃止されたドメインは他人が登録し直せます。",
+   "url": "https://atatakaidigital.com/ja/glossary/domain-expiration"
+  },
+  {
+   "term": "努力義務",
+   "base": "努力義務",
+   "plain": "",
+   "en": "effort obligation",
+   "category": "法律・制度",
+   "desc": "法律で「〜するよう努めなければならない」と定めた義務です。守らなくてもすぐに罰則があるわけではありませんが、法律が求める方向を示しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/effort-obligation"
+  },
+  {
+   "term": "なりすまし（送信元の偽装）",
+   "base": "なりすまし",
+   "plain": "送信元の偽装",
+   "en": "spoofing",
+   "category": "設定",
+   "desc": "メールの差出人アドレスを本物らしく偽ることです。公式アドレスに見えても安心できないため、内容とリンクもあわせて確認します。",
+   "url": "https://atatakaidigital.com/ja/glossary/spoofing"
+  },
+  {
+   "term": "ナレッジクライマー",
+   "base": "ナレッジクライマー",
+   "plain": "",
+   "en": "Knowledge Climber",
+   "category": "機関・企業",
+   "desc": "埼玉県からWebサイトの管理運営業務を受託している日本の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/knowledge-climber"
+  },
+  {
+   "term": "二次被害",
+   "base": "二次被害",
+   "plain": "",
+   "en": "secondary damage",
+   "category": "脆弱性・インシデント",
+   "desc": "最初に漏れた情報が悪用されて、後から起きる被害です。なりすましメールや不正ログイン、金銭の被害などがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/secondary-damage"
+  },
+  {
+   "term": "二段階認証",
+   "base": "二段階認証",
+   "plain": "",
+   "en": "two-factor authentication",
+   "category": "サイト・CMS",
+   "desc": "パスワードに加えて、携帯電話の認証コードのような2つ目の確認を求めるログイン方式です。パスワードが漏れても、ログインを防いでくれます。",
+   "url": "https://atatakaidigital.com/ja/glossary/two-factor-auth"
+  },
+  {
+   "term": "ニフティ株式会社(@nifty)",
+   "base": "ニフティ株式会社",
+   "plain": "@nifty",
+   "en": "NIFTY Corporation",
+   "category": "機関・企業",
+   "desc": "「@nifty」の名前で、光回線のインターネット、モバイル、セキュリティなどのネットワークサービスと、各種のウェブサービスを提供する会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/nifty"
+  },
+  {
+   "term": "日本経済新聞(日経)",
+   "base": "日本経済新聞",
+   "plain": "日経",
+   "en": "Nikkei Inc.",
+   "category": "機関・企業",
+   "desc": "日本の代表的な経済紙と、それを発行する報道機関・日本経済新聞社の呼び名です。紙の新聞と電子版で経済や企業のニュースを伝えています。",
+   "url": "https://atatakaidigital.com/ja/glossary/nikkei"
+  },
+  {
+   "term": "日本能率協会マネジメントセンター(JMAM)",
+   "base": "日本能率協会マネジメントセンター",
+   "plain": "JMAM",
+   "en": "JMA Management Center Inc.",
+   "category": "機関・企業",
+   "desc": "企業研修やeラーニング、検定試験を提供し、手帳や書籍も手がける人材育成の会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/jmam"
+  },
+  {
+   "term": "認証コード（AuthCode）",
+   "base": "認証コード",
+   "plain": "AuthCode",
+   "en": "AuthInfo code (EPP code)",
+   "category": "サーバー・ホスティング",
+   "desc": "ドメインを別の登録事業者へ移すときに必要な秘密のコードです。韓国の.krはKISAのWHOISで登録者の携帯・メール認証により照会し、.comなどの一般ドメインは登録事業者が依頼日から5日以内に渡します。",
+   "url": "https://atatakaidigital.com/ja/glossary/domain-auth-code"
+  },
+  {
+   "term": "認証情報",
+   "base": "認証情報",
+   "plain": "",
+   "en": "credentials",
+   "category": "サイト・CMS",
+   "desc": "本人であることを確かめるための情報で、ID・パスワード・認証コードなどを指します。漏れると、他人が本人になりすましてログインできます。",
+   "url": "https://atatakaidigital.com/ja/glossary/credentials"
+  },
+  {
+   "term": "ネームサーバー",
+   "base": "ネームサーバー",
+   "plain": "",
+   "en": "name server",
+   "category": "サーバー・ホスティング",
+   "desc": "ドメインのアドレスをどのサーバー（IP）へ向けるかを教えるサーバーです。ホスティング会社とは別の会社のネームサーバーを使っていると、サーバーのIPが変わったときにそちらの設定も自分で変える必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/name-server"
+  },
+  {
+   "term": "能動的サイバー防御",
+   "base": "能動的サイバー防御",
+   "plain": "",
+   "en": "Active Cyber Defense",
+   "category": "法律・制度",
+   "desc": "大きな被害が出る前に、国が攻撃に使われるサーバーなどを先に把握し、必要に応じて無害化する日本の制度です。",
+   "url": "https://atatakaidigital.com/ja/glossary/active-cyber-defense"
+  },
+  {
+   "term": "延べ件数",
+   "base": "延べ件数",
+   "plain": "",
+   "en": "cumulative count",
+   "category": "業務・取引",
+   "desc": "同じ人や同じデータが重複していても、出てくるたびに1件として数えた累計の件数です。実際の人数より多くなることがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/nobe"
+  },
+  {
+   "term": "野村證券",
+   "base": "野村證券",
+   "plain": "",
+   "en": "Nomura Securities Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "株式や債券などの金融商品の取引や、資産運用の相談を行う日本の大手証券会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/nomura-securities"
+  },
+  {
+   "term": "バイブコーディング",
+   "base": "バイブコーディング",
+   "plain": "",
+   "en": "Vibe coding",
+   "category": "AI用語",
+   "desc": "バイブコーディングは、AIに言葉で指示してコードを書かせ、人はコードをほとんど読まずに動くかどうかだけを見て作る方法です。試作は早くできますが、公開する前には人の確認が必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/vibe-coding"
+  },
+  {
+   "term": "パスキー",
+   "base": "パスキー",
+   "plain": "",
+   "en": "passkey",
+   "category": "設定",
+   "desc": "パスワードの代わりに、端末に保存された鍵を指紋・顔認証などで使ってログインする方式です。フィッシングに強いよう設計されています。",
+   "url": "https://atatakaidigital.com/ja/glossary/passkey"
+  },
+  {
+   "term": "パスワードの使い回し",
+   "base": "パスワードの使い回し",
+   "plain": "",
+   "en": "password reuse",
+   "category": "設定",
+   "desc": "同じ、またはほぼ同じパスワードを複数のサービスで使うことです。1か所で漏れると、他のサービスまで開けられるおそれがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/password-reuse"
+  },
+  {
+   "term": "ハッキング警告（このサイトはハッキングされている可能性があります）",
+   "base": "ハッキング警告",
+   "plain": "このサイトはハッキングされている可能性があります",
+   "en": "This site may be hacked",
+   "category": "サイト・CMS",
+   "desc": "Googleがハッキングを疑うサイトの検索結果に付ける警告です。サイト全体を直してから審査を依頼しないと消えません。",
+   "url": "https://atatakaidigital.com/ja/glossary/hacked-warning"
+  },
+  {
+   "term": "バックアップ",
+   "base": "バックアップ",
+   "plain": "",
+   "en": "backup",
+   "category": "サイト・CMS",
+   "desc": "問題が起きたときに戻れるよう、ファイルとデータベースをコピーしておくことです。PHPを上げる前に必ず取っておきます。",
+   "url": "https://atatakaidigital.com/ja/glossary/backup"
+  },
+  {
+   "term": "バックドア",
+   "base": "バックドア",
+   "plain": "",
+   "en": "backdoor",
+   "category": "脆弱性・インシデント",
+   "desc": "一度侵入した攻撃者が、次も簡単に入れるように作っておく隠し通路です。",
+   "url": "https://atatakaidigital.com/ja/glossary/backdoor"
+  },
+  {
+   "term": "バックポート",
+   "base": "バックポート",
+   "plain": "",
+   "en": "backport",
+   "category": "脆弱性・インシデント",
+   "desc": "新しいバージョンの修正を、古いバージョンに移し替えることです。PHP2Shellの際は、サポートが終わった7.4・8.0・8.1に最小限の修正だけが公開されました。",
+   "url": "https://atatakaidigital.com/ja/glossary/backport"
+  },
+  {
+   "term": "パッケージ（ソフトウェア）",
+   "base": "パッケージ",
+   "plain": "ソフトウェア",
+   "en": "package",
+   "category": "サーバー・ホスティング",
+   "desc": "サーバーにプログラムをインストール・更新するときのまとまりの単位です。パッケージの変更履歴を見れば、どんな修正が入ったかが分かります。",
+   "url": "https://atatakaidigital.com/ja/glossary/package"
+  },
+  {
+   "term": "ハッシュ化",
+   "base": "ハッシュ化",
+   "plain": "",
+   "en": "hashing",
+   "category": "設定",
+   "desc": "パスワードを元の文字に戻せない値に変換して保管する方法です。短いパスワードやよくあるパスワードは、照合で割り出されることがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/hash"
+  },
+  {
+   "term": "パッチ",
+   "base": "パッチ",
+   "plain": "",
+   "en": "patch, security release",
+   "category": "脆弱性・インシデント",
+   "desc": "見つかった穴をふさぐように直したプログラムです。PHP2Shellの修正版は8.5.12 / 8.4.27 / 8.3.36 / 8.2.35です。",
+   "url": "https://atatakaidigital.com/ja/glossary/patch"
+  },
+  {
+   "term": "ハニーポット",
+   "base": "ハニーポット",
+   "plain": "",
+   "en": "honeypot",
+   "category": "脆弱性・インシデント",
+   "desc": "攻撃を観察するために、わざと開けておくおとりのサーバーです。PHP2Shellは、公開の4日前から攻撃の試みが記録されていました。",
+   "url": "https://atatakaidigital.com/ja/glossary/honeypot"
+  },
+  {
+   "term": "パラメータ（AIモデルの大きさを表す数）",
+   "base": "パラメータ",
+   "plain": "AIモデルの大きさを表す数",
+   "en": "parameters (model parameters)",
+   "category": "AI用語",
+   "desc": "パラメータは、AIが学習しながら調整して得た数値で、その数がAIモデルの大きさを表す言葉として使われます。数が多いほど大きなコンピューターが必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/parameter"
+  },
+  {
+   "term": "バリューコマース",
+   "base": "バリューコマース",
+   "plain": "",
+   "en": "ValueCommerce Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "アフィリエイト広告(成果報酬型広告)を中心とする日本の広告会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/valuecommerce"
+  },
+  {
+   "term": "ハルシネーション（AIがもっともらしい誤りを作り出す現象）",
+   "base": "ハルシネーション",
+   "plain": "AIがもっともらしい誤りを作り出す現象",
+   "en": "hallucination",
+   "category": "AI用語",
+   "desc": "ハルシネーションは、AIが事実でない内容をもっともらしく作り出す現象です。AIの回答をサイトに載せる前に人が確認すべき理由です。",
+   "url": "https://atatakaidigital.com/ja/glossary/hallucination"
+  },
+  {
+   "term": "バンダイナムコID",
+   "base": "バンダイナムコID",
+   "plain": "",
+   "en": "Bandai Namco ID",
+   "category": "機関・企業",
+   "desc": "バンダイナムコグループの複数のサービスで共通に使えるアカウントの仕組みです。",
+   "url": "https://atatakaidigital.com/ja/glossary/bandai-namco-id"
+  },
+  {
+   "term": "バンダイナムコエンターテインメント",
+   "base": "バンダイナムコエンターテインメント",
+   "plain": "",
+   "en": "Bandai Namco Entertainment Inc.",
+   "category": "機関・企業",
+   "desc": "ゲームを中心に、キャラクターや作品(IP)を生かした事業を行う日本のエンターテインメント企業です。バンダイナムコグループの一社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/bandai-namco-entertainment"
+  },
+  {
+   "term": "ピカラ",
+   "base": "ピカラ",
+   "plain": "",
+   "en": "Pikara",
+   "category": "機関・企業",
+   "desc": "STNetの個人向けサービスのブランドです。光回線の「ピカラ光」や、格安スマホの「ピカラモバイル」などがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/pikara"
+  },
+  {
+   "term": "ビジネスコミュファ",
+   "base": "ビジネスコミュファ",
+   "plain": "",
+   "en": "Business Commufa",
+   "category": "サーバー・ホスティング",
+   "desc": "中部テレコミュニケーションが法人のお客さま向けに提供する通信サービスの名前です。",
+   "url": "https://atatakaidigital.com/ja/glossary/business-commufa"
+  },
+  {
+   "term": "平文保存",
+   "base": "平文保存",
+   "plain": "",
+   "en": "plain text",
+   "category": "脆弱性・インシデント",
+   "desc": "パスワードを暗号化やハッシュ化をせず、元の文字のまま保管することです。保存先が破られると、パスワードがそのまま見えてしまいます。",
+   "url": "https://atatakaidigital.com/ja/glossary/plaintext-password"
+  },
+  {
+   "term": "ビルド（ソースから作る）",
+   "base": "ビルド",
+   "plain": "ソースから作る",
+   "en": "build",
+   "category": "サーバー・ホスティング",
+   "desc": "ソースコードからプログラムを自分で作ることです。サポートが終わったPHP 7.4・8.0・8.1のPHP2Shell修正は、自分でビルドする必要があるかもしれません。",
+   "url": "https://atatakaidigital.com/ja/glossary/build"
+  },
+  {
+   "term": "フィッシング対策協議会",
+   "base": "フィッシング対策協議会",
+   "plain": "",
+   "en": "Council of Anti-Phishing Japan",
+   "category": "機関・企業",
+   "desc": "フィッシング(実在の組織をかたって情報をだまし取る行為)への対策を目的とする団体です。報告を受け付け、新しい手口を緊急情報として知らせています。",
+   "url": "https://atatakaidigital.com/ja/glossary/anti-phishing-council"
+  },
+  {
+   "term": "フィッシングメール",
+   "base": "フィッシングメール",
+   "plain": "",
+   "en": "phishing email",
+   "category": "脆弱性・インシデント",
+   "desc": "信頼できる会社を装って送られ、偽のサイトへ誘導するメールです。リンクは押さず、会社のサイトを自分で開いて確かめます。",
+   "url": "https://atatakaidigital.com/ja/glossary/phishing-email"
+  },
+  {
+   "term": "フェアユース（著作権法で利用が認められる範囲）",
+   "base": "フェアユース",
+   "plain": "著作権法で利用が認められる範囲",
+   "en": "fair use",
+   "category": "AI用語",
+   "desc": "フェアユースは、正当な理由と条件がそろえば、許可なく著作物を使っても著作権侵害とみなさない法の例外です。生成AIの学習に使ってよいかを考える基準になります。",
+   "url": "https://atatakaidigital.com/ja/glossary/fair-use"
+  },
+  {
+   "term": "フォレンジック調査",
+   "base": "フォレンジック調査",
+   "plain": "",
+   "en": "forensic investigation",
+   "category": "脆弱性・インシデント",
+   "desc": "パソコンやサーバーに残った記録を調べ、いつ・どこから・どのように侵入されたかの痕跡を探す調査です。",
+   "url": "https://atatakaidigital.com/ja/glossary/forensic-investigation"
+  },
+  {
+   "term": "不正アクセス",
+   "base": "不正アクセス",
+   "plain": "",
+   "en": "unauthorized access",
+   "category": "脆弱性・インシデント",
+   "desc": "許可なく他人のサーバーやアカウントに入り込むことです。IPAの調査では、日本の中小企業の不正アクセスの原因1位はパッチ未適用（48.0%）でした。",
+   "url": "https://atatakaidigital.com/ja/glossary/unauthorized-access"
+  },
+  {
+   "term": "不正アクセス禁止法",
+   "base": "不正アクセス禁止法",
+   "plain": "",
+   "en": "Act on the Prohibition of Unauthorized Computer Access",
+   "category": "法律・制度",
+   "desc": "他人のIDやパスワードを無断で使ったり、セキュリティの穴を突いたりしてコンピューターに入ることを禁じる日本の法律です。",
+   "url": "https://atatakaidigital.com/ja/glossary/unauthorized-computer-access-act"
+  },
+  {
+   "term": "不正アクセス特別相談窓口（IPA）",
+   "base": "不正アクセス特別相談窓口",
+   "plain": "IPA",
+   "en": "IPA special consultation desk for unauthorized access",
+   "category": "機関・企業",
+   "desc": "IPA（情報処理推進機構）が2026年10月16日に開いた電話相談窓口です（03-6759-5760、平日9:30〜17:30）。起きたことを聞いて被害の可能性を助言し、インシデント対応の専門事業者の一覧を紹介します。",
+   "url": "https://atatakaidigital.com/ja/glossary/ipa-consultation-desk"
+  },
+  {
+   "term": "不正利用モニタリング",
+   "base": "不正利用モニタリング",
+   "plain": "",
+   "en": "fraud monitoring",
+   "category": "業務・取引",
+   "desc": "カード会社が、いつもと違う怪しい支払いがないかを見張ることです。疑わしいときは、支払いを止めたり本人に確認したりします。",
+   "url": "https://atatakaidigital.com/ja/glossary/fraud-monitoring"
+  },
+  {
+   "term": "プライバシーマーク",
+   "base": "プライバシーマーク",
+   "plain": "",
+   "en": "PrivacyMark",
+   "category": "法律・制度",
+   "desc": "個人情報を決まりどおりに扱っていると認められた日本の会社に与えられる認証マークです。JIPDECが運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/privacymark"
+  },
+  {
+   "term": "プラグイン",
+   "base": "プラグイン",
+   "plain": "",
+   "en": "plugin",
+   "category": "サイト・CMS",
+   "desc": "WordPressに機能を追加するプログラムです。PHP2ShellのようなPHP自体の穴は、プラグインを更新しても直りません。",
+   "url": "https://atatakaidigital.com/ja/glossary/plugin"
+  },
+  {
+   "term": "ふるさと納税",
+   "base": "ふるさと納税",
+   "plain": "",
+   "en": "hometown tax donation (furusato nozei)",
+   "category": "法律・制度",
+   "desc": "好きな自治体に寄附すると、その分の税金が控除される制度です。寄附先からお礼の品を受け取ることが多くあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/furusato-nozei"
+  },
+  {
+   "term": "プレモーテム（事前検死）",
+   "base": "プレモーテム",
+   "plain": "事前検死",
+   "en": "pre-mortem",
+   "category": "脆弱性・インシデント",
+   "desc": "物事がすでに失敗したと仮定して、逆から原因を探す方法です。PHPのバージョンを変える前に「明日の朝ホームページが真っ白」と想像すると、先に用意すべきもの（バックアップ・接続情報）が見えてきます。",
+   "url": "https://atatakaidigital.com/ja/glossary/pre-mortem"
+  },
+  {
+   "term": "プロジェクト・グラスウィング",
+   "base": "プロジェクト・グラスウィング",
+   "plain": "",
+   "en": "Project Glasswing",
+   "category": "AI用語",
+   "desc": "Anthropicが2026年4月7日に始めた、セキュリティの協力計画です。一般公開しないAIモデルを選ばれた企業・機関にだけ使わせ、重要なソフトの弱点を攻撃者より先に直します。",
+   "url": "https://atatakaidigital.com/ja/glossary/project-glasswing"
+  },
+  {
+   "term": "プロセス（実行中のプログラム）",
+   "base": "プロセス",
+   "plain": "実行中のプログラム",
+   "en": "process",
+   "category": "サーバー・ホスティング",
+   "desc": "いまサーバーで動いているプログラム一つひとつです。PHPワーカーの下に見慣れないプロセスができていたら、侵入を疑います。",
+   "url": "https://atatakaidigital.com/ja/glossary/process"
+  },
+  {
+   "term": "プロバイダ(ISP)",
+   "base": "プロバイダ",
+   "plain": "ISP",
+   "en": "Internet service provider (ISP)",
+   "category": "サーバー・ホスティング",
+   "desc": "インターネットへの接続サービスを提供する会社です。回線の契約とあわせてメールアドレスを提供することも多くあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/isp"
+  },
+  {
+   "term": "プロバイダメール",
+   "base": "プロバイダメール",
+   "plain": "",
+   "en": "ISP email",
+   "category": "サーバー・ホスティング",
+   "desc": "インターネット回線の契約とともに提供されるメールアドレスです。業務に使う会社もあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/isp-email"
+  },
+  {
+   "term": "プロンプト（AIへの指示）",
+   "base": "プロンプト",
+   "plain": "AIへの指示",
+   "en": "prompt",
+   "category": "AI用語",
+   "desc": "プロンプトは、AIに何をしてほしいかを書いて送る指示文と入力です。書き方で結果が変わります。",
+   "url": "https://atatakaidigital.com/ja/glossary/prompt"
+  },
+  {
+   "term": "プロンプトインジェクション（AIをだます隠れた指示）",
+   "base": "プロンプトインジェクション",
+   "plain": "AIをだます隠れた指示",
+   "en": "prompt injection",
+   "category": "AI用語",
+   "desc": "プロンプトインジェクションは、AIが読む文章やファイルに隠し指示を紛れ込ませ、AIの動きを変えようとする攻撃です。AIは資料と命令を完全には区別できず、起こります。",
+   "url": "https://atatakaidigital.com/ja/glossary/prompt-injection"
+  },
+  {
+   "term": "ヘッドレスWordPress",
+   "base": "ヘッドレスWordPress",
+   "plain": "",
+   "en": "headless WordPress",
+   "category": "サイト・CMS",
+   "desc": "WordPressは記事を書く倉庫としてだけ残し、公開サイトは別のツールが記事を取り込んで作る方式です。WordPress（PHP）は動き続けます。",
+   "url": "https://atatakaidigital.com/ja/glossary/headless-wordpress"
+  },
+  {
+   "term": "ペネトレーションテスト（侵入テスト）",
+   "base": "ペネトレーションテスト",
+   "plain": "侵入テスト",
+   "en": "penetration testing",
+   "category": "脆弱性・インシデント",
+   "desc": "攻撃者と同じように実際にシステムへの侵入を試み、弱点を探す検査です。許可を得て行えば検査、許可なく行えば攻撃です。",
+   "url": "https://atatakaidigital.com/ja/glossary/penetration-testing"
+  },
+  {
+   "term": "ベネフィット・ステーション",
+   "base": "ベネフィット・ステーション",
+   "plain": "",
+   "en": "Benefit Station",
+   "category": "機関・企業",
+   "desc": "ベネフィット・ワンが運営する割引型の福利厚生サービスです。会員は宿泊・飲食・レジャーなどを割引価格で利用できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/benefit-station"
+  },
+  {
+   "term": "ベネフィット・ワン",
+   "base": "ベネフィット・ワン",
+   "plain": "",
+   "en": "Benefit One Inc.",
+   "category": "機関・企業",
+   "desc": "企業の従業員向け福利厚生サービスを提供する会社です。割引優待、健康支援、インセンティブポイントなどのサービスを運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/benefit-one"
+  },
+  {
+   "term": "株式会社ペルソナ",
+   "base": "株式会社ペルソナ",
+   "plain": "",
+   "en": "Persona Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "「ペルソナSTACIAカード」などのクレジットカードや電子マネーを提供する会社です。エイチ・ツー・オー リテイリングの子会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/persona"
+  },
+  {
+   "term": "弁護士ドットコム",
+   "base": "弁護士ドットコム",
+   "plain": "",
+   "en": "Bengo4.com, Inc.",
+   "category": "機関・企業",
+   "desc": "法律相談ポータルサイト「弁護士ドットコム」や電子契約サービスを運営する会社です。弁護士の検索、法律相談、法律ニュースを見られます。",
+   "url": "https://atatakaidigital.com/ja/glossary/bengo4"
+  },
+  {
+   "term": "ベンダー",
+   "base": "ベンダー",
+   "plain": "",
+   "en": "vendor",
+   "category": "業務・取引",
+   "desc": "製品やソフトウェアを作り、ほかの会社に販売・提供する事業者です。脆弱性を直す修正版も、ふつうはベンダーが出します。",
+   "url": "https://atatakaidigital.com/ja/glossary/vendor"
+  },
+  {
+   "term": "ベンチマーク（AIの性能を比べる試験）",
+   "base": "ベンチマーク",
+   "plain": "AIの性能を比べる試験",
+   "en": "Benchmark (AI performance test)",
+   "category": "AI用語",
+   "desc": "ベンチマークは、複数のAIモデルに同じ問題を解かせ、点数で比べる共通の試験です。発表資料の数字は、どの試験をどんな条件で受けたかと一緒に見てはじめて意味を持ちます。",
+   "url": "https://atatakaidigital.com/ja/glossary/benchmark"
+  },
+  {
+   "term": "ホームディレクトリ",
+   "base": "ホームディレクトリ",
+   "plain": "",
+   "en": "home directory",
+   "category": "サーバー・ホスティング",
+   "desc": "レンタルサーバーの中で、自分のホームページのファイルが入っているフォルダの場所です。韓国のGabiaは、サーバー環境の変更でサーバーが変わるとこのパスが変わると案内しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/home-directory"
+  },
+  {
+   "term": "保守契約（保守費）",
+   "base": "保守契約",
+   "plain": "保守費",
+   "en": "maintenance contract",
+   "category": "サイト・CMS",
+   "desc": "制作会社に毎月払うサイト管理の契約です。PHPの更新が含まれているかは、契約書を見るか問い合わせないと分かりません。",
+   "url": "https://atatakaidigital.com/ja/glossary/maintenance-contract"
+  },
+  {
+   "term": "ポライトネス理論（フェイス）",
+   "base": "ポライトネス理論",
+   "plain": "フェイス",
+   "en": "politeness theory (face)",
+   "category": "脆弱性・インシデント",
+   "desc": "お願いや質問が相手のフェイス、つまり「干渉されない自由」に触れるとする言語学の理論です（Brown & Levinson 1987）。理由を先に伝え、質問の形で聞くと負担が軽くなります。",
+   "url": "https://atatakaidigital.com/ja/glossary/politeness-theory"
+  },
+  {
+   "term": "ホワイトハッカー",
+   "base": "ホワイトハッカー",
+   "plain": "",
+   "en": "white-hat hacker",
+   "category": "脆弱性・インシデント",
+   "desc": "ハッキングの技術を守る側に使うセキュリティの専門家です。許可を得てシステムの弱点を探し、直すように伝えます。",
+   "url": "https://atatakaidigital.com/ja/glossary/white-hat-hacker"
+  },
+  {
+   "term": "マイナポイント",
+   "base": "マイナポイント",
+   "plain": "",
+   "en": "Mynapoint",
+   "category": "機関・企業",
+   "desc": "マイナポイントは、マイナンバーカードの普及のため総務省が実施した、キャッシュレス決済のポイントがもらえる事業です。第2弾は最大2万円分で、すでに終了しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/mynapoint"
+  },
+  {
+   "term": "マイナンバーカード",
+   "base": "マイナンバーカード",
+   "plain": "",
+   "en": "My Number Card",
+   "category": "機関・企業",
+   "desc": "マイナンバーカードは、一人ひとりに付けられた個人番号(マイナンバー)が記載された顔写真付きのカードです。本人確認やオンラインの行政手続きに使われます。",
+   "url": "https://atatakaidigital.com/ja/glossary/my-number-card"
+  },
+  {
+   "term": "毎日新聞社",
+   "base": "毎日新聞社",
+   "plain": "",
+   "en": "The Mainichi Newspapers Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "全国紙「毎日新聞」を発行する新聞社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/mainichi-shimbun"
+  },
+  {
+   "term": "毎日新聞デジタル",
+   "base": "毎日新聞デジタル",
+   "plain": "",
+   "en": "Mainichi Shimbun Digital",
+   "category": "機関・企業",
+   "desc": "毎日新聞社が運営する有料のニュースサイトです。新聞の記事をインターネットで読めます。",
+   "url": "https://atatakaidigital.com/ja/glossary/mainichi-digital"
+  },
+  {
+   "term": "マイボ",
+   "base": "マイボ",
+   "plain": "",
+   "en": "Mybo",
+   "category": "機関・企業",
+   "desc": "DCMグループの店舗で共通に使われていた会員・ポイントサービスです。2026年11月に「DCM会員制度」に刷新されました。",
+   "url": "https://atatakaidigital.com/ja/glossary/mybo"
+  },
+  {
+   "term": "マネージドホスティング",
+   "base": "マネージドホスティング",
+   "plain": "",
+   "en": "managed hosting",
+   "category": "サーバー・ホスティング",
+   "desc": "サーバーの管理やセキュリティ修正までホスティング会社が引き受けるサービスです。修正を入れても、画面のバージョン番号はそのままのことがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/managed-hosting"
+  },
+  {
+   "term": "マルウェア",
+   "base": "マルウェア",
+   "plain": "",
+   "en": "malware",
+   "category": "脆弱性・インシデント",
+   "desc": "情報を盗んだり、パソコンをこっそり操ったりするために作られた悪意あるプログラムの総称です。",
+   "url": "https://atatakaidigital.com/ja/glossary/malware"
+  },
+  {
+   "term": "丸源ラーメン",
+   "base": "丸源ラーメン",
+   "plain": "",
+   "en": "Marugen Ramen",
+   "category": "機関・企業",
+   "desc": "物語コーポレーションが運営するラーメンチェーンです。熟成醤油ラーメン「肉そば」が看板メニューです。",
+   "url": "https://atatakaidigital.com/ja/glossary/marugen-ramen"
+  },
+  {
+   "term": "マルチモーダル（文字・画像・音声をいっしょに扱うAI）",
+   "base": "マルチモーダル",
+   "plain": "文字・画像・音声をいっしょに扱うAI",
+   "en": "Multimodal AI",
+   "category": "AI用語",
+   "desc": "マルチモーダルAIは、文字だけでなく画像や音声など複数の種類の情報をいっしょに受け取り、理解して答えるAIです。写真を見せて質問できるので、使い道が広がります。",
+   "url": "https://atatakaidigital.com/ja/glossary/multimodal"
+  },
+  {
+   "term": "三重県",
+   "base": "三重県",
+   "plain": "",
+   "en": "Mie Prefecture",
+   "category": "機関・企業",
+   "desc": "本州の中部、名古屋の南にある県です。",
+   "url": "https://atatakaidigital.com/ja/glossary/mie-prefecture"
+  },
+  {
+   "term": "名義変更（ドメイン・サーバーアカウント）",
+   "base": "名義変更",
+   "plain": "ドメイン・サーバーアカウント",
+   "en": "change of registrant / ownership transfer",
+   "category": "サーバー・ホスティング",
+   "desc": "ドメインやサーバーアカウントの持ち主を変えることです。登録証に書かれた元の名義人の書類や同意が必要で、ドメインは名義変更後60日間、別の登録事業者へ移せません。",
+   "url": "https://atatakaidigital.com/ja/glossary/change-of-registrant"
+  },
+  {
+   "term": "迷惑メール送信元判定（メールの受信拒否）",
+   "base": "迷惑メール送信元判定",
+   "plain": "メールの受信拒否",
+   "en": "sender reputation",
+   "category": "サーバー・ホスティング",
+   "desc": "サーバーや問い合わせフォームが迷惑メール送信に使われ、受け手が会社のメールを迷惑メールの送信元とみなして拒否することです。見積書や請求書が相手に届かなくなります。",
+   "url": "https://atatakaidigital.com/ja/glossary/sender-reputation"
+  },
+  {
+   "term": "メール配信サービス",
+   "base": "メール配信サービス",
+   "plain": "",
+   "en": "bulk email service",
+   "category": "サーバー・ホスティング",
+   "desc": "会員やお客様の何万人にも同じメールを一斉に送る外部のサービスです。会社はアドレス帳をこのサービスに預けて使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/bulk-email-service"
+  },
+  {
+   "term": "メモリ破損（解放後使用）",
+   "base": "メモリ破損",
+   "plain": "解放後使用",
+   "en": "UAF (Use-After-Free), OOM",
+   "category": "脆弱性・インシデント",
+   "desc": "プログラムがすでに解放したメモリを、もう一度使ってしまう欠陥です。PHP2Shellは、メモリ不足エラーの後に残った状態を悪用します。",
+   "url": "https://atatakaidigital.com/ja/glossary/use-after-free"
+  },
+  {
+   "term": "モデルカード(AIモデルの説明書)",
+   "base": "モデルカード",
+   "plain": "AIモデルの説明書",
+   "en": "model card",
+   "category": "AI用語",
+   "desc": "モデルカードは、AIモデルと一緒に公開される説明書で、想定する使い道、学習データ、評価結果、限界などを書いた文書です。使う前に利用条件と弱点を確かめる最初の資料です。",
+   "url": "https://atatakaidigital.com/ja/glossary/model-card"
+  },
+  {
+   "term": "物語コーポレーション",
+   "base": "物語コーポレーション",
+   "plain": "",
+   "en": "The Monogatari Corporation",
+   "category": "機関・企業",
+   "desc": "日本の外食企業です。焼肉きんぐ、丸源ラーメン、ゆず庵など複数の飲食店ブランドを運営し、フランチャイズ事業も行っています。",
+   "url": "https://atatakaidigital.com/ja/glossary/monogatari-corporation"
+  },
+  {
+   "term": "焼肉きんぐ",
+   "base": "焼肉きんぐ",
+   "plain": "",
+   "en": "Yakiniku King",
+   "category": "機関・企業",
+   "desc": "物語コーポレーションが運営する焼肉チェーンです。時間制の食べ放題コースが中心で、席のタッチパネルで注文する仕組みです。",
+   "url": "https://atatakaidigital.com/ja/glossary/yakiniku-king"
+  },
+  {
+   "term": "ゆず庵",
+   "base": "ゆず庵",
+   "plain": "",
+   "en": "Yuzuan",
+   "category": "機関・企業",
+   "desc": "物語コーポレーションが運営する飲食店チェーンです。寿司としゃぶしゃぶの食べ放題を提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/yuzuan"
+  },
+  {
+   "term": "ユミルリンク",
+   "base": "ユミルリンク",
+   "plain": "",
+   "en": "YMIRLINK, Inc.",
+   "category": "機関・企業",
+   "desc": "企業がお客様にメールやSMSなどのメッセージを届けるためのサービスを提供する日本の会社です。メール配信サービス「Cuenote」シリーズを運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/ymir-link"
+  },
+  {
+   "term": "要配慮個人情報",
+   "base": "要配慮個人情報",
+   "plain": "",
+   "en": "sensitive personal information",
+   "category": "法律・制度",
+   "desc": "人種、信条、病歴、犯罪歴など、扱い方によっては差別や不利益につながるおそれのある個人情報です。ほかの個人情報より厳しく扱うよう法律で定められています。",
+   "url": "https://atatakaidigital.com/ja/glossary/sensitive-personal-information"
+  },
+  {
+   "term": "ライフカード",
+   "base": "ライフカード",
+   "plain": "",
+   "en": "LIFECARD Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "クレジットカードを発行し、決済やポイントのサービスを提供する日本のカード会社です。アイフルグループの一社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/lifecard"
+  },
+  {
+   "term": "ライフネット生命保険",
+   "base": "ライフネット生命保険",
+   "plain": "",
+   "en": "LIFENET INSURANCE COMPANY",
+   "category": "機関・企業",
+   "desc": "2008年に開業したオンラインの生命保険会社です。死亡・医療・がんなどの保険を、インターネットで申し込めます。",
+   "url": "https://atatakaidigital.com/ja/glossary/lifenet-insurance"
+  },
+  {
+   "term": "ライブラリ",
+   "base": "ライブラリ",
+   "plain": "",
+   "en": "library",
+   "category": "サイト・CMS",
+   "desc": "他人が作った機能を部品として取り込んで使うコードのまとまりです。ライブラリに弱点があると、それを使うすべてのプログラムに影響します。",
+   "url": "https://atatakaidigital.com/ja/glossary/library"
+  },
+  {
+   "term": "楽観バイアス",
+   "base": "楽観バイアス",
+   "plain": "",
+   "en": "optimism bias",
+   "category": "脆弱性・インシデント",
+   "desc": "悪いことは他人より自分には起こりにくいと信じてしまう人の癖です。「うちのような小さな会社は狙われない」という考えも、ここから生まれます。",
+   "url": "https://atatakaidigital.com/ja/glossary/optimism-bias"
+  },
+  {
+   "term": "ランサムウェア",
+   "base": "ランサムウェア",
+   "plain": "",
+   "en": "ransomware",
+   "category": "脆弱性・インシデント",
+   "desc": "サーバーやパソコンのファイルを使えなくし、元に戻す代わりにお金を要求する攻撃です。2026年上半期、日本の被害企業の約60%が中小企業でした。",
+   "url": "https://atatakaidigital.com/ja/glossary/ransomware"
+  },
+  {
+   "term": "リカバリーモード（復旧用リンクのメール）",
+   "base": "リカバリーモード",
+   "plain": "復旧用リンクのメール",
+   "en": "recovery mode",
+   "category": "サイト・CMS",
+   "desc": "重大なエラーが起きたとき、WordPressが管理者のメールに送ることもある復旧用のリンクです。このリンクから入ると、原因のプラグインを停止できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/recovery-mode"
+  },
+  {
+   "term": "リスト型攻撃",
+   "base": "リスト型攻撃",
+   "plain": "",
+   "en": "credential stuffing",
+   "category": "脆弱性・インシデント",
+   "desc": "別の場所から漏れたIDとパスワードの一覧を使い、いろいろなサービスに次々とログインを試す攻撃です。",
+   "url": "https://atatakaidigital.com/ja/glossary/credential-stuffing"
+  },
+  {
+   "term": "りそな銀行",
+   "base": "りそな銀行",
+   "plain": "",
+   "en": "Resona Bank, Limited",
+   "category": "機関・企業",
+   "desc": "りそなグループの中心となる銀行です。",
+   "url": "https://atatakaidigital.com/ja/glossary/resona-bank"
+  },
+  {
+   "term": "りそなグループ",
+   "base": "りそなグループ",
+   "plain": "",
+   "en": "Resona Group",
+   "category": "機関・企業",
+   "desc": "りそなホールディングスのもとに、りそな銀行・埼玉りそな銀行・関西みらい銀行などが属する金融グループです。",
+   "url": "https://atatakaidigital.com/ja/glossary/resona-group"
+  },
+  {
+   "term": "リモートコード実行（RCE）",
+   "base": "リモートコード実行",
+   "plain": "RCE",
+   "en": "remote code execution (RCE)",
+   "category": "脆弱性・インシデント",
+   "desc": "インターネット越しに外からサーバーでプログラムを実行させられてしまう弱点です。最も危険な種類の脆弱性で、PHP2ShellもCVE-2026-115560もこの種類です。",
+   "url": "https://atatakaidigital.com/ja/glossary/remote-code-execution"
+  },
+  {
+   "term": "リモートデスクトップ",
+   "base": "リモートデスクトップ",
+   "plain": "",
+   "en": "remote desktop",
+   "category": "サーバー・ホスティング",
+   "desc": "インターネットの向こうにあるパソコンの画面を手元に映し、その前に座っているように操作する仕組みです。",
+   "url": "https://atatakaidigital.com/ja/glossary/remote-desktop"
+  },
+  {
+   "term": "レジストラ（指定事業者）",
+   "base": "レジストラ",
+   "plain": "指定事業者",
+   "en": "registrar",
+   "category": "サーバー・ホスティング",
+   "desc": "ドメインを購入・更新する会社です（韓国ではCafe24・Gabiaなど）。ドメインの名義変更・移管・更新は、この会社の手続きに従います。",
+   "url": "https://atatakaidigital.com/ja/glossary/registrar"
+  },
+  {
+   "term": "レモン市場（情報の非対称性）",
+   "base": "レモン市場",
+   "plain": "情報の非対称性",
+   "en": "market for lemons / information asymmetry",
+   "category": "脆弱性・インシデント",
+   "desc": "売り手のほうが品質をずっとよく知っていて、買い手は良い品かどうかを事前に判断できない状況です。ホームページの作業も依頼側からは見えにくいため、確かめられる答えを求める質問がその溝を埋めます。",
+   "url": "https://atatakaidigital.com/ja/glossary/market-for-lemons"
+  },
+  {
+   "term": "連結業績",
+   "base": "連結業績",
+   "plain": "",
+   "en": "consolidated results",
+   "category": "業務・取引",
+   "desc": "親会社と子会社を一つの会社のようにまとめて計算した、売上や利益などの成績です。",
+   "url": "https://atatakaidigital.com/ja/glossary/consolidated-results"
+  },
+  {
+   "term": "レンタルサーバー会社",
+   "base": "レンタルサーバー会社",
+   "plain": "",
+   "en": "hosting provider",
+   "category": "サーバー・ホスティング",
+   "desc": "サーバーを貸し出し、管理してくれる会社です。日本ではエックスサーバー、さくらインターネット、ロリポップ！、ConoHa WINGなどがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/hosting-company"
+  },
+  {
+   "term": "漏えい等のおそれ",
+   "base": "漏えい等のおそれ",
+   "plain": "",
+   "en": "possible leak",
+   "category": "法律・制度",
+   "desc": "情報が外に出た事実は確認されていないものの、出た可能性を否定できない状態です。個人情報保護法では、この場合も報告の対象になることがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/possible-leak"
+  },
+  {
+   "term": "ログ",
+   "base": "ログ",
+   "plain": "",
+   "en": "log",
+   "category": "サーバー・ホスティング",
+   "desc": "いつ・どこから・どんなリクエストが来たかがサーバーに残る記録です。侵入を確かめるには、再起動や再構築の前にまずログを保存しておく必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/log"
+  },
+  {
+   "term": "ロリポップ！",
+   "base": "ロリポップ！",
+   "plain": "",
+   "en": "Lolipop!",
+   "category": "機関・企業",
+   "desc": "日本のレンタルサーバーサービスです。PHP 5.3〜8.5に修正を入れ、アップロード進捗の機能もすべて無効にしたと報告しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/lolipop"
+  },
+  {
+   "term": "ワーカー",
+   "base": "ワーカー",
+   "plain": "",
+   "en": "worker process",
+   "category": "サーバー・ホスティング",
+   "desc": "届いたリクエストを実際に処理するPHPのプログラム一つひとつです。設定を変えたりPHPを直したりした後は、すべてのワーカーを再起動する必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/worker"
+  },
+  {
+   "term": "ワンタイムパスワード",
+   "base": "ワンタイムパスワード",
+   "plain": "",
+   "en": "one-time password",
+   "category": "設定",
+   "desc": "1回だけ使え、短い時間で変わる認証用の番号です。アプリやSMSで受け取り、パスワードと一緒に入力します。",
+   "url": "https://atatakaidigital.com/ja/glossary/one-time-password"
+  },
+  {
+   "term": "AhnLab（アンラボ）",
+   "base": "AhnLab",
+   "plain": "アンラボ",
+   "en": "AhnLab ASEC",
+   "category": "機関・企業",
+   "desc": "韓国のセキュリティ企業です。GitHubに上がった「防御ツール」も、まずコードを読み、隔離した環境でだけ実行するよう警告しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/ahnlab"
+  },
+  {
+   "term": "ARTEX",
+   "base": "ARTEX",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "AIが人の代わりに自らシステムの弱点を探し、侵入を試みる自律型のペネトレーションテストシステムです。",
+   "url": "https://atatakaidigital.com/ja/glossary/artex"
+  },
+  {
+   "term": "au one net",
+   "base": "au one net",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "KDDIのプロバイダサービスです。メールが付いていて、メールだけを使うコースもあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/au-one-net"
+  },
+  {
+   "term": "AXIORY",
+   "base": "AXIORY",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "ベリーズで設立された会社が運営する海外のFXブローカーです。FXのほか株式・貴金属などを、MT4・MT5・cTraderで取引できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/axiory"
+  },
+  {
+   "term": "Apple（アップル）",
+   "base": "Apple",
+   "plain": "アップル",
+   "en": "Apple",
+   "category": "機関・企業",
+   "desc": "AppleはiPhoneやMacなどの機器とソフト、サービスを作る米国の技術企業で、Project Glasswingの最初の参加企業12社の1つです。",
+   "url": "https://atatakaidigital.com/ja/glossary/apple"
+  },
+  {
+   "term": "Anthropic（アンソロピック）",
+   "base": "Anthropic",
+   "plain": "アンソロピック",
+   "en": "Anthropic",
+   "category": "機関・企業",
+   "desc": "AIアシスタント「Claude」を開発・提供するAI企業です。プロジェクト・グラスウィングでは、公開しないAIモデルをパートナーに使わせ、重要なソフトの弱点を先に直す取り組みを進めました。",
+   "url": "https://atatakaidigital.com/ja/glossary/anthropic"
+  },
+  {
+   "term": "AIウォーターマーク(AI生成コンテンツの表示:SynthID・C2PAなど)",
+   "base": "AIウォーターマーク",
+   "plain": "AI生成コンテンツの表示:SynthID・C2PAなど",
+   "en": "AI watermark",
+   "category": "AI用語",
+   "desc": "AIウォーターマークは、AIで作った画像・動画・音声に「AIが作った」という印を残す仕組みです。あとで出どころを確かめるのに使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/ai-watermark"
+  },
+  {
+   "term": "AIエージェント(人の代わりに複数の手順を自分で進めるAI)",
+   "base": "AIエージェント",
+   "plain": "人の代わりに複数の手順を自分で進めるAI",
+   "en": "AI agent",
+   "category": "AI用語",
+   "desc": "AIエージェントは、目標を伝えるとツールを使いながら複数の手順を自分で決めて進めるAIです。任せられる分、任せる範囲を決めることが大切です。",
+   "url": "https://atatakaidigital.com/ja/glossary/ai-agent"
+  },
+  {
+   "term": "AIクレジット（利用量の単位）",
+   "base": "AIクレジット",
+   "plain": "利用量の単位",
+   "en": "AI credits",
+   "category": "AI用語",
+   "desc": "AIクレジットは、AIサービスで使える量を数える単位です。プランごとに毎月や毎日決まった量が与えられ、画像・動画・会話を作るたびに減っていきます。",
+   "url": "https://atatakaidigital.com/ja/glossary/credit"
+  },
+  {
+   "term": "AI検索（AIが答えをまとめてくれる検索）",
+   "base": "AI検索",
+   "plain": "AIが答えをまとめてくれる検索",
+   "en": "AI search",
+   "category": "AI用語",
+   "desc": "AI検索は、質問するとAIがウェブページを探して読み、答えを文章にまとめ、根拠のページへのリンクと一緒に見せる検索です。答えが間違うこともあるので、大事な点は出典で確かめます。",
+   "url": "https://atatakaidigital.com/ja/glossary/ai-search"
+  },
+  {
+   "term": "AIゴールド証券",
+   "base": "AIゴールド証券",
+   "plain": "",
+   "en": "AI Gold Securities Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "日本の登録金融商品取引業者・商品先物取引業者です。取引所FXの「くりっく365」、商品先物取引、MT5での自動売買などを提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/ai-gold-securities"
+  },
+  {
+   "term": "AIサイバー攻撃",
+   "base": "AIサイバー攻撃",
+   "plain": "",
+   "en": "AI cyberattack",
+   "category": "AI用語",
+   "desc": "攻撃者がAIを使って、システムの弱点を探したり攻撃の方法を作ったりすることを広く指す言葉です。",
+   "url": "https://atatakaidigital.com/ja/glossary/ai-cyberattack"
+  },
+  {
+   "term": "AIスロップ（大量生産された低品質なAIコンテンツ）",
+   "base": "AIスロップ",
+   "plain": "大量生産された低品質なAIコンテンツ",
+   "en": "AI slop (mass-produced low-quality AI content)",
+   "category": "AI用語",
+   "desc": "AIスロップは、生成AIで手早く大量に作られた、中身が薄く似たような低品質コンテンツを指す言葉です。YouTubeなどはこうしたコンテンツの収益化を認めていません。",
+   "url": "https://atatakaidigital.com/ja/glossary/ai-slop"
+  },
+  {
+   "term": "AGI（汎用人工知能）",
+   "base": "AGI",
+   "plain": "汎用人工知能",
+   "en": "AGI (artificial general intelligence)",
+   "category": "AI用語",
+   "desc": "AGI（汎用人工知能）は、ひとつの仕事に特化したAIではなく、人のように幅広い仕事をこなせるAIを指す言葉です。決まった定義はなく、機関ごとに基準が違います。",
+   "url": "https://atatakaidigital.com/ja/glossary/agi"
+  },
+  {
+   "term": "API（アプリケーション・プログラミング・インターフェース）",
+   "base": "API",
+   "plain": "アプリケーション・プログラミング・インターフェース",
+   "en": "API (application programming interface)",
+   "category": "AI用語",
+   "desc": "APIは、あるプログラムの機能を決められたルールで別のプログラムから使うための窓口です。AI企業もAPIを公開し、他のアプリが使った分だけ料金を払ってAI機能を組み込みます。",
+   "url": "https://atatakaidigital.com/ja/glossary/api"
+  },
+  {
+   "term": "APIキー",
+   "base": "APIキー",
+   "plain": "",
+   "en": "API key",
+   "category": "サイト・CMS",
+   "desc": "ほかのサービスとつなぐときに使う、秘密の鍵のような文字列です。PHP2Shellではメモリからこれが漏れるおそれがあり、交換が勧められています。",
+   "url": "https://atatakaidigital.com/ja/glossary/api-key"
+  },
+  {
+   "term": "auメール",
+   "base": "auメール",
+   "plain": "",
+   "en": "au mail",
+   "category": "サーバー・ホスティング",
+   "desc": "KDDIの携帯電話ブランド「au」の利用者が使えるメールサービスです。",
+   "url": "https://atatakaidigital.com/ja/glossary/au-mail"
+  },
+  {
+   "term": "Bitsight",
+   "base": "Bitsight",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "インターネット全体をスキャンしてセキュリティのリスクを分析する米国の企業です。バージョンが分かるPHPのうち、PHP2Shellの修正対象の系列は約3分の1だけだと発表しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/bitsight"
+  },
+  {
+   "term": "BANDAI SPIRITS",
+   "base": "BANDAI SPIRITS",
+   "plain": "",
+   "en": "BANDAI SPIRITS CO., LTD.",
+   "category": "機関・企業",
+   "desc": "ガンプラ(ガンダムのプラモデル)やフィギュア、景品などホビー商品を作るバンダイナムコグループの会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/bandai-spirits"
+  },
+  {
+   "term": "BIGLOBE（ビッグローブ）",
+   "base": "BIGLOBE",
+   "plain": "ビッグローブ",
+   "en": "BIGLOBE Inc.",
+   "category": "機関・企業",
+   "desc": "インターネットなどのネットワークを使った情報サービスを提供する会社です。プロバイダとしてインターネット接続やメールを提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/biglobe"
+  },
+  {
+   "term": "BIGLOBE ID",
+   "base": "BIGLOBE ID",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "BIGLOBEのサービスにログインするときに使う会員IDです。",
+   "url": "https://atatakaidigital.com/ja/glossary/biglobe-id"
+  },
+  {
+   "term": "Cafe24",
+   "base": "Cafe24",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "韓国のWebホスティング会社です。10月21日夜から、PHP 8.2以上のサービスを同じ系列の最新版へ順次更新すると告知しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/cafe24"
+  },
+  {
+   "term": "CISA（米国）",
+   "base": "CISA",
+   "plain": "米国",
+   "en": "CISA (Cybersecurity and Infrastructure Security Agency)",
+   "category": "機関・企業",
+   "desc": "米国政府のサイバーセキュリティ機関です。すぐにパッチを当て、できなければサイトをオフラインにするよう勧告しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/cisa"
+  },
+  {
+   "term": "Claude Opus(クロード・オーパス)",
+   "base": "Claude Opus",
+   "plain": "クロード・オーパス",
+   "en": "Claude Opus",
+   "category": "AI用語",
+   "desc": "AnthropicのAI「Claude」のモデルのうち、もっとも性能が高い等級です。後ろの数字はバージョンです。",
+   "url": "https://atatakaidigital.com/ja/glossary/claude-opus"
+  },
+  {
+   "term": "Cloudflare",
+   "base": "Cloudflare",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "Webサイトの手前で攻撃を防ぐサービスを提供する会社です。PHP2Shellの際に、全顧客に防御ルールを入れ、攻撃のトラフィックを観察したと発表しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/cloudflare"
+  },
+  {
+   "term": "Cloudflare Pages",
+   "base": "Cloudflare Pages",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "Cloudflareの静的サイトホスティングです。静的ファイルへのリクエストは無料・無制限で、新しいプロジェクトはWorkersで始めるよう案内が変わりつつあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/cloudflare-pages"
+  },
+  {
+   "term": "CVE-2026-115560",
+   "base": "CVE-2026-115560",
+   "plain": "",
+   "en": "",
+   "category": "脆弱性・インシデント",
+   "desc": "PHP2Shellとは別に、10月23日にPHP開発チームが公表したセッション処理の脆弱性です。まれな構成でだけ問題になり、PHP側も「起こりにくい」と説明しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/separate-cve-115560"
+  },
+  {
+   "term": "CybelAngel",
+   "base": "CybelAngel",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "インターネットに公開されたサーバーを調査するセキュリティ会社です。サポートが終わったPHPを使う環境が多いという統計を出しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/cybelangel"
+  },
+  {
+   "term": "Cuenote SR-S",
+   "base": "Cuenote SR-S",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "プログラムから送るメールを受け取り、代わりに届けるメールリレー(中継)のサービスです。開発者が自社のシステムにつないで使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/cuenote-sr-s"
+  },
+  {
+   "term": "Cuenote FC",
+   "base": "Cuenote FC",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "ユミルリンクが運営するメール配信サービスです。企業が会員やお客様へのお知らせメールを一斉に送り、どれだけ読まれたかも測れます。",
+   "url": "https://atatakaidigital.com/ja/glossary/cuenote-fc"
+  },
+  {
+   "term": "Cuenote BASE",
+   "base": "Cuenote BASE",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "Cuenoteを利用する企業が、契約情報やサポートの案内を確認するための顧客ポータル(専用のWebサイト)です。",
+   "url": "https://atatakaidigital.com/ja/glossary/cuenote-base"
+  },
+  {
+   "term": "Claude（クロード）",
+   "base": "Claude",
+   "plain": "クロード",
+   "en": "Claude",
+   "category": "AI用語",
+   "desc": "ClaudeはAnthropicの対話型AIアシスタントで、文章で頼むと答えや文章、コードを作ります。同じ名前で複数のモデルとプランがあるため、どのClaudeをどの設定で使うかを確かめます。",
+   "url": "https://atatakaidigital.com/ja/glossary/claude"
+  },
+  {
+   "term": "Claude Mythos Preview（クロード・ミトス・プレビュー）",
+   "base": "Claude Mythos Preview",
+   "plain": "クロード・ミトス・プレビュー",
+   "en": "Claude Mythos Preview",
+   "category": "AI用語",
+   "desc": "Anthropicの発表によると、ソフトウェアの弱点（脆弱性）を見つける力がきわめて高いAIモデルです。悪用の恐れから一般公開せず、一部の組織にだけ使わせています。",
+   "url": "https://atatakaidigital.com/ja/glossary/claude-mythos-preview"
+  },
+  {
+   "term": "Codex（OpenAI）",
+   "base": "Codex",
+   "plain": "OpenAI",
+   "en": "Codex (OpenAI)",
+   "category": "AI用語",
+   "desc": "Codexは、OpenAIのコーディングエージェントです。文章で頼むと、コードを読み、ファイルを直し、コマンドを実行します。",
+   "url": "https://atatakaidigital.com/ja/glossary/codex"
+  },
+  {
+   "term": "ConoHa WING",
+   "base": "ConoHa WING",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "日本のレンタルサーバーサービスです。バージョン番号をそのままにして修正したため、修正後も以前の番号が表示されることがあると案内しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/conoha"
+  },
+  {
+   "term": "Copilot（コパイロット）",
+   "base": "Copilot",
+   "plain": "コパイロット",
+   "en": "Copilot (Microsoft Copilot)",
+   "category": "AI用語",
+   "desc": "Copilotは、MicrosoftのAIアシスタントで、アプリやWord・Excelの中で質問に答え、文章を書きます。無料の個人向けと有料の会社向けが同じ名前です。",
+   "url": "https://atatakaidigital.com/ja/glossary/copilot"
+  },
+  {
+   "term": "Content ID（YouTubeの著作権自動照合）",
+   "base": "Content ID",
+   "plain": "YouTubeの著作権自動照合",
+   "en": "Content ID",
+   "category": "AI用語",
+   "desc": "Content IDは、YouTubeがアップロードされた動画を、著作権者が登録した音源・映像と自動照合する仕組みです。一致すると申し立てがつき、ブロックや広告収益の扱いが決まります。",
+   "url": "https://atatakaidigital.com/ja/glossary/content-id"
+  },
+  {
+   "term": "C2PA（コンテンツの来歴を示す標準）",
+   "base": "C2PA",
+   "plain": "コンテンツの来歴を示す標準",
+   "en": "C2PA (Coalition for Content Provenance and Authenticity)",
+   "category": "AI用語",
+   "desc": "C2PAは、写真や動画などのデジタルコンテンツに、誰がどの道具で作り、どう編集したかの履歴を署名付きで付ける公開の標準です。AIで作ったかを確かめる手がかりになります。",
+   "url": "https://atatakaidigital.com/ja/glossary/c2pa"
+  },
+  {
+   "term": "CPI(レンタルサーバー)",
+   "base": "CPI",
+   "plain": "レンタルサーバー",
+   "en": "CPI",
+   "category": "サーバー・ホスティング",
+   "desc": "KDDIウェブコミュニケーションズが運営する法人向けのレンタルサーバーです。中小企業がホームページや会社のメールを置くために使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/cpi"
+  },
+  {
+   "term": "CVE",
+   "base": "CVE",
+   "plain": "",
+   "en": "CVE (Common Vulnerabilities and Exposures)",
+   "category": "脆弱性・インシデント",
+   "desc": "公開された脆弱性ごとに付けられる世界共通の番号です。国や会社が違っても、同じ脆弱性を同じ番号で呼べます。",
+   "url": "https://atatakaidigital.com/ja/glossary/cve"
+  },
+  {
+   "term": "CVSS（深刻度スコア）",
+   "base": "CVSS",
+   "plain": "深刻度スコア",
+   "en": "CVSS (Common Vulnerability Scoring System)",
+   "category": "脆弱性・インシデント",
+   "desc": "脆弱性がどれほど深刻かを10点満点で表す世界共通のスコアです。PHP2Shellはv4.0で9.2点、「緊急（Critical）」の評価です。",
+   "url": "https://atatakaidigital.com/ja/glossary/cvss"
+  },
+  {
+   "term": "ChatGPT（チャットジーピーティー）",
+   "base": "ChatGPT",
+   "plain": "チャットジーピーティー",
+   "en": "ChatGPT",
+   "category": "AI用語",
+   "desc": "ChatGPTはOpenAIの対話型AIサービスで、質問や作業を文章で頼むと答えや文章を作ります。答えが不正確なこともあり、入力内容は社外に送られるため、任せる仕事と入れない情報を決めて使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/chatgpt"
+  },
+  {
+   "term": "display_errors",
+   "base": "display_errors",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "エラーメッセージを訪問者の画面に表示するかどうかを決める設定です。オフ（Off）にしても、PHP2Shellの攻撃は防げません。",
+   "url": "https://atatakaidigital.com/ja/glossary/display-errors"
+  },
+  {
+   "term": "DNS",
+   "base": "DNS",
+   "plain": "",
+   "en": "Domain Name System",
+   "category": "サーバー・ホスティング",
+   "desc": "ドメインをホームページのサーバーやメールサービスにつなぐ設定です。DNSを変えられる人は、ホームページとメールの道筋を一緒に変えられます。",
+   "url": "https://atatakaidigital.com/ja/glossary/dns"
+  },
+  {
+   "term": "DCMホールディングス",
+   "base": "DCMホールディングス",
+   "plain": "",
+   "en": "DCM Holdings Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "「DCM」などのホームセンター(生活用品・工具・園芸用品の大型店)を全国で運営する企業グループです。",
+   "url": "https://atatakaidigital.com/ja/glossary/dcm-holdings"
+  },
+  {
+   "term": "D style web",
+   "base": "D style web",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "アスマークが運営するアンケートモニターのサイトです。会員はアンケートや座談会に参加して謝礼を受け取ります。",
+   "url": "https://atatakaidigital.com/ja/glossary/d-style-web"
+  },
+  {
+   "term": "DeepSeek（ディープシーク）",
+   "base": "DeepSeek",
+   "plain": "ディープシーク",
+   "en": "DeepSeek",
+   "category": "AI用語",
+   "desc": "中国・杭州の会社が作る生成AIで、無料で試せるチャット画面があり、モデルの重みも公開されています。公式アプリとウェブに入れた内容は中国のサーバーに保存されます。",
+   "url": "https://atatakaidigital.com/ja/glossary/deepseek"
+  },
+  {
+   "term": "DIGITAL X News",
+   "base": "DIGITAL X News",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "インプレスが発行するメールマガジンです。",
+   "url": "https://atatakaidigital.com/ja/glossary/digital-x-news"
+  },
+  {
+   "term": "DreamHost",
+   "base": "DreamHost",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "米国のホスティング会社です。WordPressのPHPバージョンを上げる前に、テスト用のサイトを作って先に確認するよう案内しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/dreamhost"
+  },
+  {
+   "term": "EDR（エンドポイント検知・対応）",
+   "base": "EDR",
+   "plain": "エンドポイント検知・対応",
+   "en": "Endpoint Detection and Response",
+   "category": "サーバー・ホスティング",
+   "desc": "パソコンやサーバーの中の不審な動きを常に見張り、攻撃とみられる動きを知らせて止めるセキュリティソフトです。",
+   "url": "https://atatakaidigital.com/ja/glossary/edr"
+  },
+  {
+   "term": "ETCカード",
+   "base": "ETCカード",
+   "plain": "",
+   "en": "ETC card",
+   "category": "業務・取引",
+   "desc": "高速道路の料金所で止まらずに通行料金を払えるようにするカードです。",
+   "url": "https://atatakaidigital.com/ja/glossary/etc-card"
+  },
+  {
+   "term": "Formspree",
+   "base": "Formspree",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "静的サイトに問い合わせフォームを付ける外部サービスです。無料は月50件までで、有料は月払い15ドルからです。",
+   "url": "https://atatakaidigital.com/ja/glossary/formspree"
+  },
+  {
+   "term": "FX(外国為替証拠金取引)",
+   "base": "FX",
+   "plain": "外国為替証拠金取引",
+   "en": "FX (foreign exchange margin trading)",
+   "category": "業務・取引",
+   "desc": "証拠金というお金を預け、その何倍もの金額でドルや円などの通貨を売買し、為替レートの差で利益や損失を出す取引です。",
+   "url": "https://atatakaidigital.com/ja/glossary/fx"
+  },
+  {
+   "term": "FFmpeg",
+   "base": "FFmpeg",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "FFmpegは、動画・音声・画像のファイルを読み書きして変換する無料のオープンソースソフトです。多くのサービスの裏で使われる部品です。",
+   "url": "https://atatakaidigital.com/ja/glossary/ffmpeg"
+  },
+  {
+   "term": "FTP",
+   "base": "FTP",
+   "plain": "",
+   "en": "FTP (File Transfer Protocol)",
+   "category": "サーバー・ホスティング",
+   "desc": "自分のパソコンとサーバーの間でファイルを上げ下ろしする通り道です。管理画面に入れないとき、プラグインのフォルダー名を変えるのに使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/ftp"
+  },
+  {
+   "term": "FTC（米連邦取引委員会）",
+   "base": "FTC",
+   "plain": "米連邦取引委員会",
+   "en": "Federal Trade Commission",
+   "category": "機関・企業",
+   "desc": "米国の消費者保護・公正取引の機関です。小規模事業者に、ホスティングを選ぶときはセキュリティ機能を確かめるよう案内しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/ftc"
+  },
+  {
+   "term": "Gabia",
+   "base": "Gabia",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "韓国のWebホスティング会社です。サーバー環境を変えると既存のデータが初期化され、復元できないと案内しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/gabia"
+  },
+  {
+   "term": "Genians",
+   "base": "Genians",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "韓国のセキュリティ企業です。OSごとの更新コマンドと、PHP-FPM・Apacheの再起動を案内しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/genians"
+  },
+  {
+   "term": "GitHub Pages",
+   "base": "GitHub Pages",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "GitHubの無料の静的サイトホスティングです。オンラインビジネス用の無料ホスティングとして使うことは認められていません。",
+   "url": "https://atatakaidigital.com/ja/glossary/github-pages"
+  },
+  {
+   "term": "Google（グーグル）",
+   "base": "Google",
+   "plain": "グーグル",
+   "en": "Google",
+   "category": "機関・企業",
+   "desc": "Googleは、検索やクラウド、Geminiなどを提供する米国のテクノロジー企業です。AIセキュリティ協力「Project Glasswing」のパートナーとして登場します。",
+   "url": "https://atatakaidigital.com/ja/glossary/google"
+  },
+  {
+   "term": "Google Search Console（セキュリティの問題レポート）",
+   "base": "Google Search Console",
+   "plain": "セキュリティの問題レポート",
+   "en": "Google Search Console (Security issues report)",
+   "category": "サイト・CMS",
+   "desc": "Googleに自社サイトを登録し、検索での状態を見る無料ツールです。ハッキング警告が付いたら「セキュリティの問題」レポートで原因を見て、審査を依頼します。",
+   "url": "https://atatakaidigital.com/ja/glossary/search-console"
+  },
+  {
+   "term": "Grok（グロック）",
+   "base": "Grok",
+   "plain": "グロック",
+   "en": "Grok",
+   "category": "AI用語",
+   "desc": "GrokはxAIが作ったAIアシスタントで、X（旧Twitter）やgrok.com、アプリで使えます。Xの投稿やウェブを調べて答えますが、誤った内容を自信をもって答えることがあり、確認が必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/grok"
+  },
+  {
+   "term": "GMOインターネット",
+   "base": "GMOインターネット",
+   "plain": "",
+   "en": "GMO Internet, Inc.",
+   "category": "機関・企業",
+   "desc": "ドメインやサーバーなどのインターネットインフラ事業と、インターネット広告・メディア事業を行う日本の会社です。GMOインターネットグループの一社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/gmo-internet"
+  },
+  {
+   "term": "GMOインターネットグループ",
+   "base": "GMOインターネットグループ",
+   "plain": "",
+   "en": "GMO Internet Group, Inc.",
+   "category": "機関・企業",
+   "desc": "日本の総合インターネットグループです。インターネットインフラ、セキュリティ、広告・メディア、インターネット金融、暗号資産の事業を行う会社をまとめています。",
+   "url": "https://atatakaidigital.com/ja/glossary/gmo-internet-group"
+  },
+  {
+   "term": "GMOクリック証券",
+   "base": "GMOクリック証券",
+   "plain": "",
+   "en": "GMO CLICK Securities, Inc.",
+   "category": "機関・企業",
+   "desc": "GMOインターネットグループのネット証券会社です。株式、投資信託、FX、CFDなどをインターネットで取引できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/gmo-click-securities"
+  },
+  {
+   "term": "GMOサイバーセキュリティ byイエラエ",
+   "base": "GMOサイバーセキュリティ byイエラエ",
+   "plain": "",
+   "en": "GMO Cybersecurity by Ierae, Inc.",
+   "category": "機関・企業",
+   "desc": "GMOインターネットグループのセキュリティ会社です。脆弱性診断、ペネトレーションテスト、セキュリティ監視、インシデント対応支援などを提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/gmo-ierae"
+  },
+  {
+   "term": "GW証券",
+   "base": "GW証券",
+   "plain": "",
+   "en": "GW Securities Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "日本の登録金融商品取引業者で、「FXTF」の名前でFX・CFDの取引サービスを提供しています。旧社名はゴールデンウェイ・ジャパンです。",
+   "url": "https://atatakaidigital.com/ja/glossary/gw-securities"
+  },
+  {
+   "term": "GPTs（目的に合わせて設定したChatGPT）",
+   "base": "GPTs",
+   "plain": "目的に合わせて設定したChatGPT",
+   "en": "GPTs (custom GPTs)",
+   "category": "AI用語",
+   "desc": "指示や参考ファイル、使う機能をあらかじめ入れて、ひとつの用途に合わせたChatGPTです。OpenAIは2026年12月11日に提供を終え、プラグインへ移す予定です。",
+   "url": "https://atatakaidigital.com/ja/glossary/custom-gpt"
+  },
+  {
+   "term": "GPU（グラフィックス処理装置）",
+   "base": "GPU",
+   "plain": "グラフィックス処理装置",
+   "en": "GPU (graphics processing unit)",
+   "category": "AI用語",
+   "desc": "GPU（グラフィックス処理装置）は、もともと画面の絵を速く描くために作られた部品で、たくさんの計算を一度に分けて処理するのが得意です。この性質から、AIの学習や実行に広く使われています。",
+   "url": "https://atatakaidigital.com/ja/glossary/gpu"
+  },
+  {
+   "term": "Gemini（ジェミニ）",
+   "base": "Gemini",
+   "plain": "ジェミニ",
+   "en": "Gemini",
+   "category": "AI用語",
+   "desc": "GeminiはGoogleのAIモデルと、そのモデルで動くAIアシスタントアプリの名前です。GmailやChromeなどにも入っていて、どこで使うかによって入力内容の扱いが変わります。",
+   "url": "https://atatakaidigital.com/ja/glossary/gemini"
+  },
+  {
+   "term": "Hostinger",
+   "base": "Hostinger",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "ウェブホスティング会社です。PHP2Shellの修正版を10月22日06:44（UTC）までに全プラットフォームへ配布し、VPS以外のプランでは利用者の対応は不要と告知しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/hostinger"
+  },
+  {
+   "term": "HTTPステータスコード（500 / 200）",
+   "base": "HTTPステータスコード",
+   "plain": "500 / 200",
+   "en": "HTTP status code",
+   "category": "サイト・CMS",
+   "desc": "サーバーがリクエストに答えるときに付ける数字です。500はサーバーエラー、200は正常という意味ですが、PHP2Shellの攻撃は成功しても200になることがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/http-status"
+  },
+  {
+   "term": "Hugo",
+   "base": "Hugo",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "記事をあらかじめHTMLファイルにしておく静的サイトのツールです。WordPressの記事を移して、本番サーバーからPHPをなくすのに使われます。",
+   "url": "https://atatakaidigital.com/ja/glossary/hugo"
+  },
+  {
+   "term": "i-Port",
+   "base": "i-Port",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "野村證券が金融機関などに提供するポートフォリオ管理ツールです。",
+   "url": "https://atatakaidigital.com/ja/glossary/i-port"
+  },
+  {
+   "term": "ini_set() / .user.ini",
+   "base": "ini_set() / .user.ini",
+   "plain": "",
+   "en": "ini_set(), .user.ini",
+   "category": "設定",
+   "desc": "サイトの中からPHPの設定を変える方法です。session.upload_progress.enabledはこの方法では足りず、設定ファイルを直す必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/user-ini"
+  },
+  {
+   "term": "INTERNET Watch",
+   "base": "INTERNET Watch",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "株式会社インプレスが運営するインターネット関連のニュースサイトです。通信サービスやネットワーク機器、セキュリティ事件などを扱います。",
+   "url": "https://atatakaidigital.com/ja/glossary/internet-watch"
+  },
+  {
+   "term": "IS6FX",
+   "base": "IS6FX",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "海外で登録された会社が運営する、FX取引サービスのブランド名です。日本の金融庁に登録していない海外FX会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/is6fx"
+  },
+  {
+   "term": "IoC（侵害の痕跡を示す目印）",
+   "base": "IoC",
+   "plain": "侵害の痕跡を示す目印",
+   "en": "Indicator of Compromise",
+   "category": "脆弱性・インシデント",
+   "desc": "「この痕跡があれば侵入された」と言える目に見える目印で、怪しい接続元のアドレスやファイルなどです。PHP2Shellでは決定的なIoCがまだ出ておらず、いつもと違う動きから推し量ります。",
+   "url": "https://atatakaidigital.com/ja/glossary/ioc"
+  },
+  {
+   "term": "ICANN",
+   "base": "ICANN",
+   "plain": "",
+   "en": "Internet Corporation for Assigned Names and Numbers",
+   "category": "機関・企業",
+   "desc": ".comなどの一般ドメインの国際的なルールを決める機関です。期限切れ前の更新通知2回、削除後30日間の回復期間といったルールを定めています。",
+   "url": "https://atatakaidigital.com/ja/glossary/icann"
+  },
+  {
+   "term": "ITmedia(アイティメディア)",
+   "base": "ITmedia",
+   "plain": "アイティメディア",
+   "en": "ITmedia Inc.",
+   "category": "機関・企業",
+   "desc": "インターネット専業のメディア企業で、ITとその周辺分野のニュースサイトを運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/itmedia"
+  },
+  {
+   "term": "IPアドレス",
+   "base": "IPアドレス",
+   "plain": "",
+   "en": "IP address",
+   "category": "サーバー・ホスティング",
+   "desc": "インターネットにつながるコンピューターやサーバーごとに付く番号です。アクセス元を調べたり遮断したりするときに使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/ip-address"
+  },
+  {
+   "term": "IP制限",
+   "base": "IP制限",
+   "plain": "",
+   "en": "IP restriction",
+   "category": "設定",
+   "desc": "あらかじめ許可したIPアドレスからのアクセスだけを受け付け、それ以外を遮断するセキュリティ設定です。",
+   "url": "https://atatakaidigital.com/ja/glossary/ip-restriction"
+  },
+  {
+   "term": "IPA（情報処理推進機構）",
+   "base": "IPA",
+   "plain": "情報処理推進機構",
+   "en": "IPA (Information-technology Promotion Agency, Japan)",
+   "category": "機関・企業",
+   "desc": "日本政府所管の情報セキュリティ機関です。修正版の公開前に「前もって準備してほしい」と呼びかけました。",
+   "url": "https://atatakaidigital.com/ja/glossary/ipa"
+  },
+  {
+   "term": "J:COM NET",
+   "base": "J:COM NET",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "J:COMの家庭向けインターネットサービスです。ケーブルテレビ回線や光回線でインターネットにつなぎます。",
+   "url": "https://atatakaidigital.com/ja/glossary/jcom-net"
+  },
+  {
+   "term": "JR九州(九州旅客鉄道)",
+   "base": "JR九州",
+   "plain": "九州旅客鉄道",
+   "en": "Kyushu Railway Company (JR Kyushu)",
+   "category": "機関・企業",
+   "desc": "福岡に本社を置く鉄道会社で、九州の在来線と九州新幹線を運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/jr-kyushu"
+  },
+  {
+   "term": "JRグループ",
+   "base": "JRグループ",
+   "plain": "",
+   "en": "Japan Railways Group",
+   "category": "機関・企業",
+   "desc": "1987年に日本国有鉄道が分かれてできた鉄道会社のグループです。地域ごとにJR東海、JR西日本、JR九州などがあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/jr-group"
+  },
+  {
+   "term": "JR東海(東海旅客鉄道)",
+   "base": "JR東海",
+   "plain": "東海旅客鉄道",
+   "en": "Central Japan Railway Company (JR Central)",
+   "category": "機関・企業",
+   "desc": "名古屋に本社を置く鉄道会社で、東京〜新大阪の東海道新幹線を運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/jr-central"
+  },
+  {
+   "term": "JR西日本(西日本旅客鉄道)",
+   "base": "JR西日本",
+   "plain": "西日本旅客鉄道",
+   "en": "West Japan Railway Company (JR West)",
+   "category": "機関・企業",
+   "desc": "大阪に本社を置く鉄道会社で、西日本の在来線と山陽・北陸新幹線を運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/jr-west"
+  },
+  {
+   "term": "JCOM株式会社(J:COM)",
+   "base": "JCOM株式会社",
+   "plain": "J:COM",
+   "en": "JCOM Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "日本の大手ケーブルテレビ会社です。テレビ、インターネット、スマホ、電気など、暮らしのサービスをまとめて提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/jcom"
+  },
+  {
+   "term": "JPCERT/CC",
+   "base": "JPCERT/CC",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "日本のセキュリティインシデント対応の調整機関です。PHP2Shellの際に注意喚起を出し、確認すべき侵害痕跡を3つ示しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/jpcert"
+  },
+  {
+   "term": "JIPDEC(日本情報経済社会推進協会)",
+   "base": "JIPDEC",
+   "plain": "日本情報経済社会推進協会",
+   "en": "JIPDEC",
+   "category": "機関・企業",
+   "desc": "日本の一般財団法人で、個人情報を適切に扱う会社に「プライバシーマーク」を付与する制度を運営しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/jipdec"
+  },
+  {
+   "term": "JPRS（日本レジストリサービス）",
+   "base": "JPRS",
+   "plain": "日本レジストリサービス",
+   "en": "JPRS (Japan Registry Services)",
+   "category": "機関・企業",
+   "desc": "日本の.jpドメインを管理する組織です。廃止されたドメインが偽サイトに悪用されるおそれがあるとして、登録を続けるよう勧めています。",
+   "url": "https://atatakaidigital.com/ja/glossary/jprs"
+  },
+  {
+   "term": "Kinsta",
+   "base": "Kinsta",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "WordPressサイトの運用を引き受けるマネージドホスティング会社です。PHP2Shellの修正は同社が対応したと告知しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/kinsta"
+  },
+  {
+   "term": "KISAのサーバー点検サービス（韓国）",
+   "base": "KISAのサーバー点検サービス",
+   "plain": "韓国",
+   "en": "KISA server care service",
+   "category": "機関・企業",
+   "desc": "韓国のKISAが韓国の中小企業向けに、ハッキング用のプログラム（Webシェルなど）がないかを点検してくれるサービスです。",
+   "url": "https://atatakaidigital.com/ja/glossary/kisa-server-care"
+  },
+  {
+   "term": "KISA侵害事故の届出（韓国・118）",
+   "base": "KISA侵害事故の届出",
+   "plain": "韓国・118",
+   "en": "KISA incident report",
+   "category": "機関・企業",
+   "desc": "韓国のKISAが運営する、ハッキング被害の届出窓口です。サイト「ボホナラ」の「侵害事故届出」か、電話118で届け出られます。",
+   "url": "https://atatakaidigital.com/ja/glossary/boho-report"
+  },
+  {
+   "term": "KWCメール",
+   "base": "KWCメール",
+   "plain": "",
+   "en": "KWC Mail",
+   "category": "サーバー・ホスティング",
+   "desc": "CPIのメール専用プランです。ホームページ用のサーバーなしで、クラウド上のメールサーバーだけを使えます。",
+   "url": "https://atatakaidigital.com/ja/glossary/kwc-mail"
+  },
+  {
+   "term": "KDDI株式会社",
+   "base": "KDDI株式会社",
+   "plain": "",
+   "en": "KDDI CORPORATION",
+   "category": "機関・企業",
+   "desc": "日本の大手通信会社です。au、UQ mobile、povoなどのブランドで携帯電話やインターネットを提供し、法人向けの通信サービスも手がけています。",
+   "url": "https://atatakaidigital.com/ja/glossary/kddi"
+  },
+  {
+   "term": "KDDIウェブコミュニケーションズ",
+   "base": "KDDIウェブコミュニケーションズ",
+   "plain": "",
+   "en": "KDDI Web Communications Inc.",
+   "category": "サーバー・ホスティング",
+   "desc": "KDDIグループの会社です。ホームページやメールのレンタルサーバー、ホームページ作成ツール、通話・SMSの機能を組み込むサービスなどを提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/kddi-web-communications"
+  },
+  {
+   "term": "LINEログイン",
+   "base": "LINEログイン",
+   "plain": "",
+   "en": "LINE Login",
+   "category": "機関・企業",
+   "desc": "LINEのアカウントで、ほかのWebサイトやアプリに登録・ログインできる仕組みです。サービス側は自分でパスワードを預からずに済みます。",
+   "url": "https://atatakaidigital.com/ja/glossary/line-login"
+  },
+  {
+   "term": "Llama（MetaのAIモデル）",
+   "base": "Llama",
+   "plain": "MetaのAIモデル",
+   "en": "Llama (Meta AI model)",
+   "category": "AI用語",
+   "desc": "Llamaは、Metaが作ったAI言語モデルのシリーズです。重みをダウンロードして自分のパソコンやサーバーで動かせますが、Metaのライセンス条件があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/llama"
+  },
+  {
+   "term": "memory_limit / post_max_size",
+   "base": "memory_limit / post_max_size",
+   "plain": "",
+   "en": "memory_limit, post_max_size",
+   "category": "設定",
+   "desc": "PHPが使えるメモリと、受け取れるリクエストの大きさを決める設定です。PHPの公式発表が、暫定対策としてその調整を示しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/memory-limit"
+  },
+  {
+   "term": "multipart/form-data",
+   "base": "multipart/form-data",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "ファイルをアップロードしたりフォームを送ったりするときに使う送信形式です。この形式の怪しいリクエストの後にエラーが出ていたら、攻撃の痕跡かもしれません。",
+   "url": "https://atatakaidigital.com/ja/glossary/multipart"
+  },
+  {
+   "term": "MoE（専門家混合モデル）",
+   "base": "MoE",
+   "plain": "専門家混合モデル",
+   "en": "MoE (mixture of experts)",
+   "category": "AI用語",
+   "desc": "MoEは、AIモデルの中を複数の小さな「専門家」に分け、入力ごとにその一部だけを選んで働かせる方式です。モデル全体は大きくしつつ、一度に使う計算を減らせます。",
+   "url": "https://atatakaidigital.com/ja/glossary/moe"
+  },
+  {
+   "term": "MCP（AIが外部ツールとつながる決まり）",
+   "base": "MCP",
+   "plain": "AIが外部ツールとつながる決まり",
+   "en": "MCP (Model Context Protocol)",
+   "category": "AI用語",
+   "desc": "MCPは、AIアプリがファイルや検索などの外部ツールとつながるための共通の決まりです。ツールごとに作り直さずに済み、AIが実際の作業までできます。",
+   "url": "https://atatakaidigital.com/ja/glossary/mcp"
+  },
+  {
+   "term": "Microsoft（マイクロソフト）",
+   "base": "Microsoft",
+   "plain": "マイクロソフト",
+   "en": "Microsoft",
+   "category": "機関・企業",
+   "desc": "Microsoftは、WindowsやMicrosoft 365、Copilotなどを提供するアメリカのソフトウェア会社です。",
+   "url": "https://atatakaidigital.com/ja/glossary/microsoft"
+  },
+  {
+   "term": "MT4/MT5（メタトレーダー）",
+   "base": "MT4/MT5",
+   "plain": "メタトレーダー",
+   "en": "MetaTrader 4 / MetaTrader 5",
+   "category": "機関・企業",
+   "desc": "FX取引で広く使われる取引ソフトです。決めたルールで自動売買する機能があり、24時間動かすリモートPCで使われることが多くあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/mt4-mt5"
+  },
+  {
+   "term": "Netlify",
+   "base": "Netlify",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "静的サイトのホスティングサービスです。無料プランは月300クレジットで、使い切るとすべてのサイトが次の請求期間まで止まります。",
+   "url": "https://atatakaidigital.com/ja/glossary/netlify"
+  },
+  {
+   "term": "null（値なし）",
+   "base": "null",
+   "plain": "値なし",
+   "en": "null",
+   "category": "サイト・CMS",
+   "desc": "プログラミングで「まだ値が決まっていない」ことを表す印です。数字の0とは違います。",
+   "url": "https://atatakaidigital.com/ja/glossary/null-value"
+  },
+  {
+   "term": "NTTPCコミュニケーションズ",
+   "base": "NTTPCコミュニケーションズ",
+   "plain": "",
+   "en": "NTTPC Communications, Inc.",
+   "category": "機関・企業",
+   "desc": "企業向けのネットワーク、データセンター、クラウド、セキュリティなどのサービスを提供する日本の通信・IT企業です。",
+   "url": "https://atatakaidigital.com/ja/glossary/nttpc"
+  },
+  {
+   "term": "NPU（AI計算に特化したチップ）",
+   "base": "NPU",
+   "plain": "AI計算に特化したチップ",
+   "en": "NPU (neural processing unit)",
+   "category": "AI用語",
+   "desc": "NPUはAIの計算だけを受け持つ、パソコンやスマホの中のチップです。同じAIの仕事をCPUやGPUより少ない電力でこなし、ネットなしで機器の中でAIを動かす土台になります。",
+   "url": "https://atatakaidigital.com/ja/glossary/npu"
+  },
+  {
+   "term": "NHK(日本放送協会)",
+   "base": "NHK",
+   "plain": "日本放送協会",
+   "en": "NHK (Japan Broadcasting Corporation)",
+   "category": "機関・企業",
+   "desc": "日本の公共放送です。放送法に基づいて設立され、視聴者が払う受信料を主な財源として運営されています。",
+   "url": "https://atatakaidigital.com/ja/glossary/nhk"
+  },
+  {
+   "term": "OANDA証券",
+   "base": "OANDA証券",
+   "plain": "",
+   "en": "OANDA Securities Co., Ltd.",
+   "category": "機関・企業",
+   "desc": "日本でFXとCFDの取引サービスを提供する証券会社です。MT4やMT5など、複数の取引ツールを使えます。",
+   "url": "https://atatakaidigital.com/ja/glossary/oanda-securities"
+  },
+  {
+   "term": "OpenAI（オープンエーアイ）",
+   "base": "OpenAI",
+   "plain": "オープンエーアイ",
+   "en": "OpenAI",
+   "category": "機関・企業",
+   "desc": "ChatGPTやCodex、開発者向けAPIを提供するアメリカのAI企業です。使っているAIツールがこの会社のものか分かれば、料金や入力内容の扱いをどこで確かめればよいか分かります。",
+   "url": "https://atatakaidigital.com/ja/glossary/openai"
+  },
+  {
+   "term": "OpenBSD",
+   "base": "OpenBSD",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "OpenBSDは、セキュリティを最優先にボランティアが開発する無料のOSです。パソコンやサーバーを動かす土台のソフトの一つです。",
+   "url": "https://atatakaidigital.com/ja/glossary/openbsd"
+  },
+  {
+   "term": "Pagefind",
+   "base": "Pagefind",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "静的サイトに検索機能を付ける無料のオープンソースツールです。韓国語・日本語・中国語に対応しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/pagefind"
+  },
+  {
+   "term": "php -v",
+   "base": "php -v",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "サーバーでPHPのバージョンを確認するコマンドです。ただし、ホームページを実際に動かしているPHPとバージョンが違うことがあり、それだけを信じてはいけません。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-v"
+  },
+  {
+   "term": "PHP Compatibility Checker",
+   "base": "PHP Compatibility Checker",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "プラグインやテーマが新しいPHPのバージョンで動くかを、前もって点検してくれるWordPressのプラグインです。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-compatibility-checker"
+  },
+  {
+   "term": "php_admin_value",
+   "base": "php_admin_value",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "PHP-FPMの設定で値を固定する方法です。サイトのプログラムが後からその値を変えられないようにするときに使います。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-admin-value"
+  },
+  {
+   "term": "php.ini（PHPの設定ファイル）",
+   "base": "php.ini",
+   "plain": "PHPの設定ファイル",
+   "en": "php.ini",
+   "category": "設定",
+   "desc": "PHPがどう動くかを決めておく設定ファイルです。すぐに更新できないときの暫定対策も、このファイルかPHP-FPMの設定に入れます。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-ini"
+  },
+  {
+   "term": "PHP2Shell",
+   "base": "PHP2Shell",
+   "plain": "",
+   "en": "PHP2Shell (CVE-2026-109618 / CVE-2026-109619)",
+   "category": "脆弱性・インシデント",
+   "desc": "2026年10月に公開された、PHP本体の脆弱性2件をまとめた呼び名です。ログインなしで、外からサーバーのプログラムを実行できてしまいます。",
+   "url": "https://atatakaidigital.com/ja/glossary/php2shell"
+  },
+  {
+   "term": "phpinfoファイル",
+   "base": "phpinfoファイル",
+   "plain": "",
+   "en": "phpinfo()",
+   "category": "設定",
+   "desc": "PHPのバージョンやサーバーの設定を画面に表示する確認用のファイルです。誰でも見られるため、確認したらすぐに消します。",
+   "url": "https://atatakaidigital.com/ja/glossary/phpinfo"
+  },
+  {
+   "term": "PHPSESSID",
+   "base": "PHPSESSID",
+   "plain": "",
+   "en": "PHPSESSID (session ID cookie)",
+   "category": "サイト・CMS",
+   "desc": "サイトが訪問者を見分けるために使う番号札（Cookie）です。不自然に長い値が記録されていたら、攻撃の試みかもしれません。",
+   "url": "https://atatakaidigital.com/ja/glossary/phpsessid"
+  },
+  {
+   "term": "PHP開発チーム",
+   "base": "PHP開発チーム",
+   "plain": "",
+   "en": "PHP Group, php.net",
+   "category": "機関・企業",
+   "desc": "PHPを作り、直している開発チームです。公式サイトphp.netでセキュリティ勧告と修正版を出します。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-group"
+  },
+  {
+   "term": "PLURA",
+   "base": "PLURA",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "韓国のセキュリティ企業です。アップロードが不要なアドレスに届くmultipartのリクエストを遮断するよう勧めました。",
+   "url": "https://atatakaidigital.com/ja/glossary/plura"
+  },
+  {
+   "term": "PRAISE-NET",
+   "base": "PRAISE-NET",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "製薬業界の4団体が共同で運営する会員向けの情報システムです。行政通知のデータベースやセミナー申込などを提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/praise-net"
+  },
+  {
+   "term": "Perplexity（パープレキシティ）",
+   "base": "Perplexity",
+   "plain": "パープレキシティ",
+   "en": "Perplexity",
+   "category": "AI用語",
+   "desc": "質問すると、ウェブを調べて答えを文章にまとめ、根拠になったページを番号付きで示すAI検索サービスです。答えと出典を並べて確かめられます。",
+   "url": "https://atatakaidigital.com/ja/glossary/perplexity"
+  },
+  {
+   "term": "PHP",
+   "base": "PHP",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "WordPressなどのホームページの仕組みをサーバー上で動かすプログラミング言語です。家でいえば基礎にあたります。",
+   "url": "https://atatakaidigital.com/ja/glossary/php"
+  },
+  {
+   "term": "PHP-FPM",
+   "base": "PHP-FPM",
+   "plain": "",
+   "en": "PHP-FPM (FastCGI Process Manager)",
+   "category": "サーバー・ホスティング",
+   "desc": "Webサーバーの後ろでPHPのプログラムを動かし続けておく仕組みです。PHPを直した後は、これを再起動しないと新しいバージョンが反映されません。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-fpm"
+  },
+  {
+   "term": "PHPセッション",
+   "base": "PHPセッション",
+   "plain": "",
+   "en": "PHP session",
+   "category": "サーバー・ホスティング",
+   "desc": "訪問者が複数のページを行き来する間、ログイン状態などの情報をサーバーに一時的に覚えておくPHPの機能です。session_start()で開き、WordPressはセッションが開いたままだとサイトヘルスで重大な問題として表示します。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-session"
+  },
+  {
+   "term": "PHPバージョン切替",
+   "base": "PHPバージョン切替",
+   "plain": "",
+   "en": "PHP version switch",
+   "category": "サーバー・ホスティング",
+   "desc": "サーバーの管理画面で、ドメインごとにPHPのバージョンを切り替える機能です。エックスサーバーは「PHP Ver.切替」、ロリポップ！は「PHP設定」画面にあります。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-version-switch"
+  },
+  {
+   "term": "PHPのリリースサイクル",
+   "base": "PHPのリリースサイクル",
+   "plain": "",
+   "en": "PHP release cycle",
+   "category": "脆弱性・インシデント",
+   "desc": "PHPの各バージョンは公開後4年間（バグ修正2年＋セキュリティ修正2年）サポートされ、終了日は毎年12月31日です。2024年に決まったルールです。",
+   "url": "https://atatakaidigital.com/ja/glossary/php-release-cycle"
+  },
+  {
+   "term": "RAG（資料を探して付け足し、答えさせる方法）",
+   "base": "RAG",
+   "plain": "資料を探して付け足し、答えさせる方法",
+   "en": "RAG (retrieval-augmented generation)",
+   "category": "AI用語",
+   "desc": "RAGは、AIが答える前に社内文書やWebなどから関連する内容を探し、質問に付け足す方法です。モデルを学習し直さずに、最新の情報や自分の資料をもとに答えさせられます。",
+   "url": "https://atatakaidigital.com/ja/glossary/rag"
+  },
+  {
+   "term": "session.upload_progress.enabled",
+   "base": "session.upload_progress.enabled",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "ファイルアップロードの進み具合を記録するPHPの設定です。0にして無効にしておくことが、PHP2Shellの暫定対策の一つです。",
+   "url": "https://atatakaidigital.com/ja/glossary/upload-progress"
+  },
+  {
+   "term": "session.upload_progress.name",
+   "base": "session.upload_progress.name",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "アップロード進捗の機能が使う名前を決める設定です。初期値から変えているサイトは、Cloudflareの防御ルールでは防げません。",
+   "url": "https://atatakaidigital.com/ja/glossary/upload-progress-name"
+  },
+  {
+   "term": "Simply Static",
+   "base": "Simply Static",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "WordPressサイトをHTMLファイルに変換して書き出すプラグインです。無料のツールだけでは、フォーム・検索・コメントが動きません。",
+   "url": "https://atatakaidigital.com/ja/glossary/simply-static"
+  },
+  {
+   "term": "SSH",
+   "base": "SSH",
+   "plain": "",
+   "en": "SSH (Secure Shell)",
+   "category": "サーバー・ホスティング",
+   "desc": "サーバーに遠隔で接続して命令を出す方法です。WP-CLIのようなコマンドツールを使うには必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/ssh"
+  },
+  {
+   "term": "SSL/TLS（暗号化通信）",
+   "base": "SSL/TLS",
+   "plain": "暗号化通信",
+   "en": "SSL/TLS",
+   "category": "設定",
+   "desc": "訪問者とホームページの間の通信を暗号化する技術で、アドレスがhttpsで始まれば使われているという意味です。米国FTCは、ホスティングを選ぶ際にSSL/TLSやメール認証などのセキュリティ機能を確認するよう勧めています。",
+   "url": "https://atatakaidigital.com/ja/glossary/ssl-tls"
+  },
+  {
+   "term": "SBI新生銀行",
+   "base": "SBI新生銀行",
+   "plain": "",
+   "en": "SBI Shinsei Bank, Limited",
+   "category": "機関・企業",
+   "desc": "SBIグループに属する日本の銀行です。",
+   "url": "https://atatakaidigital.com/ja/glossary/sbi-shinsei-bank"
+  },
+  {
+   "term": "Suno（スーノ）",
+   "base": "Suno",
+   "plain": "スーノ",
+   "en": "Suno",
+   "category": "AI用語",
+   "desc": "Sunoは、短い文章で曲の雰囲気を伝えると、歌と歌詞、伴奏までそろった曲を作る音楽生成AIのサービスです。無料でも使えますが、作った曲を商用に使えるかは料金プランで変わります。",
+   "url": "https://atatakaidigital.com/ja/glossary/suno"
+  },
+  {
+   "term": "skyticket(スカイチケット)",
+   "base": "skyticket",
+   "plain": "スカイチケット",
+   "en": "skyticket",
+   "category": "機関・企業",
+   "desc": "株式会社アドベンチャーが運営する旅行予約サイト・アプリです。航空券、ホテル、レンタカー、高速バスなどを比較して予約できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/skyticket"
+  },
+  {
+   "term": "skyticketプレミアム",
+   "base": "skyticketプレミアム",
+   "plain": "",
+   "en": "skyticket Premium",
+   "category": "機関・企業",
+   "desc": "skyticketの有料会員サービスです。会費を払うと、会員特典としてベネフィット・ステーションなどの優待を受けられました。",
+   "url": "https://atatakaidigital.com/ja/glossary/skyticket-premium"
+  },
+  {
+   "term": "SECaaS（クラウド型セキュリティサービス）",
+   "base": "SECaaS",
+   "plain": "クラウド型セキュリティサービス",
+   "en": "Security as a Service (SECaaS)",
+   "category": "サーバー・ホスティング",
+   "desc": "社内にセキュリティ製品を入れる代わりに、セキュリティ会社がインターネット経由で遠隔からセキュリティ機能を提供するサービスです。韓国のICT中小企業向け情報保護支援事業は、SECaaSの利用費用の80%を支援します。",
+   "url": "https://atatakaidigital.com/ja/glossary/secaas"
+  },
+  {
+   "term": "session.serialize_handler",
+   "base": "session.serialize_handler",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "PHPがセッション情報を保存するときの方式を決める設定で、初期値はphpです。CVE-2026-115560は、この値をphp_binaryかphp_serializeにしたうえで、プログラムが実行中にphpへ戻す場合にだけ問題になります。",
+   "url": "https://atatakaidigital.com/ja/glossary/serialize-handler"
+  },
+  {
+   "term": "Sora（ソラ）",
+   "base": "Sora",
+   "plain": "ソラ",
+   "en": "Sora",
+   "category": "AI用語",
+   "desc": "文章や画像から短い動画を作っていたOpenAIの動画生成AIで、2026年4月26日にウェブとアプリの提供を終えました。作ったものは自分の手元に保存しておく大切さを示した例です。",
+   "url": "https://atatakaidigital.com/ja/glossary/sora"
+  },
+  {
+   "term": "THE GUNDAM BASE MEMBERS",
+   "base": "THE GUNDAM BASE MEMBERS",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "BANDAI SPIRITSが運営するガンプラの公式総合施設「THE GUNDAM BASE」の会員向けサービスです。",
+   "url": "https://atatakaidigital.com/ja/glossary/the-gundam-base"
+  },
+  {
+   "term": "Titan FX(タイタンFX)",
+   "base": "Titan FX",
+   "plain": "タイタンFX",
+   "en": "Titan FX Limited",
+   "category": "機関・企業",
+   "desc": "バヌアツで登録されたTitan FX Limitedが運営する海外のFXブローカーです。FX、CFD、コモディティの取引をMT4などで提供しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/titan-fx"
+  },
+  {
+   "term": "TTS（音声合成）",
+   "base": "TTS",
+   "plain": "音声合成",
+   "en": "text-to-speech (TTS)",
+   "category": "AI用語",
+   "desc": "TTS（音声合成）は、文字で書いた文章をコンピューターが人の声のように読み上げる技術です。録音なしで案内音声やナレーションを作れますが、対応言語や利用条件は道具ごとに違います。",
+   "url": "https://atatakaidigital.com/ja/glossary/tts"
+  },
+  {
+   "term": "TDnet(適時開示情報伝達システム)",
+   "base": "TDnet",
+   "plain": "適時開示情報伝達システム",
+   "en": "Timely Disclosure network (TDnet)",
+   "category": "機関・企業",
+   "desc": "東京証券取引所が運営する情報開示のシステムです。上場会社が重要な会社情報をここで開示し、誰でも取引所のサイトで閲覧できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/tdnet"
+  },
+  {
+   "term": "TRAICY(トライシー)",
+   "base": "TRAICY",
+   "plain": "トライシー",
+   "en": "TRAICY",
+   "category": "機関・企業",
+   "desc": "旅行のニュースサイトです。航空会社、マイレージ、鉄道、ホテル、バス、旅行会社のニュースやセール情報を伝えています。",
+   "url": "https://atatakaidigital.com/ja/glossary/traicy"
+  },
+  {
+   "term": "UQ mobileメール",
+   "base": "UQ mobileメール",
+   "plain": "",
+   "en": "UQ mobile mail",
+   "category": "サーバー・ホスティング",
+   "desc": "KDDIの格安スマホのブランド「UQ mobile」の利用者が使えるメールサービスです。",
+   "url": "https://atatakaidigital.com/ja/glossary/uq-mobile-mail"
+  },
+  {
+   "term": "Vercel",
+   "base": "Vercel",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "Webサイトのホスティングサービスです。無料のHobbyプランは個人的・非商用の利用専用のため、会社のサイトには有料のProが必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/vercel"
+  },
+  {
+   "term": "Verizon DBIR",
+   "base": "Verizon DBIR",
+   "plain": "",
+   "en": "Data Breach Investigations Report",
+   "category": "機関・企業",
+   "desc": "米国の通信会社Verizonが毎年出している、情報漏えい事故の報告書です。2026年版は、侵害の31%がソフトウェアの脆弱性から始まったと発表しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/verizon-dbir"
+  },
+  {
+   "term": "VulnCheck",
+   "base": "VulnCheck",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "米国の脆弱性情報の企業です。PHP2Shellの攻撃でWebシェルをセッションファイルに仕込もうとした試みと、GitHub上の偽の攻撃実証コードを報告しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/vulncheck"
+  },
+  {
+   "term": "VPS",
+   "base": "VPS",
+   "plain": "",
+   "en": "VPS (Virtual Private Server)",
+   "category": "サーバー・ホスティング",
+   "desc": "1台のサーバーを分けて、それぞれが自分専用のサーバーのように使う方式です。自由がきく代わりに、PHPなどの土台は利用者が自分で直す必要があります。",
+   "url": "https://atatakaidigital.com/ja/glossary/vps"
+  },
+  {
+   "term": "Wiz",
+   "base": "Wiz",
+   "plain": "",
+   "en": "Wiz Research",
+   "category": "機関・企業",
+   "desc": "PHP2Shellを見つけたセキュリティ会社の一つです。最新のWordPressなどで攻撃が成立することを実演しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/wiz"
+  },
+  {
+   "term": "WP Engine",
+   "base": "WP Engine",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "WordPress専用のマネージドホスティング会社です。PHPのバージョンを本番・テスト環境ごとに数秒で切り替えられると案内しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/wp-engine"
+  },
+  {
+   "term": "WP_MEMORY_LIMIT",
+   "base": "WP_MEMORY_LIMIT",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "WordPressが使えるメモリの上限を決める設定です。メモリ不足が原因のときは、128M〜256Mに上げてみます。",
+   "url": "https://atatakaidigital.com/ja/glossary/wp-memory-limit"
+  },
+  {
+   "term": "WP-CLI",
+   "base": "WP-CLI",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "WordPressをコマンドで管理するツールです。WordPressのファイルが正常かどうか（wp core verify-checksums）も確認できます。",
+   "url": "https://atatakaidigital.com/ja/glossary/wp-cli"
+  },
+  {
+   "term": "wp-config.php",
+   "base": "wp-config.php",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "WordPressの基本設定が入ったファイルです。デバッグログを有効にする3行も、このファイルに書き込みます。",
+   "url": "https://atatakaidigital.com/ja/glossary/wp-config"
+  },
+  {
+   "term": "Webシェル",
+   "base": "Webシェル",
+   "plain": "",
+   "en": "web shell",
+   "category": "脆弱性・インシデント",
+   "desc": "侵入者がサーバーにこっそり置く、遠隔操作用の裏口ファイルです。パッチを当てても消えずに残ります。",
+   "url": "https://atatakaidigital.com/ja/glossary/webshell"
+  },
+  {
+   "term": "Webメール",
+   "base": "Webメール",
+   "plain": "",
+   "en": "webmail",
+   "category": "サーバー・ホスティング",
+   "desc": "メールソフトを入れずに、Webブラウザーで直接メールを読み書きできる仕組みです。",
+   "url": "https://atatakaidigital.com/ja/glossary/webmail"
+  },
+  {
+   "term": "WHOIS",
+   "base": "WHOIS",
+   "plain": "",
+   "en": "",
+   "category": "サーバー・ホスティング",
+   "desc": "ドメインの登録者・登録事業者・有効期限などの登録情報を調べるサービスです。韓国の.krドメインは、韓国インターネット振興院（KISA）が運営するWHOISで調べます。",
+   "url": "https://atatakaidigital.com/ja/glossary/whois"
+  },
+  {
+   "term": "WordPressのメジャーリリース",
+   "base": "WordPressのメジャーリリース",
+   "plain": "",
+   "en": "major release",
+   "category": "サイト・CMS",
+   "desc": "新しい機能が入るWordPressの大きなバージョンです。リリース周期はふつう約4か月なので、おおよそ年3回出て、そのたびにプラグインや画面の確認が必要です。",
+   "url": "https://atatakaidigital.com/ja/glossary/wordpress-major-release"
+  },
+  {
+   "term": "WordPress",
+   "base": "WordPress",
+   "plain": "",
+   "en": "",
+   "category": "サイト・CMS",
+   "desc": "世界でいちばん多く使われているホームページ管理ソフトです。PHPの上で動くため、PHPに穴があると一緒に影響を受けます。",
+   "url": "https://atatakaidigital.com/ja/glossary/wordpress"
+  },
+  {
+   "term": "WAF（Webアプリケーションファイアウォール）",
+   "base": "WAF",
+   "plain": "Webアプリケーションファイアウォール",
+   "en": "WAF (Web Application Firewall)",
+   "category": "サーバー・ホスティング",
+   "desc": "Webサイトに届く怪しいリクエストを手前でふるい落とす仕組みです。攻撃を減らせますが、パッチの代わりにはなりません。",
+   "url": "https://atatakaidigital.com/ja/glossary/waf"
+  },
+  {
+   "term": "Xint",
+   "base": "Xint",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "韓国のセキュリティ企業です。確認用のPHPファイルで本当のバージョンを見る方法と、メモリ上限を外す危険を案内しました。",
+   "url": "https://atatakaidigital.com/ja/glossary/xint"
+  },
+  {
+   "term": "YTN",
+   "base": "YTN",
+   "plain": "",
+   "en": "",
+   "category": "機関・企業",
+   "desc": "韓国の24時間ニュース専門チャンネルです。放送のほか、ウェブやYouTubeでもニュースを配信しています。",
+   "url": "https://atatakaidigital.com/ja/glossary/ytn"
+  },
+  {
+   "term": ".htaccess",
+   "base": ".htaccess",
+   "plain": "",
+   "en": "",
+   "category": "設定",
+   "desc": "Webサーバーの動きをフォルダーごとに決める設定ファイルです。侵入者がこっそり書き換えることが多く、最近変わっていたら怪しいサインです。",
+   "url": "https://atatakaidigital.com/ja/glossary/htaccess"
+  },
+  {
+   "term": "株式会社STNet",
+   "base": "株式会社STNet",
+   "plain": "",
+   "en": "STNet, Incorporated",
+   "category": "機関・企業",
+   "desc": "香川県高松市に本社を置く通信・ITの会社です。通信回線、データセンター、クラウド、システム開発などを手がけています。",
+   "url": "https://atatakaidigital.com/ja/glossary/stnet"
+  }
+ ]
+}
