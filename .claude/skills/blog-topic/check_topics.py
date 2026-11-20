@@ -79,6 +79,13 @@ def main():
     if a.search_urls and Path(a.search_urls).exists():
         known |= {norm(l.strip()) for l in Path(a.search_urls).read_text(encoding="utf-8").splitlines() if l.strip()}
 
+    # 순위표에서 이월 후보 (이월 칸이 「-」가 아닌 행)
+    carried = set()
+    for ln in text.splitlines():
+        cells = [c.strip() for c in ln.strip().strip("|").split("|")]
+        if ln.startswith("|") and len(cells) >= 10 and re.match(r"^T\d+$", cells[2]) and cells[-1] not in ("-", ""):
+            carried.add(cells[2])
+
     # 상세
     details = {}
     for sec in re.split(r"\n(?=### T\d+)", text)[1:]:
@@ -94,6 +101,13 @@ def main():
             errs.append(f"{tid}: 주제 축 값 '{f['주제 축']}'")
         if f.get("글 종류") and f["글 종류"] not in TYPES:
             errs.append(f"{tid}: 글 종류 값 '{f['글 종류']}'")
+        # 상위 결과 구성 (이길 여지 판단, D43). 새 후보는 필수, 이월 후보(예전 형식)는 경고만
+        comp = f.get("상위 구성", "").strip()
+        if not comp:
+            (warns if tid in carried else errs).append(
+                f"{tid}: 상위 구성 없음 — 「상위 구성: 대형 n / 전문 n / 작은 사이트 n (작은: 도메인…)」")
+        elif not re.search(r"대형\s*\d+\s*/\s*전문\s*\d+\s*/\s*작은 사이트\s*\d+", comp):
+            errs.append(f"{tid}: 상위 구성 형식 「대형 n / 전문 n / 작은 사이트 n」")
         subs = [s for s in re.split(r"\s+/\s+", f.get("서브 키워드", "")) if s.strip()]
         if not 3 <= len(subs) <= 5:
             errs.append(f"{tid}: 서브 키워드 {len(subs)}개 (3~5개)")

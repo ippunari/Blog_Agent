@@ -1,5 +1,5 @@
 {
-  "_comment": "rules/blog-collect.md 출처 목록의 기계용 사본. 규칙 표를 바꾸면 여기도 맞춘다. method: rss | kev | search. filter: true면 AI·보안 키워드가 들어간 글만 남긴다. paid: true면 제목·요약만 기록(본문 우회 금지). search 방식: WebSearch에 query를 넣고 domains가 있으면 allowed_domains로 건다 (site: 연산자는 잘 먹지 않음).",
+  "_comment": "rules/blog-collect.md 출처 목록의 기계용 사본. 규칙 표를 바꾸면 여기도 맞춘다. method: rss | kev | search | trends(Google 트렌드 급상승 — 후보와 따로 trends 목록, 등급 C 신호, D43). filter: true면 AI·보안 키워드가 들어간 글만 남긴다. paid: true면 제목·요약만 기록(본문 우회 금지). search 방식: WebSearch에 query를 넣고 domains가 있으면 allowed_domains로 건다 (site: 연산자는 잘 먹지 않음).",
   "sources": [
     {"id": "openai", "name": "OpenAI", "lang": "en", "grade": "A", "axis": "AI", "method": "rss", "url": "https://openai.com/news/rss.xml"},
     {"id": "anthropic", "name": "Anthropic", "lang": "en", "grade": "A", "axis": "AI", "method": "search", "query": "Anthropic announces", "domains": ["anthropic.com"]},
@@ -66,6 +66,7 @@
     {"id": "jiqizhixin", "name": "机器之心", "lang": "zh", "grade": "B", "axis": "AI", "method": "search", "query": "大模型 发布", "domains": ["jiqizhixin.com"]},
     {"id": "qbitai", "name": "量子位", "lang": "zh", "grade": "B", "axis": "AI", "method": "rss", "url": "https://www.qbitai.com/feed"},
     {"id": "36kr", "name": "36氪", "lang": "zh", "grade": "B", "axis": "mixed", "method": "search", "query": "36氪 AI 大模型", "domains": ["36kr.com"]},
-    {"id": "infoq-cn", "name": "InfoQ 中国", "lang": "zh", "grade": "B", "axis": "mixed", "method": "rss", "url": "https://www.infoq.cn/feed", "filter": true}
+    {"id": "infoq-cn", "name": "InfoQ 中国", "lang": "zh", "grade": "B", "axis": "mixed", "method": "rss", "url": "https://www.infoq.cn/feed", "filter": true},
+    {"id": "google-trends-jp", "name": "Google トレンド 急上昇 (JP)", "lang": "ja", "grade": "C", "axis": "-", "method": "trends", "url": "https://trends.google.co.jp/trending/rss?geo=JP"}
   ]
 }

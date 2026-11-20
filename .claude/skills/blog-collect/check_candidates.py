@@ -72,7 +72,10 @@ def main():
         if summ and not HANGUL.search(summ):
             problems.append(f"{cid}: 한국어 요약이 한국어가 아님")
 
-    known = {norm(i["url"]) for i in json.loads(Path(a.fetch).read_text(encoding="utf-8"))["items"]}
+    fetched = json.loads(Path(a.fetch).read_text(encoding="utf-8"))
+    known = {norm(i["url"]) for i in fetched["items"]}
+    # Google 트렌드 급상승의 관련 뉴스 URL (「검색 트렌드」 절, D43)
+    known |= {norm(n["url"]) for t in fetched.get("trends", []) for n in t.get("news", []) if n.get("url")}
     if a.search_urls and Path(a.search_urls).exists():
         known |= {norm(l.strip()) for l in Path(a.search_urls).read_text(encoding="utf-8").splitlines()
                   if l.strip().startswith("http")}
