@@ -8,3 +8,19 @@ credentials*.json
 
 # macOS
 .DS_Store
+
+# 작업 데이터 — git에는 프로그램·규칙·폴더 구조만 (D42). 파일은 로컬 폴더에만
+candidates/*
+!candidates/.gitkeep
+topics/*
+!topics/.gitkeep
+briefs/*
+!briefs/.gitkeep
+research/*
+!research/.gitkeep
+drafts/*
+!drafts/.gitkeep
+factcheck/*
+!factcheck/.gitkeep
+reports/*
+!reports/.gitkeep
