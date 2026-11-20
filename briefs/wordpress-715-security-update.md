@@ -5,14 +5,14 @@ candidate: C03 (candidates/2026-11-19-pm.md)
 route: 속보
 type: 보안 대책 가이드
 axis: 보안
-author: ヤン
+author: ひかりちゃん
 cta: {주: 60분 무료 상담, 보조: PHP Free 30초 점검}
 deadline: 2026-11-22T10:04+09:00 (기사 게재 기준, 원래 공표 시각은 blog-research에서 확인)
 selected_at: 2026-11-20T14:10+09:00
 kind: 속보
-perspective: 생략
 trial: 없음
 selected_by: 미기입 (시트 「선택자」 칸 비어 있음)
+rep_comment: 없음
 status: 조사 대기
 ---
 
@@ -36,4 +36,4 @@ status: 조사 대기
 - 내부 링크 후보: https://atatakaidigital.com/ja/blog/php-vulnerability-fix-guide / https://atatakaidigital.com/ja/blog/hacked-website-consequences / https://atatakaidigital.com/ja/blog/website-keys-owner-checklist
 
 ## 다음 단계
-- 대표 코멘트 생략(속보) → blog-research로 바로. 발행 직전 마감 재확인 — 지나면 깊이 있는 글로 돌린다 (D34)
+- blog-research로 바로. 발행 직전 마감 재확인 — 지나면 깊이 있는 글로 돌린다 (D34)

@@ -5,14 +5,14 @@ candidate: "Q: mvp 開発 とは (candidates/2026-11-20-am.md 질문 입구)"
 route: 일반
 type: 개발 발주·견적 가이드
 axis: 개발
-author: ヤン
+author: ひかりちゃん
 cta: {주: 견적·상담 문의, 보조: 뉴스레터 구독}
 deadline: 없음 (평일 오전 8시 JST 예약 발행)
 selected_at: 2026-11-20T14:10+09:00
 kind: 개편
-perspective: 요청
 trial: 없음
 selected_by: 미기입 (시트 「선택자」 칸 비어 있음)
+rep_comment: 없음
 status: 기존 글 업데이트
 ---
 
@@ -33,5 +33,5 @@ status: 기존 글 업데이트
 - 업데이트 제안 (새 글을 만들지 않음)
 
 ## 다음 단계
-- blog-perspective: 대표에게 질문 3개 (개발 발주·견적: 경험담 / 실패 사례 / 발주 전에 꼭 할 것), 다음 영업일 오전까지 기다림
+- blog-research로 (대표 질문 단계는 없음, D37 — 대표 한마디가 생기면 rep_comment에)
 - blog-research: 기존 3편을 읽고 겹치는 부분·낡은 부분 목록

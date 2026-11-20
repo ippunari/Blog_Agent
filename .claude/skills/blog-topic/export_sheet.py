@@ -21,11 +21,12 @@ from xml.sax.saxutils import escape
 TABLES_AM = [("속보 AI", "## 속보 순위 — AI"), ("속보 보안·개발", "## 속보 순위 — 보안·개발"),
              ("깊이 새 글", "## 깊이 새 글 순위"), ("깊이 개편", "## 깊이 개편 순위")]
 TABLES_PM = TABLES_AM[:2]
-HEAD = ["구분", "선택", "추천 이유", "가제목", "마감", "실습", "글 종류", "메인 키워드", "총점", "이월", "ID",
+HEAD = ["구분", "선택", "대표 한마디", "추천 이유", "가제목", "마감", "실습", "글 종류", "메인 키워드", "총점", "이월", "ID",
         "1키워드1글", "서브 키워드", "전환", "자료부족", "수요", "경험", "수명", "원문 URL", "상세 파일", "선택자", "메모"]
-WIDTH = [14, 6, 40, 60, 11, 14, 18, 26, 6, 24, 5, 18, 70, 5, 7, 5, 5, 5, 50, 22, 10, 80]
+WIDTH = [14, 6, 30, 40, 60, 11, 14, 18, 26, 6, 24, 5, 18, 70, 5, 7, 5, 5, 5, 50, 22, 10, 80]
 NUMERIC = {"총점", "전환", "자료부족", "수요", "경험", "수명"}
-NOTE = "○는 구분마다 1개. 바꿀 때만 같은 구분 안에서 ○를 옮기고, 선택자에 이름을 적은 뒤 「확인했어」라고 알려 주세요."
+NOTE = ("○는 구분마다 1개. 바꿀 때만 같은 구분 안에서 ○를 옮기고, 선택자에 이름을 적은 뒤 「확인했어」라고 알려 주세요. "
+        "하고 싶은 말이 있는 주제는 「대표 한마디」 칸에 1~2줄 (선택, 기다리지 않습니다).")
 OTHERS = 3  # 구분마다 보여 줄 다른 후보 수
 CHOICE = "○"
 SCORE_RE = re.compile(r"전환\s*(\d)\s*/\s*자료부족\s*(\d)\s*/\s*수요\s*(\d)\s*/\s*경험\s*(\d)\s*/\s*수명\s*(\d)")
@@ -59,7 +60,7 @@ def read_rows(path):
             scores = list(sc.groups()) if sc else [""] * 5
             carry_txt = "-" if carry == "-" else "이월(" + carry.replace("topics/", "").replace(".md", "") + ")"
             chosen = mark in ("○", "☑")
-            row = ([label, CHOICE if chosen else "", d.get("추천", "") if chosen else "", tt, dl, d.get("실습", ""),
+            row = ([label, CHOICE if chosen else "", "", d.get("추천", "") if chosen else "", tt, dl, d.get("실습", ""),
                     typ, kw, tot, carry_txt, tid, one, d.get("서브 키워드", "")] + scores
                    + [d.get("원문 URL", ""), path, "", d.get("메모", "").replace("**", "")])
             if chosen:

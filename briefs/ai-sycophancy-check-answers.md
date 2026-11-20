@@ -5,14 +5,14 @@ candidate: C21 (candidates/2026-11-20-am.md)
 route: 속보
 type: AI 업무 활용
 axis: AI
-author: ヤン
+author: ひかりちゃん
 cta: {주: 뉴스레터 구독, 보조: AI 도입 상담}
 deadline: 2026-11-22 (네이처 게재 현지 11/19 + 72시간, 시각 미확인)
 selected_at: 2026-11-20T14:10+09:00
 kind: 속보
-perspective: 생략
 trial: 에이전트
 selected_by: 미기입 (시트 「선택자」 칸 비어 있음)
+rep_comment: 없음
 status: 조사 대기
 ---
 
@@ -40,4 +40,4 @@ status: 조사 대기
 - 다른 사람의 검증(같은 현상을 시험한 글)도 찾아 「다른 사람의 검증」으로 적는다 (rules/blog-research.md)
 
 ## 다음 단계
-- 대표 코멘트 생략(속보) → blog-research로 바로
+- blog-research로 바로

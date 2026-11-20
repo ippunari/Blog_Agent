@@ -5,12 +5,13 @@ candidate: "Q: アプリ開発 費用 相場 / 内訳 / 中小企業 ホーム�
 route: 일반
 type: 개발 발주·견적 가이드
 axis: 개발
-author: ヤン
+author: ひかりちゃん
 cta: {주: 견적·상담 문의, 보조: 뉴스레터 구독}
 deadline: 없음 (평일 오전 8시 JST 예약 발행)
 selected_at: 2026-11-20T10:54+09:00
 selected_by: 시트 「선택자」 칸 미기입
-status: 대표 코멘트 대기
+rep_comment: 없음
+status: 조사 대기
 ---
 
 # 주제 카드: アプリ開発の費用相場と内訳　見積もり前に知っておくこと
@@ -31,7 +32,7 @@ status: 대표 코멘트 대기
 - 내부 링크 후보: https://atatakaidigital.com/ja/blog/why-development-quotes-differ / https://atatakaidigital.com/ja/blog/before-you-start-development / https://atatakaidigital.com/ja/blog/jinsoku_dev_mvp
 
 ## 주의
-- 경쟁이 가장 센 키워드. 대형 매체와 차별되려면 회사가 실제로 본 내역이 필요 → blog-perspective에서 대표 경험(지어내지 않는다)을 받는다. 비용 수치는 조사 노트에 출처가 있는 것만
+- 경쟁이 가장 센 키워드. 대형 매체와 차별되려면 회사가 실제로 본 내역이 필요 → 다른 사람의 검증·실제 견적 사례 조사로 채운다(대표 한마디가 있으면 함께, 지어내지 않는다). 비용 수치는 조사 노트에 출처가 있는 것만
 
 ## 다음 단계
-- blog-perspective: 대표에게 질문 3개 (일반 글은 대표 코멘트를 기다린다)
+- blog-research로 (대표 질문 단계는 없음, D37 — 대표 한마디가 생기면 rep_comment에)

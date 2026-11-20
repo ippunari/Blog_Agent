@@ -5,15 +5,15 @@ candidate: "Q: ホームページ 改ざん 事例 / ホームページ 改ざ�
 route: 일반
 type: 보안 대책 가이드
 axis: 보안
-author: ヤン
+author: ひかりちゃん
 cta: {주: 60분 무료 상담, 보조: PHP Free 30초 점검}
 deadline: 없음 (평일 오전 8시 JST 예약 발행)
 selected_at: 2026-11-20T14:10+09:00
 kind: 새 글
-perspective: 요청
 trial: 없음
 selected_by: 미기입 (시트 「선택자」 칸 비어 있음)
-status: 대표 코멘트 대기
+rep_comment: 없음
+status: 조사 대기
 ---
 
 # 주제 카드: ホームページ改ざんの原因と対策　中小企業がまず確認すること
@@ -34,4 +34,4 @@ status: 대표 코멘트 대기
 - 내부 링크 후보: https://atatakaidigital.com/ja/blog/hacked-website-consequences / https://atatakaidigital.com/ja/blog/php-vulnerability-fix-guide / https://atatakaidigital.com/ja/blog/php-webshell-self-check / 이번 주 속보(briefs/wordpress-715-security-update.md, briefs/php-vulnerability-november-update.md)
 
 ## 다음 단계
-- blog-perspective: 대표에게 질문 3개 (보안 대책 가이드: 실제로 어디서 막히나 / 무엇부터 해야 하나 …), 다음 영업일 오전까지 기다림
+- blog-research로 (대표 질문 단계는 없음, D37 — 대표 한마디가 생기면 rep_comment에)

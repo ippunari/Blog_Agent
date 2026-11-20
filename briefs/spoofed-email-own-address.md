@@ -5,12 +5,13 @@ candidate: "Q: なりすまし メール 自分のアドレス 対策 (candidate
 route: 일반
 type: 보안 대책 가이드
 axis: 보안
-author: ヤン
+author: ひかりちゃん
 cta: {주: 60분 무료 상담, 보조: PHP Free 30초 점검}
 deadline: 없음 (평일 오전 8시 JST 예약 발행)
 selected_at: 2026-11-20T10:54+09:00
 selected_by: 시트 「선택자」 칸 미기입
-status: 대표 코멘트 대기
+rep_comment: 없음
+status: 조사 대기
 ---
 
 # 주제 카드: なりすましメールが自分のアドレスから届く？会社のドメインを守る対策
@@ -34,4 +35,4 @@ status: 대표 코멘트 대기
 - 가제목이 전각 35자를 넘음 → blog-outline에서 줄인다
 
 ## 다음 단계
-- blog-perspective: 대표에게 질문 3개 (일반 글은 대표 코멘트를 기다린다)
+- blog-research로 (대표 질문 단계는 없음, D37 — 대표 한마디가 생기면 rep_comment에)
