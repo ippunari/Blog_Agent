@@ -1,0 +1,6 @@
+{
+ "_note": "Windsor.ai에 연결된 계정이 시험(test)인지 회사(company)인지만 적는다. 계정 ID·이름은 적지 않는다 (실행 때 get_connectors로 받는다). 계정을 바꾸면 여기 label만 고친다 (D74)",
+ "threads": {"label": "test"},
+ "facebook": {"label": "test"},
+ "linkedin": {"label": "company"}
+}

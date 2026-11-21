@@ -485,3 +485,22 @@
 - **D33이 막으려던 것**: Pokepay·KARTE처럼 교훈이 있는 사고를 가져오고도 빼는 일 — 중소기업 경로 사고는 최대 5건까지 남기므로 교훈 소재는 계속 들어온다
 - **다시 볼 조건**: 보안 사고 해설 글의 유입·문의 기여가 측정될 때 / 5건 상한 때문에 큰 사고(속보 가치)를 놓칠 때
 
+
+## D74 SNS 게시는 Windsor.ai MCP로 — 「올려」가 승인, X·note는 사람, 날짜별 시트로 확인 (2026-11-21, rules/blog-distribute.md v1.4, blog-distribute SKILL·sns_post.py·sns_digest.py·sns_sheet.py·accounts.json — D66의 게시 방식을 바꿈)
+- **결정**: ① Threads·Facebook 페이지·LinkedIn 회사 페이지는 Windsor.ai MCP `execute_action`으로 에이전트가 올린다. 쓰는 action은 `threads/create_text_post`·`facebook_organic/create_post`·`linkedin_organic/create_post` 셋뿐 (삭제·수정·예약·Messenger·Instagram은 부르지 않는다) ② 사람의 「올려」가 승인이다 — 앱 안의 초안 단계는 없다 ③ X·note는 사람이 붙여 넣는다 ④ LinkedIn 링크는 첫 댓글이 아니라 링크 카드(본문 아래, 제목 og_title·설명 excerpt) ⑤ 사람은 공유 드라이브 `03_Blog/sns`의 날짜별 시트(한 행 = 글 × 플랫폼, 필터)로 문안을 확인한다. 시트는 보기용, 원본은 로컬 sns.md ⑥ 계정은 `accounts.json`에 test|company만 적는다 (계정 ID·이름은 파일에 적지 않는다)
+- **이유**: 사용자가 Windsor.ai에 Threads(개인·시험)·Facebook 페이지(시험)·LinkedIn 회사 페이지를 연결했다. 사용자는 「업로드까지는 하고, 승인해서 올리는 건 내가」를 원했지만, Windsor도 각 SNS 직접 API도 「초안을 올려 두고 사람이 앱에서 공개」하는 흐름이 없다(Threads 컨테이너는 앱에 안 보이고 24시간 뒤 사라짐, LinkedIn API 초안은 화면에 없음, Facebook은 예약 글뿐 — 잊으면 자동 공개). 그래서 사용자 제안대로 「문안을 날짜별로 정리 → 「올려」 때 올린다」로 정했다. 직접 API에 비해 키·60일 토큰 갱신·LinkedIn Community Management API 심사가 필요 없다. 시트는 사용자: 「구글에도 올리자 그래야 인간이 확인이 가능하지」 → 추천 「날짜별 1장」(「올려 오늘」의 단위가 날짜, 글별이면 하루 6파일, 플랫폼별은 필터로)
+- **검토한 대안**: 각 SNS 직접 API(D66 원안, 키 없음·토큰 관리) / Facebook만 예약 글로 올려 두고 사람이 Business Suite에서 공개 / 게시는 전부 사람 / X API 유료 게시(글 1편 약 $0.22 — 키를 받으면 다시 본다)
+- **주의**: LinkedIn은 실제 회사 페이지다 — 시험 게시를 하지 않고, 첫 실제 글에서 사람의 「올려」로 처음 올린다. Windsor에 계정 권한을 맡기는 것은 ⚠ 대표 + 기술 보안팀 승인 전(남은 일). Drive는 파일 내용을 바꿀 수 없어, 문안이 바뀌면 새 시트를 올리고 옛 시트는 이름에 「(이전)」을 붙여 남긴다
+- **다시 볼 조건**: 승인이 나서 Threads·Facebook을 회사 계정으로 바꿀 때(accounts.json label만) / Windsor가 X를 지원하거나 X 키를 받을 때 / LinkedIn 글에서 기호가 깨지는 등 Windsor 전달 문제가 보일 때
+
+## D75 SNS 플랫폼별 스타일 — 읽는 사람·切り口·틀을 플랫폼마다 따로, 고객 창구는 사람 (2026-11-21, rules/blog-distribute.md v1.5, blog-distribute SKILL·check_sns.py·sns_sheet.py·sns_digest.py)
+- **결정**: ① 플랫폼마다 읽는 사람·목소리·切り口(앞에 세울 것)·틀·끝맺음을 정한다 — X `数字/意外な事実/質問`, Threads `試した/気づき`(질문으로 끝), Facebook `場面`(사장님이 겪을 장면), LinkedIn `判断`(회사 판단 + 수치, 「弊社編集部では」), note `要約` ② sns.md 플랫폼마다 `### 切り口`를 적고, 다섯 첫 문장이 서로 달라야 한다 ③ 낚시·반응 구걸 표현 금지, 이모지·해시태그 수(Threads 0~1, LinkedIn 2~3, Facebook 0~2) ④ 글 종류별 결(보안 속보·보안 대책·AI 사용법·AI 속보·도입·발주) ⑤ 댓글·DM은 사람이 하루 1번 이상 보고, 문의는 상담 창구로 안내하는 정형 답 ⑥ 점검: 切り口·첫 20자 겹침·목소리 표지·낚시·구걸·이모지는 오류, 소식형 첫 줄·Threads 질문 끝·Facebook 장면·영문 용어·LinkedIn 첫 두 줄 수치는 경고
+- **이유**: 사용자: 「중요한 것은 각각의 플랫폼에 맞게끔 글이 작성되냐는 거야」 「SNS는 진짜 고객이 오는 창구야. 좀 더 세세한 규칙을 세워줘」. v1.4까지는 길이·링크·해시태그와 한 줄 말투뿐이라, 시험 문안에서 Threads·Facebook·LinkedIn이 모두 「8.6 공개 → 지금 버전 기한」 같은 소식형 첫 줄·같은 순서였다 (새 점검을 옛 문안에 돌리면 切り口 없음 5건 + 소식형 첫 줄·장면 없음 경고)
+- **검토한 대안**: 플랫폼별 예문만 늘리기(점검이 없으면 같은 틀로 돌아간다) / 切り口·틀을 모두 오류로(내용 판정을 스크립트가 완벽히 못 해 거짓 오류가 생긴다 — 확실한 것만 오류)
+- **다시 볼 조건**: blog-measure에서 플랫폼별 클릭·댓글이 쌓이면 切り口·틀·해시태그 수를 고친다 / 경고가 자주 거짓이면 판정을 고친다
+
+## D76 SNS 하루 순서·대표 이미지·note 검색 분리 (2026-11-21, rules/blog-distribute.md v1.6, blog-distribute SKILL·check_sns.py·sns_post.py·sns_sheet.py·sns_digest.py·sns_common.py, blog-publish ghost_upload.py)
+- **결정**: ① 회차(발행 12시 전 아침 / 후 저녁)마다 시트 1장 → 「올려 아침」으로 자동 게시 → 사람은 ✋(X·note)를 붙여 넣고 시트 「게시 주소」 칸에 적음 → 「다 올렸어 아침」으로 에이전트가 시트를 읽어 기록 ② 대표 이미지: blog-publish가 SNS용 JPEG 사본을 Ghost에 올려 `hero_jpg_url`로 남기고, LinkedIn은 이미지 글(`create_image_post`, 본문 끝 링크), X·note는 시트의 이미지 주소로 사람이 첨부, Facebook·Threads는 링크 미리보기(OGP) ③ note는 **모든 글**(속보 포함), 블로그 요약이 아니라 다른 각도(속보 `編集部メモ` / 깊이 `裏側`·`視点`), 제목·첫 문단에 메인 키워드 금지·제목 첫 15자가 블로그 제목과 달라야 함 ④ X·Threads·LinkedIn 첫 두 줄에 블로그 키워드 하나(경고) ⑤ SNS 사실은 3行まとめ·굵은 직답·SNS 포인트에서만, SNS용 별도 사실 대조는 두지 않는다
+- **이유**: 사용자: 「글을 오전에 3개 발행하잖아. 각각 이렇게 되면 내가 어떻게 해야 하는 거야? 그리고 메인 이미지는? 노트도 넣어야지. 제일 중요한 것은 글이 잘 검색되게 하는 거야」 → note 범위 「모든 글」(「인기를 위해서는」). 「너무 비교가 많으면 안 좋을 것 같은데」 → 별도 대조 대신 출처 제한. 하루 6편이면 「X 올렸어」를 대화로 하나씩 알리는 방식은 너무 많다. note.com은 도메인이 강해 같은 키워드 요약은 블로그와 검색에서 겨룬다. Windsor LinkedIn 링크 카드에는 이미지 칸이 없다
+- **검토한 대안**: note는 깊이 글만(사용자가 모든 글 선택) / SNS 문안 사실 대조 서브 에이전트(비교 단계가 늘어 뺌) / 날짜 단위 시트(아침·저녁 발행이 따로라 회차로)
+- **다시 볼 조건**: note 글이 블로그보다 위에 뜨는 것이 Search Console에 보일 때 / 사람 붙여 넣기 시간이 모자랄 때(X 자동 게시 재검토) / 첫 게시에서 LinkedIn 이미지 글·Threads 미리보기가 기대와 다를 때

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""blog-distribute: sns.md 점검 (rules/blog-distribute.md). 오류 0이어야 sns_post.py가 보낸다
+"""blog-distribute: sns.md 점검 (rules/blog-distribute.md). 오류 0이어야 sns_post.py --plan이 게시 요청을 낸다
 
 사용법:
   python3 -I check_sns.py <slug>                       # 발행 완료 카드 기준 (publish/done/YYYY-MM/<slug>/sns.md) → 통과하면 sns/YYYY-MM-DD.md 다시 만들기
@@ -27,7 +27,21 @@ from check_draft import split_draft, plain  # noqa: E402
 
 # 플랫폼 → (최소, 최대) 글자 수 (본문). X는 가중치로 따로
 LENGTH = {"threads": (0, 500), "note": (1000, 2000), "linkedin": (300, 600), "facebook": (200, 400)}
-HASHTAGS = {"x": (1, 2), "note": (3, 5), "threads": (0, 3), "linkedin": (0, 3), "facebook": (0, 3)}
+HASHTAGS = {"x": (1, 2), "note": (3, 5), "threads": (0, 1), "linkedin": (2, 3), "facebook": (0, 2)}
+EMOJI_MAX = {"x": 1, "threads": 2, "facebook": 1, "linkedin": 0, "note": 0}
+# 切り口: 플랫폼마다 앞에 세울 것 (rules/blog-distribute.md 「플랫폼별 스타일」, D75)
+KIRIKUCHI = {"x": {"数字", "意外な事実", "質問"}, "threads": {"試した", "気づき"}, "facebook": {"場面"},
+             "linkedin": {"判断"}, "note": {"編集部メモ", "裏側", "視点"}}
+NOTE_KIRI = {"속보": {"編集部メモ"}, "깊이": {"裏側", "視点"}}   # note는 블로그 요약이 아니라 다른 각도 (D76)
+# 목소리 표지: 이 말이 나오면 안 되는 플랫폼
+VOICE_NG = {"ヒカリです": {"x", "facebook", "linkedin"}, "弊社": {"x", "threads", "facebook"}}
+CLICKBAIT = ["衝撃", "必見", "知らないと損", "ヤバい", "やばい", "驚愕", "してないの？", "な人は今すぐ"]
+BAIT = ["いいねして", "いいねお願い", "RTして", "リポストして", "シェアして", "フォローして", "保存して", "コメントして", "拡散"]
+EMOJI_RE = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B50\u2B55\u203C\u2049\u3030\u303D]")
+GREETING = re.compile(r"^(ヒカリです|こんにちは)")
+EN_TERM = re.compile(r"(?<![A-Za-z0-9./_-])([A-Za-z][A-Za-z0-9._-]{2,})(?![A-Za-z0-9])")
+KNOWN_NAMES = {"PHP", "AI", "WordPress", "ChatGPT", "Gemini", "Claude", "Copilot", "Google", "Microsoft", "Windows",
+               "Excel", "Word", "LINE", "Apple", "iPhone", "Android", "Mac", "Zoom", "Slack", "Teams", "OpenAI", "Gmail"}
 # 본문에 링크가 있어야 하는 곳 / 있으면 안 되는 곳
 LINK_IN_BODY = {"x": False, "threads": True, "note": True, "linkedin": False, "facebook": False}
 BANNED = ["絶対", "100%安全", "100％安全", "最強", "神ツール", "革命的", "今すぐ対策しないと", "大変なことに", "ずさん"]
@@ -61,6 +75,85 @@ def shared_span(a, b, n=COPY_N):
     return None
 
 
+def first_line(b):
+    """인사 줄(「ヒカリです。」「こんにちは…」)을 뺀 첫 줄"""
+    for ln in b.strip().splitlines():
+        ln = ln.strip()
+        if ln and not GREETING.match(ln):
+            return ln
+    return ""
+
+
+def style(p, secs, b, E, W, title_words):
+    """플랫폼별 스타일 점검 (rules/blog-distribute.md 「플랫폼별 스타일」, D75)"""
+    k = secs.get("切り口", "").strip()
+    if k not in KIRIKUCHI[p]:
+        E.append(f"{p}: 「### 切り口」이 {sorted(KIRIKUCHI[p])} 중 하나여야 함 (지금 {k or '없음'})")
+    for w_, ng in VOICE_NG.items():
+        if p in ng and w_ in b:
+            E.append(f"{p}: 「{w_}」를 쓰지 않는다 (목소리: 플랫폼별 스타일)")
+    for w_ in CLICKBAIT:
+        if w_ in b:
+            E.append(f"{p}: 낚시 표현 「{w_}」")
+    for w_ in BAIT:
+        if w_ in b:
+            E.append(f"{p}: 반응 구걸 「{w_}」 (노출이 줄어든다)")
+    n = len(EMOJI_RE.findall(b))
+    if n > EMOJI_MAX[p]:
+        E.append(f"{p}: 이모지 {n}개 — {EMOJI_MAX[p]}개까지")
+    lines = [ln.strip() for ln in b.strip().splitlines() if ln.strip()]
+    text_lines = [ln for ln in lines if not URL_RE.fullmatch(ln) and not re.fullmatch(r"(#\S+\s*)+", ln)]
+    first = first_line(b)
+    if p != "note" and re.search(r"(公開|発表|リリース|発売|開始)(されました|しました)", first):
+        W.append(f"{p}: 첫 줄이 「〜が公開されました」 소식형 — 切り口({k or '?'})을 첫 줄에")
+    if p == "threads":
+        if text_lines and not re.search(r"[？?]$", text_lines[-1]):
+            W.append("threads: 마지막 문장을 질문으로 끝내 답글을 부른다")
+        if any(re.match(r"^(\d+[.．)](?!\d)|・|■|-\s)", ln) for ln in lines):
+            W.append("threads: 번호·기호 목록을 쓰지 않는다 (이야기하듯)")
+    if p == "facebook":
+        if not re.search(r"「|たら|と言われ|から.*(届|来|聞)", first):
+            W.append("facebook: 첫 줄에 장면이 없음 — 「○○から『△△』と言われたら」처럼 사장님이 겪을 장면으로")
+        if len(first) > 60:
+            W.append(f"facebook: 첫 줄 {len(first)}자 — 60자 이내 (접기 전에 보이게)")
+        for t in EN_TERM.findall(URL_RE.sub("", b)):
+            if t not in KNOWN_NAMES and t not in title_words and not re.search(re.escape(t) + r"[（(]", b):
+                W.append(f"facebook: 영문 기술 용어 「{t}」 — 쓰지 않거나 괄호로 풀이")
+    if p == "linkedin":
+        if not re.search(r"\d", "".join(text_lines[:2])):
+            W.append("linkedin: 첫 두 줄에 근거 수치가 없음 (「もっと見る」 전에 판단 + 수치)")
+        if "弊社" not in b:
+            W.append("linkedin: 「弊社編集部では」로 판단 주체를 밝힌다")
+    if p in ("x", "threads", "facebook", "linkedin") and GREETING.match(first) is None and re.match(r"^\d{4}年\d+月\d+日", first):
+        W.append(f"{p}: 첫 줄이 날짜로 시작 — 切り口을 앞에")
+
+
+def kwn(s):
+    """검색어 비교용: 공백·전각 공백 빼고 소문자"""
+    return re.sub(r"[\s\u3000]", "", s or "").lower()
+
+
+def seo(p, secs, b, E, W, kw_main, kw_all, route, blog_titles):
+    """검색: note는 블로그와 다른 검색어를 맡는다 / 다른 SNS는 첫 두 줄에 블로그 키워드 (D76)"""
+    lines = [ln.strip() for ln in b.strip().splitlines() if ln.strip() and not GREETING.match(ln.strip())]
+    head2 = kwn("".join(lines[:2]))
+    if p == "note":
+        k = secs.get("切り口", "").strip()
+        if k and k not in NOTE_KIRI[route]:
+            E.append(f"note: {route} 글의 切り口은 {sorted(NOTE_KIRI[route])} (블로그 요약이 아니라 다른 각도)")
+        title = secs.get("タイトル", "")
+        if not title:
+            E.append("note: 「### タイトル」 없음")
+        if kw_main and (kw_main in kwn(title) or kw_main in head2):
+            E.append(f"note: 제목·첫 문단에 블로그 메인 키워드 「{kw_main}」 — note가 블로그와 같은 검색어로 겨룬다 (다른 말로)")
+        for t in blog_titles:
+            if t and t != "-" and kwn(title)[:15] == kwn(t)[:15]:
+                E.append(f"note: 제목 첫 15자가 블로그 제목과 같음 — 「{t[:20]}」")
+                break
+    elif p in ("x", "threads", "linkedin") and kw_all and not any(k in head2 for k in kw_all):
+        W.append(f"{p}: 첫 두 줄에 블로그 키워드(메인·서브)가 없음 — SNS 안 검색용으로 자연스럽게 1번 ({kw_all[0]} 등)")
+
+
 def http_status(url):
     p = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-L", "--max-time", "30", "-w", "%{http_code}", "--", url],
                        capture_output=True, text=True)
@@ -86,6 +179,13 @@ def check(sns_path, draft_path, card_path, url=None, offline=False):
     body_plain = "\n".join(plain(ln) for ln in main.splitlines())
     body_norm = norm(body_plain)
     body_compact = re.sub(r"\s+", "", re.sub(r"\[S\d+\]", "", main))
+    h1 = next((ln[2:] for ln in main.splitlines() if ln.startswith("# ")), "")
+    dfm = front(draft_path.read_text())
+    title_words = set(EN_TERM.findall(dfm.get("og_title", "") + " " + h1))   # 글 제목의 이름은 Facebook에서도 된다
+    kw_main = kwn(dfm.get("main_keyword", ""))
+    kw_all = [k for k in [kw_main] + [kwn(x) for f in ("sub_keywords", "event_keywords")
+                                      for x in re.split(r"\s*/\s*", dfm.get(f, ""))] if k and k != "-"]
+    route = "속보" if "속보" in dfm.get("route", "") else "깊이"
     rep = card.get("rep_comment", "없음").strip()
     has_rep = rep not in ("", "없음", "-", "none")
 
@@ -124,13 +224,16 @@ def check(sns_path, draft_path, card_path, url=None, offline=False):
             exl = URL_RE.findall(ex)
             if exl != [want]:
                 E.append(f"{p}: 「### {name}」({what})에 이 UTM 링크 1개만: {want} (지금 {exl or '없음'})")
-            if p == "facebook" and ex.strip() != want:
-                E.append("facebook: 「### リンク」에는 URL만 쓴다")
+            if p in ("facebook", "linkedin") and ex.strip() != want:
+                E.append(f"{p}: 「### リンク」에는 URL만 쓴다")
         # 해시태그
         tags = HASHTAG_RE.findall(b)
         lo, hi = HASHTAGS[p]
         if not lo <= len(tags) <= hi:
-            (E if p in ("x", "note") else W).append(f"{p}: 해시태그 {len(tags)}개 — {lo}~{hi}개 {tags}")
+            E.append(f"{p}: 해시태그 {len(tags)}개 — {lo}~{hi}개 {tags}")
+        # 스타일 (D75)
+        style(p, secs, b, E, W, title_words)
+        seo(p, secs, b, E, W, kw_main, kw_all, route, [h1, dfm.get("og_title", ""), dfm.get("seo_title", "")])
         # note 꼬리
         if p == "note" and "全文はブログで" not in b:
             E.append("note: 「全文はブログで」와 링크가 없음 (전문 전재 금지)")
@@ -167,6 +270,12 @@ def check(sns_path, draft_path, card_path, url=None, offline=False):
         span = shared_span(norms[p], body_norm)
         if span:
             E.append(f"{p}: 블로그 본문과 {COPY_N}자 이상 같음 — 「{span}」 (새로 쓴다, 전재 금지)")
+    firsts = {p: first_line(posts[p]["本文"]) for p in norms}
+    fp = list(firsts)
+    for i, a in enumerate(fp):
+        for b_ in fp[i + 1:]:
+            if firsts[a][:20] and re.sub(r"\s", "", firsts[a])[:20] == re.sub(r"\s", "", firsts[b_])[:20]:
+                E.append(f"{a}·{b_}: 첫 문장 첫 20자가 같음 — 「{firsts[a][:20]}」 (切り口을 다르게)")
     ps = list(norms)
     for i, a in enumerate(ps):
         for b_ in ps[i + 1:]:

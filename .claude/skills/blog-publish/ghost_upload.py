@@ -9,7 +9,7 @@
   GET  posts/<id>, posts/slug/<slug>, tags, users — 읽기 (필자 계정 찾기 포함)
   POST posts (status=draft)                     — 새 초안
   PUT  posts/<id> (status=draft, 지금도 draft일 때만) — 우리가 만든 초안 갱신
-  POST images/upload                            — 대표 이미지
+  POST images/upload                            — 대표 이미지 (+ SNS용 JPEG 사본 → ghost_post.json hero_jpg_url, D76)
   발행·예약 상태, newsletter·email, 삭제, 다른 경로는 코드에 없다
 
 사용법:
@@ -171,6 +171,7 @@ def main():
         if code == "200":
             sys.exit(f"❌ slug {a.slug} 글이 Ghost에 이미 있음 ({data['posts'][0]['status']}) — 우리 기록이 없어 덮어쓰지 않는다. 사람에게 묻는다")
 
+    hero_jpg_url = rec.get("hero_jpg_url", "")
     if hero and hero.exists():
         code, data = gh.api("POST", "images/upload/", file=hero)
         if code not in ("200", "201"):
@@ -178,6 +179,15 @@ def main():
         post["feature_image"] = data["images"][0]["url"]
         if g.get("feature_image_alt"):
             post["feature_image_alt"] = g["feature_image_alt"]
+        # SNS용 JPEG 사본 (Threads·LinkedIn 이미지 글, X·note 첨부 — webp를 받지 않는 곳이 있다, D76)
+        jpg = Path(tempfile.mkdtemp()) / f"{a.slug}_hero.jpg"
+        subprocess.run(["sips", "-s", "format", "jpeg", "-s", "formatOptions", "85", str(hero), "--out", str(jpg)],
+                       capture_output=True)
+        if jpg.exists():
+            code, data = gh.api("POST", "images/upload/", file=jpg)
+            hero_jpg_url = data["images"][0]["url"] if code in ("200", "201") else ""
+            if not hero_jpg_url:
+                print(f"⚠ SNS용 JPEG 올리기 실패 ({code}) — SNS 이미지는 사람이 붙인다")
 
     if rec:
         post["updated_at"] = cur["updated_at"]
@@ -191,7 +201,7 @@ def main():
         print(f"⚠⚠ 상태가 {p['status']} — 즉시 Ghost에서 확인 (초안이어야 함)")
     now = datetime.now(JST)
     rec_p.write_text(json.dumps({"id": p["id"], "uuid": p["uuid"], "slug": p["slug"], "status": p["status"],
-                                 "uploaded_at": f"{now:%Y-%m-%dT%H:%M%z}",
+                                 "uploaded_at": f"{now:%Y-%m-%dT%H:%M%z}", "hero_jpg_url": hero_jpg_url,
                                  "first_uploaded_at": rec.get("first_uploaded_at", f"{now:%Y-%m-%dT%H:%M%z}")},
                                 ensure_ascii=False, indent=1) + "\n")
     print(f"{'갱신' if rec else '새 초안'} 통과 — status={p['status']} slug={p['slug']}")

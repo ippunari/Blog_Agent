@@ -6,14 +6,19 @@ sns.md 형식 (rules/blog-distribute.md 「sns.md」):
   url: https://atatakaidigital.com/ja/blog/<slug>
   created_at: 2026-11-21T15:00+09:00
   hero: <대표 이미지 경로>
+  hero_url: <SNS용 JPEG 공개 주소 — 없으면 ghost_post.json hero_jpg_url>
   ---
   # SNS 문안: <글 제목>
   ## x            ← 플랫폼 이름 (x / threads / note / linkedin / facebook)
+  ### 切り口      ← 앞에 세울 것 한 단어 (check_sns.KIRIKUCHI, D75)
+  ```text
+  数字
+  ```
   ### 本文
   ```text
   ...
   ```
-  ### 返信        ← X: 링크 답글 / LinkedIn: ### 最初のコメント / Facebook: ### リンク
+  ### 返信        ← X: 링크 답글 / LinkedIn·Facebook: ### リンク (URL만 — 링크 카드·미리보기)
   ```text
   ...
   ```
@@ -28,7 +33,15 @@ from after_publish import front, set_front  # noqa: E402,F401
 
 PLATFORMS = ["x", "threads", "note", "linkedin", "facebook"]
 # 본문 말고 따로 두는 칸: 플랫폼 → (칸 이름, 들어갈 것)
-EXTRA = {"x": ("返信", "링크 답글"), "linkedin": ("最初のコメント", "링크 첫 댓글"), "facebook": ("リンク", "링크 미리보기 URL")}
+EXTRA = {"x": ("返信", "링크 답글"), "linkedin": ("リンク", "링크 카드 URL"), "facebook": ("リンク", "링크 미리보기 URL")}
+# 게시 방식 (D74): Windsor.ai MCP로 에이전트가 보내는 곳 → (connector, action). 이 밖의 action은 부르지 않는다
+WINDSOR = {"threads": ("threads", "create_text_post"),
+           "facebook": ("facebook_organic", "create_post"),
+           "linkedin": ("linkedin_organic", "create_image_post")}   # 대표 이미지 + 본문 끝 링크 (D76). JPEG 주소가 없으면 create_post 링크 카드
+ALLOWED_ACTIONS = {("threads", "create_text_post"), ("facebook_organic", "create_post"),
+                   ("linkedin_organic", "create_image_post"), ("linkedin_organic", "create_post")}
+AUTO = list(WINDSOR)                 # 「올려」로 에이전트가 올리는 곳
+HAND = ["x", "note"]                 # 사람이 붙여 넣는 곳 (X는 Windsor 미지원, note는 공식 API 없음)
 URL_RE = re.compile(r"https?://[^\s「」（）()<>]+")
 
 
@@ -72,7 +85,28 @@ def paths(root, slug):
             "sns": root / "publish" / "done" / month / slug / "sns.md"}
 
 
-DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2}|오늘|today)$")
+DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2}|오늘|today|아침|저녁)$")
+SLOTS = ("아침", "저녁")              # 회차 = 발행 시각 12시 전 / 후 (D76)
+
+
+def slot_of(published_at):
+    """'2026-11-21T08:00+09:00' → 아침 / 저녁"""
+    try:
+        return "아침" if int(published_at[11:13]) < 12 else "저녁"
+    except ValueError:
+        return ""
+
+
+def hero_url(sns_path, head=None):
+    """SNS용 대표 이미지 JPEG 공개 주소: sns.md 머리 hero_url → 같은 폴더 ghost_post.json hero_jpg_url (blog-publish가 올린다)"""
+    import json
+    if head and head.get("hero_url"):
+        return head["hero_url"]
+    gp = Path(sns_path).parent / "ghost_post.json"
+    try:
+        return json.loads(gp.read_text()).get("hero_jpg_url", "") if gp.exists() else ""
+    except ValueError:
+        return ""
 
 
 def is_date(arg):

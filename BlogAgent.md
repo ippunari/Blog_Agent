@@ -39,7 +39,7 @@
 | 7 | blog-factcheck | 수치·날짜·고유명사·인용 대조, SOURCES |
 | 8 | blog-polish | 문장 다듬기 → 바뀐 사실 재대조 → SEO·AEO·AIO 점검 → 메타 |
 | 9 | blog-publish | 이미지 → ◆ 미리보기 확인 → Ghost 예약 발행 |
-| 10 | blog-distribute | 발행 직후 5개 SNS용으로 다시 쓰기 ◆ 확인 후 「올려」 → API 게시 (note는 사람) |
+| 10 | blog-distribute | 발행 직후 5개 SNS용으로 다시 쓰기 → 날짜별 시트 ◆ 확인 후 「올려」 → Windsor 게시 (X·note는 사람) |
 | 11 | blog-newsletter | 주간 뉴스레터 ◆ 테스트 발송 확인 후 발송 |
 | 12 | blog-measure | 주간 리포트·월간 개선안 ◆ 반영 승인 |
 
@@ -65,8 +65,8 @@
 | 깊이 있는 글 (아침 새 글 1 + 저녁 새 글 1) | 10편 | 각 2시간 → 20시간 + 사람 실습 |
 | 주제 확인 (시트) | — | 없음 (D67, 바꿀 때만 대화로) |
 | 뉴스레터 | 1회 (금요일 오전 8시) | 30분 |
-| SNS 확인 (5곳 × 30편) | 150건 | 약 15시간 |
-| **합계** | | **약 주 41시간** — ⚠ 담당자 증원 전제 |
+| SNS (30편 × 5곳) — 회차 시트 확인 10분 × 10회 + X 붙여 넣기 30건 + note 붙여 넣기 30건 (D76) | 150건 | 약 10시간 (잠정 — 실제로 재서 고친다) |
+| **합계** | | **약 주 36시간** — ⚠ 담당자 증원 전제 |
 
 ## 규칙 파일
 | 파일 | 내용 |
@@ -100,7 +100,7 @@
 - `drafts/<slug>.md` 초안 (다듬기 뒤: 머리에 메타, 끝에 「다듬기 메모」 — 체크리스트·바꾼 것)
 - `factcheck/<slug>.md` 대조 보고서
 - `publish/<slug>/` Ghost에 붙일 발행 파일 (임시 방식: HTML 카드 2개·미리보기·입력값·대표 이미지·역링크 조각, D50)
-- `publish/done/YYYY-MM/<slug>/sns.md` SNS 문안 원본·`sns_posted.json` 게시 기록 → `sns/YYYY-MM-DD.md` 날짜별 모음 (보기용, 스크립트가 다시 만든다, D66)
+- `publish/done/YYYY-MM/<slug>/sns.md` SNS 문안 원본·`sns_posted.json` 게시 기록 → `sns/YYYY-MM-DD.md` 날짜별 모음 (보기용, 스크립트가 다시 만든다, D66) → 공유 드라이브 `03_Blog/sns`에 회차(아침·저녁) 시트 (보기용, 사람이 「게시 주소」만 적는다, D74·D76)
 - `reports/YYYY-Www.md` 주간 리포트
 
 ### 주제 카드의 상태와 정리 (D40)
@@ -125,7 +125,7 @@
 | 7 | blog-factcheck | — | — | ☑ |
 | 8 | blog-polish | 자동 교정 도구 설치 | — | ☑ |
 | 9 | blog-publish | Ghost 스태프 계정·API(초안 권한) | Ghost에 초안까지 업로드(키는 로컬 .env, D62) — 발행은 사람 | ☑ |
-| 10 | blog-distribute | SNS 계정·2단계 인증·API 키(.env) | 문안 파일 → ◆ 「올려」 뒤 API 게시(X·Threads·LinkedIn·Facebook 페이지), note는 사람 — 시험 계정부터 (D66) | ☐ |
+| 10 | blog-distribute | SNS 계정·2단계 인증·Windsor.ai 연결 | 문안 파일·날짜별 시트(03_Blog/sns) → ◆ 「올려」 뒤 Windsor 게시(Threads·Facebook 페이지·LinkedIn 회사 페이지), X·note는 사람 — Threads·Facebook은 시험 계정 (D66, D74) | ☐ |
 | 11 | blog-newsletter | Ghost 뉴스레터 설정 | 원고 파일로 출력 | ☐ |
 | 12 | blog-measure | Search Console·GA4 | 데이터가 쌓이면 실행 | ☐ |
 | 13 | 전체 연결 | — | 속보 경로·일반 경로로 묶기 | ☐ |
@@ -136,7 +136,7 @@
 - 스킬은 `.claude/skills/<스킬명>/SKILL.md`에 만들고, 본문에서 `rules/common.md`와 해당 `rules/<스킬명>.md`를 읽게 한다
 - 만들면서 규칙이 바뀌면 `rules/` 해당 파일 + 변경 이력 + `decisions.md` 갱신
 - 완성하면 위 표의 상태를 ☑로 바꾸고, 커밋해서 GitHub(비공개 저장소 https://github.com/ippunari/Blog_Agent)에 push한다 (프로그램·규칙만, D42)
-- 9~11은 ⚠ 대표 + 기술 보안팀 확인 전에는 임시 방식(파일 출력)으로만 — 단 9번은 Ghost **초안** 업로드까지 (D62, 발행은 사람), 10번은 사람의 「올려」 뒤 API 게시·시험 계정부터 (D66, 승인은 남은 일)
+- 9~11은 ⚠ 대표 + 기술 보안팀 확인 전에는 임시 방식(파일 출력)으로만 — 단 9번은 Ghost **초안** 업로드까지 (D62, 발행은 사람), 10번은 사람의 「올려」 뒤 Windsor.ai 게시·Threads·Facebook은 시험 계정부터 (D66·D74, 승인은 남은 일)
 
 ## 남은 일
 - [ ] ⚠ **대표 + 기술 보안팀 확인**: AI 크롤러 허용(잠정: 모두 허용), 법률·평판 항목(명예훼손, 스텔스 마케팅 규제, 특정전자메일법, 개인정보보호법, 이미지 권리)
@@ -166,9 +166,17 @@
 - [ ] 사이트 Ghost 미리보기(`/p/…`)가 공개 글과 다른 간단한 화면 — 전체 폭 대표 이미지·흰 보드가 안 보여 ◆ 미리보기 확인이 어렵다. 공개 화면과 같은 미리보기를 사이트 개발 쪽에 요청할지 (D65)
 - [ ] 첫 실제 발행 때 공개 화면 확인 (전체 폭 대표 이미지·흰 보드 분류 줄·FAQ·CTA) → 「발행했어」 → after_publish.py
 - [ ] OpenAI API 키(BlogAPI) 만료 2027-02-19 — 쓰게 되면(크레딧 충전 뒤) 그 전에 교체. 지금 대표 이미지는 Codex(ChatGPT 구독)
-- [ ] ⚠ SNS API 연동·자동 게시(D66) — 대표 + 기술 보안팀 승인. 지금은 사용자 개인 계정으로 시험(`SNS_ACCOUNT_LABEL=test`)
-- [ ] SNS 키 넣기 (사람, `.env`): X 개발자 앱(읽기+쓰기)·크레딧(글 1편 약 $0.22) / Threads API 앱·토큰 / LinkedIn 앱 「Share on LinkedIn」·토큰 / Facebook 페이지 토큰(pages_manage_posts) → 첫 실제 게시로 X 이미지 업로드·LinkedIn 버전 헤더 확인
-- [ ] 회사 계정으로 바꾸기: `.env` 값 + `SNS_ACCOUNT_LABEL=company`. LinkedIn 회사 페이지는 Community Management API 심사. Threads·LinkedIn 토큰 60일 갱신
+- [ ] ⚠ SNS 자동 게시를 Windsor.ai에 맡기는 것(D74) — 대표 + 기술 보안팀 승인. 지금 Threads(개인)·Facebook(시험 페이지)은 시험 계정, **LinkedIn은 회사 페이지**
+- [ ] 첫 실제 글의 「올려」 때 확인: LinkedIn 링크 카드·기호, Facebook 링크 미리보기, Threads 링크 (D74)
+- [ ] 회사 계정으로 바꾸기: Windsor에서 Threads·Facebook 회사 계정 연결 + `.claude/skills/blog-distribute/accounts.json` label
+- [ ] SNS 고객 창구 (사람): 댓글·DM 하루 1번 이상 확인, 문의는 상담 창구로 안내 / 각 SNS 프로필 소개·링크를 블로그·상담 페이지로 1회 설정 (D75)
+- [ ] SNS 첫 실제 게시 전: LinkedIn 회사 페이지 게시 승인 기록 (대표 + 기술 보안팀, D74) / 첫 게시 때 LinkedIn 이미지 글·기호, Threads·Facebook 링크 미리보기 이미지 확인 (D76)
+- [ ] 기존 업로드 글(PHP 등)은 SNS용 JPEG가 없다 — 「Ghost에 올려」를 한 번 더 하면 `hero_jpg_url`이 생긴다 (D76)
+- [ ] note 이용 규칙 확인 — 하루 6편 올리기·AI로 쓴 글 (D76)
+- [ ] 댓글·DM 매일 보고 (Windsor로 읽기) — 지금은 사람이 직접 / 같은 계정 연속 게시 간격 — 13번 전체 연결
+- [ ] 편집부 담당자 개인 계정 공유의 스텔스 마케팅 규제 표시 — 법률 확인 항목에 넣는다
+- [ ] 발행 직후 색인 요청(IndexNow·Search Console) — 검색에 가장 직접 효과. blog-publish·사이트 설정 쪽
+- [ ] X 자동 게시 여부 — Windsor 미지원. 지금은 사람이 붙여 넣기. X API 키(글 1편 약 $0.22)를 받을지
 - [ ] 13번 전체 연결에서: 실습 기한(⚠1일 안·⚠지남)·속보 마감을 정해진 시각에 알리는 방법 (지금은 /blog-status를 실행해야 보임)
 
 ## 변경 이력
@@ -185,7 +193,7 @@
 - 2026-11-21: 사실 대조 가볍게 — 재대조는 사실 표지가 바뀐 문장만·다듬기 끝에 한 번, 속보 다시 열기는 핵심 문장만 (D61)
 - 2026-11-21: 발행 — Ghost 초안 업로드(키는 로컬 .env, 초안만)·사이트 실제 태그 (D62)
 - 2026-11-21: 대표 이미지 — ChatGPT(Codex) 생성·글 내용이 주인공·사이트 표시 기준 1800×945 (D63, D64), 글 머리 보드 hta-top (D65)
-- 2026-11-21: SNS 배포 — 발행 직후 바로, 에이전트 문안 + 사람 「올려」 뒤 API 게시, note는 사람 (D66)
+- 2026-11-21: SNS 배포 — 발행 직후 바로, 에이전트 문안 + 사람 「올려」 뒤 API 게시, note는 사람 (D66) → Windsor.ai MCP 게시·X는 사람·LinkedIn 링크 카드·공유 드라이브 날짜별 시트 (D74), 플랫폼별 스타일(읽는 사람·切り口·틀)·고객 창구는 사람 (D75), 회차 시트·「다 올렸어」·SNS용 JPEG·LinkedIn 이미지 글·note 모든 글과 검색어 분리 (D76)
 - 2026-11-21: 주제 선정 — 사람 확인 없이 추천 ○로 바로 카드, 시트는 기록용 (D67)
 - 2026-11-21: 발행 — 사이트 분류 축(site_axis)·「迅速開発の進め方」 보조 링크 (D68) / 속보 분량은 중앙값을 상한 참고로만, 모자라도 속보로 (D69) / 뉴스레터 입구가 없는 동안 뉴스레터 보조 CTA는 뺌 (D70) / 주제 점수는 AI 사용법·AI 도입·개발 발주 중심, PHP·보안은 입구 (D71) / 아침 3 · 저녁 3, 깊이 새 글 AI 8 + 개발 2, 개편 몫 없음, 키워드(수요) 비중 35% (D72) / 수집의 보안 사고 우선 줄임 — 일본 사고는 중소기업 경로만 최대 5건, 상한 우선순위 AI·개발 먼저 (D73)
 - 2026-11-20: 발행 — 파일 출력·사이트 기사 템플릿·FAQ JSON-LD·대표 이미지 프롬프트·공개 글 점검 (D50)

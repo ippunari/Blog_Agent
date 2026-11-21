@@ -128,7 +128,7 @@ th{background:var(--code);font-size:13px}
   <div class="step"><div class="num">9</div><div class="step-body"><b><a href="#publish">blog-publish</a></b> 발행 — HTML·대표 이미지 → Ghost <b>초안</b> 업로드 (발행은 사람) → <code>publish/&lt;slug&gt;/</code></div></div>
   <div class="arrow"><span class="tag t-human">◆ Ghost 미리보기 · 발행/예약 · 「발행했어 &lt;slug&gt; &lt;URL&gt;」</span> → <span class="tag t-status">발행 완료</span> → 모든 파일 <code>done/YYYY-MM/</code></div>
   <div class="arrow">바로 이어서 (D66)</div>
-  <div class="step"><div class="num">10</div><div class="step-body"><b><a href="#distribute">blog-distribute</a></b> SNS 5곳 문안 → <code>publish/done/YYYY-MM/&lt;slug&gt;/sns.md</code> → <span class="tag t-human">◆ 확인 · 「올려 &lt;slug&gt;」</span> → API 게시 (X·Threads·LinkedIn·Facebook 페이지) / note는 사람</div></div>
+  <div class="step"><div class="num">10</div><div class="step-body"><b><a href="#distribute">blog-distribute</a></b> SNS 5곳 문안 → <code>publish/done/YYYY-MM/&lt;slug&gt;/sns.md</code> → <span class="tag t-human">◆ 확인 · 「올려 &lt;slug&gt;」</span> → Windsor 게시 (Threads·Facebook 페이지·LinkedIn 회사 페이지) / X·note는 사람</div></div>
   <div class="arrow"></div>
   <div class="step todo"><div class="num">11</div><div class="step-body"><b>blog-newsletter</b> 주간 뉴스레터 <span class="tag t-todo">미완성</span></div></div>
   <div class="arrow"></div>
@@ -401,7 +401,7 @@ th{background:var(--code);font-size:13px}
       <li><code>preview.html</code> / <code>ghost.md</code> 입력값·체크리스트 / <code>ghost.json</code> 업로드 값</li>
       <li><code>board.json</code> 글 머리 분류 줄·태그 알약·번호 (에이전트가 씀)</li>
       <li><code>hero_prompt.md</code> → <code>hero_cand_N.png</code> → <code>&lt;slug&gt;_hero.webp</code>(1800×945)·<code>hero_alt.txt</code>·<code>hero_site_preview.png</code></li>
-      <li><code>images.json</code> 본문 이미지 / <code>ghost_post.json</code> 올린 초안 id</li>
+      <li><code>images.json</code> 본문 이미지 / <code>ghost_post.json</code> 올린 초안 id·SNS용 대표 이미지 JPEG 주소 <code>hero_jpg_url</code> (D76)</li>
       <li>Ghost 초안 (필자 ひかり·실제 태그·대표 이미지) / 발행 후: <code>backlinks.md</code></li>
     </ul></div>
   </div>
@@ -453,42 +453,46 @@ th{background:var(--code);font-size:13px}
 <!-- 10 distribute -->
 <div class="card" id="distribute">
   <div class="card-head"><span class="n">10</span><h3>blog-distribute — SNS 배포</h3><code>/blog-distribute [slug]</code> · <code>올려</code> · <code>올려 &lt;slug&gt;</code> · <code>올려 오늘|YYYY-MM-DD</code></div>
-  <p>발행 직후 바로(「발행했어」에 이어서) 최종 글을 5개 SNS에 맞게 <b>플랫폼마다 새로</b> 쓴다. 사람이 확인하고 「올려」 하면 API로 게시한다. <b>「올려」 없이는 보내지 않는다</b> (철칙 2, D66).</p>
+  <p>발행 직후 바로(「발행했어」에 이어서) 최종 글을 5개 SNS에 맞게 <b>플랫폼마다 새로</b> 쓰고 — 읽는 사람·切り口(X 数字 / Threads 試した·気づき / Facebook 場面 / LinkedIn 判断 / note 要約)·틀이 다르다 (D75) — 날짜별 시트를 공유 드라이브에 올린다. 사람이 확인하고 「올려」 하면 <b>Windsor.ai MCP</b>로 Threads·Facebook 페이지·LinkedIn 회사 페이지에 게시한다. <b>「올려」가 승인 — 없이는 보내지 않는다</b> (철칙 2, D66·D74).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/done/YYYY-MM/&lt;slug&gt;.md</code> (<span class="tag t-status">발행 완료</span>, <code>url</code>·<code>rep_comment</code>)</li>
-      <li><code>drafts/done/YYYY-MM/&lt;slug&gt;.md</code> 최종 글 — <b>SNS 사실은 여기 있는 것만</b></li>
+      <li><code>drafts/done/YYYY-MM/&lt;slug&gt;.md</code> 최종 글 — <b>SNS 사실은 여기 있는 것만</b> (LinkedIn 링크 카드 제목·설명은 og_title·excerpt)</li>
       <li><code>outlines/done/YYYY-MM/&lt;slug&gt;.md</code> 「SNS 포인트」(수치·의견·질문)</li>
-      <li>대표 이미지 <code>&lt;slug&gt;_hero.webp</code> (X 첨부)</li>
-      <li><code>.env</code> (로컬, 600 — 사람이 직접): <code>SNS_ACCOUNT_LABEL</code>(test|company), X·Threads·LinkedIn·Facebook 페이지 키</li>
+      <li>대표 이미지 <code>&lt;slug&gt;_hero.webp</code> (X·note에 사람이 첨부)</li>
+      <li>Windsor.ai 연결 계정 (사람이 연결, ID는 실행 때 <code>get_connectors</code>) · <code>accounts.json</code> 플랫폼별 test|company</li>
     </ul></div>
-    <div><h4>출력 — <code>publish/done/YYYY-MM/&lt;slug&gt;/</code></h4><ul>
-      <li><code>sns.md</code> 플랫폼별 本文·返信/最初のコメント/リンク (UTM 링크)</li>
-      <li><code>sns_posted.json</code> 게시 기록 (플랫폼별 id·주소·시각·계정)</li>
+    <div><h4>출력</h4><ul>
+      <li><code>publish/done/YYYY-MM/&lt;slug&gt;/sns.md</code> 플랫폼별 切り口·本文·返信(X)/リンク(LinkedIn·Facebook) (UTM 링크) — 원본</li>
+      <li><code>sns_posted.json</code> 게시 기록 (플랫폼별 id·주소·시각·계정, 실패는 error)</li>
       <li>카드: <code>sns:</code>·<code>sns_posted_at</code>·<code>sns_platforms</code></li>
-      <li><b><code>sns/YYYY-MM-DD.md</code> 날짜별 모음</b> — 그날 글을 발행 순으로, 플랫폼마다 ✅ 올림 / ⏳ 대기 / ✋ 붙여 넣기 (보기용, 스크립트가 다시 만듦)</li>
+      <li><b><code>sns/YYYY-MM-DD.md</code> 날짜별 모음</b> — ✅ 올림 / ⏳ 「올려」 대기 / ✋ 붙여 넣기 / ❌ 실패 (보기용, 스크립트가 다시 만듦, 머리에 시트 ID)</li>
+      <li><b>공유 드라이브 <code>03_Blog/sns</code> 「BlogAgent SNS 문안 YYYY-MM-DD 아침|저녁」 회차 시트</b> — 한 행 = 글 × 플랫폼, 필터, 대표 이미지 주소, 사람이 적는 「게시 주소」 칸 (D76)</li>
     </ul></div>
   </div>
   <dl>
     <dt>카드 상태</dt><dd><span class="tag t-status">발행 완료</span> 그대로 (done 폴더 안에서 <code>sns</code> 줄만 추가)</dd>
     <dt><span class="tag t-human">◆ 사람</span></dt><dd><ol style="margin:0;padding-left:18px">
-      <li>문안 5개 확인 → 「고쳐」 / 「올려」(방금 본 글) / 「올려 &lt;slug&gt;」(파일 이름·주소도 됨) / 「올려 오늘」(목록 → 「응」 → 전부)</li>
-      <li>날짜별 모음의 ✋ 항목: note 붙여 넣기 (공식 API 없음, 見出し画像 = 대표 이미지), Facebook 개인 계정 공유, 키가 없는 플랫폼</li>
-      <li>답글·첫 댓글이 실패했다고 나오면 그 링크 한 줄만 손으로</li>
-    </ol>⚠ 지금은 사용자 개인 계정으로 시험(<code>test</code>). 회사 계정은 <code>.env</code> 값만 바꾼다</dd>
+      <li>회차 시트 확인 → 「고쳐」 / <b>「올려 아침」</b>(그 회차 전부) / 「올려 &lt;slug&gt;」 / 「올려 오늘」(목록 → 「응」)</li>
+      <li>✋ 행: X(본문 + 링크 답글)·note(모든 글 — 제목·본문·見出し画像) 붙여 넣기, 시트의 대표 이미지 주소로 첨부 → 「게시 주소」 칸에 적고 <b>「다 올렸어 아침」</b></li>
+      <li>첫 LinkedIn 게시 뒤 기호가 깨지지 않았는지 확인</li>
+    </ol>⚠ Threads·Facebook은 시험 계정, <b>LinkedIn은 회사 페이지(실제 공개)</b> — 시험 게시 없이 실제 글의 「올려」로만. 계정을 바꾸면 <code>accounts.json</code> label만</dd>
+    <dt>게시 순서</dt><dd><code>sns_post.py 아침 --plan</code>(점검·요청 JSON, 보내지 않음) → 에이전트 <code>execute_action</code> (<code>threads/create_text_post</code>·<code>facebook_organic/create_post</code>·<code>linkedin_organic/create_image_post</code>(JPEG 없으면 <code>create_post</code>)만) → <code>sns_post.py --record</code> / 「다 올렸어」: 시트 읽기 → <code>--record-many</code></dd>
     <dt>스크립트</dt><dd><ul>
-      <li><code>check_sns.py</code> 길이(X 가중치)·링크 자리·UTM·해시태그·「全文はブログで」·복사 금지(30자)·숫자가 최종 글에 있는지·금지 표현·ヤン·계정 ID·공개 URL 200 (<code>--offline</code> 시험)</li>
-      <li><code>sns_post.py</code> 기본 dry-run, <code>--go</code>로 게시. 허용 목록(글·답글·댓글·이미지·주소 읽기만), 같은 글 한 번(<code>--force</code>), 하루 10건, <code>SNS_STOP</code> 긴급 정지, <code>.env</code> 600 확인</li>
-      <li><code>sns_digest.py</code> 날짜별 모음 다시 만들기 (점검·게시 때 자동)</li>
-      <li><code>sns_common.py</code> sns.md 읽기·done 경로·UTM·slug 알아보기(파일 이름·주소 → slug)</li>
+      <li><code>check_sns.py</code> note 검색어 분리(메인 키워드·제목 15자·切り口 編集部メモ/裏側/視点)·첫 두 줄 키워드(D76) + 길이(X 가중치)·링크 자리·UTM·해시태그·「全文はブログで」·복사 금지(30자)·숫자가 최종 글에 있는지·금지 표현·ヤン·계정 ID·공개 URL 200 (<code>--offline</code> 시험) + <b>스타일(D75)</b>: 切り口·첫 20자 겹침·목소리 표지·낚시·반응 구걸·이모지(오류) / 소식형 첫 줄·Threads 질문 끝·Facebook 장면·영문 용어·LinkedIn 첫 두 줄 수치(경고)</li>
+      <li><code>sns_post.py</code> 미리 보기 / <code>--plan</code> JSON / <code>--record</code>·<code>--record-many</code>(시트 게시 주소) 기록. 대상: slug·날짜·<code>아침|저녁</code>. 같은 글 한 번(<code>--force</code>), 하루 10건, <code>SNS_STOP</code> 긴급 정지</li>
+      <li><code>sns_sheet.py</code> 회차 시트 xlsx (<code>--slot</code>) → Drive <code>create_file</code> (같은 날 다시 올리면 옛 시트 제목에 「(이전)」)</li>
+      <li><code>sns_digest.py</code> 날짜별 모음 다시 만들기 (점검·기록 때 자동, <code>--sheet</code> ID 적기)</li>
+      <li><code>sns_common.py</code> sns.md 읽기·done 경로·UTM·slug 알아보기·<code>WINDSOR</code> 게시 방식 표</li>
     </ul></dd>
-    <dt>규칙</dt><dd><code>rules/blog-distribute.md</code> (D20·D38·D66), <code>rules/common.md</code> 3·4장 목소리·금지 표현, 7장 운영 보안</dd>
+    <dt>규칙</dt><dd><code>rules/blog-distribute.md</code> (D20·D38·D66·D74), <code>rules/common.md</code> 3·4장 목소리·금지 표현, 7장 운영 보안</dd>
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>플랫폼 길이·해시태그·링크 자리 → <code>rules/blog-distribute.md</code> 표 + <code>check_sns.py</code> <code>LENGTH</code>·<code>HASHTAGS</code>·<code>LINK_IN_BODY</code></li>
-    <li>API 버전 만료(LinkedIn·Facebook) → <code>.env</code> <code>LINKEDIN_VERSION</code>·<code>FB_GRAPH_VERSION</code> (기본값은 <code>sns_post.py</code> 머리)</li>
-    <li>보낼 수 있는 요청 → <code>sns_post.py</code> <code>ALLOWED</code>·<code>FIELDS</code> (삭제·예약·수정은 넣지 않는다)</li>
-    <li>Threads·LinkedIn 토큰 60일 — 190/401 오류면 새 토큰을 <code>.env</code>에</li>
+    <li>플랫폼 스타일(切り口·목소리·낚시 표현·이모지) → <code>rules/blog-distribute.md</code> 「플랫폼별 스타일」 + <code>check_sns.py</code> <code>KIRIKUCHI</code>·<code>VOICE_NG</code>·<code>CLICKBAIT</code>·<code>BAIT</code>·<code>EMOJI_MAX</code>·<code>style()</code></li>
+    <li>게시 방식(플랫폼 ↔ Windsor action) → <code>sns_common.py</code> <code>WINDSOR</code>·<code>HAND</code> + <code>sns_post.py</code> <code>params_for</code> (삭제·예약·수정 action은 넣지 않는다)</li>
+    <li>시험 → 회사 계정 → Windsor에서 계정 교체 + <code>accounts.json</code> label</li>
+    <li>시트 칸·색 → <code>sns_sheet.py</code> <code>HEAD</code>·<code>WIDTH</code>·<code>STYLE</code> / 폴더 → <code>drive_folders.json</code></li>
   </ul></div>
 </div>
 
