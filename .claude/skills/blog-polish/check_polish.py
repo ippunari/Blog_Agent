@@ -3,11 +3,11 @@
 
 drafts/<slug>.md 를 rules/voice-hikari.md 7장(D49)·rules/common.md 4·6장·rules/blog-polish.md로 본다.
  1. textlint (preset-japanese·히라가나·한자 연속·중복 표현·prh 사전) — 본문만 떼어 낸 사본으로. 원문 인용(>)과 「」『』 안은 제외
-    (문장 길이는 「」 안까지 세야 하므로 textlint가 아니라 이 스크립트가 본다: 80자 초과 오류, 61~80자 경고)
+    (문장 길이는 「」 안까지 세야 하므로 textlint가 아니라 이 스크립트가 본다: 80자 초과 오류, 71~80자 경고, D78)
  2. 보이지 않는 특수 문자 (파일 전체)
  3. 「〜ね。」「〜よ。」 끝맺음 (질문 「？」 문장은 제외), 같은 어미 3연속, 「〜てください」 문단당 2회, 「ぜひ」 글당 1회
  4. 일본어 AI 문투, 관청 말투·판단이 필요한 말 (경고)
- 5. 리듬: 61~80자 문장(경고), 문단마다 30자 이하 문장, 体言止め 후보, 「の」 3연속 후보
+ 5. 리듬: 71~80자 문장(경고), 긴 문장만 이어지는 문단(D78), 体言止め 후보, 「の」 3연속 후보
  6. 한자 비율 25~35% (40% 넘으면 오류)
  7. 메타: 검색용 제목·메타 설명·SNS 제목·설명·excerpt·slug — 길이·키워드·대조된 문장인지
  8. 초안 점검(blog-draft/check_draft.py)을 같이 돌린다
@@ -66,6 +66,12 @@ OK_END = set("すんうたるだかぬねよ")  # です·ます·ません·で
 # 「い」로 끝나는 말: 형용사·ない·たい·ください는 괜찮고, 「違い」「扱い」 같은 명사는 体言止め
 I_OK = re.compile(r"(な|た|し|さ|く|す|か|ご|る|ら|き|よ|い|ぽ|ど|高|多|早|速|安|低|遅|広|狭|近|遠|強|弱|古|深|浅|重|軽|長|短|若|痛|辛|甘|細|太|丸|黒|白|赤|青|良|悪|怖|鋭|厚|薄|固|硬|暗|明|温|寒|暑|熱|冷|緩|淡|濃|醜|美|偉|幼|賢|鈍)い$")
 QUOTE = re.compile(r"「[^「」]*」|『[^『』]*』")
+# D78: 흐린 말 — 글 전체에서 2회 넘으면 경고 (「」 안 인용 제외)
+VAGUE_WORDS = ("多くの", "幅広い", "欠かせません", "必要不可欠", "と考えられます")
+VAGUE_MAX = 2
+CONCLUSION_RE = re.compile(r"結論から(言うと|言えば|いうと|いえば)")
+# D78: 한자 6자 연속 금지의 예외 — 기관·법률·직함 이름 (줄이면 사실이 흐려진다: 最高研究責任者 → 研究部門の責任者)
+NAME_SUFFIX = re.compile(r"(委員会|機構|協会|研究所|大学|省|庁|局|法|条例|責任者|担当者|部長|課長|社長|会長|理事長|長官|大臣|本部|機関|裁判所|銀行)$")
 KANJI_RANGE = {"default": (25, 35), "보안 사고 해설": (25, 38), "보안 대책 가이드": (25, 38)}
 
 
@@ -78,6 +84,8 @@ def is_taigen(s):
     core = re.sub(r"[）」』\)\]]+$", "", s.rstrip("。"))
     if not s.endswith("。") or not core:
         return False
+    if core in ("はい", "いいえ"):  # FAQ 답 (D78)
+        return False
     if core[-1] == "い":
         return not I_OK.search(core)
     return core[-1] not in OK_END
@@ -85,6 +93,22 @@ NO_CHAIN = re.compile(r"(?<![こそあどもい])の[^、。「」\s]{1,10}(?<![
 KANJI = re.compile(r"[一-鿿々〆]")
 KANA = re.compile(r"[ぁ-ゖァ-ヺー]")
 MEMO_START, MEMO_END = "<!-- auto:start -->", "<!-- auto:end -->"
+
+
+_GLOSS = None
+
+
+def glossary_words(root):
+    """사이트 용어집 말 (한자 연속 예외용, D78)"""
+    global _GLOSS
+    if _GLOSS is None:
+        gp = Path(root) / ".claude/skills/blog-draft/glossary_site.json"
+        try:
+            g = json.loads(gp.read_text())
+            _GLOSS = {w for t in g["terms"] for w in (t.get("term", ""), t.get("base", "")) if w}
+        except (OSError, ValueError, KeyError):
+            _GLOSS = set()
+    return _GLOSS
 
 
 def jlen(s):
@@ -280,6 +304,11 @@ def check(a, root):
                 k = ln.find("方", max(col - 2, 0))
                 if k >= 0 and ln[k + 1:k + 2] != "が":
                     continue
+            # 한자 연속: 기관·법률·직함 이름이나 사이트 용어집 말이면 넘긴다 (D78)
+            if m.get("ruleId") == "max-kanji-continuous-len":
+                run = m["message"].rsplit(":", 1)[-1].strip()
+                if NAME_SUFFIX.search(run) or run in glossary_words(root):
+                    continue
             E(f"{m['line']}행 textlint [{m.get('ruleId', '')}] {m['message'].splitlines()[0]}")
 
     # 3·4·5. 문장·문단
@@ -304,8 +333,15 @@ def check(a, root):
         n = jlen(s)
         if n > 80:
             E(f"{i+1}행 {n}자 — 80자 넘는 문장은 나눈다: 「{s[:20]}…」")
-        elif 60 < n <= 80:
-            W(f"{i+1}행 {n}자 — 60자 안팎이 기준. 나눌 수 있으면 나눈다: 「{s[:20]}…」")
+        elif 70 < n <= 80:
+            W(f"{i+1}행 {n}자 — 60자 안팎이 기준. 나눌 수 있으면 나눈다: 「{s[:20]}…」 (D78: 71자부터 경고)")
+    joined_uq = unquote(joined)
+    for w in VAGUE_WORDS:
+        c = joined_uq.count(w)
+        if c > VAGUE_MAX:
+            W(f"흐린 말 「{w}」 {c}회 — 글당 {VAGUE_MAX}회까지. 숫자·대상·이유를 구체적으로 쓴다 (7-5, D78)")
+    if len(CONCLUSION_RE.findall(joined_uq)) > 1:
+        E(f"「結論から言うと」 {len(CONCLUSION_RE.findall(joined_uq))}회 — 되풀이하지 않는다. 결론은 그냥 먼저 쓴다 (7-5, D78)")
     zehi = joined.count("ぜひ")
     if zehi > 1:
         E(f"「ぜひ」 {zehi}회 — 글당 1회까지 (7-5)")
@@ -323,14 +359,17 @@ def check(a, root):
             if ends[j] == ends[j + 1] == ends[j + 2]:
                 E(f"{ss[j][0]+1}행부터 같은 어미 「〜{ends[j]}。」 3연속 (rules/blog-polish.md)")
                 break
-        if len(ss) >= 3 and not any(jlen(s) <= 30 for _, s in ss):
-            W(f"{start+1}행 문단에 30자 이하 짧은 문장이 없음 — 리듬 (7-3)")
+        # D78: 짧은 문장을 일부러 만들지 않는다 — 긴 문장(40자 넘음)만 이어질 때만 경고
+        if len(ss) >= 3 and not any(jlen(s) <= 40 for _, s in ss):
+            W(f"{start+1}행 문단의 문장이 모두 40자를 넘음 — 하나를 나눈다 (채우기 문장을 더하지 않는다, 7-3)")
         for i, s in ss:
             if is_taigen(s):
                 W(f"{i+1}행 体言止め 후보 「…{s[-12:]}」 (7-3)")
     lead = next((ss for _, ss, lst in paras if not lst), [])
     if lead and re.search(r"(について|を)(解説|ご紹介)", lead[0][1]):
         E("리드를 「〜について解説します / をご紹介します」로 시작하지 않는다 (7-5)")
+    if lead and re.search(r"(こんな|このような|そんな)(お)?悩み", lead[0][1]):
+        E("리드를 「こんなお悩みはありませんか？」류로 시작하지 않는다 — 실제 장면·사실로 시작 (7-5, D78)")
 
     # 6. 한자 비율
     k, kana, ratio = metrics(text, bl)

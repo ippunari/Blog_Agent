@@ -320,6 +320,7 @@ th{background:var(--code);font-size:13px}
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>ヒカリちゃん 말투·쓰지 않는 말 → <code>rules/voice-hikari.md</code> (+ 금지 표현은 <code>check_draft.py</code>)</li>
+    <li>전문어 개수에서 빼는 말(영문 이름·코드·괄호 풀이·나라 이름) → <code>check_draft.py</code> 「용어 수준」·<code>NOT_JARGON</code>·<code>PLACE_KATA</code>·<code>COMMON_KATA</code> (D78)</li>
     <li>분량 기준 → <code>rules/blog-draft.md</code> (D47, 일반 글은 상위 글 중앙값 기준 / 속보는 1500~max(3000, 중앙값×1.2), D69) / 상자 표기(<code>:::box</code> 등) → blog-publish 변환과 짝</li>
   </ul></div>
 </div>
@@ -380,6 +381,7 @@ th{background:var(--code);font-size:13px}
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>교정 규칙 → <code>prh-hikari.yml</code>(바꿀 말 사전)·<code>textlintrc.json</code>, 그 밖의 문체 검사 → <code>check_polish.py</code></li>
+    <li>한자 연속 예외 이름 끝말 → <code>NAME_SUFFIX</code> / 흐린 말·횟수 → <code>VAGUE_WORDS</code>·<code>VAGUE_MAX</code> / 문장 길이 경고 71자·긴 문장 문단 40자 → <code>check()</code> (D78) / 편집자가 볼 것(일반론 지우기 등) → <code>naturalness_review.md</code></li>
     <li>메타 길이 규격 → <code>rules/blog-polish.md</code> 「메타 정보」 (excerpt에 리드 문장 금지, D52)</li>
   </ul></div>
 </div>

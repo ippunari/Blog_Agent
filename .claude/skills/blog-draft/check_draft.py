@@ -56,7 +56,10 @@ PARTS = {"리드": ((100, 200), (100, 200)), "3行まとめ": ((100, 150), (100,
          "ヒカリちゃんのまとめ": ((20, 50), (30, 60)), "cta": ((40, 80), (40, 80)), "cta_sub": ((15, 60), (15, 60))}
 DRAFT_RATIO = 0.9
 # 전문어로 세지 않는 말: 심각도 이름(공식 표기 그대로 쓴다)·표기 규칙의 시간대 (D59)
-NOT_JARGON = {"Critical", "High", "Medium", "Moderate", "Low", "UTC", "JST"}
+NOT_JARGON = {"Critical", "High", "Medium", "Moderate", "Low", "UTC", "JST", "URL", "PDF", "IT", "AI"}
+# D78: 나라·지역 이름은 전문어가 아니다
+PLACE_KATA = {"アメリカ", "イギリス", "ドイツ", "フランス", "カナダ", "オーストラリア", "インド", "ロシア", "ヨーロッパ", "アジア",
+              "シンガポール", "ブラジル", "イタリア", "スペイン", "オランダ", "スイス", "アフリカ"}
 TERM_CAP = {"속보": 3, "일반": 6}
 DEICTIC = re.compile(r"^(この|その|あの|上の|下の|次の表|これは|それは|これら|そこで|こちら)")
 WARN_WORDS = re.compile(r"攻撃|悪用|漏えい|漏洩|被害|乗っ取|侵入|不正アクセス")
@@ -66,7 +69,7 @@ COMMON_KATA = {"ホームページ", "サーバー", "レンタルサーバー",
                "システム", "ニュース", "リスト", "ページ", "スマホ", "パソコン", "インターネット", "アップデート", "アプリ",
                "ソフトウェア", "プログラム", "コード", "テスト", "メッセージ", "ブラウザー", "ブログ", "サイトヘルス", "タブ",
                "クリック", "ボタン", "スケジュール", "カレンダー", "トラブル", "ポイント", "ケース", "ステップ", "コスト",
-               "ニーズ", "メーカー", "リスク", "イメージ", "ヒカリ", "ヒカリちゃん", "ホスティング", "ホスティングサービス"}
+               "ニーズ", "メーカー", "リスク", "イメージ", "ヒカリ", "ヒカリちゃん", "ホスティング", "ホスティングサービス", "チェックリスト", "マニュアル"}
 
 
 def strip_tags(s):
@@ -284,8 +287,7 @@ def main():
         sec_s = set(S_RE.findall(" ".join(TAG_RE.findall("\n".join(lines[i:end])))))
         allow = toc_facts.get(h, set()) | (faq_facts if h.startswith("FAQ") else set())
         extra = sorted(sec_s - allow, key=lambda x: int(x[1:]))
-        if extra and allow:
-            W(f"「{h}」: 설계안 「쓸 사실」 밖의 S번호 {', '.join(extra)} — 이유를 초안 메모에")
+        # D78: 설계안 「쓸 사실」 밖의 S번호 경고는 뺐다 — 모든 [S번호]는 사실 대조가 원문과 맞춰 본다
     lead_s = set()
     first_h2 = got[0][0] if got else len(lines)
     lead_s = set(S_RE.findall(" ".join(TAG_RE.findall("\n".join(lines[:first_h2])))))
@@ -604,9 +606,14 @@ def main():
         prose = "\n".join(l for i, l in body_lines if not l.startswith((":::", "#")) and
                           not any(b["type"] == "cta" and b["start"] < i <= b["start"] + len(b["lines"]) for b in boxes))
         txt2 = re.sub(r"\]\(https?://[^)]+\)", "]", strip_tags(prose))
-        cands = set(re.findall(r"[A-Za-z][A-Za-z\-]{2,}", txt2)) | set(re.findall(r"[ァ-ヶー]{4,}", txt2))
+        # D78: 세지 않는 것 — 코드 이름(`…`, _ . ( : 숫자에 붙은 말), 괄호 풀이가 붙은 말, 대문자로 시작하는 영문 이름, 나라 이름
+        txt2 = re.sub(r"`[^`]*`", " ", txt2)
+        txt2 = re.sub(r"[（(][^（）()]*[）)]", " ", re.sub(r"[A-Za-zァ-ヶー\-]+(?=[（(])", " ", txt2))
+        txt2 = re.sub(r"[A-Za-z0-9_.:\-]*[_.:0-9][A-Za-z0-9_.:\-]*\(?\)?|[A-Za-z_]+\(\)", " ", txt2)
+        cands = set(re.findall(r"(?<![A-Za-z])[a-z][A-Za-z\-]{2,}|(?<![A-Za-z])[A-Z]{2,}(?![a-z])", txt2)) | set(re.findall(r"[ァ-ヶー]{4,}", txt2))
         jargon = sorted(c for c in cands
-                        if c not in COMMON_KATA and c not in NOT_JARGON and not any(c in k or k in c for k in known if len(k) >= 3)
+                        if c not in COMMON_KATA and c not in NOT_JARGON and c not in PLACE_KATA
+                        and not any(c in k or k in c for k in known if len(k) >= 3)
                         and norm(c) not in norm(kwtxt) and c not in srcnames)
         cap_t = TERM_CAP["속보" if short else "일반"]
         if len(jargon) > cap_t:
