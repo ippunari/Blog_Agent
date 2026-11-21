@@ -100,7 +100,7 @@ th{background:var(--code);font-size:13px}
   <a href="#collect">1 collect</a><a href="#topic">2 topic</a><a href="#research">4 research</a>
   <a href="#outline">5 outline</a><a href="#draft">6 draft</a><a href="#factcheck">7 factcheck</a>
   <a href="#polish">8 polish</a><a href="#publish">9 publish</a><a href="#distribute">10 distribute</a><a href="#status">status</a>
-  <a href="#todo">10~13 미완성</a><a href="#folders">폴더</a>
+  <a href="#todo">11~13 미완성</a><a href="#folders">폴더</a>
 </nav>
 
 <!-- ───────── 흐름 ───────── -->
@@ -136,10 +136,11 @@ th{background:var(--code);font-size:13px}
   <div class="step todo"><div class="num">12</div><div class="step-body"><b>blog-measure</b> 주간 리포트·월간 개선안 <span class="tag t-todo">미완성</span></div></div>
 </div>
 <div class="paths">
-  <div><b>속보 경로</b> — 발표 72시간 안. 조사 30분 이내, 마감 = 발표 + 72시간. 미리보기 확인 즉시 발행</div>
-  <div><b>깊이 있는 글</b> — 6개월 이상 유효. 전체 단계, 평일 오전 8시(JST) 예약 발행</div>
-  <div><b>직접 찾은 주제 (D41)</b> — <code>/blog-topic 직접 "주제" URL</code> → ◆ 카드 초안 확인 → 카드(<code>origin: 직접</code>) → 4번부터 같음. 시트·Drive에 안 올림</div>
-  <div><b>중단</b> — 마감이 지나거나 사람이 취소 → <span class="tag t-status">중단</span> + 이유, 모든 파일 <code>dropped/</code>. 마감 지난 속보는 먼저 깊이 있는 글로 돌린다 (D34)</div>
+  <div><b>Ghost 초안까지 사람 없음 (D79)</b> — 1~9번 업로드까지 묻지 않고 간다. 사람은 ◆ 미리보기·발행, SNS 「올려」, 사람 실습(<code>[실습 필요]</code> 초안)만. 내용 문제(원문 바뀜·분량 미달 등)로 멈출 때만 묻는다</div>
+  <div><b>속보 경로</b> — 발표 72시간 안. 조사 30분 이내, 마감 = 발표 + 72시간, 메인 키워드는 사건어로 시작(D80), 사람 실습 없음. 미리보기 확인 즉시 발행</div>
+  <div><b>깊이 있는 글</b> — 6개월 이상 유효, 아침·저녁 1편씩(AI 8 + 개발 2/주, D72). 메인 키워드는 이길 여지 문턱을 넘는 말(D80). 전체 단계, 평일 오전 8시(JST) 예약 발행</div>
+  <div><b>직접 찾은 주제 (D41)</b> — <code>/blog-topic 직접 "주제" URL</code> → 확인 없이 바로 카드(<code>origin: 직접</code>, D67) → 4번부터 같음. 시트·Drive에 안 올림</div>
+  <div><b>중단·전환</b> — 사람이 취소하면 <span class="tag t-status">중단</span> + 이유, 모든 파일 <code>dropped/</code>. 마감 지난 속보는 묻지 않고 깊이 있는 글로 돌린다(<code>converted_from: 속보</code> → <span class="tag t-status">조사 대기</span>, 노트는 이어서, D34·D79)</div>
 </div>
 
 <!-- ───────── 공통 ───────── -->
@@ -161,7 +162,7 @@ th{background:var(--code);font-size:13px}
 <!-- 1 collect -->
 <div class="card" id="collect">
   <div class="card-head"><span class="n">1</span><h3>blog-collect — 수집</h3><code>/blog-collect [am|pm] [--hours N]</code></div>
-  <p>영어·한국어·일본어·중국어권 AI·보안 소식과 일본 독자의 질문을 모아, 같은 사건을 묶은 후보 목록(최대 약 40건)을 만든다. 매일 2회.</p>
+  <p>영어·한국어·일본어·중국어권 AI·보안 소식과 일본 독자의 질문을 모아, 같은 사건을 묶은 후보 목록(최대 약 40건 — 넘치면 AI 활용·개발 먼저, 일본 보안 사고는 중소기업 경로만 최대 5건, D73)을 만든다. 매일 2회.</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>sources.json</code> 출처 목록 (피드·검색)</li>
@@ -186,7 +187,7 @@ th{background:var(--code);font-size:13px}
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>출처 추가·삭제 → <code>rules/blog-collect.md</code> 표와 <code>sources.json</code>을 <b>함께</b></li>
-    <li>후보 상한·우선순위·뺄 것 → SKILL.md 5장 / 후보 파일 형식 → SKILL.md 6장 (blog-topic이 이 형식을 읽으므로 같이 확인)</li>
+    <li>후보 상한·우선순위(D73)·뺄 것 → SKILL.md 5장 + <code>rules/blog-collect.md</code> / 후보 파일 형식 → SKILL.md 6장 (blog-topic이 이 형식을 읽으므로 같이 확인)</li>
   </ul></div>
 </div>
 
@@ -532,8 +533,9 @@ th{background:var(--code);font-size:13px}
 <div class="tbl"><table>
   <tr><th>폴더</th><th>올리는 스킬</th><th>무엇</th></tr>
   <tr><td><code>candidates</code></td><td>collect</td><td>보기용 Google 문서 (고쳐도 반영 안 됨, 댓글만)</td></tr>
-  <tr><td><code>topics</code> / <code>지난 시트</code></td><td>topic</td><td>확인용 시트 (최신 1장만, 지난 것은 옮김) — 사람이 ○·대표 한마디를 적는 곳</td></tr>
-  <tr><td><code>trials</code> / <code>끝난 실습</code></td><td>research</td><td>사람 실습 문서 — 팀원이 결과를 적는 곳</td></tr>
+  <tr><td><code>topics</code> / <code>지난 시트</code></td><td>topic</td><td>보기·기록용 시트 (최신 1장만, 지난 것은 옮김) — 고쳐도 반영 안 됨, 바꿀 때는 대화로 <code>select</code>·「중단」 (D67)</td></tr>
+  <tr><td><code>trials</code> / <code>끝난 실습</code></td><td>research</td><td>사람 실습 문서 — 팀원이 결과를 적는 곳 (글은 이미 Ghost에 <code>[실습 필요]</code> 초안으로 있음, D79)</td></tr>
+  <tr><td><code>sns</code></td><td>distribute</td><td>회차(아침·저녁) SNS 문안 시트 — 사람이 확인하고 X·note 「게시 주소」만 적는 곳 (D74·D76)</td></tr>
 </table></div>
 <p class="sub">공유 설정은 스킬이 바꾸지 않습니다. 새 폴더·파일 위치는 먼저 사람에게 묻습니다.</p>
 
