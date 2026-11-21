@@ -32,6 +32,9 @@ JST = timezone(timedelta(hours=9))
 S_RE = re.compile(r"S\d+")
 SEP_RE = re.compile(r"^\|[\s\-|:]+\|$")
 CORE_POS = ("제목", "메타", "리드", "3行まとめ")
+# D77: 핵심(●) = 제목·메타·리드·3行まとめ·차별 포인트·H2 직답 + 날짜·시점이 든 문장.
+# 숫자만 든 문장(판 번호·건수)은 핵심이 아니다 — 노트의 원어 원문 문장과 대조하는 것은 그대로
+DATE_RE = re.compile(r"\d+月\d+日|\d{4}年|\d+月(?:時点|まで|から|末|中|上旬|中旬|下旬)|時点|\d{1,2}時")
 OK_VERDICT = {"일치", "고침", "설명"}
 ALL_VERDICT = OK_VERDICT | {"뺌", "불일치", "확인 불가"}
 STALE_DAYS = 7
@@ -107,12 +110,13 @@ def units(text):
         cand = bool(re.search(r"\d|[A-Za-z]{3,}|「[^」]{4,}」", d))
         if not tagged and not cand and pos not in ("제목", "메타"):
             return
-        core = core or diff or pos.startswith(CORE_POS) or bool(re.search(r"\d", d))
+        core = core or diff or pos.startswith(CORE_POS) or bool(DATE_RE.search(d))
         out.append({"pos": pos, "text": d, "tags": tags, "core": core, "tagged": tagged})
 
     for s in sentences(f.get("meta", "")):
         add("메타", s, core=True)
     pos, box, diff, lead_done, seen_h2 = "도입부", None, False, False, False
+    answer_next = False  # D77: H2 바로 뒤 첫 문단의 굵은 문장 = 직답 → 핵심
     for i, l in enumerate(lines):
         st = l.strip()
         if not st:
@@ -126,7 +130,7 @@ def units(text):
             add("제목", st[2:], core=True)
             continue
         if st.startswith("## "):
-            pos, seen_h2 = st[3:].strip(), True
+            pos, seen_h2, answer_next = st[3:].strip(), True, True
             if pos == "SOURCES":
                 break
             add(pos + " (H2)", st[3:])
@@ -160,9 +164,14 @@ def units(text):
         if st.startswith(">"):
             add(here, st.lstrip("> "), diff=diff)  # 인용은 한 줄 통째로
             continue
+        is_answer = answer_next and not box and st.startswith("**")
+        answer_next = False
+        if is_answer:
+            bold = re.match(r"^\*\*(.+?)\*\*", st)
+            ans_keys = {key(display(s)) for s in sentences(bold.group(1))} if bold else set()
         body = re.sub(r"^\s*(-|\d+\.(?!\d))\s*", "", st).replace("**", "")
         for s in sentences(body):
-            add(here, s, diff=diff)
+            add(here, s, core=is_answer and key(display(s)) in ans_keys, diff=diff)
     return out
 
 

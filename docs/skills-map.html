@@ -327,7 +327,7 @@ th{background:var(--code);font-size:13px}
 <!-- 7 factcheck -->
 <div class="card" id="factcheck">
   <div class="card-head"><span class="n">7</span><h3>blog-factcheck — 사실 대조</h3><code>/blog-factcheck [slug] [--recheck]</code></div>
-  <p>초안의 사실 문장을 노트의 원어 원문 문장과 한 문장씩 대조(일치/고침/뺌/설명)한다. 핵심 문장은 원문 페이지를 다시 열어 앞뒤까지 본다(속보도 핵심 문장의 출처만, D61). 틀린 문장만 고친다. 다듬기 뒤 재대조는 사실 표지가 바뀐 문장만.</p>
+  <p>초안의 사실 문장을 노트의 원어 원문 문장과 한 문장씩 대조(일치/고침/뺌/설명)한다. 핵심 문장(제목·메타·리드·3行まとめ·차별 포인트·H2 직답·날짜·시점 문장 — 숫자만 든 문장은 아님, D77)은 원문 페이지를 다시 열어 앞뒤까지 본다(속보도 핵심 문장의 출처만, D61). 틀린 문장만 고친다. 다듬기 뒤 재대조는 사실 표지가 바뀐 문장만.</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">대조 대기</span>)</li>
@@ -344,10 +344,11 @@ th{background:var(--code);font-size:13px}
     <dt>카드 상태</dt><dd><span class="tag t-status">대조 대기</span> → <span class="tag t-status">다듬기 대기</span> (<code>--recheck</code>는 상태를 바꾸지 않음)</dd>
     <dt><span class="tag t-human">◆ 사람</span></dt><dd>없음</dd>
     <dt>스크립트</dt><dd><code>check_factcheck.py</code> — <code>--init</code> 보고서 뼈대 / <code>--urls-out</code> 다시 열 URL / <code>--fill-titles</code> / <code>--write-sources</code> / <code>--recheck</code> 다듬기 뒤 「재대조 대상」(사실 표지가 바뀜)·「표현만 바뀜」(생략) 나누기, <code>--write-skips</code> 생략분 근거 승계 (D61) / 인자 없음 = 점검 (초안 점검도 같이)</dd>
-    <dt>규칙</dt><dd><code>rules/blog-factcheck.md</code> (D48), <code>rules/blog-draft.md</code> 「문장 표시」</dd>
+    <dt>규칙</dt><dd><code>rules/blog-factcheck.md</code> (D48·D61·D77), <code>rules/blog-draft.md</code> 「문장 표시」</dd>
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>대조 단위·통과 기준·SOURCES 형식 → <code>rules/blog-factcheck.md</code> + <code>check_factcheck.py</code></li>
+    <li>핵심(●) 문장 기준(원문 페이지 앞뒤까지 볼 문장) → <code>check_factcheck.py</code> <code>units()</code>·<code>CORE_POS</code>·<code>DATE_RE</code> (D77)</li>
     <li>재대조를 생략할 「사실 표지」(숫자·고유명사·한정어·부정·태도·주어) → <code>check_factcheck.py</code> <code>markers()</code>·<code>LIMIT_WORDS</code> (D61)</li>
   </ul></div>
 </div>
