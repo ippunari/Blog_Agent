@@ -214,8 +214,30 @@ def main():
         print(f"⚠ 기존 태그에 없음: {missing} — 붙이지 않았다 (새 태그는 사람이 정한다)")
     if not post.get("feature_image"):
         print("⚠ 대표 이미지 없음 — 만든 뒤 다시 올리면 이 초안에 들어간다")
-    print(f"편집 화면: {url.rstrip('/')}/ghost/#/editor/post/{p['id']}")
-    print("→ ◆ Ghost 미리보기에서 ghost.md 5장 체크리스트 확인 → 사람이 「Publish only」로 발행·예약")
+    editor = f"{url.rstrip('/')}/ghost/#/editor/post/{p['id']}"
+    print(f"편집 화면: {editor}")
+    card_status(root / "briefs" / f"{a.slug}.md", bool(g.get("trial_pending")), editor)
+    if g.get("trial_pending"):
+        print("→ ◆ 실습 필요 — 팀원이 실습 문서에 결과 → 「실습 끝났어 <slug>」 → 섹션 채워 같은 초안 갱신 뒤 미리보기·발행 (D79)")
+    else:
+        print("→ ◆ Ghost 미리보기에서 ghost.md 5장 체크리스트 확인 → 사람이 「Publish only」로 발행·예약")
+
+
+def card_status(card_p, pending, editor):
+    """D79: 실습 자리 표시가 있는 초안을 올리면 카드 「실습 대기」, 채운 뒤 다시 올리면 「발행 준비」로 되돌린다"""
+    if not card_p.exists():
+        print(f"⚠ 카드 {card_p} 없음 — 상태를 바꾸지 못함")
+        return
+    ct = card_p.read_text()
+    cur = (re.search(r"(?m)^status:\s*(.*)$", ct) or [None, ""])[1].split("(")[0].strip()
+    new = "실습 대기" if pending else ("발행 준비" if cur == "실습 대기" else None)
+    if new and new != cur:
+        ct = re.sub(r"(?m)^status:.*$", f"status: {new}", ct, count=1)
+        print(f"카드 status: {cur} → {new}")
+    line = f"ghost_draft: {editor}"
+    ct = re.sub(r"(?m)^ghost_draft: .*$", line, ct, count=1) if re.search(r"(?m)^ghost_draft: ", ct) else \
+        re.sub(r"\n---\n", "\n" + line + "\n---\n", ct, count=1)
+    card_p.write_text(ct)
 
 
 if __name__ == "__main__":

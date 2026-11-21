@@ -18,8 +18,9 @@ outlines/<slug>.md 를 읽어 rules/common.md 1·4·6장, rules/blog-outline.md 
 12. FAQ: 근거 검색어가 카드에 기록된 것, 질문에 그 단어가 다 들어 있음
 13. 판 번호가 조사 노트에 있는지, 「〇系以前」 같은 범위 넓힘 경고
 14. 도입부에 메인 키워드(속보는 사건 검색어도)
-15. 실습: trial 사람이고 노트에 결과가 없으면 「◆ 실습 대기」 행
+15. 실습: trial 사람이고 노트에 결과가 없으면 「◆ 실습 대기」 행 (자리 표시로 초안·업로드까지 간다, D79)
 16. SNS 포인트·대표 한마디·금지 표현
+17. 키워드 (D80): 속보 메인 키워드는 카드 「사건어」로 시작, 카드 상위 구성 검색어 = 메인 키워드
 
 사용법:
   python3 -I check_outline.py outlines/<slug>.md [--root .] [--verify-links]
@@ -177,6 +178,16 @@ def main():
     m = re.search(r"^- 메인 키워드:\s*(.+)$", card, re.M)
     if m and norm(m.group(1)) != norm(main_kw):
         W(f"메인 키워드가 카드와 다름: 카드 「{m.group(1).strip()}」 / 설계 「{main_kw}」 (바꿨다면 카드에도 이유를)")
+    # D80: 속보 메인 키워드는 사건어로 시작 / 상위 구성은 메인 키워드로 센 것
+    ev = re.search(r"^- 사건어:\s*(.+)$", card, re.M)
+    if route == "속보":
+        if not ev:
+            W("카드에 「사건어:」 없음 — D80 이전 카드면 2장대로 키워드를 갱신 (속보 메인 키워드 = 사건어로 시작)")
+        elif not norm(main_kw).startswith(norm(ev.group(1).split("(")[0].strip())):
+            E(f"속보 메인 키워드 「{main_kw}」가 사건어 「{ev.group(1).strip()}」로 시작하지 않음 (D80)")
+    cq = re.search(r"상위 구성 검색어:\s*([^\n(]+)", card)
+    if cq and norm(cq.group(1).strip()) != norm(main_kw):
+        W(f"카드 상위 구성 검색어 「{cq.group(1).strip()}」 ≠ 메인 키워드 — 메인 키워드로 다시 센다 (D80)")
     m = re.search(r"cta:\s*\{주:\s*([^,}]+),\s*보조:\s*([^}]+)\}", card)
     if m and (m.group(1).strip() != f["cta_main"] or m.group(2).strip() != f["cta_sub"]):
         E(f"CTA가 카드와 다름: 카드 주 {m.group(1).strip()} / 보조 {m.group(2).strip()}")
@@ -396,8 +407,8 @@ def main():
     if trial_pending:
         if not any(PENDING in " ".join(r) for r in toc):
             E(f"trial: 사람이고 노트에 실습 결과가 없음 → 「使ってみた」 행의 직답·쓸 사실에 「{PENDING}」")
-        if cf.get("status", "").split("(")[0].strip() not in ("실습 대기", "설계 대기"):
-            W("실습 결과가 없는데 카드가 「실습 대기」가 아님 — 설계 후 카드를 「실습 대기」로")
+        if cf.get("status", "").split("(")[0].strip() not in ("설계 대기", "초안 대기"):
+            W("실습 결과 전이라도 설계 후 카드는 「초안 대기」 — 「실습 대기」는 Ghost 초안 업로드 뒤 (D79)")
     elif any(PENDING in " ".join(r) for r in toc):
         E(f"노트에 실습 결과가 있는데 「{PENDING}」 행이 남아 있음 — 결과로 채운다")
 

@@ -250,6 +250,11 @@ def render(bl, inline, ol_class="cs-chk"):
     return "\n".join(h)
 
 
+TRIAL = {"pending": False}
+TRIAL_MARK = "◆ 실습 필요"          # 본문 자리 표시 상자 (D79) — after_publish.py가 공개 글에서 찾는다
+TRIAL_TITLE = "[실습 필요] "        # Ghost 제목(title)에만 붙인다. meta_title·og_title·slug에는 붙이지 않는다
+
+
 def box_text(inner, inline):
     return "".join(f"<p>{inline(d)}</p>" if k == "p" else render([(k, d)], inline, "plain") for k, d in inner)
 
@@ -268,6 +273,12 @@ def render_box(d, inline):
         return f'<div class="cs-lim"><strong>{html.escape(label)}：</strong>{box_text(inner, inline)}</div>'
     if typ == "cta":
         return ("CTA", label, inner)  # 호출한 쪽에서 처리
+    if typ == "trial":   # 사람 실습 자리 표시 (D79) — 미리보기에서 눈에 띄게, 발행 전에 반드시 채운다
+        TRIAL["pending"] = True
+        return ('<div class="cs-trial-pending" style="border:3px dashed #d33;background:#fff4f2;padding:16px;'
+                'margin:16px 0;border-radius:8px"><p style="margin:0 0 8px;font-weight:700;color:#c00">'
+                f'{TRIAL_MARK} — 이 섹션은 팀원 실습 뒤 에이전트가 채운다. 이 상자가 있는 동안 발행하지 않는다</p>'
+                f'{box_text(inner, inline)}</div>')
     E(f"본문 안에 올 수 없는 상자: :::{typ} {label}")
     return ""
 
@@ -671,6 +682,11 @@ def main():
         W(f"{now.year}년 일본 공휴일이 JP_HOLIDAYS에 없음 — 예약 시각이 공휴일일 수 있다")
     when = "확인 즉시 (속보)" if route == "속보" else f"{next_weekday_8(now):%Y-%m-%d %H:%M} JST 예약 (평일 오전 8시)"
     seo_title = title if meta["seo_title"] in ("", "-") else meta["seo_title"]
+    # D79: 실습 자리 표시가 있으면 Ghost 제목에만 표시 — 사람이 Ghost 목록에서 알아보게
+    ghost_title = TRIAL_TITLE + title if TRIAL["pending"] else title
+    trial_note = (f"\n> ⚠ **{TRIAL_TITLE.strip()} — 발행 금지.** 「使ってみた」 섹션이 자리 표시(◆ 실습 필요)다. "
+                  f"팀원이 실습 문서에 결과를 적고 「실습 끝났어 {slug}」 → 에이전트가 채워 같은 초안을 갱신하고 제목 표시를 뗀다 (D79)\n"
+                  if TRIAL["pending"] else "")
     axis = card.get("site_axis") or card.get("axis", "")   # D68
     tags = tag_slugs(axis, route, card.get("type", fm.get("type", "")))
     if not TAGS["axis"].get(axis):
@@ -681,10 +697,10 @@ built_at: {now:%Y-%m-%dT%H:%M%z}
 draft: {a.draft}
 ---
 
-# Ghost 입력값: {title}
+# Ghost 입력값: {ghost_title}
 
 > blog-publish 임시 방식 (D23·D50). Ghost 관리 화면에서 **초안(Draft)** 으로 만들고, ◆ 미리보기 확인 뒤 사람이 발행·예약한다 (철칙 2)
-
+{trial_note}
 ## 1. 본문 (HTML 카드 2개, 순서대로)
 1. 새 글 → 본문에서 `/html` → HTML 카드에 `card1-style.html` 전체를 붙여 넣는다
 2. 그 아래 HTML 카드 하나 더 → `card2-body.html` 전체를 붙여 넣는다
@@ -693,7 +709,7 @@ draft: {a.draft}
 ## 2. 글 설정 (오른쪽 ⚙)
 | 칸 | 넣을 값 |
 |---|---|
-| Post title | {title} |
+| Post title | {ghost_title} |
 | Post URL (slug) | {slug} — 발행 뒤 바꾸지 않는다 |
 | Excerpt | {meta["excerpt"]} |
 | Tags | {" → ".join(f"`{t}`" for t in tags)} (이 순서, 기존 태그만 — tags.json) |
@@ -722,6 +738,7 @@ draft: {a.draft}
 - 사진은 원본 사이트(Wikimedia 등)의 주소를 그대로 쓴다. Ghost API 연동 뒤에는 Ghost에 올려서 바꾼다
 
 ## 5. ◆ 미리보기 확인 (사람)
+- [ ] 제목에 「{TRIAL_TITLE.strip()}」, 본문에 「{TRIAL_MARK}」 상자가 **없다** (있으면 발행하지 않는다, D79)
 - [ ] 제목·첫 문단(리드)·3行まとめ가 맞다
 - [ ] CTA 버튼이 열린다 — 글 끝·옆 칸
 - [ ] 대표 이미지가 보이고 잘리지 않는다
@@ -733,7 +750,8 @@ draft: {a.draft}
 """)
     # ghost_upload.py가 읽는 값 (D62) — ghost.md와 같은 값
     (out / "ghost.json").write_text(json.dumps({
-        "slug": slug, "built_at": f"{now:%Y-%m-%dT%H:%M%z}", "title": title, "custom_excerpt": meta["excerpt"],
+        "slug": slug, "built_at": f"{now:%Y-%m-%dT%H:%M%z}", "title": ghost_title, "custom_excerpt": meta["excerpt"],
+        "trial_pending": TRIAL["pending"],
         "meta_title": seo_title, "meta_description": meta["meta"],
         "og_title": meta["og_title"], "og_description": meta["og_description"],
         "twitter_title": meta["og_title"], "twitter_description": meta["og_description"],
@@ -757,6 +775,8 @@ def report(slug, out):
         print(f"불통과 — 오류 {len(errs)}개 (파일을 쓰지 않음)")
         sys.exit(1)
     print(f"통과 — publish/{slug}/ (card1-style.html · card2-body.html · preview.html · ghost.md · ghost.json)")
+    if TRIAL["pending"]:
+        print(f"◆ 실습 자리 표시 있음 — Ghost 제목 「{TRIAL_TITLE.strip()} …」, 업로드 뒤 카드 「실습 대기」 (D79)")
 
 
 if __name__ == "__main__":

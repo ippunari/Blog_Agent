@@ -3,7 +3,7 @@
 
 1. URL이 https://atatakaidigital.com/ja/blog/<slug> 인지 (slug를 바꾸지 않았는지)
 2. 공개 글 점검 (예약이면 건너뜀 → 공개 뒤 --verify-live):
-   200 / 제목 / SOURCES / 남은 초안 표시 없음 / FAQPage 구조화 데이터가 정확히 1개 / og:image
+   200 / 제목 / SOURCES / 남은 초안 표시·실습 자리 표시(D79) 없음 / FAQPage 구조화 데이터가 정확히 1개 / og:image
 3. 역링크: check_outline.py --verify-links 로 넣을 곳을 다시 확인 → publish/<slug>/backlinks.md (사람이 붙일 HTML 조각)
 4. 카드에 published_at·url, status: 발행 완료
 5. 카드·research·outlines·drafts·factcheck·publish/<slug> 를 각 폴더 done/YYYY-MM/ 로 옮긴다 (D40·D44)
@@ -69,6 +69,10 @@ def live_check(url, title, card2):
         errs.append("페이지에 제목이 없음")
     if 'class="cs-src"' not in page:
         errs.append("SOURCES(cs-src)가 없음 — 카드 2가 빠졌나")
+    # D79: 실습 자리 표시가 남은 채로 발행되면 안 된다 (제목 표시·본문 상자)
+    for mark in ("[실습 필요]", "◆ 실습 필요", "cs-trial-pending"):
+        if mark in page:
+            errs.append(f"실습 자리 표시가 공개 글에 남음: {mark} — 바로 비공개(Unpublish)로 돌리고 「실습 끝났어」로 채운다 (D79)")
     for pat in (r"\[S\d+\]", r"\[(EXP|OP|\?)\]", r"^:::", r"<!-- *차별"):
         if re.search(pat, page, re.M):
             errs.append(f"초안 표시가 남음: {pat}")

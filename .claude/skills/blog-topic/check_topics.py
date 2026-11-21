@@ -2,7 +2,9 @@
 """blog-topic: 주제 후보 파일 점검.
 
 1. 머리(front matter)와 후보마다 필수 항목
-2. 점수 1~5 정수, 총점 = 가중합 재계산과 일치 (전환 35 / 자료부족 20 / 수요 20 / 경험 15 / 수명 10)
+2. 점수 1~5 정수, 총점 = 가중합 재계산과 일치 (전환 25 / 자료부족 20 / 수요 35 / 경험 10 / 수명 10, D72)
+8. 키워드 (D80): 「상위 구성 검색어」 = 메인 키워드 / 속보는 「사건어」가 있고 메인 키워드가 사건어로 시작 /
+   깊이 글이 작은 사이트 0개 + 자료 판정 3 이하(이길 여지 문턱)인데 ○·☑면 오류 / 수요 5인데 질문형 3개 미만·트렌드 없음이면 경고
 3. 서브 키워드 3~5개, 속보는 마감 필수
 4. 순위표: 아침·저녁 모두 속보 AI / 속보 보안·개발 / 깊이 새 글 (D72).
    표마다 최대 5개, 축·경로 일치, 총점 내림차순, 상세와 값 일치
@@ -41,6 +43,14 @@ URL_RE = re.compile(r"https?://[^\s)|<>」]+")
 SCORE_RE = re.compile(r"전환\s*(\d)\s*/\s*자료부족\s*(\d)\s*/\s*수요\s*(\d)\s*/\s*경험\s*(\d)\s*/\s*수명\s*(\d)"
                       r"\s*→\s*총점\s*(\d+)")
 JA = re.compile(r"[぀-ヿ一-鿿]")
+# 질문형 검색어 꼬리 (D43 축별 꼬리말 + 질문 문장) — 수요 5 근거 세기용 (D80)
+Q_TAILS = ("とは", "なぜ", "違い", "対策", "確認", "原因", "被害", "対応", "使い方", "無料", "料金", "できること",
+           "注意点", "費用", "相場", "期間", "流れ", "方法", "やり方", "手順", "内訳", "比較", "どう", "？", "?", "いつ",
+           "見積", "危険", "安全", "しない", "されたら")
+
+
+def kw_norm(k):
+    return re.sub(r"\s+", " ", k.replace("\u3000", " ")).strip().casefold()
 
 
 def norm(u):
@@ -109,6 +119,28 @@ def main():
                 f"{tid}: 상위 구성 없음 — 「상위 구성: 대형 n / 전문 n / 작은 사이트 n (작은: 도메인…)」")
         elif not re.search(r"대형\s*\d+\s*/\s*전문\s*\d+\s*/\s*작은 사이트\s*\d+", comp):
             errs.append(f"{tid}: 상위 구성 형식 「대형 n / 전문 n / 작은 사이트 n」")
+        sm_small = re.search(r"작은 사이트\s*(\d+)", comp)
+        small = int(sm_small.group(1)) if sm_small else None
+        # D80: 상위 구성은 메인 키워드로 센다
+        cq = f.get("상위 구성 검색어", "").strip()
+        new = tid not in carried
+        if not cq:
+            (errs if new else warns).append(f"{tid}: 상위 구성 검색어 없음 — 메인 키워드로 검색해서 센다 (D80)")
+        elif kw_norm(cq) != kw_norm(f.get("메인 키워드", "")):
+            errs.append(f"{tid}: 상위 구성 검색어 「{cq}」 ≠ 메인 키워드 — 메인 키워드로 다시 센다 (D80)")
+        # D80: 속보 메인 키워드 = 사건어로 시작
+        if f.get("경로") == "속보":
+            ev = f.get("사건어", "").strip()
+            if not ev:
+                (errs if new else warns).append(f"{tid}: 속보는 「사건어:」(제품명·버전·사건명) 필요 (D80)")
+            elif not kw_norm(f.get("메인 키워드", "")).startswith(kw_norm(ev)):
+                errs.append(f"{tid}: 속보 메인 키워드는 사건어 「{ev}」로 시작 — 일반어는 서브 키워드로 (D80)")
+        # D80: 이길 여지 문턱 (깊이 글) — 작은 사이트 0개 + 자료 판정 3 이하면 그 키워드로 추천하지 않는다
+        jm = re.search(r"자료\s*(\d)\s*\+\s*경쟁\s*(\d)", f.get("점수 근거", ""))
+        jaryo = int(jm.group(1)) if jm else None
+        if f.get("경로") == "일반" and jm is None and new:
+            errs.append(f"{tid}: 점수 근거에 「자료부족 n = (자료 n + 경쟁 n)÷2」 없음 (D43, D80 문턱 판정)")
+        gate_fail = f.get("경로") == "일반" and small == 0 and jaryo is not None and jaryo <= 3
         # 깊이 글은 실제 검색 근거가 있는 키워드만 (D72): 「추정」 금지
         if f.get("경로") == "일반" and "추정" in f.get("키워드 근거", ""):
             errs.append(f"{tid}: 깊이 글 키워드 근거에 「추정」 — 자동완성·知恵袋·트렌드에서 확인한 키워드만 (D72)")
@@ -136,13 +168,19 @@ def main():
             tot = total(s)
             if tot != int(sm.group(6)):
                 errs.append(f"{tid}: 총점 {sm.group(6)} ≠ 계산값 {tot}")
+            # D80: 수요 5 = 질문형 3개 이상 + 知恵袋 반복, 또는 트렌드 급상승. 큰 키워드의 자동완성 개수만으로는 5가 아니다
+            if s["수요"] == 5:
+                q = sum(1 for x in subs if any(t in x for t in Q_TAILS))
+                basis = f.get("키워드 근거", "") + f.get("점수 근거", "")
+                if q < 3 and "트렌드" not in basis:
+                    warns.append(f"{tid}: 수요 5인데 질문형 서브 키워드 {q}개·트렌드 없음 — 수요 5 기준 확인 (D80)")
         if f.get("경로") == "속보" and not re.search(r"\d{4}-\d{2}-\d{2}", f.get("마감", "")):
             errs.append(f"{tid}: 속보는 마감 날짜 필요 (발표 + 72시간)")
         if f.get("실습") and not any(f["실습"].startswith(t) for t in TRIALS):
             errs.append(f"{tid}: 실습 값 '{f['실습']}' (에이전트 가능 / 사람 필요 / 해당 없음 으로 시작)")
         details[tid] = {"axis": f.get("주제 축"), "route": f.get("경로"), "total": tot, "title": tt,
                         "type": f.get("글 종류"), "rec": f.get("추천", "").strip(),
-                        "trial": f.get("실습", "")}
+                        "trial": f.get("실습", ""), "gate_fail": gate_fail, "main_kw": f.get("메인 키워드", "")}
 
     # 순위표
     tables = TABLES_PM if front.get("slot") == "pm" else TABLES_AM
@@ -174,6 +212,9 @@ def main():
             if not d:
                 errs.append(f"{title}: {tid} 상세 없음")
                 continue
+            if mark in ("○", "☑") and d.get("gate_fail"):
+                errs.append(f"{title}: {tid} 「{d['main_kw']}」는 이길 여지 문턱 미달(작은 사이트 0 + 자료 판정 3 이하) — "
+                            f"더 구체적인 말을 메인으로 다시 세거나 추천에서 건너뛴다 (D80)")
             if mark == "○" and not d["rec"]:
                 errs.append(f"{title}: {tid}는 ○인데 상세에 「추천:」 이유가 없음")
             if d["route"] != route:

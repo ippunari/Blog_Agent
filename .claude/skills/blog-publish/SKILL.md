@@ -21,7 +21,7 @@ argument-hint: "[slug] | 발행했어 <slug> <URL> | 예약했어 <slug> <URL> <
 
 ## 1. 카드 고르기
 - 인자 slug → 그 카드. 인자 없음 → `briefs/*.md`(하위 폴더 제외)에서 `status: 발행 준비` 중 ① 속보 먼저, 마감이 가까운 순 ② 일반은 `selected_at` 순. 시작 전에 한 줄로 알린다
-- 속보는 마감을 본다. 지났으면 만들지 않고 D34대로 사람에게 (스크립트도 멈춘다)
+- 속보는 마감을 본다. 지났으면 만들지 않는다 (스크립트도 멈춘다) — D34대로 **사람에게 묻지 않고 깊이 있는 글로 돌린다** (D79): 카드 `route: 일반`·`kind: 새 글`·`deadline: 없음`·`converted_from: 속보 (YYYY-MM-DD 마감 지남)`·`status: 조사 대기` → 보고 맨 앞에 「속보 마감 지남 → 깊이 있는 글로 돌림」. 노트·설계안·초안은 옮기지 않는다 (blog-research가 일반 범위를 보충하고 설계부터 다시)
 
 ## 2. 대표 이미지 — 프롬프트 → ChatGPT(Codex) 이미지 생성 → 에이전트가 고름 (D63)
 기본은 이 컴퓨터의 Codex CLI(사람의 ChatGPT 계정 로그인 — 구독 사용량, 비용 없음). `--engine api`는 OpenAI API 크레딧이 있을 때. 둘 다 안 되면 사람이 프롬프트로 만든다 (D50)
@@ -48,7 +48,7 @@ python3 -I .claude/skills/blog-publish/make_hero_ai.py <slug>             # Code
 python3 -I .claude/skills/blog-publish/make_hero.py <원본> <slug> --alt "<일본어 alt>"
 ```
   → `publish/<slug>/<slug>_hero.webp` 1800×945 WebP 200KB 이하 + `hero_alt.txt` + `hero_site_preview.png`. **사이트 표시 미리보기를 직접 열어** 주제 장치·키워드 글자·얼굴이 흰 띠(본문 카드)와 잘린 곳 밖에 있는지 본다 — 가리면 프롬프트 배치를 고쳐 다시
-- 이미지가 아직 없어도 3장으로 간다 (ghost.md에 「아직 없음」). 속보는 기다리지 않는다 — 사람에게 이미지가 필요하다고 보고에 적는다
+- 이미지가 아직 없어도(자동 생성 실패·한도 포함) **기다리지 않고** 3장·3-2장(업로드)으로 간다 — 모든 글 (D79). ghost.md에 「아직 없음」, 보고에 「대표 이미지 필요 — hero_prompt.md」. 이미지가 생기면 「이미지 <slug> <파일>」 → 3장 → 3-2장으로 같은 초안 갱신
 
 ## 2-2. 본문 이미지 (에이전트, D55) — 사람은 ◆ 미리보기에서 남김/뺌만
 rules/blog-publish.md 「본문 이미지」. 속보 1~2장, 일반 2~4장. 섹션 내용과 직접 관련된 것만 (꾸밈용 금지)
@@ -98,8 +98,11 @@ python3 -I $U <slug>             # 초안 만들기 — 다시 돌리면 같은 
 - 태그는 `tags.json`의 실제 slug만 (없는 태그는 붙이지 않고 ⚠). 사이트 태그가 바뀌면 tags.json을 고친다
 - 카드에 `site_axis:`가 있으면 태그·글 머리 보드는 그 축으로 (사람이 정한 카드만, D68). 주제 축에 태그·보드가 없으면 멈추고 묻는다
 - 대표 이미지·본문을 고쳐 3장을 다시 돌렸으면 이 단계도 다시 (같은 초안 갱신). 이미 사람이 발행·예약한 글이면 스크립트가 멈춘다
+- **사람 실습 자리 표시**(`:::trial`)가 있는 초안도 올린다 (D79): build_publish.py가 Ghost 제목에만 `[실습 필요] `를 붙이고(meta_title·og_title·slug는 그대로) 본문에 「◆ 실습 필요」 상자를 넣는다 → ghost_upload.py가 카드를 `status: 실습 대기`·`ghost_draft: <편집 화면>`으로 바꾼다
+- 「실습 끝났어」 뒤 섹션을 채워 3장부터 다시 돌리면 제목 표시·상자가 빠지고, ghost_upload.py가 같은 초안을 갱신하며 카드를 「발행 준비」로 되돌린다
 
 ## 4. ◆ 사람에게 넘기기 (보고하고 기다린다)
+- **실습 대기 카드**(제목 `[실습 필요]`)는 보고 맨 앞에 「사람 실습 필요 — 실습 문서 <trial_doc>, 기한 <trial_due>, Ghost 초안 <ghost_draft>. 이 상태로 발행하지 않는다 — 결과를 적고 「실습 끝났어 <slug>」」. 미리보기·발행은 채운 뒤
 보고 (한국어, 짧게): 카드 / 마감(속보) / 만든 파일 경로 / 점검 결과 / 대표 이미지 상태(프롬프트 경로) / 발행 시각 / **사람이 할 일** = (초안이 올라갔으면) Ghost 편집 화면 주소에서 미리보기 → `ghost.md` 5장 체크리스트 → 「Publish only」로 발행·예약 → 「발행했어 <slug> <URL>」 (키가 없으면 ghost.md 1~3장대로 붙여 넣기부터)
 - 사람이 미리보기에서 고칠 점을 말하면: 사실·문장이면 앞 단계, 표시·디자인이면 스크립트·템플릿을 고쳐 3장 다시
 
@@ -110,7 +113,7 @@ python3 -I $A <slug> <URL>                                # 공개됨
 python3 -I $A <slug> <URL> --scheduled "YYYY-MM-DD HH:MM"  # 예약
 python3 -I $A <slug> --verify-live                        # 예약 글이 공개된 뒤
 ```
-- URL·slug 확인 → 공개 글 점검(제목·SOURCES·남은 표시·FAQPage 1개·og:image) → 역링크 넣을 곳 다시 확인(`--verify-links`) → `backlinks.md` → 카드 `published_at`·`url`·`status: 발행 완료` → 카드·노트·설계·초안·보고서·publish 폴더를 `done/YYYY-MM/`로
+- URL·slug 확인 → 공개 글 점검(제목·SOURCES·남은 표시·**실습 자리 표시 `[실습 필요]`·「◆ 실습 필요」(D79)**·FAQPage 1개·og:image) → 역링크 넣을 곳 다시 확인(`--verify-links`) → `backlinks.md` → 카드 `published_at`·`url`·`status: 발행 완료` → 카드·노트·설계·초안·보고서·publish 폴더를 `done/YYYY-MM/`로
 - 점검 오류면 아무것도 옮기지 않는다 → 사람에게 무엇을 Ghost에서 고칠지 알린다
 - 보고: 점검 결과 / **역링크 붙이기**(`publish/done/YYYY-MM/<slug>/backlinks.md` — 사람이 기존 글 카드에 붙인다, 위치 문제는 묻는다) / Search Console 색인 요청(연결 뒤, 지금은 남은 일)
 - **점검이 통과하면 이어서 바로 blog-distribute를 실행한다** (SNS 문안 → ◆ 확인 → 「올려」, D66). 예약 글은 `--verify-live` 통과 뒤

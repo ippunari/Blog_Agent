@@ -6,6 +6,7 @@ drafts/<slug>.md 를 설계안·조사 노트·규칙과 맞춰 본다.
  2. H2가 설계안 목차와 같은 순서·같은 문구인지, H2 바로 뒤 굵은 직답(40~80자)
  3. 표시: [S번호]가 노트에 있는지 / 섹션의 「쓸 사실」 밖이면 경고 / [EXP]·[OP]는 근거가 있을 때만 / [?] 목록
  4. 철칙 1: 실습 기록 없이 「試しました」 등, 대표 한마디 없이 대표 의견·「代表ヤンのひとこと」
+    사람 실습 결과 전(trial: 사람 + 노트 「◆」)이면 「使ってみた」 섹션은 :::trial 자리 표시 상자 하나 (D79)
  5. 금지 표현 (common.md 4장, voice-hikari.md 5장)
  6. 표기: 전각 숫자, 날짜 형식, 판 번호·날짜가 노트에 있는지, 「〇系以前」 범위 넓힘
  7. 첫 문단 200자 안에 메인 키워드(속보는 사건 검색어도), 「とは」 정의 문장
@@ -35,7 +36,7 @@ from check_outline import front, sections, table, bullets, norm, width, has_kw  
 FRONT = ["slug", "brief", "outline", "research", "route", "kind", "type", "author", "trial", "length",
          "main_keyword", "sub_keywords", "event_keywords", "cta_main", "cta_sub", "rep_comment", "meta",
          "created_at"]
-BOX_TYPES = {"box", "guide", "matome", "note", "rep", "cta"}
+BOX_TYPES = {"box", "guide", "matome", "note", "rep", "cta", "trial"}   # trial = 사람 실습 자리 표시 (D79)
 NO_ANSWER_H2 = ("3行まとめ", "FAQ", "よくある質問", "SOURCES")
 FORBIDDEN = ["絶対", "100%安全", "100％安全", "最強", "神ツール", "革命的", "いかがでしたか", "大変なことに",
              "ずさん", "手遅れ", "今すぐ対策しないと", "なのだ"]
@@ -147,6 +148,8 @@ def main():
     of, osec = front(outline), sections(outline)
     facts, has_exp = note_facts(note)
     rep = f["rep_comment"] not in ("없음", "")
+    # D79: 사람 실습 결과 전이면 「使ってみた」 섹션은 자리 표시(:::trial)로 두고 업로드까지 간다
+    trial_pending = f["trial"].split("|")[0].strip() == "사람" and not has_exp
     for k in ("slug", "route", "type", "trial", "main_keyword", "sub_keywords", "event_keywords", "cta_main",
               "cta_sub", "rep_comment", "length"):
         if of.get(k, "").strip() != f[k].strip():
@@ -199,6 +202,12 @@ def main():
         E("대표 한마디가 없는데 「代表ヤンのひとこと」 상자가 있음 (철칙 1)")
     if rep and not [b for b in boxes if b["type"] == "rep"]:
         E("대표 한마디가 있는데 :::rep 상자가 없음")
+    trial_boxes = [b for b in boxes if b["type"] == "trial"]
+    trial_lines = {i for b in trial_boxes for i in range(b["start"], b["start"] + len(b["lines"]) + 2)}
+    if trial_boxes and not trial_pending:
+        E("실습 자리 표시(:::trial)가 남아 있음 — 실습 결과가 노트에 있거나 trial이 사람이 아니면 섹션을 채우거나 뺀다 (D79)")
+    if trial_pending and len(trial_boxes) != 1:
+        E(f"trial: 사람이고 실습 결과 전 — 「使ってみた」 섹션에 :::trial 자리 표시 상자 1개 (지금 {len(trial_boxes)}개, D79)")
 
     # --- H2
     toc = [r for r in table(osec.get("목차", [])) if len(r) >= 8]
@@ -211,6 +220,11 @@ def main():
     for k, (i, h) in enumerate(got):
         end = got[k + 1][0] if k + 1 < len(got) else len(lines)
         sec_ranges.append((h, i, end))
+    pending_h2 = {r[2] for r in toc if "◆" in " ".join(r[3:6])} if trial_pending else set()
+    for b in trial_boxes:
+        sec = next((h for h, i, end in sec_ranges if i < b["start"] < end), None)
+        if trial_pending and sec not in pending_h2:
+            E(f"실습 자리 표시(:::trial)는 설계안 「◆ 실습 대기」 행의 H2 안에 — 지금 「{sec}」 (D79)")
     # 글 뼈대 순서 (voice-hikari.md 2장, D47): 리드 → 3行まとめ → (こんな方に) → わかること → 案内 → 첫 H2
     route = f["route"]
     _n0 = sum(len(re.sub(r"\s", "", plain(l))) for l in lines if not l.startswith("# ") and not l.startswith("<!--"))
@@ -257,7 +271,7 @@ def main():
         if not rg[0] <= n_b <= rg[1]:
             W(f"「{b['label'] or key}」 {n_b}자 (목표 {rg[0]}~{rg[1]})")
     for h, i, end in sec_ranges:
-        if h.startswith(NO_ANSWER_H2):
+        if h.startswith(NO_ANSWER_H2) or h in pending_h2:   # 실습 자리 표시 섹션은 직답 없음 (D79)
             continue
         nxt = next((l.strip() for l in lines[i + 1:end] if l.strip() and not l.strip().startswith("<!--")), "")
         if not nxt.startswith("**"):
@@ -303,11 +317,14 @@ def main():
 
     body_lines = [(i, l) for i, l in enumerate(lines) if not l.startswith("<!--")]
     body_join = "\n".join(l for _, l in body_lines)
+    # 실습 자리 표시 상자와 그 H2는 철칙 1 표현 검사에서 뺀다 (D79 — 상자 밖에 쓰면 지금처럼 오류)
+    exp_join = "\n".join(l for i, l in body_lines if i not in trial_lines
+                         and not (l.startswith("## ") and l[3:].strip() in pending_h2))
 
     # --- 철칙 1 · 금지 표현
     if not has_exp:
         for p in EXP_PHRASES:
-            if p in body_join:
+            if p in exp_join:
                 E(f"실습 기록이 없는데 「{p}」 (철칙 1)")
     if not rep:
         for p in REP_PHRASES:
@@ -444,7 +461,8 @@ def main():
 
     # --- 분량
     lo, hi = [int(x) for x in re.findall(r"\d+", f["length"])[:2]]
-    n = sum(len(re.sub(r"\s", "", plain(l))) for l in lines if not l.startswith("# ") and not l.startswith("<!--"))
+    n = sum(len(re.sub(r"\s", "", plain(l))) for k, l in enumerate(lines)
+            if not l.startswith("# ") and not l.startswith("<!--") and k not in trial_lines)   # 자리 표시는 분량에서 뺀다 (D79)
     cap = int(hi * DRAFT_RATIO)
     if n < lo:
         E(f"분량 {n}자 — 하한 {lo} 미만. 늘려 쓰지 말고 초안 메모 「조사 보충 필요」로 (D47)")

@@ -145,7 +145,7 @@ def units(text):
             else:
                 box = None
             continue
-        if box and box.startswith("cta"):
+        if box and box.startswith(("cta", "trial")):   # trial = 사람 실습 자리 표시, 결과가 들어오면 --recheck (D79)
             continue
         here = box.split(None, 1)[-1] if box else pos
         if not seen_h2 and not box and not lead_done and not st.startswith(("|", ">")):

@@ -120,15 +120,20 @@ def body_lines(text):
     m = re.match(r"^---\n.*?\n---\n", text, re.S)
     start = m.group(0).count("\n") if m else 0
     lines = text.splitlines()
-    box, out = None, []
+    box, out, trial_open = None, [], False
     for i in range(start, len(lines)):
         st = lines[i].strip()
         if re.match(r"^## SOURCES\s*$", st):
             break
         if st.startswith(":::"):
+            opening = box is None
             box = st[3:].strip() or None if box is None else None
-            out.append((i, lines[i], "marker"))
+            if not (opening and box and box.startswith("trial")) and not (not opening and trial_open):
+                out.append((i, lines[i], "marker"))
+            trial_open = bool(opening and box and box.startswith("trial"))
             continue
+        if box and box.startswith("trial"):
+            continue   # 사람 실습 자리 표시는 다듬기 대상이 아니다 (D79)
         out.append((i, lines[i], box))
     return out
 

@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 JST = timezone(timedelta(hours=9))
-ORDER = ["조사 대기", "기존 글 업데이트", "설계 대기", "실습 대기", "초안 대기", "대조 대기", "다듬기 대기", "발행 준비", "발행 완료", "중단"]
+ORDER = ["조사 대기", "기존 글 업데이트", "설계 대기", "초안 대기", "대조 대기", "다듬기 대기", "실습 대기", "발행 준비", "발행 완료", "중단"]   # 실습 대기 = Ghost 초안([실습 필요]) 업로드 뒤 (D79)
 
 
 def front(path):
@@ -80,6 +80,7 @@ def main():
             "status": status_name(f.get("status")), "dl": dl, "dl_txt": dl_txt,
             "origin": f.get("origin", "시트"), "trial": f.get("trial", "-").split("|")[0].strip() or "-",
             "sel": f.get("selected_at", ""), "trial_doc": f.get("trial_doc", ""), "trial_due": f.get("trial_due", ""),
+            "ghost_draft": f.get("ghost_draft", ""),
             "r": mark(root, "research", slug), "o": mark(root, "outlines", slug), "d": mark(root, "drafts", slug), "c": mark(root, "factcheck", slug),
         })
 
@@ -103,15 +104,16 @@ def main():
     todo = [r for r in rows if r["status"] == "실습 대기"]
     if todo:
         print()
-        print("사람이 할 일 (실습 대기):")
+        print("사람이 할 일 (실습 대기 — Ghost에 「[실습 필요]」 초안으로 올라가 있음, D79):")
         for r in todo:
             due, _ = parse_deadline(r["trial_due"])
             if due:
                 h = (due - now).total_seconds() / 3600
-                due_txt = due.strftime("%m/%d %H:%M") + (" ⚠지남 → 연장 / 실습 없이 쓰기 / 중단 중에서 정한다" if h < 0 else " ⚠1일 안" if h < 24 else "")
+                due_txt = due.strftime("%m/%d %H:%M") + (" ⚠지남 → 연장 / 실습 섹션 빼고 발행 / 중단 중에서 정한다" if h < 0 else " ⚠1일 안" if h < 24 else "")
             else:
                 due_txt = "(기한 없음)"
-            print(f"- {r['slug']}: 기한 {due_txt} / 실습 문서 {r['trial_doc'] or '(링크 없음 — blog-research에서 올리지 못함)'} → 끝나면 「실습 끝났어 {r['slug']}」")
+            print(f"- {r['slug']}: 기한 {due_txt} / 실습 문서 {r['trial_doc'] or '(링크 없음 — blog-research에서 올리지 못함)'}"
+                  f" / Ghost 초안 {r['ghost_draft'] or '(아직 안 올림)'} → 끝나면 「실습 끝났어 {r['slug']}」")
 
     done = sorted((root / "briefs" / "done").glob("*/*.md"))
     dropped = sorted((root / "briefs" / "dropped").glob("*.md"))
