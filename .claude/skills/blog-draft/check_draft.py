@@ -55,6 +55,8 @@ PARTS = {"리드": ((100, 200), (100, 200)), "3行まとめ": ((100, 150), (100,
          "この記事でわかること": ((50, 80), (60, 100)), "ヒカリちゃんの案内": ((50, 100), (100, 200)),
          "ヒカリちゃんのまとめ": ((20, 50), (30, 60)), "cta": ((40, 80), (40, 80)), "cta_sub": ((15, 60), (15, 60))}
 DRAFT_RATIO = 0.9
+# 전문어로 세지 않는 말: 심각도 이름(공식 표기 그대로 쓴다)·표기 규칙의 시간대 (D59)
+NOT_JARGON = {"Critical", "High", "Medium", "Moderate", "Low", "UTC", "JST"}
 TERM_CAP = {"속보": 3, "일반": 6}
 DEICTIC = re.compile(r"^(この|その|あの|上の|下の|次の表|これは|それは|これら|そこで|こちら)")
 WARN_WORDS = re.compile(r"攻撃|悪用|漏えい|漏洩|被害|乗っ取|侵入|不正アクセス")
@@ -208,7 +210,9 @@ def main():
         sec_ranges.append((h, i, end))
     # 글 뼈대 순서 (voice-hikari.md 2장, D47): 리드 → 3行まとめ → (こんな方に) → わかること → 案内 → 첫 H2
     route = f["route"]
-    ri = 0 if route == "속보" else 1
+    _len = [int(x) for x in re.findall(r"\d+", f.get("length", "").replace(",", ""))]
+    short = route == "속보" and (_len[-1] if _len else 3000) <= 3000   # 짧은 속보만 속보 부품·용어 기준 (D59)
+    ri = 0 if short else 1
     first_h2_i = got[0][0] if got else len(lines)
     lead_i = next((i for i, l in enumerate(lines[:first_h2_i]) if l.strip() and not in_box[i]
                    and not l.startswith(("#", "<!--", ">", "|"))), None)
@@ -602,9 +606,9 @@ def main():
         txt2 = re.sub(r"\]\(https?://[^)]+\)", "]", strip_tags(prose))
         cands = set(re.findall(r"[A-Za-z][A-Za-z\-]{2,}", txt2)) | set(re.findall(r"[ァ-ヶー]{4,}", txt2))
         jargon = sorted(c for c in cands
-                        if c not in COMMON_KATA and not any(c in k or k in c for k in known if len(k) >= 3)
+                        if c not in COMMON_KATA and c not in NOT_JARGON and not any(c in k or k in c for k in known if len(k) >= 3)
                         and norm(c) not in norm(kwtxt) and c not in srcnames)
-        cap_t = TERM_CAP["속보" if route == "속보" else "일반"]
+        cap_t = TERM_CAP["속보" if short else "일반"]
         if len(jargon) > cap_t:
             W(f"용어집에 없는 전문어 {len(jargon)}개 (상한 {cap_t}) — 빼기·행동으로 바꾸기·괄호 풀이, 남기면 초안 메모 「용어집 추가 후보」: {', '.join(jargon[:12])}")
 

@@ -373,7 +373,7 @@ def main():
                 want_lo, want_hi = round(med * 0.8, -2), round(med * 1.2, -2)
                 if abs(lo - want_lo) > want_lo * 0.1 or abs(hi - want_hi) > want_hi * 0.1:
                     E(f"length {lo}-{hi} ≠ 상위 글 중앙값 {med}자 × 0.8~1.2 = {int(want_lo)}-{int(want_hi)} (D58 — 글 종류 범위로 자르지 않는다)")
-        fx = FIXED["속보" if route == "속보" else "일반"]
+        fx = FIXED["속보" if route == "속보" and hi <= 3000 else "일반"]   # 해설형 분량이면 일반 부품 (D59)
         n_matome = len([r for r in body if "FAQ" not in r[2] and "よくある質問" not in r[2]])
         n_cta = len([r for r in table(sec.get("CTA", [])) if len(r) >= 3])
         fixed = fx[0] + fx[1] * n_matome + fx[2] * n_cta

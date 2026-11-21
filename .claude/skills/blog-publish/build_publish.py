@@ -43,7 +43,17 @@ JP_HOLIDAYS = {
     "2027-11-23",
 }
 DAILY_CAP = 6          # 평일 하루 6편 (D31). 넘으면 멈추고 사람에게 (common.md 7장 B)
-AXIS_TAG = {"AI": "ai", "보안": "security", "개발": "dev"}   # 사이트 카테고리 slug (/ja/blog/<slug>)
+TAGS = json.loads((HERE / "tags.json").read_text())   # 실제 Ghost 태그 slug (D62에서 확인)
+
+
+def tag_slugs(axis, route, typ):
+    """기본 = 언어 + 주제 축, 보조 = 글 종류 (common.md 6장 12) → 사이트 실제 태그"""
+    out = TAGS["lang"] + TAGS["axis"].get(axis, [])
+    if axis == "보안":
+        cat = TAGS["security_cat"]
+        hit = cat["속보"] if route == "속보" else next((v for k, v in cat.items() if not k.startswith("_") and k != "속보" and re.search(k, typ)), "")
+        out += [hit] if hit else []
+    return out
 BTN_LINE = re.compile(r"^\[[^\]]+\]\([^)\s]+\)$")
 UA = "Mozilla/5.0 (compatible; BlogAgentPublish/1.0)"
 
@@ -561,9 +571,35 @@ def main():
         side = (f'<div class="cs-sidecta">\n<b>{html.escape(m0["kicker"])}</b>\n'
                 f'<a class="btn" {track(slug, "side")} href="{m0["btn"][1]}">{html.escape(m0["btn"][0])}</a>\n</div>')
 
+    # --- 글 머리 보드 (D65): 사이트는 본문 카드 맨 앞 hta-top에서 분류 줄·태그 알약·번호를 읽어
+    #     글 머리(전체 폭 대표 이미지 + 흰 보드)를 만든다. 기존 글 130편이 모두 이 블록을 가진다 ---
+    bp = root / "publish" / slug / "board.json"
+    board = json.loads(bp.read_text()) if bp.exists() else {}
+    series = TAGS.get("board", {}).get(card.get("axis", ""), {})
+    top_html = ""
+    if not series:
+        E(f"주제 축 「{card.get('axis', '')}」의 글 머리 분류(tags.json board)가 없음 — 사람에게 묻는다")
+    elif not board:
+        E(f"publish/{slug}/board.json 없음 — 글 머리 보드 값(kind·cat·no)을 SKILL 3장대로 쓴다 (D65)")
+    else:
+        cat_parts = [x.strip() for x in str(board.get("cat", "")).split("·") if x.strip()]
+        if not board.get("kind") or not 2 <= len(cat_parts) <= 4 or not board.get("no"):
+            E("board.json: kind(굵은 글씨 1개)·cat(「·」로 2~4개)·no(번호 표시)가 모두 있어야 함")
+        if series.get("topic") and not board.get("topic"):
+            E(f"board.json topic이 없음 — 「{series['crumb']} · <topic> · <kind>」 (예: {series['topic']})")
+        if board.get("no") and not str(board["no"]).startswith(series["no"]):
+            E(f"board.json no는 「{series['no']}」로 시작 (기존 글과 같은 줄)")
+        mins = max(1, round(len(plain(re.sub(r"<script.*?</script>", "", "".join(sec_html), flags=re.S))) / 600))
+        info = [f"{series['time']} 約{mins}分", f"更新日 {now:%Y.%m.%d}"]
+        top_html = ('<div class="hta-top">\n<div class="hta-w">\n'
+                    f'<p class="cs-crumb">{html.escape(" · ".join(x for x in (series["crumb"], board.get("topic", "")) if x))} · <b>{html.escape(board.get("kind", ""))}</b></p>\n'
+                    f'<div class="cs-tags">\n<span class="cs-cat"><i></i>{html.escape(" · ".join(cat_parts))}</span>\n'
+                    f'<span class="cs-no">{html.escape(str(board.get("no", "")))}</span>\n</div>\n'
+                    '<div class="cs-info">\n' + "\n".join(f"<span>{x}</span>" for x in info) + "\n</div>\n</div>\n</div>")
+
     readers_html = (f'<div class="cs-readers{"" if len(readers) > 1 else " single"}">\n' + "\n".join(readers) + "\n</div>") if readers else ""
     body_html = "\n".join(x for x in [
-        "<!--kg-card-begin: html-->", '<div class="ondi-article">', '<div class="hta">', '<div class="hta-w">',
+        "<!--kg-card-begin: html-->", '<div class="ondi-article">', '<div class="hta">', top_html, '<div class="hta-w">',
         '<div class="cs-lead">' + "".join(lead) + "</div>", key, readers_html, guide,
         '<div class="cs-wrap">', '<aside class="cs-side">',
         '<nav aria-label="目次" class="cs-toc">\n<p class="toc-title">CONTENTS</p>\n<ol>\n' + "\n".join(toc) + "\n</ol>\n</nav>",
@@ -608,8 +644,8 @@ def main():
             im = Image.open(hero)
             kb = hero.stat().st_size / 1024
             hero_info = f"{hero.name} {im.size[0]}×{im.size[1]} {im.format} {kb:.0f}KB"
-            if im.size != (1200, 630) or im.format != "WEBP" or kb > 200:
-                E(f"대표 이미지 규격 아님: {hero_info} (1200×630 WebP 200KB 이하)")
+            if im.size[0] < 1200 or abs(im.size[0] / im.size[1] - 1800 / 945) > 0.01 or im.format != "WEBP" or kb > 200:
+                E(f"대표 이미지 규격 아님: {hero_info} (1.905:1, 폭 1200~1800, WebP 200KB 이하 — make_hero.py)")
         except ImportError:
             W("Pillow 없음 — 대표 이미지 규격을 확인하지 못함")
     alt_p = out / "hero_alt.txt"
@@ -635,6 +671,9 @@ def main():
     when = "확인 즉시 (속보)" if route == "속보" else f"{next_weekday_8(now):%Y-%m-%d %H:%M} JST 예약 (평일 오전 8시)"
     seo_title = title if meta["seo_title"] in ("", "-") else meta["seo_title"]
     axis = card.get("axis", "")
+    tags = tag_slugs(axis, route, card.get("type", fm.get("type", "")))
+    if not TAGS["axis"].get(axis):
+        W(f"주제 축 「{axis}」의 사이트 태그가 tags.json에 없음 — 사람에게 묻는다 (지금은 ja만)")
     (out / "ghost.md").write_text(f"""---
 slug: {slug}
 built_at: {now:%Y-%m-%dT%H:%M%z}
@@ -656,8 +695,8 @@ draft: {a.draft}
 | Post title | {title} |
 | Post URL (slug) | {slug} — 발행 뒤 바꾸지 않는다 |
 | Excerpt | {meta["excerpt"]} |
-| Tags | `{AXIS_TAG.get(axis, "?")}`(주제 축 {axis}, 맨 앞) + 글 종류 「{card.get("type", fm.get("type", ""))}」 — 기존 태그 중 맞는 것. 새 태그는 만들지 말고 묻는다 |
-| Authors | ヒカリちゃん 스태프 계정 (D38) — 아직 없으면 지금 계정 그대로 두고 보고 |
+| Tags | {" → ".join(f"`{t}`" for t in tags)} (이 순서, 기존 태그만 — tags.json) |
+| Authors | `ひかり` (Ghost 스태프 slug `hikari`, D38) — ghost_upload.py가 자동으로 넣는다 |
 | Feature image | `{hero.name}` / alt: {hero_alt or "(hero_alt.txt 없음)"} |
 | Visibility | Public (전체 공개) |
 | Code injection | 비워 둔다 (FAQ 구조화 데이터는 카드 2 끝에 들어 있음) |
@@ -691,6 +730,15 @@ draft: {a.draft}
 - [ ] 이메일 발송이 꺼져 있다 (Publish only)
 - 확인 뒤 발행·예약하고 에이전트에게: 「발행했어 {slug} <글 URL>」 (예약이면 「예약했어 {slug} <URL> <YYYY-MM-DD HH:MM>」)
 """)
+    # ghost_upload.py가 읽는 값 (D62) — ghost.md와 같은 값
+    (out / "ghost.json").write_text(json.dumps({
+        "slug": slug, "built_at": f"{now:%Y-%m-%dT%H:%M%z}", "title": title, "custom_excerpt": meta["excerpt"],
+        "meta_title": seo_title, "meta_description": meta["meta"],
+        "og_title": meta["og_title"], "og_description": meta["og_description"],
+        "twitter_title": meta["og_title"], "twitter_description": meta["og_description"],
+        "tag_slugs": tags,
+        "feature_image_file": hero.name if hero.exists() else "", "feature_image_alt": hero_alt,
+    }, ensure_ascii=False, indent=1) + "\n")
     ct = card_p.read_text()
     line = f"publish: publish/{slug}/ ({now:%Y-%m-%d})"
     ct = re.sub(r"(?m)^publish: .*$", line, ct, count=1) if re.search(r"(?m)^publish: ", ct) else \
@@ -707,7 +755,7 @@ def report(slug, out):
     if errs:
         print(f"불통과 — 오류 {len(errs)}개 (파일을 쓰지 않음)")
         sys.exit(1)
-    print(f"통과 — publish/{slug}/ (card1-style.html · card2-body.html · preview.html · ghost.md)")
+    print(f"통과 — publish/{slug}/ (card1-style.html · card2-body.html · preview.html · ghost.md · ghost.json)")
 
 
 if __name__ == "__main__":

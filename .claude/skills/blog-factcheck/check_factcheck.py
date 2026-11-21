@@ -10,7 +10,8 @@
   python3 -I check_factcheck.py drafts/<slug>.md --fill-titles INDEX  fetch_page.py의 index.json으로 제목·연 날 채우기
   python3 -I check_factcheck.py drafts/<slug>.md --write-sources    초안 SOURCES를 URL별 번호로 쓰기
   python3 -I check_factcheck.py drafts/<slug>.md                    점검 (초안 점검 check_draft.py 포함)
-  python3 -I check_factcheck.py drafts/<slug>.md --recheck          다듬기 뒤: 대조표와 달라진 사실 문장 목록
+  python3 -I check_factcheck.py drafts/<slug>.md --recheck          다듬기 뒤: 달라진 사실 문장을 「재대조 대상」/「표현만 바뀜(생략)」으로 (D61)
+  python3 -I check_factcheck.py drafts/<slug>.md --recheck --write-skips   표현만 바뀐 것을 재대조 기록에 근거 승계로 적기
 종료 코드 0 = 통과, 1 = 오류
 """
 import argparse
@@ -37,6 +38,44 @@ STALE_DAYS = 7
 REPORT_SECTIONS = ["요약", "출처 다시 열기", "대조표", "실명 기업 문장", "쓰지 않을 것 확인", "고친 내용", "재대조 기록"]
 SRC_HEAD = "| 번호 | 제목 | 발행처 | 발표일 | URL | S번호 | 등급 | 다시 열기 | 연 날 | 결과 |"
 ROW_HEAD = "| # | 위치 | 문장 | 표시 | 핵심 | 판정 | 근거·조치 |"
+
+
+# D61: 사실 표지 — 이것이 같으면 「표현만 바뀜」으로 보고 재대조를 생략한다
+LIMIT_WORDS = ("だけ", "のみ", "すべて", "全て", "全部", "一部", "自分で", "必ず", "限る", "限り", "以上", "以下", "以前",
+               "以降", "未満", "可能性", "おそれ", "恐れ", "まで", "から", "ほとんど", "多く", "少なくとも", "約", "ごろ", "頃")
+NEG_RE = re.compile(r"(ない|ません|なく|ず[、。]|ぬ|不要|無効)")
+
+
+def markers(t):
+    """문장 → 사실 표지 (숫자·날짜·판 번호, S번호, 영문 고유명사, 가타카나 말, 한정·범위어, 부정, 주어)"""
+    from collections import Counter
+    d = display(t)
+    m = Counter()
+    for x in re.findall(r"\d+(?:[.,]\d+)*", d):
+        m["num:" + x] += 1
+    for x in S_RE.findall(t):
+        m["src:" + x] += 1
+    for x in re.findall(r"[A-Za-z][A-Za-z0-9.+\-]*", d):
+        m["en:" + x.lower()] += 1
+    for x in re.findall(r"[ァ-ヴー]{3,}", d):
+        m["kana:" + x] += 1
+    for w in LIMIT_WORDS:
+        if w in d:
+            m["lim:" + w] += d.count(w)
+    m["neg"] = len(NEG_RE.findall(d))
+    for w in ("求め", "呼びかけ", "勧め", "推奨", "必要", "義務", "禁止", "予定", "見込み", "確認でき"):   # 말한 쪽의 태도·강도
+        if w in d:
+            m["stance:" + w] += d.count(w)
+    sub = re.match(r"^(.{1,24}?)(?:によると|は|が)", d)
+    if sub:
+        m["sub:" + re.sub(r"[「」、\s]", "", sub.group(1))] += 1
+    return m
+
+
+def bigram_sim(a, b):
+    A = {a[i:i + 2] for i in range(len(a) - 1)}
+    B = {b[i:i + 2] for i in range(len(b) - 1)}
+    return len(A & B) / max(1, len(A | B))
 
 
 def display(s):
@@ -170,10 +209,9 @@ def need_reopen(route, groups, units_, today):
             if (today - d).days > STALE_DAYS:
                 why.append(f"{STALE_DAYS}일 지남")
                 break
-        if route == "속보":
-            need[g["url"]] = why if "속보 A" in why else []
-        else:
-            need[g["url"]] = why
+        # D61: 속보도 핵심 문장의 출처만 다시 연다 (A등급 전부 → 핵심). 나머지는 노트의 원어 원문 문장과 대조.
+        #      발행 직전 공식 발표 재확인은 blog-publish가 한다
+        need[g["url"]] = [w for w in why if w != "속보 A"]
     return need
 
 
@@ -358,12 +396,44 @@ def check(a, root, recheck=False):
     # 1. 초안의 모든 단위가 대조됐는지
     missing = [u for u in us if key(u["text"]) not in base]
     if recheck:
-        if missing:
-            print(f"다듬기 뒤 달라졌거나 새로 생긴 대조 단위 {len(missing)}개 — 원문과 다시 대조해 「재대조 기록」에 적는다:")
-            today = datetime.now(JST).strftime("%Y-%m-%d")
-            for u in missing:
+        today = datetime.now(JST).strftime("%Y-%m-%d")
+        # D61: 달라진 단위마다 원래 대조 행(같은 위치·가장 비슷한 문장)을 찾아 사실 표지를 비교한다
+        pool = [r for r in rows + rech if r["verdict"] in OK_VERDICT and key(r["text"]) not in cur_keys]
+        todo, skip = [], []
+        for u in missing:
+            cand = sorted(((bigram_sim(key(u["text"]), key(r["text"])), r) for r in pool
+                           if r["pos"].split("(")[0] == u["pos"].split("(")[0]), key=lambda x: -x[0])
+            if cand and cand[0][0] >= 0.35 and markers(cand[0][1]["text"]) == markers(u["text"]) \
+                    and set(S_RE.findall(" ".join(u["tags"]))) <= set(S_RE.findall(cand[0][1]["tags"] + cand[0][1]["basis"])):
+                skip.append((u, cand[0][1]))
+                pool.remove(cand[0][1])
+            else:
+                todo.append((u, cand[0][1] if cand else None))
+        if todo:
+            print(f"재대조 대상 {len(todo)}개 — 사실 표지(숫자·날짜·고유명사·S번호·한정어·부정·주어)가 바뀌었거나 새 문장. 원문과 다시 대조해 「재대조 기록」에:")
+            for u, r in todo:
                 tg = " ".join(u["tags"]) if u["tags"] else "-"
+                if r:
+                    a_, b_ = markers(r["text"]), markers(u["text"])
+                    diff = sorted(set((a_ - b_) | (b_ - a_)))
+                    print(f"  ↳ 원래 #{r['no']}: {r['text'][:60]} / 바뀐 표지: {', '.join(diff)[:120]}")
                 print(f"| {today} | {u['pos']} | {u['text']} | {tg} | {'●' if u['core'] else ''} |  |  |")
+        if skip:
+            print(f"표현만 바뀜 {len(skip)}개 — 사실 표지가 같아 재대조 생략 (--write-skips 로 재대조 기록에 근거 승계):")
+            for u, r in skip:
+                print(f"  - [{u['pos']}] #{r['no']} → {u['text'][:60]}")
+        if a.write_skips and skip:
+            rtxt = rp.read_text()
+            add = "".join(f"| {today} | {u['pos']} | {u['text']} | {' '.join(u['tags']) if u['tags'] else '-'} | {'●' if u['core'] else ''} "
+                          f"| {r['verdict']} | 표현만 바뀜(사실 표지 같음, D61) — #{r['no']} 근거 승계: {r['basis']} |\n" for u, r in skip)
+            i = rtxt.index("## 재대조 기록")
+            j = rtxt.find("\n## ", i + 5)
+            j = len(rtxt) if j < 0 else j
+            body = rtxt[i:j].rstrip("\n") + "\n" + add
+            rp.write_text(rtxt[:i] + body + ("\n" + rtxt[j:].lstrip("\n") if j < len(rtxt) else ""))
+            print(f"재대조 기록에 {len(skip)}행 적음 (근거 승계)")
+        print(f"재대조 대상 {len(todo)}개 / 생략 {len(skip)}개")
+        missing = [u for u, _ in todo]
         gone = [r for r in rows if r["verdict"] in ("일치", "고침") and key(r["text"]) not in cur_keys]
         if gone:
             print(f"대조표에 있었는데 초안에서 사라진 사실 문장 {len(gone)}개 (다듬기에서 지웠거나 바꿈):")
@@ -480,6 +550,7 @@ def main():
     ap.add_argument("--fill-titles")
     ap.add_argument("--write-sources", action="store_true")
     ap.add_argument("--recheck", action="store_true")
+    ap.add_argument("--write-skips", action="store_true")
     a = ap.parse_args()
     root = Path(a.root)
     if a.init:

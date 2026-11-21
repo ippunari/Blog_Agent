@@ -1,0 +1,39 @@
+{
+ "_note": "Ghost 실제 태그 slug (2026-11-21 기존 글 46편에서 확인). 순서 = Ghost 태그 순서(첫째가 기본 태그). 새 태그는 만들지 않는다 — 없는 축·종류는 사람에게 묻는다",
+ "lang": [
+  "ja"
+ ],
+ "axis": {
+  "AI": [
+   "howto",
+   "howto-ai"
+  ],
+  "보안": [
+   "websekiyuritei",
+   "phphuri"
+  ],
+  "개발": []
+ },
+ "security_cat": {
+  "_note": "보안 축만: 글이 답하는 질문 종류 → #cat 태그 (route 속보는 news)",
+  "속보": "hash-cat-news",
+  "대책|가이드|해결|고치": "hash-cat-fix",
+  "확인|점검|체크": "hash-cat-check",
+  "판단|선택|비교|맡길": "hash-cat-decide",
+  "관리|운영": "hash-cat-manage"
+ },
+ "board": {
+  "_note": "글 머리 보드(hta-top) — 기존 글에서 확인 (D65). crumb = 분류 줄 앞부분, no = 번호 표시 앞말, time = 읽는 시간 말",
+  "보안": {
+   "crumb": "PHPフリー · Webセキュリティ",
+   "no": "PHPフリー",
+   "time": "読了時間"
+  },
+  "AI": {
+   "crumb": "HowtoAI",
+   "no": "HowtoAI",
+   "time": "読む時間",
+   "topic": "AI × 実務 / ChatGPT / AIニュース"
+  }
+ }
+}

@@ -270,7 +270,16 @@ def check(a, root):
     if err:
         E(err)
     else:
+        src_lines = text.splitlines()
         for m in msgs:
+            # 「方 => ほう」: 형태소 분석이 사람을 뜻하는 「方(かた)」(持っている方・知りたい方は)까지 「ほう」로 읽는다.
+            # 「ほう」 쓰임은 거의 「〜ほうが」이므로, 「方」 다음이 「が」가 아니면 かた로 보고 넘긴다 (D60)
+            if m.get("ruleId") == "ja-hiragana-keishikimeishi" and "方 => ほう" in m["message"]:
+                ln = src_lines[m["line"] - 1] if 0 < m["line"] <= len(src_lines) else ""
+                col = m.get("column", 1) - 1
+                k = ln.find("方", max(col - 2, 0))
+                if k >= 0 and ln[k + 1:k + 2] != "が":
+                    continue
             E(f"{m['line']}행 textlint [{m.get('ruleId', '')}] {m['message'].splitlines()[0]}")
 
     # 3·4·5. 문장·문단
