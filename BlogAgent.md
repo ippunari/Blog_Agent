@@ -123,7 +123,7 @@
 | 6 | blog-draft | **ヒカリちゃん 목소리 가이드, 용어집** | — | ☑ |
 | 7 | blog-factcheck | — | — | ☑ |
 | 8 | blog-polish | 자동 교정 도구 설치 | — | ☑ |
-| 9 | blog-publish | Ghost 스태프 계정·API(초안 권한) | Ghost에 초안까지 업로드(키는 로컬 .env, D62) — 발행은 사람 | ☐ |
+| 9 | blog-publish | Ghost 스태프 계정·API(초안 권한) | Ghost에 초안까지 업로드(키는 로컬 .env, D62) — 발행은 사람 | ☑ |
 | 10 | blog-distribute | SNS 계정·2단계 인증 | 게시할 글을 파일로 출력, 사람이 올림 | ☐ |
 | 11 | blog-newsletter | Ghost 뉴스레터 설정 | 원고 파일로 출력 | ☐ |
 | 12 | blog-measure | Search Console·GA4 | 데이터가 쌓이면 실행 | ☐ |
@@ -153,6 +153,7 @@
 - [x] 6번 blog-draft 완성 (2026-11-20) → 다음: 7번 blog-factcheck (PHP 카드가 「대조 대기」)
 - [x] 7번 blog-factcheck 완성 (2026-11-20) → 다음: 8번 blog-polish (먼저: 자동 교정 도구 설치. PHP 카드가 「다듬기 대기」)
 - [x] 8번 blog-polish 완성 (2026-11-20) → 다음: 9번 blog-publish (먼저: Ghost 스태프 계정·API — ⚠ 대표 + 기술 보안팀 확인 전에는 파일 출력만. PHP 카드가 「발행 준비」)
+- [x] 9번 blog-publish 완성 (2026-11-21, Ghost 초안 업로드까지 — 발행은 사람) → 다음: 10번 blog-distribute (먼저: SNS 계정·2단계 인증 — ⚠ 대표 + 기술 보안팀 확인 전에는 파일 출력만. PHP 카드는 편집자 검토·재대조 뒤 「발행 준비」)
 - [x] 5번 blog-outline에서: 속보의 서브 키워드가 질문형이 아닐 때 H2 배치 → 제목·첫 문단·「何が起きた？」 H2에 녹인다 (2026-11-20, D44)
 - [x] 사람 실습 체크리스트 전달 방식 → 공유 드라이브 `03_Blog/trials`에 카드당 실습 문서, 카드 상태 「실습 대기」 (2026-11-20, D45)
 - [ ] 「PHP Free」(사이트)·「PHPフリー」(기존 글 일부) 표기 통일 여부
