@@ -4,7 +4,7 @@
 1. 머리(front matter)와 후보마다 필수 항목
 2. 점수 1~5 정수, 총점 = 가중합 재계산과 일치 (전환 35 / 자료부족 20 / 수요 20 / 경험 15 / 수명 10)
 3. 서브 키워드 3~5개, 속보는 마감 필수
-4. 순위표: 아침(am) = 속보 AI / 속보 보안·개발 / 깊이 새 글 / 깊이 개편, 저녁(pm) = 속보 2개.
+4. 순위표: 아침·저녁 모두 속보 AI / 속보 보안·개발 / 깊이 새 글 (D72).
    표마다 최대 5개, 축·경로 일치, 총점 내림차순, 상세와 값 일치
 6. 추천 ○: 표마다 1개 (속보는 한쪽 표가 비면 다른 쪽 2개). 고른 뒤(☑ 있음)에는 경고만
 7. 「실습」 값, ○ 행은 「추천」 이유 필수, 개편 표는 「[更新]」 가제목만, 「이월」 칸 형식
@@ -22,16 +22,17 @@ import re
 import sys
 from pathlib import Path
 
-WEIGHTS = {"전환": 35, "자료부족": 20, "수요": 20, "경험": 15, "수명": 10}
+WEIGHTS = {"전환": 25, "자료부족": 20, "수요": 35, "경험": 10, "수명": 10}   # 키워드(수요) 우선 (D72)
 FRONT = ["made_at", "slot", "candidates", "counts"]
 FIELDS = ["경로", "원 후보", "주제 축", "글 종류", "가제목", "메인 키워드", "서브 키워드", "키워드 근거",
           "점수", "점수 근거", "일본어 상위 결과", "1키워드1글", "마감", "원문 URL", "실습"]
 TRIALS = {"에이전트 가능", "사람 필요", "해당 없음"}
 MARKS = {"☐", "○", "☑"}
 # (표 제목, 경로, AI 축이어야 하나(None=상관없음), 개편 표인가)
+# 아침·저녁 같은 3표: 속보 AI 1 · 속보 보안·개발 1 · 깊이 새 글 1 (개편 없음, D72)
 TABLES_AM = [("## 속보 순위 — AI", "속보", True, False), ("## 속보 순위 — 보안·개발", "속보", False, False),
-             ("## 깊이 새 글 순위", "일반", None, False), ("## 깊이 개편 순위", "일반", None, True)]
-TABLES_PM = TABLES_AM[:2]
+             ("## 깊이 새 글 순위", "일반", None, False)]
+TABLES_PM = TABLES_AM
 ROUTES = {"속보", "일반"}
 AXES = {"AI", "보안", "개발"}
 TYPES = {"AI 속보", "AI 사용법", "AI 업무 활용", "AI 도입 가이드", "보안 사고 해설",
@@ -108,6 +109,9 @@ def main():
                 f"{tid}: 상위 구성 없음 — 「상위 구성: 대형 n / 전문 n / 작은 사이트 n (작은: 도메인…)」")
         elif not re.search(r"대형\s*\d+\s*/\s*전문\s*\d+\s*/\s*작은 사이트\s*\d+", comp):
             errs.append(f"{tid}: 상위 구성 형식 「대형 n / 전문 n / 작은 사이트 n」")
+        # 깊이 글은 실제 검색 근거가 있는 키워드만 (D72): 「추정」 금지
+        if f.get("경로") == "일반" and "추정" in f.get("키워드 근거", ""):
+            errs.append(f"{tid}: 깊이 글 키워드 근거에 「추정」 — 자동완성·知恵袋·트렌드에서 확인한 키워드만 (D72)")
         subs = [s for s in re.split(r"\s+/\s+", f.get("서브 키워드", "")) if s.strip()]
         if not 3 <= len(subs) <= 5:
             errs.append(f"{tid}: 서브 키워드 {len(subs)}개 (3~5개)")
@@ -187,15 +191,17 @@ def main():
                     errs.append(f"{title}: 총점 내림차순이 아님 ({tid})")
                 prev = int(tot)
         marks[title] = (marks[title], len(rows))
-    # 화·목 아침: 깊이 새 글 표는 AI 실습 후보만 (D35). 후보가 없을 수 있어 경고
-    dm = re.search(r"(\d{4})-(\d{2})-(\d{2})-am", Path(a.file).name)
-    if dm and datetime.date(*map(int, dm.groups())).weekday() in (1, 3):
+    # 깊이 새 글 몫 (D72): 화·금 저녁 = 개발, 그 밖(주 8회) = AI. 후보가 없을 수 있어 경고
+    dm = re.search(r"(\d{4})-(\d{2})-(\d{2})-(am|pm)", Path(a.file).name)
+    if dm:
+        wd = datetime.date(*map(int, dm.groups()[:3])).weekday()
+        want_axis = "개발" if (dm.group(4) == "pm" and wd in (1, 4)) else "AI"
         mm = re.search(r"## 깊이 새 글 순위[^\n]*\n((?:\|.*\n)+)", text)
         for r in (mm.group(1).splitlines()[2:] if mm else []):
             c = [x.strip() for x in r.strip().strip("|").split("|")]
             d = details.get(c[2]) if len(c) > 2 else None
-            if d and (d["axis"] != "AI" or d["trial"].startswith("해당 없음")):
-                warns.append(f"화·목 아침 깊이 새 글 표에 AI 실습이 아닌 후보 {c[2]} — AI 실습 후보가 없을 때만 (추천에 이유)")
+            if d and d["axis"] != want_axis:
+                warns.append(f"깊이 새 글 표({want_axis} 몫)에 {d['axis']} 후보 {c[2]} — {want_axis} 후보가 없거나 검색 수요 5일 때만 (추천에 이유)")
     # 추천 ○ 개수: 표마다 1개, 속보는 한쪽이 비면 다른 쪽 2개
     names = [t[0] for t in tables]
     for i, title in enumerate(names):

@@ -1,11 +1,11 @@
 {
  "_comment": "점수표 '회사 경험'(15%) 기준 = 회사 서비스와 이어지는가 (D39). 서비스: PHP Free 30초 점검·60분 상담 / 迅速開発 견적·상담 / AI 도입 지원(상담·교육·구축) — BlogAgent.md 「연결할 서비스」. 바꾸면 rules/blog-topic.md 변경 이력에 적는다",
- "status": "2026-11-20 서비스 연결 기준",
+ "status": "2026-11-21 AI 활용·도입·개발 중심, PHP·보안은 입구 (D71)",
  "areas": [
   {
    "area": "PHP·WordPress·홈페이지 보안 (취약점·변조·버전 업)",
-   "score": 5,
-   "service": "PHP Free 점검·상담에 바로"
+   "score": 3,
+   "service": "PHP Free(입구 서비스)에 바로 — 입구라 3"
   },
   {
    "area": "개발 발주·견적·MVP·외주·테스트 데이터",
@@ -19,22 +19,22 @@
   },
   {
    "area": "AI 업무 활용 (사례·업무 개선)",
-   "score": 3,
-   "service": "AI 도입 지원에 간접"
+   "score": 4,
+   "service": "AI 도입 지원에 가깝게"
   },
   {
    "area": "AI 도구 사용법·실습 (ChatGPT·Gemini·Claude·Copilot)",
-   "score": 3,
-   "service": "AI 도입 지원·뉴스레터에 간접"
+   "score": 5,
+   "service": "AI 도입 지원(교육)에 바로"
   },
   {
    "area": "웹 서버·호스팅·메일 보안 (nginx, VPS, 사칭 메일)",
-   "score": 3,
+   "score": 2,
    "service": "PHP Free·상담에 간접"
   },
   {
    "area": "보안 사고 해설 (기업 정보 유출·위탁처·공급망)",
-   "score": 3,
+   "score": 2,
    "service": "상담에 간접"
   },
   {
@@ -44,8 +44,8 @@
   },
   {
    "area": "AI 모델 발표·업계·투자 뉴스, 엔터·창작 AI",
-   "score": 1,
-   "service": "서비스 밖"
+   "score": 2,
+   "service": "AI 도입 지원에 간접"
   }
  ]
 }

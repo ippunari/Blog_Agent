@@ -575,10 +575,11 @@ def main():
     #     글 머리(전체 폭 대표 이미지 + 흰 보드)를 만든다. 기존 글 130편이 모두 이 블록을 가진다 ---
     bp = root / "publish" / slug / "board.json"
     board = json.loads(bp.read_text()) if bp.exists() else {}
-    series = TAGS.get("board", {}).get(card.get("axis", ""), {})
+    # site_axis: 사이트 분류(태그·글 머리)만 다른 축으로 둘 때 — 사람이 정한 카드만 (D68)
+    series = TAGS.get("board", {}).get(card.get("site_axis") or card.get("axis", ""), {})
     top_html = ""
     if not series:
-        E(f"주제 축 「{card.get('axis', '')}」의 글 머리 분류(tags.json board)가 없음 — 사람에게 묻는다")
+        E(f"주제 축 「{card.get('site_axis') or card.get('axis', '')}」의 글 머리 분류(tags.json board)가 없음 — 사람에게 묻는다")
     elif not board:
         E(f"publish/{slug}/board.json 없음 — 글 머리 보드 값(kind·cat·no)을 SKILL 3장대로 쓴다 (D65)")
     else:
@@ -670,7 +671,7 @@ def main():
         W(f"{now.year}년 일본 공휴일이 JP_HOLIDAYS에 없음 — 예약 시각이 공휴일일 수 있다")
     when = "확인 즉시 (속보)" if route == "속보" else f"{next_weekday_8(now):%Y-%m-%d %H:%M} JST 예약 (평일 오전 8시)"
     seo_title = title if meta["seo_title"] in ("", "-") else meta["seo_title"]
-    axis = card.get("axis", "")
+    axis = card.get("site_axis") or card.get("axis", "")   # D68
     tags = tag_slugs(axis, route, card.get("type", fm.get("type", "")))
     if not TAGS["axis"].get(axis):
         W(f"주제 축 「{axis}」의 사이트 태그가 tags.json에 없음 — 사람에게 묻는다 (지금은 ja만)")

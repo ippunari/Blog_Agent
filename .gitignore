@@ -28,6 +28,8 @@ publish/*
 !publish/.gitkeep
 reports/*
 !reports/.gitkeep
+sns/*
+!sns/.gitkeep
 
 # 파이썬 캐시
 __pycache__/

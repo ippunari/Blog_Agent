@@ -96,6 +96,7 @@ python3 -I $U <slug>             # 초안 만들기 — 다시 돌리면 같은 
 ```
 - `.env`에 키가 없으면 「키 없음」으로 멈춘다 → 4장에서 사람이 ghost.md대로 붙여 넣는다
 - 태그는 `tags.json`의 실제 slug만 (없는 태그는 붙이지 않고 ⚠). 사이트 태그가 바뀌면 tags.json을 고친다
+- 카드에 `site_axis:`가 있으면 태그·글 머리 보드는 그 축으로 (사람이 정한 카드만, D68). 주제 축에 태그·보드가 없으면 멈추고 묻는다
 - 대표 이미지·본문을 고쳐 3장을 다시 돌렸으면 이 단계도 다시 (같은 초안 갱신). 이미 사람이 발행·예약한 글이면 스크립트가 멈춘다
 
 ## 4. ◆ 사람에게 넘기기 (보고하고 기다린다)
@@ -111,7 +112,8 @@ python3 -I $A <slug> --verify-live                        # 예약 글이 공개
 ```
 - URL·slug 확인 → 공개 글 점검(제목·SOURCES·남은 표시·FAQPage 1개·og:image) → 역링크 넣을 곳 다시 확인(`--verify-links`) → `backlinks.md` → 카드 `published_at`·`url`·`status: 발행 완료` → 카드·노트·설계·초안·보고서·publish 폴더를 `done/YYYY-MM/`로
 - 점검 오류면 아무것도 옮기지 않는다 → 사람에게 무엇을 Ghost에서 고칠지 알린다
-- 보고: 점검 결과 / **역링크 붙이기**(`publish/done/YYYY-MM/<slug>/backlinks.md` — 사람이 기존 글 카드에 붙인다, 위치 문제는 묻는다) / Search Console 색인 요청(연결 뒤, 지금은 남은 일) / 다음 단계 blog-distribute
+- 보고: 점검 결과 / **역링크 붙이기**(`publish/done/YYYY-MM/<slug>/backlinks.md` — 사람이 기존 글 카드에 붙인다, 위치 문제는 묻는다) / Search Console 색인 요청(연결 뒤, 지금은 남은 일)
+- **점검이 통과하면 이어서 바로 blog-distribute를 실행한다** (SNS 문안 → ◆ 확인 → 「올려」, D66). 예약 글은 `--verify-live` 통과 뒤
 
 ## 하지 않는 것
 - Ghost에서 발행·예약·삭제, 이메일 발송 (Publish only) — 초안 올리기만 한다 (D62)

@@ -8,7 +8,7 @@ outlines/<slug>.md 를 읽어 rules/common.md 1·4·6장, rules/blog-outline.md 
  4. slug: 카드 slug와 같음, 형식, 개편이면 기존 글 목록에 있는 slug
  5. 목차: H2 4~8개, 키워드 H2 절반 이상, 직답 40~80자, 형식 칸, 사건 검색어는 「何が起きた」 H2에,
     「とは」 키워드면 「〇〇とは、」 정의 직답
- 6. 쓸 사실 S번호가 조사 노트에 있는지 / 분량: 글 종류 범위·상위 글 중앙값 × 0.8~1.2·섹션 합계 + 고정 부품 ≤ 상한 90% (D47)
+ 6. 쓸 사실 S번호가 조사 노트에 있는지 / 분량: 글 종류 범위·상위 글 중앙값 × 0.8~1.2(속보는 1500~max(3000, 중앙값×1.2), D69)·섹션 합계 + 고정 부품 ≤ 상한 90% (D47)
     3行まとめ·代表ヤン은 H2 칸이 아니라 상자
  7. 서브 키워드: 질문형 3개 이상 (속보: 사건 1~2 + 질문형 2 이상), 카드에 D43 키워드 절
  8. CTA: 주·보조가 카드와 같음, 버튼 문구·링크가 common.md 「CTA 버튼」 표와 같음, 속보는 글 끝만
@@ -370,12 +370,17 @@ def main():
                 E("노트에 「상위 글 분량」 중앙값이 없음 — blog-research로 (D47, D58: 속보도)")
             else:
                 med = int(mm2.group(1).replace(",", ""))
-                want_lo, want_hi = round(med * 0.8, -2), round(med * 1.2, -2)
+                if route == "속보":   # 속보: 중앙값은 상한 참고만, 하한 1,500 — 분량 때문에 멈추지 않는다 (D69)
+                    want_lo, want_hi = 1500, max(3000, round(med * 1.2, -2))
+                else:
+                    want_lo, want_hi = round(med * 0.8, -2), round(med * 1.2, -2)
                 if abs(lo - want_lo) > want_lo * 0.1 or abs(hi - want_hi) > want_hi * 0.1:
-                    E(f"length {lo}-{hi} ≠ 상위 글 중앙값 {med}자 × 0.8~1.2 = {int(want_lo)}-{int(want_hi)} (D58 — 글 종류 범위로 자르지 않는다)")
-        fx = FIXED["속보" if route == "속보" and hi <= 3000 else "일반"]   # 해설형 분량이면 일반 부품 (D59)
+                    E(f"length {lo}-{hi} ≠ {int(want_lo)}-{int(want_hi)} (" + ("속보: 1500 - max(3000, 중앙값 × 1.2), D69" if route == "속보" else f"상위 글 중앙값 {med}자 × 0.8~1.2, D58") + ")")
         n_matome = len([r for r in body if "FAQ" not in r[2] and "よくある質問" not in r[2]])
         n_cta = len([r for r in table(sec.get("CTA", [])) if len(r) >= 3])
+        fs = FIXED["속보"]
+        short = route == "속보" and total + fs[0] + fs[1] * n_matome + fs[2] * n_cta <= 3000
+        fx = FIXED["속보" if short else "일반"]   # 짧은 속보(설계 분량 3,000자 이하)만 속보 부품, 그 밖은 일반 부품 (D59, D69)
         fixed = fx[0] + fx[1] * n_matome + fx[2] * n_cta
         cap = int(hi * DRAFT_RATIO)
         if total + fixed > cap:
@@ -461,6 +466,8 @@ def main():
         elif buttons:
             E(f"CTA 「{name}」가 common.md 「CTA 버튼」 표에 없음")
     for need in (f["cta_main"], f["cta_sub"]):
+        if need == "없음":   # 보조 CTA 없음 (D70 — 뉴스레터 입구가 없는 동안)
+            continue
         if need not in names:
             E(f"CTA 「{need}」가 CTA 표에 없음")
     if route == "속보" and any("끝" not in r[0] for r in cta):

@@ -210,8 +210,8 @@ def main():
         sec_ranges.append((h, i, end))
     # 글 뼈대 순서 (voice-hikari.md 2장, D47): 리드 → 3行まとめ → (こんな方に) → わかること → 案内 → 첫 H2
     route = f["route"]
-    _len = [int(x) for x in re.findall(r"\d+", f.get("length", "").replace(",", ""))]
-    short = route == "속보" and (_len[-1] if _len else 3000) <= 3000   # 짧은 속보만 속보 부품·용어 기준 (D59)
+    _n0 = sum(len(re.sub(r"\s", "", plain(l))) for l in lines if not l.startswith("# ") and not l.startswith("<!--"))
+    short = route == "속보" and _n0 <= 3000   # 짧은 속보(초안 분량 3,000자 이하)만 속보 부품·용어 기준 (D59, D69)
     ri = 0 if short else 1
     first_h2_i = got[0][0] if got else len(lines)
     lead_i = next((i for i, l in enumerate(lines[:first_h2_i]) if l.strip() and not in_box[i]

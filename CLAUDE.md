@@ -33,6 +33,7 @@
 - `briefs/<slug>.md` 진행 중인 주제 카드 (blog-research로 넘김). 발행 완료는 `briefs/done/YYYY-MM/`, 중단은 `briefs/dropped/` (BlogAgent.md 「주제 카드의 상태와 정리」)
 - `research/<slug>.md` 조사 노트, `outlines/<slug>.md` 설계안, `drafts/<slug>.md` 초안, `factcheck/<slug>.md` 사실 대조 보고서 — 발행 완료는 각 폴더의 `done/YYYY-MM/`, 중단은 `dropped/` (카드와 함께 옮긴다)
 - `publish/<slug>/` Ghost에 붙일 발행 파일(임시 방식) — 발행 완료는 `publish/done/YYYY-MM/` (D50)
+- `sns/YYYY-MM-DD.md` 날짜별 SNS 문안 모음(보기용 — 원본은 `publish/done/YYYY-MM/<slug>/sns.md`, D66)
 - `reports/` 주간 리포트
 - 이 작업 데이터는 **로컬 폴더에만** 둔다. git에는 프로그램(`.claude/skills/`)·규칙·문서·폴더 구조(`.gitkeep`)만 올린다 (D42)
 

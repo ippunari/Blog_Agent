@@ -131,7 +131,7 @@ def main():
         errs = live_check(c["url"], title, card2)
         for e in errs:
             print("❌", e)
-        print("불통과" if errs else f"통과 — 공개 확인 {c['url']}")
+        print("불통과" if errs else f"통과 — 공개 확인 {c['url']}\n다음: 바로 blog-distribute {slug} (D66)")
         sys.exit(1 if errs else 0)
 
     want = f"{SITE}/ja/blog/{slug}"
@@ -180,7 +180,9 @@ def main():
             shutil.move(str(src), str(dst / name))
             moved.append(f"{folder}/done/{month}/{name}")
     print("옮김:", ", ".join(moved))
-    print("남은 일: 역링크 붙이기(backlinks.md) / Search Console 색인 요청 (연결 뒤) / 다음 단계 blog-distribute")
+    print("남은 일: 역링크 붙이기(backlinks.md) / Search Console 색인 요청 (연결 뒤)")
+    print(f"다음: 예약 글 — 공개된 뒤 --verify-live 통과하면 blog-distribute {slug}" if a.scheduled
+          else f"다음: 바로 blog-distribute {slug} — SNS 문안 (D66)")
 
 
 if __name__ == "__main__":

@@ -4,5 +4,6 @@
   "PHP Free 30초 점검": {"kicker": "PHP Free 30秒の無料チェック", "button": "PHP Freeで30秒チェック（無料）", "link": "/ja/phpfree"},
   "견적·상담 문의": {"kicker": "迅速開発 · 60分の相談は何度でも無料", "button": "つくりたいものを60分相談する（無料）", "link": "/ja#contact"},
   "AI 도입 상담": {"kicker": "AI導入の相談 · 無料", "button": "AI導入を60分相談する（無料）", "link": "/ja#contact"},
+  "迅速開発の進め方": {"kicker": "迅速開発 · 進め方", "button": "迅速開発の進め方を見る", "link": "/ja#process"},
   "뉴스레터 구독": {"kicker": "ニュースレター · 毎週金曜", "button": "毎週金曜のニュースレターを受け取る（無料）", "link": null}
 }
