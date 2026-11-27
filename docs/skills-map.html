@@ -162,16 +162,17 @@ th{background:var(--code);font-size:13px}
 <!-- 1 collect -->
 <div class="card" id="collect">
   <div class="card-head"><span class="n">1</span><h3>blog-collect — 수집</h3><code>/blog-collect [am|pm] [--hours N]</code></div>
-  <p>영어·한국어·일본어·중국어권 AI·보안 소식과 일본 독자의 질문을 모아, 같은 사건을 묶은 후보 목록(최대 약 40건 — 넘치면 AI 활용·개발 먼저, 일본 보안 사고는 중소기업 경로만 최대 5건, D73)을 만든다. 매일 2회.</p>
+  <p>영어·한국어·일본어·중국어권 AI·보안 소식과 일본 독자의 질문을 모아, 같은 사건을 묶은 후보 목록(최대 약 40건)을 만든다. 축별·언어별 건수 없이 <b>우리 회사에 중요한 순서</b> 하나로 고른다 — ① 미국 주요 AI 기업의 새 발표·신기술 + 급한 보안(실제 악용 중·일본 중소기업 경로의 사고) ② 바로 글이 되는 재료(사용법·도입·개발 발주) ③ 그 밖의 AI 새 소식 — 급하지 않은 보안은 남기지 않음 (PHP·보안은 입구일 뿐, D84). 40건은 상한일 뿐. 매일 2회.</p>
   <div class="io">
     <div><h4>입력</h4><ul>
-      <li><code>sources.json</code> 출처 목록 (피드·검색)</li>
+      <li><code>sources.json</code> 출처 목록 (피드·검색 — 정부 도입 출처 経産省·中小企業庁·総務省·IT導入補助金·IPA DX, 반응 출처 はてブ·Qiita·Zenn 포함)</li>
+      <li><code>tracked_products.json</code> 추적 제품 (ChatGPT·Claude·Gemini·Workspace·M365 Copilot·NotebookLM 공식 업데이트, D82)</li>
       <li><code>seed_keywords.json</code> 자동완성 씨앗 키워드</li>
       <li>직전 <code>candidates/</code> 파일 (수집 범위 = 그 시각 −24시간, 이미 수집한 글 표시)</li>
-      <li>웹: RSS·CISA KEV·Google 트렌드 급상승·Google 자동완성, WebSearch, 知恵袋·note</li>
+      <li>웹: RSS·CISA KEV·<b>Google 뉴스 RSS</b>(한국·중국 회사 발표, D83)·Google 트렌드 급상승·Google 자동완성, WebSearch, 知恵袋·note</li>
     </ul></div>
     <div><h4>출력</h4><ul>
-      <li><code>candidates/YYYY-MM-DD-am|pm.md</code> — 후보(C01…)·질문 입구·검색 트렌드</li>
+      <li><code>candidates/YYYY-MM-DD-am|pm.md</code> — 후보(C01…, AI → 개발 → 보안 순, 「반응」 칸)·언어별 건수·질문 입구·검색 트렌드</li>
       <li>공유 드라이브 <code>03_Blog/candidates</code>에 보기용 Google 문서 (머리에 <code>doc:</code> ID)</li>
     </ul></div>
   </div>
@@ -179,15 +180,16 @@ th{background:var(--code);font-size:13px}
     <dt>카드 상태</dt><dd>— (카드를 만들지 않음)</dd>
     <dt><span class="tag t-human">◆ 사람</span></dt><dd>없음 (Drive 문서는 읽고 댓글만)</dd>
     <dt>스크립트</dt><dd><ul>
-      <li><code>fetch_feeds.py</code> 피드·KEV·트렌드·자동완성을 한 번에 가져옴 → <code>$SP/fetch.json</code>, <code>fetch.titles.txt</code></li>
-      <li><code>check_candidates.py</code> 필수 항목·값·<b>수집 데이터에 없는 URL</b> 점검</li>
+      <li><code>fetch_feeds.py</code> 피드·KEV·트렌드·자동완성·추적 제품을 한 번에 가져옴 → <code>$SP/fetch.json</code>, <code>fetch.titles.txt</code> (출처 상태 ok·empty·error, 반응 수 はてブ·HN)</li>
+      <li><code>check_candidates.py</code> 필수 항목·값·<b>수집 데이터에 없는 URL</b>·counts·검색 안 한 출처(<code>search_done.txt</code>)·언어별 줄 점검 (건수 상한·하한은 보지 않음, D84)</li>
       <li><code>export_doc.py</code> Drive용 보기 사본 md 만들기</li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-collect.md</code> (출처 표·등급 A~D·중복 처리)</dd>
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
-    <li>출처 추가·삭제 → <code>rules/blog-collect.md</code> 표와 <code>sources.json</code>을 <b>함께</b></li>
-    <li>후보 상한·우선순위(D73)·뺄 것 → SKILL.md 5장 + <code>rules/blog-collect.md</code> / 후보 파일 형식 → SKILL.md 6장 (blog-topic이 이 형식을 읽으므로 같이 확인)</li>
+    <li>출처 추가·삭제 → <code>rules/blog-collect.md</code> 표와 <code>sources.json</code>을 <b>함께</b> / 추적 제품 → <code>tracked_products.json</code> + rules 「추적 제품」 줄</li>
+    <li>고르는 순서(중요도)·보안 기준 → SKILL.md 5장 5번 + <code>rules/blog-collect.md</code> 「수집 범위와 상한」 (D84)</li>
+    <li>후보 상한·뺄 것 → SKILL.md 5장 + <code>rules/blog-collect.md</code> / 후보 파일 형식 → SKILL.md 6장 (blog-topic이 이 형식을 읽으므로 같이 확인)</li>
   </ul></div>
 </div>
 

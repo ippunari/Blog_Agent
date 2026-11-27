@@ -171,13 +171,15 @@
 - [ ] 첫 실제 글의 「올려」 때 확인: LinkedIn 링크 카드·기호, Facebook 링크 미리보기, Threads 링크 (D74)
 - [ ] 회사 계정으로 바꾸기: Windsor에서 Threads·Facebook 회사 계정 연결 + `.claude/skills/blog-distribute/accounts.json` label
 - [ ] SNS 고객 창구 (사람): 댓글·DM 하루 1번 이상 확인, 문의는 상담 창구로 안내 / 각 SNS 프로필 소개·링크를 블로그·상담 페이지로 1회 설정 (D75)
-- [ ] SNS 첫 실제 게시 전: LinkedIn 회사 페이지 게시 승인 기록 (대표 + 기술 보안팀, D74) / 첫 게시 때 LinkedIn 이미지 글·기호, Threads·Facebook 링크 미리보기 이미지 확인 (D76)
+- [ ] ~~SNS 첫 실제 게시 전: LinkedIn 회사 페이지 게시 승인 기록~~ → 2026-11-22 사용자가 승인을 받은 것으로 하고 첫 게시(php-critical-vulnerabilities-patch) / 첫 게시 때 LinkedIn 이미지 글·기호, Threads·Facebook 링크 미리보기 이미지 확인 (D76)
 - [ ] 기존 업로드 글(PHP 등)은 SNS용 JPEG가 없다 — 「Ghost에 올려」를 한 번 더 하면 `hero_jpg_url`이 생긴다 (D76)
 - [ ] note 이용 규칙 확인 — 하루 6편 올리기·AI로 쓴 글 (D76)
 - [ ] 댓글·DM 매일 보고 (Windsor로 읽기) — 지금은 사람이 직접 / 같은 계정 연속 게시 간격 — 13번 전체 연결
 - [ ] 편집부 담당자 개인 계정 공유의 스텔스 마케팅 규제 표시 — 법률 확인 항목에 넣는다
 - [ ] 발행 직후 색인 요청(IndexNow·Search Console) — 검색에 가장 직접 효과. blog-publish·사이트 설정 쪽
 - [ ] X 자동 게시 여부 — Windsor 미지원. 지금은 사람이 붙여 넣기. X API 키(글 1편 약 $0.22)를 받을지
+- [ ] blog-topic을 고칠 때: 「AI 속보」 전환 점수(2점, D71)를 다시 본다 — 미국 최신 AI 뉴스·신기술이 글로 더 뽑히게 (사용자, 2026-11-27 — 수집은 D83에서 먼저 바꿈)
+- [ ] ⚠ Google 뉴스 RSS 이용 조건 확인 (대표 + 기술 보안팀) — blog-collect가 한국·중국 회사 발표를 이걸로 모은다. 지금은 제목·링크만 (D83)
 - [ ] 13번 전체 연결에서: 실습 기한(⚠1일 안·⚠지남)·속보 마감을 정해진 시각에 알리는 방법 (지금은 /blog-status를 실행해야 보임)
 
 ## 변경 이력

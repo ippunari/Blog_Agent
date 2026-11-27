@@ -1,0 +1,23 @@
+{
+  "_comment": "추적 제품 목록 (D82, MorningAI의 추적 대상 목록 방식). 일본 중소기업이 실제로 쓰는 AI 제품만 넣는다. 제품마다 공식 업데이트 출처를 하나 이상 둔다 — rss(filter: true면 AI 키워드가 든 글만) 또는 search(domains → allowed_domains). 새 기능·바뀐 화면은 「AI 사용법」 재료. 등급은 모두 A(공식). 제품을 더하거나 뺄 때는 rules/blog-collect.md 「추적 제품」 줄도 고친다.",
+  "products": [
+    {"id": "chatgpt", "name": "ChatGPT", "sources": [
+      {"label": "릴리스 노트", "method": "search", "query": "ChatGPT release notes new features", "domains": ["help.openai.com"]}
+    ]},
+    {"id": "claude", "name": "Claude", "sources": [
+      {"label": "릴리스 노트", "method": "search", "query": "Claude release notes new features", "domains": ["support.claude.com", "docs.claude.com"]}
+    ]},
+    {"id": "gemini", "name": "Gemini", "sources": [
+      {"label": "Google 블로그", "method": "rss", "url": "https://blog.google/products/gemini/rss/"}
+    ]},
+    {"id": "workspace", "name": "Google Workspace (Gemini·NotebookLM)", "sources": [
+      {"label": "Workspace Updates", "method": "rss", "url": "https://workspaceupdates.googleblog.com/feeds/posts/default", "filter": true}
+    ]},
+    {"id": "m365-copilot", "name": "Microsoft 365 Copilot", "sources": [
+      {"label": "Microsoft 365 블로그", "method": "rss", "url": "https://www.microsoft.com/en-us/microsoft-365/blog/feed/", "filter": true}
+    ]},
+    {"id": "notebooklm", "name": "NotebookLM", "sources": [
+      {"label": "Google 블로그", "method": "search", "query": "NotebookLM new feature", "domains": ["blog.google"]}
+    ]}
+  ]
+}

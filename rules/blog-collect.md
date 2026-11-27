@@ -1,9 +1,10 @@
 # blog-collect (수집)
 
-> v1.6 2026-11-21 · 운영하며 보강 · 공통 규칙: [common.md](common.md)
+> v1.9 2026-11-27 · 운영하며 보강 · 공통 규칙: [common.md](common.md)
 
 ## 목적
 4개 언어권의 AI·보안 소식과 독자의 질문을 모아, 중복을 없앤 후보 목록을 만든다.
+- 회사의 주 서비스는 **AI 도입 지원·빠른 개발**이다. **PHP·보안은 손님을 불러오는 입구일 뿐**이다 — 후보는 우리 회사에 중요한 순서로 고르고, 보안은 지금 대응이 필요한 것만 (D71, D84)
 
 ## 입력
 - 아래 출처 목록, 질문 입구
@@ -25,13 +26,16 @@
 ### 출처 목록
 | 언어권 | 공식 | 미디어·커뮤니티 | 보안 |
 |---|---|---|---|
-| 영어 | OpenAI, Anthropic, Google/DeepMind, Microsoft, Meta AI, AWS, Hugging Face | **IT 종합**: The Verge, TechCrunch, VentureBeat, Ars Technica, Wired, Engadget, ZDNET, The Register, CNBC Tech, Axios / **통신사·경제지**: Reuters, Bloomberg, WSJ, FT / **AI 전문**: MIT Technology Review, The Decoder, The Information, 404 Media / **커뮤니티**: Hacker News, Reddit | BleepingComputer, The Hacker News, Krebs on Security, SecurityWeek, Dark Reading, The Record, CISA KEV |
-| 한국어 | 네이버 HyperCLOVA X, 카카오, LG AI연구원, Upstage | AI타임스, ZDNet Korea, 전자신문 / GeekNews | 보안뉴스, KISA |
-| 일본어 | PR TIMES(보도자료) | ITmedia AI+, Impress Watch, 日経クロステック, Publickey, GIGAZINE | IPA, JPCERT/CC, 個人情報保護委員会, Security NEXT, piyolog |
-| 중국어 | DeepSeek, 通义千问(Qwen), 文心, 智谱, Kimi, 豆包 | 机器之心, 量子位, 36氪, InfoQ 中国 | — |
+| 영어 | OpenAI, Anthropic, Google/DeepMind, Microsoft, Meta AI, AWS, Hugging Face | **IT 종합**: The Verge, TechCrunch, VentureBeat, Ars Technica, Wired, Engadget, ZDNET, The Register, CNBC Tech, Axios / **경제지**: Bloomberg, WSJ, FT / **AI 전문**: MIT Technology Review, The Decoder, The Information, 404 Media / **업무 활용·뉴스레터**: One Useful Thing, TLDR AI (C) / **커뮤니티**: Hacker News | BleepingComputer, The Hacker News, CISA KEV |
+| 한국어 | 네이버 HyperCLOVA X, 카카오, LG AI연구원, Upstage (Google 뉴스 RSS), 카카오 기술 블로그 | AI타임스, ZDNet Korea, 전자신문, 블로터, 바이라인네트워크, IT조선 / GeekNews | — |
+| 일본어 | PR TIMES(보도자료), **経済産業省, 中小企業庁, 総務省, IT導入補助金, IPA(DX·발주 자료)** | ITmedia AI+, Impress Watch, 日経クロステック, Publickey, GIGAZINE / **반응**: はてなブックマーク IT, Qiita, Zenn (C) | IPA, JPCERT/CC, 個人情報保護委員会, Security NEXT, piyolog |
+| 중국어 | DeepSeek, 通义千问(Qwen), 文心, 智谱, Kimi, 豆包 (Google 뉴스 RSS) | 机器之心, 量子位, 36氪, InfoQ 中国 | — |
 
 - 일본어 출처의 두 가지 용도: ① 일본 국내 보안 사고 수집 ② 해외 뉴스가 이미 일본어로 다뤄졌는지 확인 (주제 점수의 "일본어 자료 부족")
 - 유료 매체(Bloomberg, WSJ, FT, The Information, 日経クロステック)는 제목·공개 요약만 쓴다
+- 정부 기관(経産省·中小企業庁·総務省·IT導入補助金·IPA DX)의 용도: AI 도입 가이드·개발 발주 글의 재료 — AI 지침, DX, 보조금, 발주·요구 정의 자료 (D82)
+- **추적 제품** (D82): ChatGPT, Claude, Gemini, Google Workspace(Gemini·NotebookLM), Microsoft 365 Copilot, NotebookLM의 공식 업데이트(릴리스 노트·공식 블로그). 새 기능은 「AI 사용법」 재료. 일본 중소기업이 실제로 쓰는 제품만 넣는다 — 목록은 `.claude/skills/blog-collect/tracked_products.json`
+- **뺀 출처** (D82): Reuters·Reddit(검색 도구 접근 거부, Reddit은 RSS도 막힘), Krebs on Security·SecurityWeek·Dark Reading·The Record(기업 보안 중심), 보안뉴스·KISA(일본 독자와 거리가 멂)
 - 기계용 목록(URL·수집 방법): `.claude/skills/blog-collect/sources.json` — 이 표를 바꾸면 함께 고친다
 
 ### 질문 입구
@@ -43,16 +47,22 @@
 
 ### 수집 방법
 1. **RSS·공개 API**: 피드가 있는 출처는 스크립트로 한 번에 가져온다 (출처당 1회 요청)
-2. **WebSearch**: 피드가 없거나 막힌 출처, 중국·한국 공식 발표
-3. **질문 입구**: Google 자동완성은 공개 API, 知恵袋·note는 WebSearch에 도메인을 지정한 간접 검색 (직접 접속하지 않음)
+2. **Google 뉴스 RSS 검색** (D83): 한국·중국 회사 발표 — 그 언어권 설정(hl·gl)으로 출처당 1회. 링크는 news.google.com 중계 주소라 매체 기사 등급 B, 공식 원문은 blog-research. 제목·링크만 쓴다 (⚠ 상업 이용 조건 미확인 — 대표 + 기술 보안팀 확인 항목)
+3. **WebSearch**: 피드가 없거나 막힌 출처 (WebSearch는 미국 기준이라 한국·중국 결과가 약하다). 검색어 끝에 수집 달을 그 출처의 언어로 붙인다 — `November 2026`·`2026年11月`·`2026년 11월` (D85)
+4. **질문 입구**: Google 자동완성은 공개 API, 知恵袋·note는 WebSearch에 도메인을 지정한 간접 검색 (직접 접속하지 않음)
 - 검색은 도메인 지정(allowed_domains)으로 한다. `site:` 연산자는 결과가 걸러지지 않았다 (2026-11-19 시험)
 - 후보 파일의 URL은 **실제로 수집한 데이터에 있는 것만** 쓴다. 저장 전 점검 스크립트로 대조한다 (URL 짐작 금지)
 - 일반 기사 피드(IT 종합·경제지 등)는 AI·보안·개발 키워드가 든 글만 남긴다
 
 ### 수집 범위와 상한
 - 범위: **직전 수집 시각 − 24시간**부터 (겹치게). 피드에 늦게 올라오면서 발표 시각은 앞당겨 적는 출처가 있어, 겹치지 않으면 두 회차 사이에서 빠진다 (2026-11-20 확인: Security NEXT). 직전 후보 파일에 이미 있는 글은 「이미 수집」으로 표시하고 다시 후보로 만들지 않는다. 첫 실행·공백이 길 때는 72시간 (D33)
-- **일본 회사·기관의 보안 사고**(유출·랜섬웨어·부정 접속)는 **중소기업도 쓰는 경로**(홈페이지·통판 사이트·예약 시스템·위탁처·SaaS·메일)로 일어난 것만, **1회 최대 5건** 남긴다. 같은 경로(예: 같은 위탁처 SaaS)는 1건으로 묶는다. 회사 규모로 빼지는 않는다. 보고에 남긴 건수·뺀 건수를 적는다 (D33 → D73)
-- 상한: 1회 후보 약 40건. 넘으면 ① AI 사용법·업무 활용·도입과 이어지는 AI 소식(주요 AI 기업의 제품 발표·변경 포함)·개발 관련 ② 중소기업이 쓰는 제품의 취약점(WordPress·PHP·메일 등) ③ 일본 기업 보안 사고(위 조건, 최대 5) ④ 일본어 보도 없음 ⑤ A·B등급 순 (D73)
+- **축별·언어별 건수는 정하지 않는다. 우리 회사에 중요한 순서 하나로 약 40건까지 고른다** (D84 — D73·D82·D83의 건수·우선순위를 바꿈). 40건은 상한이다 — 채우려고 순서가 낮은 것을 넣지 않는다
+  1. 미국 주요 AI 기업(OpenAI·Google/DeepMind·Anthropic·Microsoft·Meta·AWS·NVIDIA·Hugging Face 등)의 새 발표·신기술 **+ 급한 보안**(중소기업 홈페이지·쇼핑몰·메일에서 실제로 악용되고 있는 취약점, 또는 그 경로 — 홈페이지·통판·예약·위탁처 SaaS·메일 — 로 일어난 일본 회사의 사고. 같은 경로의 일본 사고는 1건으로 묶는다)
+  2. 바로 글이 되는 재료: AI 사용법·업무 활용·도입, 개발 발주·견적
+  3. 그 밖의 AI 새 소식(새 모델·서비스 — 언어와 관계없이 같은 기준, 한국·중국도 여기서 겨룬다)
+  - 급하지 않은 보안(업데이트 안내 수준·해외 사고·기업용 제품·위협 그룹 분석)은 남기지 않는다
+  - 같은 순위 안에서는 반응(はてブ·HN·보도 수)이 큰 것 → 일본어 보도 없음 → A·B등급 순
+- 축 안의 새 소식은 「일본 중소기업과 관계없다」는 이유로 빼지 않는다 — 남길지는 위 순서로 정한다 (D83, D84)
 - 실행: 당분간 사람이 수동 실행 (자동 예약은 스킬 제작 13번 "전체 연결"에서)
 
 ### 출처 신뢰도 등급
@@ -68,7 +78,9 @@
 - 가장 높은 등급의 출처를 대표로, 나머지는 참고 링크로
 
 ### 후보 기록 항목
-수집 일시 / 언어 / 원문 제목(원어 그대로) / 한국어 요약 1~2문장 / 원문 URL / 출처명 / 등급 / 1차 출처 URL 유무 / 발표 일시 / 주제 축 / 예상 글 종류 / 일본어 보도 유무 / 참고 링크
+수집 일시 / 언어 / 원문 제목(원어 그대로) / 한국어 요약 1~2문장 / 원문 URL / 출처명 / 등급 / 1차 출처 URL 유무 / 발표 일시 / 주제 축 / 예상 글 종류 / 일본어 보도 유무 / 참고 링크 / **반응**(はてブ 수·HN 점수·다룬 매체 수 — 수집 데이터에 있는 숫자만, 없으면 「없음」, D82)
+- 후보 정렬: AI → 개발 → 보안 (D82)
+- 보고에 **언어별 건수**를 적는다(정보용 — 0건이어도 된다, D84). 검색 출처는 빠짐없이 검색하고 기록한다 (D82)
 - 질문 입구는 후보와 따로 "질문" 목록으로 기록 (축 / 질문·검색어 / 입구 / URL)
 
 ### 보안 (common.md 7장)
@@ -83,3 +95,7 @@
 - 2026-11-20 v1.4: 수집 범위를 직전 수집 − 24시간으로 겹치고 「이미 수집」 표시, 일본 기업 보안 사고는 규모와 관계없이 남김 (D33)
 - 2026-11-20 v1.5: 질문 입구에 Google 트렌드 급상승 RSS 추가, 후보 파일 「검색 트렌드」 절 (D43)
 - 2026-11-21 v1.6: 일본 기업 보안 사고는 중소기업 경로만·최대 5건, 상한 우선순위 AI·개발 먼저 (D73)
+- 2026-11-27 v1.7: 보안 최대 10건·일본 사고 최대 3건, 보안 출처 6개 뺌, 추적 제품·정부 도입 출처·반응 출처(はてブ·Qiita·Zenn) 추가, 「반응」 칸, 깊이 있는 글 재료 10건 하한, 언어별 건수·검색 기록 점검, 정렬 AI 먼저, Reuters·Reddit 뺌 (D82)
+- 2026-11-27 v1.8: 새 소식은 「일본 중소기업과 관계없음」으로 빼지 않음, 상한 우선순위 1번 = 미국 주요 AI 기업의 새 발표·신기술, 한국·중국 회사 발표는 Google 뉴스 RSS, 한국 IT 매체 4곳 추가 (D83)
+- 2026-11-27 v1.9: 축별·언어별 건수(보안 최대 10·일본 사고 최대 3·재료 최소 10)를 없애고 「우리 회사에 중요한 순서」 하나로 고름, 40건은 상한일 뿐 / 보강: 급한 보안(실제 악용 중·일본 중소기업 경로의 사고)은 1순위와 같은 자리, 급하지 않은 보안은 남기지 않음 (D84)
+- 2026-11-27 v2.0: 검색어 끝에 수집 달을 그 출처의 언어로 붙임 (D85)

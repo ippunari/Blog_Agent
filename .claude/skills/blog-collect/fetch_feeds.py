@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""blog-collect: RSS·Atom·RDF 피드와 CISA KEV, Google 트렌드 급상승, Google 자동완성을 한 번에 가져온다.
+"""blog-collect: RSS·Atom·RDF 피드와 CISA KEV, Google 뉴스 RSS 검색, Google 트렌드 급상승, Google 자동완성을 한 번에 가져온다.
 
 - Python 표준 라이브러리만 쓴다 (외부 패키지 설치 없음, rules/common.md 7장 F)
 - 출처당 1회 요청, 타임아웃 12초, 일반 User-Agent (개인 정보 없음)
@@ -7,8 +7,9 @@
 
 사용법:
   python3 -I fetch_feeds.py --sources sources.json --candidates-dir candidates \
-      [--seeds seed_keywords.json] [--hours 72] [--only id,id] --out OUT.json
+      [--products tracked_products.json] [--seeds seed_keywords.json] [--hours 72] [--only id,id] --out OUT.json
   --only: 그 출처만 가져온다 (시험용. 자동완성 씨앗은 건너뜀)
+  --products: 추적 제품 목록 (D82). 제품마다 공식 업데이트 출처를 출처 목록에 더한다 — 「AI 사용법」 재료
 
 범위: --hours가 없으면 직전 candidates의 collected_at − 24시간부터 (겹침). 직전 후보 파일에 있는 URL은 [이미 수집] 표시
 """
@@ -49,11 +50,13 @@ KEYWORDS = [
     r"hack", r"CVE-", r"zero-day", r"leak", r"WordPress", r"\bPHP\b",
     r"セキュリティ", r"脆弱性", r"不正アクセス", r"漏えい", r"漏洩", r"ランサム", r"改ざん", r"フィッシング",
     r"サイバー", r"보안", r"해킹", r"취약점", r"랜섬", r"유출", r"安全漏洞", r"网络安全",
-    # 개발
+    # 개발 (발주·견적·도입 재료 포함, D82). 「補助金」만으로는 넓어서 IT導入補助金만 넣는다
     r"システム開発", r"アプリ開発", r"受託開発", r"開発会社", r"ノーコード", r"ローコード",
+    r"発注", r"見積", r"要件定義", r"外注", r"(?<![A-Za-z])DX(?![A-Za-z])", r"IT導入補助金", r"デジタル化",
 ]
 KW_RE = re.compile("|".join(KEYWORDS), re.IGNORECASE)
 TAG_RE = re.compile(r"<[^>]+>")
+HN_POINTS_RE = re.compile(r"Points:\s*(\d+)")
 CTRL_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f​-‏ -‮⁠-⁤﻿]")
 
 
@@ -117,8 +120,21 @@ def child_text(el, *names):
     return None
 
 
+XML_ENC_RE = re.compile(rb"^\s*<\?xml[^>]*encoding=[\"']([\w.-]+)[\"']", re.I)
+
+
+def to_utf8(data):
+    """ElementTree는 Shift_JIS·EUC-JP 같은 멀티바이트 선언을 못 읽는다 (総務省 피드). UTF-8로 바꾸고 선언을 지운다"""
+    m = XML_ENC_RE.match(data)
+    enc = m.group(1).decode("ascii").lower().replace("_", "-") if m else ""
+    if enc and enc not in ("utf-8", "us-ascii", "iso-8859-1"):
+        text = data.decode(enc, "replace")
+        return re.sub(r"^\s*<\?xml[^>]*\?>", "", text, count=1).encode("utf-8")
+    return data
+
+
 def parse_feed(data):
-    root = ET.fromstring(data)
+    root = ET.fromstring(to_utf8(data))
     entries = [e for e in root.iter() if local(e.tag) in ("item", "entry")]
     out = []
     for e in entries:
@@ -127,6 +143,8 @@ def parse_feed(data):
             "url": (child_text(e, "link") or child_text(e, "guid", "id") or "").strip(),
             "published": child_text(e, "pubdate", "published", "updated", "date", "issued"),
             "summary": child_text(e, "description", "summary", "content", "encoded"),
+            "bookmarks": child_text(e, "bookmarkcount"),  # はてなブックマーク数 (D82 반응 신호)
+            "publisher": child_text(e, "source"),  # Google 뉴스 RSS의 실제 매체 이름 (D83)
         })
     return out
 
@@ -148,6 +166,8 @@ def collect_feed(src, since):
         if not it["title"] or not it["url"]:
             continue
         items.append({
+            "engagement": engagement(src, it),
+            "publisher": clean(it.get("publisher")) or None,
             "title": it["title"],
             "url": it["url"],
             "published": d.astimezone(JST).isoformat(timespec="minutes") if d else None,
@@ -158,6 +178,42 @@ def collect_feed(src, since):
         if len(items) >= MAX_ITEMS_PER_SOURCE:
             break
     return items
+
+
+def engagement(src, it):
+    """반응 신호 (D82, MorningAI의 Engagement를 가져옴): 출처가 주는 숫자만 적는다. 없으면 None"""
+    if it.get("bookmarks") and it["bookmarks"].strip().isdigit():
+        return f'はてブ {it["bookmarks"].strip()}'
+    m = HN_POINTS_RE.search(it.get("summary") or "")
+    if m and src["id"] == "hackernews":
+        return f"HN {m.group(1)}점"
+    return None
+
+
+GNEWS_LOCALE = {"ko": ("ko", "KR", "KR:ko"), "zh": ("zh-CN", "CN", "CN:zh-Hans"),
+                "ja": ("ja", "JP", "JP:ja"), "en": ("en-US", "US", "US:en")}
+
+
+def gnews_url(src):
+    """Google 뉴스 RSS 검색 주소 (D83). 한국·중국 회사 발표를 그 언어권 뉴스로 찾는다 — WebSearch는 미국 기준이라 약하다.
+    링크는 news.google.com 중계 주소다. 제목·링크만 쓰고 본문은 가져오지 않는다"""
+    hl, gl, ceid = GNEWS_LOCALE[src["lang"]]
+    q = urllib.parse.quote(f'{src["query"]} when:3d')
+    return f"https://news.google.com/rss/search?q={q}&hl={hl}&gl={gl}&ceid={ceid}"
+
+
+def load_products(path):
+    """tracked_products.json → 출처 목록 항목 (D82, MorningAI의 추적 대상 목록을 가져옴).
+    제품마다 공식 업데이트 출처(rss 또는 search)를 하나 이상 둔다"""
+    out = []
+    for p in json.loads(Path(path).read_text(encoding="utf-8"))["products"]:
+        for i, f in enumerate(p["sources"]):
+            src = {"id": f'prod-{p["id"]}' + (f"-{i + 1}" if len(p["sources"]) > 1 else ""),
+                   "name": f'{p["name"]} ({f["label"]})', "lang": f.get("lang", "en"),
+                   "grade": "A", "axis": "AI", "product": p["name"], **f}
+            src.pop("label", None)
+            out.append(src)
+    return out
 
 
 def collect_kev(src, since):
@@ -238,6 +294,7 @@ def main():
     ap.add_argument("--sources", required=True)
     ap.add_argument("--candidates-dir")
     ap.add_argument("--seeds")
+    ap.add_argument("--products", help="추적 제품 목록 tracked_products.json (D82)")
     ap.add_argument("--hours", type=float, help="이 시간만큼 거슬러 올라가 수집 (직전 파일보다 우선)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--only", help="쉼표로 나눈 출처 id만 (시험용)")
@@ -255,11 +312,16 @@ def main():
         since = now - timedelta(hours=DEFAULT_HOURS)
 
     sources = json.loads(Path(a.sources).read_text(encoding="utf-8"))["sources"]
+    if a.products:
+        sources += load_products(a.products)
     if a.only:
         only = {x.strip() for x in a.only.split(",")}
         sources = [s for s in sources if s["id"] in only]
         a.seeds = None
-    fetchable = [s for s in sources if s["method"] in ("rss", "kev")]
+    for s in sources:
+        if s["method"] == "gnews":
+            s["url"] = gnews_url(s)
+    fetchable = [s for s in sources if s["method"] in ("rss", "kev", "gnews")]
     search = [s for s in sources if s["method"] == "search"]
 
     report, items = [], []
@@ -274,13 +336,15 @@ def main():
             s = futs[f]
             try:
                 _, got = f.result()
-                report.append({"id": s["id"], "name": s["name"], "status": "ok", "count": len(got)})
+                # 0건도 따로 표시한다 — 실패·조용함·안 함을 섞지 않는다 (D82, last30days의 source_status)
+                report.append({"id": s["id"], "name": s["name"], "lang": s["lang"],
+                               "status": "ok" if got else "empty", "count": len(got)})
                 for it in got:
                     items.append({"source_id": s["id"], "source": s["name"], "lang": s["lang"],
                                   "grade": s["grade"], "axis_hint": s["axis"],
-                                  "paid": bool(s.get("paid")), **it})
+                                  "paid": bool(s.get("paid")), "product": s.get("product"), **it})
             except Exception as e:  # noqa: BLE001 — 실패 출처는 보고만 하고 계속
-                report.append({"id": s["id"], "name": s["name"], "status": "error",
+                report.append({"id": s["id"], "name": s["name"], "lang": s["lang"], "status": "error",
                                "error": f"{type(e).__name__}: {str(e)[:120]}"})
 
     # Google 트렌드 급상승 — 후보(items)와 따로 모은다
@@ -313,7 +377,7 @@ def main():
         "since": since.astimezone(JST).isoformat(timespec="minutes"),
         "sources_report": report,
         "search_sources": [{"id": s["id"], "name": s["name"], "lang": s["lang"], "grade": s["grade"],
-                            "axis": s["axis"], "query": s["query"],
+                            "axis": s["axis"], "query": s["query"], "product": s.get("product"),
                             "domains": s.get("domains", [])} for s in search],
         "items": items,
         "trends": trends,
@@ -332,18 +396,23 @@ def main():
              "# idx | grade | lang | axis | source | published | title"]
     for it in sorted(items, key=lambda x: (x["axis_hint"], x["source_id"])):
         lines.append(f'{it["idx"]} | {"[이미 수집] " if it["already"] else ""}{it["grade"]} | {it["lang"]} | {it["axis_hint"]} | {it["source"]}'
-                     f'{" (유료)" if it["paid"] else ""} | {it["published"] or "-"}{"(날짜 확인 필요)" if it.get("date_suspect") else ""} | {it["title"][:110]}')
+                     f'{" → " + it["publisher"] if it.get("publisher") else ""}'
+                     f'{" (유료)" if it["paid"] else ""} | {it["published"] or "-"}{"(날짜 확인 필요)" if it.get("date_suspect") else ""} | {it["title"][:110]}'
+                     f'{" | 반응 " + it["engagement"] if it.get("engagement") else ""}')
     lines.append(f"# Google 트렌드 급상승: 축에 맞는 것 {len(trends)}건 / 전체 {trends_total}건 (등급 C — 신호일 뿐 근거 아님)")
     for t in trends:
         lines.append(f'# 트렌드 | {t["query"]} | {t["approx_traffic"] or "-"} | {t["published"] or "-"} | '
                      + " / ".join(f'{n["title"][:60]} <{n["url"]}>' for n in t["news"]))
     Path(a.out).with_suffix(".titles.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    ok = sum(1 for r in report if r["status"] == "ok")
+    ok = sum(1 for r in report if r["status"] in ("ok", "empty"))
     print(f"since={out['since']} sources_ok={ok}/{len(report)} items={len(items)} already={n_seen} "
           f"search_sources={len(search)} suggestion_seeds={sum(len(v) for v in suggestions.values())}")
     for r in report:
-        if r["status"] != "ok":
+        if r["status"] == "error":
             print(f"  FAIL {r['id']}: {r['error']}")
+        elif r["status"] == "empty":
+            print(f"  EMPTY {r['id']}: 범위 안 0건")
+    print(f"검색할 출처 {len(search)}개 — 검색할 때마다 $SP/search_done.txt에 「id | 결과 수」를 적는다 (빠지면 점검 오류)")
 
 
 if __name__ == "__main__":
