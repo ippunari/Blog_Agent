@@ -12,6 +12,10 @@
    사건어가 회사·서비스 이름(+일반어)뿐이면 경고 / 수요 점수가 질문형 수로 정한 상한(0→1, 1→2, 2→3, 3+→4, 5는 知恵袋 반복·트렌드)을 넘으면 오류
 6. 추천 ○: 속보 2개(급한 보안이 있으면 급한 보안 1 + 그 밖 1, D86) · 깊이 1개. 고른 뒤(☑ 있음)에는 경고만
 7. 「실습」 값, ○ 행은 「추천」 이유 필수, 새 글 표에 「[更新]」 없음, 「이월」 칸 형식
+10. 마감 (D88): 속보 「마감」은 「YYYY-MM-DD HH:MM」이고 업무 시간(평일 9~18시) 안이어야 한다 (deadline.py로 계산) /
+    ○ 속보는 made_at부터 마감까지 남은 업무 시간이 3시간 이상
+11. 사건어 (D90): 「사건어 근거」에 원문 제목 / 사건어가 자동완성에 없어 메인에 못 넣으면 「사건어: … (메인에 없음)」 — 이때는
+    「메인이 사건어로 시작」 검사를 건너뛰고, 가제목에 사건어가 있는지 본다 / 수요 5 반복 근거에 질문 입구·note·Q&A
 9. 속보 표의 보안 축 후보는 「급한 보안: 예 — 근거」 필수 (D86 — 급하지 않은 보안은 순위표에 넣지 않는다)
 5. URL이 모두 후보 파일·검색 결과 URL 목록·기존 글 목록에 있는지 (짐작한 URL 방지)
 
@@ -22,6 +26,7 @@
 """
 import argparse
 import datetime
+import importlib.util
 import json
 import re
 import sys
@@ -65,14 +70,24 @@ def is_question(k):
 
 
 def demand_cap(q, basis):
-    """질문형 서브 키워드 수 → 수요 상한 (D87). 5는 질문형 3+에 知恵袋 반복(2건 이상), 또는 트렌드 급상승"""
+    """질문형 서브 키워드 수 → 수요 상한 (D87). 5는 질문형 3+에 반복 근거 하나(D90): 知恵袋 2건+ /
+    note·Q&A에 같은 질문 / 질문 입구에 같은 질문 2회+ / 트렌드 급상승"""
     if "트렌드" in basis:
         return 5
     ch = [int(n) for n in re.findall(r"知恵袋[^;／/]{0,20}?(\d+)\s*건", basis)]
-    repeat = max(ch, default=0) >= 2 or bool(re.search(r"知恵袋[^;／/]{0,20}반복", basis))
+    qi = [int(n) for n in re.findall(r"질문 입구[^;／/]{0,20}?(\d+)\s*회", basis)]
+    repeat = (max(ch, default=0) >= 2 or max(qi, default=0) >= 2
+              or bool(re.search(r"知恵袋[^;／/]{0,20}반복", basis))
+              or bool(re.search(r"반복 근거[^;]{0,10}(note|Q&A)", basis)))
     if q >= 3:
         return 5 if repeat else 4
     return {2: 3, 1: 2}.get(q, 1)
+
+
+_spec = importlib.util.spec_from_file_location("deadline", Path(__file__).resolve().parent / "deadline.py")
+DL = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(DL)   # 마감 계산은 deadline.py 한 곳에서 (D88)
+NOT_IN_MAIN = "(메인에 없음)"
 
 
 def kw_norm(k):
@@ -156,11 +171,21 @@ def main():
             errs.append(f"{tid}: 상위 구성 검색어 「{cq}」 ≠ 메인 키워드 — 메인 키워드로 다시 센다 (D80)")
         # D80: 속보 메인 키워드 = 사건어로 시작
         if f.get("경로") == "속보":
-            ev = f.get("사건어", "").strip()
+            ev_raw = f.get("사건어", "").strip()
+            not_in_main = NOT_IN_MAIN in ev_raw
+            ev = ev_raw.replace(NOT_IN_MAIN, "").strip()
             if not ev:
                 (errs if new else warns).append(f"{tid}: 속보는 「사건어:」(제품명·버전·사건명) 필요 (D80)")
+            elif not_in_main:
+                # D90: 사건어가 자동완성에 없어 메인 키워드에 못 넣었다 → 제목·첫 문단·「何が起きた？」에 넣는다
+                if not all(w in kw_norm(f.get("가제목", "")) for w in kw_norm(ev).split()):
+                    warns.append(f"{tid}: 사건어 「{ev}」가 메인에 없음 — 가제목에는 넣는다 (D90)")
             elif not kw_norm(f.get("메인 키워드", "")).startswith(kw_norm(ev)):
-                errs.append(f"{tid}: 속보 메인 키워드는 사건어 「{ev}」로 시작 — 일반어는 서브 키워드로 (D80)")
+                errs.append(f"{tid}: 속보 메인 키워드는 사건어 「{ev}」로 시작 — 사건어가 자동완성에 없으면 "
+                            f"「사건어: {ev} {NOT_IN_MAIN}」 (D80, D90)")
+            # D90: 사건어는 원문에서 먼저 뽑는다
+            if ev and "원문 제목" not in f.get("사건어 근거", ""):
+                (errs if new else warns).append(f"{tid}: 「사건어 근거: 원문 제목 「…」」 필요 — 사건어는 원문의 고유한 말에서 (D90)")
             if ev:
                 rest = [w for w in kw_norm(ev).split() if w not in GENERIC_NAMES and w not in GENERIC_NOUNS]
                 if not rest and not re.search(r"\d", ev):
@@ -219,8 +244,18 @@ def main():
             if s["수요"] > cap:
                 (errs if new else warns).append(
                     f"{tid}: 수요 {s['수요']} > 질문형 {q}개의 상한 {cap} — 수요 점수표대로 (D87)")
-        if f.get("경로") == "속보" and not re.search(r"\d{4}-\d{2}-\d{2}", f.get("마감", "")):
-            errs.append(f"{tid}: 속보는 마감 날짜 필요 (발표 + 72시간)")
+        dl = None
+        if f.get("경로") == "속보":
+            dm_ = re.search(r"\d{4}-\d{2}-\d{2}(?:[ T]\d{1,2}:\d{2})?", f.get("마감", ""))
+            if not dm_:
+                errs.append(f"{tid}: 속보는 마감 필요 — deadline.py로 계산 (발표 + 72시간, 업무 시간 밖이면 다음 업무일 12:00, D88)")
+            else:
+                dl = DL.parse(dm_.group(0))
+                if not re.search(r"\d{1,2}:\d{2}", dm_.group(0)):
+                    (errs if new else warns).append(f"{tid}: 마감에 시각이 없음 — 「YYYY-MM-DD HH:MM」 (D88)")
+                elif not DL.in_work_hours(dl):
+                    (errs if new else warns).append(
+                        f"{tid}: 마감 {dm_.group(0)}이 업무 시간(평일 9~18시) 밖 — deadline.py로 다음 업무일 12:00 (D88)")
         # D86: 속보의 보안 축은 급한 보안만 (실제 악용 중인 취약점·일본 중소기업 경로의 사고)
         urgent = f.get("급한 보안", "").strip().startswith("예")
         if f.get("경로") == "속보" and f.get("주제 축") == "보안" and not urgent:
@@ -230,7 +265,7 @@ def main():
         details[tid] = {"axis": f.get("주제 축"), "route": f.get("경로"), "total": tot, "title": tt,
                         "type": f.get("글 종류"), "rec": f.get("추천", "").strip(),
                         "trial": f.get("실습", ""), "gate_fail": gate_fail, "main_kw": f.get("메인 키워드", ""),
-                        "urgent": urgent and f.get("주제 축") == "보안"}
+                        "urgent": urgent and f.get("주제 축") == "보안", "deadline": dl}
 
     # 순위표
     tables = TABLES
@@ -267,6 +302,14 @@ def main():
             if mark in ("○", "☑") and d.get("gate_fail"):
                 errs.append(f"{title}: {tid} 「{d['main_kw']}」는 이길 여지 문턱 미달(작은 사이트 0 + 자료 판정 3 이하) — "
                             f"더 구체적인 말을 메인으로 다시 세거나 추천에서 건너뛴다 (D80)")
+            # D88: ○ 속보는 남은 업무 시간이 NEED_HOURS 이상 (6시간 규칙을 바꿈)
+            if mark == "○" and d.get("deadline") and front.get("made_at"):
+                try:
+                    left = DL.work_hours_left(DL.parse(front["made_at"]), d["deadline"])
+                except ValueError:
+                    left = None
+                if left is not None and left < DL.NEED_HOURS:
+                    errs.append(f"{title}: {tid} 마감까지 업무 시간 {left:.1f}시간 — {DL.NEED_HOURS}시간 미만은 추천하지 않는다 (D88)")
             if mark == "○" and not d["rec"]:
                 errs.append(f"{title}: {tid}는 ○인데 상세에 「추천:」 이유가 없음")
             if d["route"] != route:

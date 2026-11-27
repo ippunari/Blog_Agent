@@ -221,12 +221,14 @@ th{background:var(--code);font-size:13px}
       <li><code>suggest.py</code> 키워드 자동완성 (축별 질문형 꼬리말, D43)</li>
       <li><code>check_topics.py</code> 점수 1~5·총점 재계산·순위표 구성·URL 점검 + 키워드(D80: 상위 구성 검색어·속보 사건어·이길 여지 문턱 / D87: 메인이 근거에 그대로·서브 일본어 질문형·사건어 경고·수요 상한) + 속보 ○ 2개·보안은 「급한 보안」만(D86)</li>
       <li><code>export_sheet.py</code> 순위표 → 시트용 xlsx</li>
+      <li><code>deadline.py</code> 속보 마감 = 공표 + 72시간, 업무 시간(평일 9~18시) 밖이면 다음 업무일 12:00 · 남은 업무 시간 (D88 — blog-research도 씀)</li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-topic.md</code> (주제 축·점수표·속보/일반 판정·회차 운영·시트 칸), <code>rules/blog-perspective.md</code> (대표 한마디)</dd>
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>점수 가중치(전환25·자료부족20·수요35·경험10·수명10, D72) → <code>rules/blog-topic.md</code> 점수표 + <code>check_topics.py</code> <code>WEIGHTS</code></li>
     <li>키워드 고르기(D80, D87): 메인은 근거에 그대로 있는 말·이길 여지 문턱·속보 메인은 <code>사건어</code>로 시작(사건어의 뜻)·서브는 일본어 질문형(깊이 3·속보 2)·수요는 질문형 수로 한 칸씩 → <code>rules/blog-topic.md</code> 「검색어 찾기」·점수표 + <code>check_topics.py</code> <code>Q_TAILS</code>(질문형 목록)·<code>GENERIC_NAMES</code>·<code>demand_cap</code>·<code>gate_fail</code></li>
+    <li>속보 마감·추천 시간(D88): 업무 시간·필요 시간 3시간 → <code>deadline.py</code> <code>WORK_START</code>·<code>WORK_END</code>·<code>NEED_HOURS</code>·<code>JP_HOLIDAYS</code>(build_publish.py와 같이) / 사건어는 원문에서·「(메인에 없음)」, 수요 5 반복 근거(D90) → <code>check_topics.py</code> <code>demand_cap</code>·<code>NOT_IN_MAIN</code> / AI 글 주 CTA 임시(D89) → <code>rules/common.md</code> 1장</li>
     <li>속보 자리(D86): 한 순위·급한 보안만 1편 → <code>rules/blog-topic.md</code> 「속보 / 일반 판정」 + <code>check_topics.py</code> <code>TABLES</code>·<code>급한 보안</code> / 검색수 도구(ラッコ)는 키를 받은 뒤</li>
     <li>회사 경험 점수 → <code>experience.json</code> / 추천 수·요일 규칙 → <code>rules/blog-topic.md</code> 「회차 운영」</li>
     <li>시트 칸 → <code>rules/blog-topic.md</code> 「시트」 + <code>export_sheet.py</code> / 카드 형식 → SKILL.md 9장 (뒤 스킬이 모두 읽음)</li>
@@ -297,6 +299,7 @@ th{background:var(--code);font-size:13px}
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>제목·메타 길이, H2 수 → <code>rules/blog-outline.md</code> + <code>check_outline.py</code></li>
     <li>속보 × 글 종류 목차 틀 → <code>rules/blog-outline.md</code> (D44) / CTA 문구·링크 → <code>common.md</code> 1장</li>
+    <li>AI 글이 만드는 내용이면 주 CTA를 견적·상담 문의로(D89) / 카드 사건어 「(메인에 없음)」 → <code>event_keywords</code>(D90) → SKILL.md 2·3장 + <code>rules/blog-outline.md</code></li>
   </ul></div>
 </div>
 
