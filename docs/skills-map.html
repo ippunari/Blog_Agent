@@ -196,7 +196,7 @@ th{background:var(--code);font-size:13px}
 <!-- 2 topic -->
 <div class="card" id="topic">
   <div class="card-head"><span class="n">2</span><h3>blog-topic — 주제 선정</h3><code>/blog-topic</code> · <code>select T01 …</code> · <code>중단 &lt;slug&gt;</code> · <code>직접 "주제" URL</code></div>
-  <p>후보에 일본어 검색어를 찾고 점수를 매겨 순위표를 내고, 추천 ○를 넣은 시트를 기록용으로 올리고(아침 3 · 저녁 3 — 속보 AI·속보 보안·개발·깊이 새 글, D72), 확인을 기다리지 않고 ○ 주제의 카드를 바로 만든다 (D67).</p>
+  <p>후보에 일본어 검색어를 찾고 점수를 매겨 순위표를 내고, 추천 ○를 넣은 시트를 기록용으로 올리고(아침 3 · 저녁 3 — 속보 2(급한 보안이 있으면 그중 1, D86)·깊이 새 글 1, D72), 확인을 기다리지 않고 ○ 주제의 카드를 바로 만든다 (D67).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li>새 <code>candidates/</code> 파일 + 앞 <code>topics/</code> 파일 (이월 후보)</li>
@@ -219,14 +219,15 @@ th{background:var(--code);font-size:13px}
     <dt>스크립트</dt><dd><ul>
       <li><code>list_posts.py</code> 사이트맵에서 기존 글 제목·메타 → <code>existing_posts.json</code>·<code>.titles.txt</code>·<code>.stale.txt</code></li>
       <li><code>suggest.py</code> 키워드 자동완성 (축별 질문형 꼬리말, D43)</li>
-      <li><code>check_topics.py</code> 점수 1~5·총점 재계산·순위표 구성·URL 점검 + 키워드(D80: 상위 구성 검색어·속보 사건어·이길 여지 문턱·수요 5 근거)</li>
+      <li><code>check_topics.py</code> 점수 1~5·총점 재계산·순위표 구성·URL 점검 + 키워드(D80: 상위 구성 검색어·속보 사건어·이길 여지 문턱 / D87: 메인이 근거에 그대로·서브 일본어 질문형·사건어 경고·수요 상한) + 속보 ○ 2개·보안은 「급한 보안」만(D86)</li>
       <li><code>export_sheet.py</code> 순위표 → 시트용 xlsx</li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-topic.md</code> (주제 축·점수표·속보/일반 판정·회차 운영·시트 칸), <code>rules/blog-perspective.md</code> (대표 한마디)</dd>
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>점수 가중치(전환25·자료부족20·수요35·경험10·수명10, D72) → <code>rules/blog-topic.md</code> 점수표 + <code>check_topics.py</code> <code>WEIGHTS</code></li>
-    <li>키워드 고르기(D80): 깊이 글 이길 여지 문턱(작은 사이트 0 + 자료 판정 3 이하 → 메인으로 안 씀)·속보 메인은 <code>사건어</code>로 시작·<code>상위 구성 검색어</code> = 메인 키워드·수요 5 기준(질문형 3개+) → <code>rules/blog-topic.md</code> 「검색어 찾기」·점수표 + <code>check_topics.py</code> <code>Q_TAILS</code>·<code>gate_fail</code></li>
+    <li>키워드 고르기(D80, D87): 메인은 근거에 그대로 있는 말·이길 여지 문턱·속보 메인은 <code>사건어</code>로 시작(사건어의 뜻)·서브는 일본어 질문형(깊이 3·속보 2)·수요는 질문형 수로 한 칸씩 → <code>rules/blog-topic.md</code> 「검색어 찾기」·점수표 + <code>check_topics.py</code> <code>Q_TAILS</code>(질문형 목록)·<code>GENERIC_NAMES</code>·<code>demand_cap</code>·<code>gate_fail</code></li>
+    <li>속보 자리(D86): 한 순위·급한 보안만 1편 → <code>rules/blog-topic.md</code> 「속보 / 일반 판정」 + <code>check_topics.py</code> <code>TABLES</code>·<code>급한 보안</code> / 검색수 도구(ラッコ)는 키를 받은 뒤</li>
     <li>회사 경험 점수 → <code>experience.json</code> / 추천 수·요일 규칙 → <code>rules/blog-topic.md</code> 「회차 운영」</li>
     <li>시트 칸 → <code>rules/blog-topic.md</code> 「시트」 + <code>export_sheet.py</code> / 카드 형식 → SKILL.md 9장 (뒤 스킬이 모두 읽음)</li>
   </ul></div>

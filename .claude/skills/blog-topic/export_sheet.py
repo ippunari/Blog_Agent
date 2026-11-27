@@ -2,7 +2,7 @@
 """blog-topic: topics/ 순위표를 Google Sheets에 올릴 엑셀(.xlsx) 파일로 바꾼다.
 
 - 맨 위 안내 1줄 → 칸 이름 → 추천 행(○, 굵게) → 다른 후보(구분마다 최대 3개, 「이월」 표시)
-- 아침·저녁 모두 속보 AI / 속보 보안·개발 / 깊이 새 글 (D72)
+- 아침·저녁 모두 속보(급한 보안은 「속보 급한 보안」으로 색 구분) / 깊이 새 글 (D72, D86)
 - 칸 순서는 rules/blog-topic.md 「시트」
 - 「선택」 칸에 드롭다운(○)을 건다. 추천은 ○가 들어 있고 사람은 옮기기만 한다
 - 외부 라이브러리 없이 표준 라이브러리(zipfile)로 xlsx를 쓴다. --out이 .csv면 CSV로 쓴다
@@ -18,9 +18,7 @@ import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-TABLES_AM = [("속보 AI", "## 속보 순위 — AI"), ("속보 보안·개발", "## 속보 순위 — 보안·개발"),
-             ("깊이 새 글", "## 깊이 새 글 순위")]   # 아침·저녁 같은 3표, 개편 없음 (D72)
-TABLES_PM = TABLES_AM
+TABLES = [("속보", "## 속보 순위"), ("깊이 새 글", "## 깊이 새 글 순위")]   # 아침·저녁 같은 2표, 개편 없음 (D72, D86)
 HEAD = ["구분", "선택", "대표 한마디", "추천 이유", "가제목", "마감", "실습", "글 종류", "메인 키워드", "총점", "이월", "ID",
         "1키워드1글", "서브 키워드", "전환", "자료부족", "수요", "경험", "수명", "원문 URL", "상세 파일", "선택자", "메모"]
 WIDTH = [14, 6, 30, 40, 60, 11, 14, 18, 26, 6, 24, 5, 18, 70, 5, 7, 5, 5, 5, 50, 22, 10, 80]
@@ -31,7 +29,7 @@ OTHERS = 3  # 구분마다 보여 줄 다른 후보 수
 CHOICE = "○"
 SCORE_RE = re.compile(r"전환\s*(\d)\s*/\s*자료부족\s*(\d)\s*/\s*수요\s*(\d)\s*/\s*경험\s*(\d)\s*/\s*수명\s*(\d)")
 # styles.xml cellXfs 번호: 0 기본, 1 칸 이름, 2~5 구분 색, 6 안내, 7~10 구분 색 + 굵게(추천 행)
-FILL = {"속보 AI": 2, "속보 보안·개발": 3, "깊이 새 글": 4, "깊이 개편": 5}
+FILL = {"속보": 2, "속보 급한 보안": 3, "깊이 새 글": 4}
 HEAD_STYLE, NOTE_STYLE, BOLD = 1, 6, 5
 
 
@@ -39,7 +37,7 @@ def read_rows(path):
     """반환: (추천 행 목록, 다른 후보 행 목록)"""
     text = Path(path).read_text(encoding="utf-8")
     slot = re.search(r"^slot:\s*(\w+)", text, re.M)
-    tables = TABLES_PM if slot and slot.group(1) == "pm" else TABLES_AM
+    tables = TABLES
     details = {}
     for sec in re.split(r"\n(?=### T\d+)", text)[1:]:
         tid = re.match(r"### (T\d+)", sec).group(1)
@@ -60,7 +58,8 @@ def read_rows(path):
             scores = list(sc.groups()) if sc else [""] * 5
             carry_txt = "-" if carry == "-" else "이월(" + carry.replace("topics/", "").replace(".md", "") + ")"
             chosen = mark in ("○", "☑")
-            row = ([label, CHOICE if chosen else "", "", d.get("추천", "") if chosen else "", tt, dl, d.get("실습", ""),
+            kind = "속보 급한 보안" if label == "속보" and d.get("급한 보안", "").startswith("예") else label
+            row = ([kind, CHOICE if chosen else "", "", d.get("추천", "") if chosen else "", tt, dl, d.get("실습", ""),
                     typ, kw, tot, carry_txt, tid, one, d.get("서브 키워드", "")] + scores
                    + [d.get("원문 URL", ""), path, "", d.get("메모", "").replace("**", "")])
             if chosen:
@@ -105,7 +104,7 @@ def write_xlsx(rec, others, out):
         f'<dataValidations count="1"><dataValidation type="list" allowBlank="1" showErrorMessage="1" '
         f'sqref="B3:B{last}"><formula1>"{CHOICE}"</formula1></dataValidation></dataValidations>'
         "</worksheet>")
-    colors = ("D9D9D9", "E8F0FE", "FDECEA", "E6F4EA", "FFF4E5")  # 칸 이름, 속보 AI, 보안·개발, 새 글, 개편
+    colors = ("D9D9D9", "E8F0FE", "FDECEA", "E6F4EA", "FFF4E5")  # 칸 이름, 속보, 속보 급한 보안, 깊이 새 글, (예비)
     fills = "".join(f'<fill><patternFill patternType="solid"><fgColor rgb="FF{c}"/></patternFill></fill>'
                     for c in colors)
 

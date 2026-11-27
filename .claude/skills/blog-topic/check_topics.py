@@ -6,10 +6,13 @@
 8. 키워드 (D80): 「상위 구성 검색어」 = 메인 키워드 / 속보는 「사건어」가 있고 메인 키워드가 사건어로 시작 /
    깊이 글이 작은 사이트 0개 + 자료 판정 3 이하(이길 여지 문턱)인데 ○·☑면 오류 / 수요 5인데 질문형 3개 미만·트렌드 없음이면 경고
 3. 서브 키워드 3~5개, 속보는 마감 필수
-4. 순위표: 아침·저녁 모두 속보 AI / 속보 보안·개발 / 깊이 새 글 (D72).
+4. 순위표: 아침·저녁 모두 속보 / 깊이 새 글 (D72, D86).
    표마다 최대 5개, 축·경로 일치, 총점 내림차순, 상세와 값 일치
-6. 추천 ○: 표마다 1개 (속보는 한쪽 표가 비면 다른 쪽 2개). 고른 뒤(☑ 있음)에는 경고만
-7. 「실습」 값, ○ 행은 「추천」 이유 필수, 개편 표는 「[更新]」 가제목만, 「이월」 칸 형식
+   D87: 메인 키워드가 「키워드 근거」에 그대로 있는가(깊이 오류·속보 경고) / 서브 키워드는 일본어, 질문형 깊이 3개·속보 2개 이상 /
+   사건어가 회사·서비스 이름(+일반어)뿐이면 경고 / 수요 점수가 질문형 수로 정한 상한(0→1, 1→2, 2→3, 3+→4, 5는 知恵袋 반복·트렌드)을 넘으면 오류
+6. 추천 ○: 속보 2개(급한 보안이 있으면 급한 보안 1 + 그 밖 1, D86) · 깊이 1개. 고른 뒤(☑ 있음)에는 경고만
+7. 「실습」 값, ○ 행은 「추천」 이유 필수, 새 글 표에 「[更新]」 없음, 「이월」 칸 형식
+9. 속보 표의 보안 축 후보는 「급한 보안: 예 — 근거」 필수 (D86 — 급하지 않은 보안은 순위표에 넣지 않는다)
 5. URL이 모두 후보 파일·검색 결과 URL 목록·기존 글 목록에 있는지 (짐작한 URL 방지)
 
 사용법:
@@ -30,11 +33,9 @@ FIELDS = ["경로", "원 후보", "주제 축", "글 종류", "가제목", "메�
           "점수", "점수 근거", "일본어 상위 결과", "1키워드1글", "마감", "원문 URL", "실습"]
 TRIALS = {"에이전트 가능", "사람 필요", "해당 없음"}
 MARKS = {"☐", "○", "☑"}
-# (표 제목, 경로, AI 축이어야 하나(None=상관없음), 개편 표인가)
-# 아침·저녁 같은 3표: 속보 AI 1 · 속보 보안·개발 1 · 깊이 새 글 1 (개편 없음, D72)
-TABLES_AM = [("## 속보 순위 — AI", "속보", True, False), ("## 속보 순위 — 보안·개발", "속보", False, False),
-             ("## 깊이 새 글 순위", "일반", None, False)]
-TABLES_PM = TABLES_AM
+# (표 제목, 경로, 추천 ○ 수)
+# 아침·저녁 같은 2표: 속보 2 (AI·개발 중심, 급한 보안만 1편까지 끼움, D86) · 깊이 새 글 1 (개편 없음, D72)
+TABLES = [("## 속보 순위", "속보", 2), ("## 깊이 새 글 순위", "일반", 1)]
 ROUTES = {"속보", "일반"}
 AXES = {"AI", "보안", "개발"}
 TYPES = {"AI 속보", "AI 사용법", "AI 업무 활용", "AI 도입 가이드", "보안 사고 해설",
@@ -43,10 +44,35 @@ URL_RE = re.compile(r"https?://[^\s)|<>」]+")
 SCORE_RE = re.compile(r"전환\s*(\d)\s*/\s*자료부족\s*(\d)\s*/\s*수요\s*(\d)\s*/\s*경험\s*(\d)\s*/\s*수명\s*(\d)"
                       r"\s*→\s*총점\s*(\d+)")
 JA = re.compile(r"[぀-ヿ一-鿿]")
-# 질문형 검색어 꼬리 (D43 축별 꼬리말 + 질문 문장) — 수요 5 근거 세기용 (D80)
-Q_TAILS = ("とは", "なぜ", "違い", "対策", "確認", "原因", "被害", "対応", "使い方", "無料", "料金", "できること",
-           "注意点", "費用", "相場", "期間", "流れ", "方法", "やり方", "手順", "内訳", "比較", "どう", "？", "?", "いつ",
-           "見積", "危険", "安全", "しない", "されたら")
+# 질문형 검색어 = 이 말이 들어간 일본어 검색어 (D87 — rules/blog-topic.md 「질문형의 뜻」과 같은 목록)
+Q_TAILS = (
+    "とは", "意味", "違い", "比較", "なぜ", "いつ", "どう", "？", "?",                       # 뜻·비교·질문 문장
+    "方法", "やり方", "手順", "使い方", "コツ", "設定", "解除", "始め", "作り", "プロンプト",  # 방법 (〜方도, 아래 Q_KATA)
+    "できない", "使えない", "されない", "表示されない", "原因", "エラー", "危険", "安全", "注意点", "禁止",
+    "被害", "されたら", "対策", "確認", "対応",                                              # 문제·위험·대응
+    "費用", "料金", "相場", "無料", "内訳", "見積", "補助金",                                 # 비용
+    "例", "事例", "サンプル", "テンプレート", "チェックリスト", "ガイドライン", "ステップ", "流れ", "期間",  # 자료·진행
+    "できること")
+Q_KATA = re.compile(r"\S方(\s|$)")   # 消し方·書き方 같은 「〜方」
+# 사건어가 이것(+ GENERIC_NOUNS)뿐이면 사건어가 아니다 — 제품명+버전·모델명·고유 기능명·회사+사고·CVE (D87)
+GENERIC_NAMES = {"google", "chatgpt", "openai", "gemini", "claude", "anthropic", "copilot", "microsoft", "wordpress",
+                 "php", "apple", "meta", "aws", "amazon", "生成ai", "ai"}
+GENERIC_NOUNS = {"検索", "ai", "アプリ", "新機能", "機能", "アップデート", "脆弱性", "情報漏洩", "公式", "最新", "モデル"}
+
+
+def is_question(k):
+    return any(t in k for t in Q_TAILS) or bool(Q_KATA.search(k))
+
+
+def demand_cap(q, basis):
+    """질문형 서브 키워드 수 → 수요 상한 (D87). 5는 질문형 3+에 知恵袋 반복(2건 이상), 또는 트렌드 급상승"""
+    if "트렌드" in basis:
+        return 5
+    ch = [int(n) for n in re.findall(r"知恵袋[^;／/]{0,20}?(\d+)\s*건", basis)]
+    repeat = max(ch, default=0) >= 2 or bool(re.search(r"知恵袋[^;／/]{0,20}반복", basis))
+    if q >= 3:
+        return 5 if repeat else 4
+    return {2: 3, 1: 2}.get(q, 1)
 
 
 def kw_norm(k):
@@ -135,6 +161,10 @@ def main():
                 (errs if new else warns).append(f"{tid}: 속보는 「사건어:」(제품명·버전·사건명) 필요 (D80)")
             elif not kw_norm(f.get("메인 키워드", "")).startswith(kw_norm(ev)):
                 errs.append(f"{tid}: 속보 메인 키워드는 사건어 「{ev}」로 시작 — 일반어는 서브 키워드로 (D80)")
+            if ev:
+                rest = [w for w in kw_norm(ev).split() if w not in GENERIC_NAMES and w not in GENERIC_NOUNS]
+                if not rest and not re.search(r"\d", ev):
+                    warns.append(f"{tid}: 사건어 「{ev}」가 회사·서비스 이름뿐 — 제품명+버전·모델명·고유 기능명·회사+사고·CVE로 (D87)")
         # D80: 이길 여지 문턱 (깊이 글) — 작은 사이트 0개 + 자료 판정 3 이하면 그 키워드로 추천하지 않는다
         jm = re.search(r"자료\s*(\d)\s*\+\s*경쟁\s*(\d)", f.get("점수 근거", ""))
         jaryo = int(jm.group(1)) if jm else None
@@ -147,7 +177,23 @@ def main():
         subs = [s for s in re.split(r"\s+/\s+", f.get("서브 키워드", "")) if s.strip()]
         if not 3 <= len(subs) <= 5:
             errs.append(f"{tid}: 서브 키워드 {len(subs)}개 (3~5개)")
+        # D87: 서브 키워드 = 일본 독자가 쓰는 일본어 질문형
+        bad = (errs if new else warns)
+        for x in subs:
+            if not JA.search(x):
+                bad.append(f"{tid}: 서브 키워드 「{x}」에 일본어가 없음 — 일본어 검색어만 (D87)")
+        q = sum(1 for x in subs if JA.search(x) and is_question(x))
+        need_q = 2 if f.get("경로") == "속보" else 3
+        if q < need_q:
+            bad.append(f"{tid}: 질문형 서브 키워드 {q}개 ({f.get('경로')} {need_q}개 이상 — 〜とは·使い方·費用·対策 등, D87)")
         mk = f.get("메인 키워드", "")
+        # D87: 메인 키워드 = 실제로 확인한 말 (키워드 근거에 그대로)
+        basis_kw = f.get("키워드 근거", "")
+        if mk and kw_norm(mk) not in kw_norm(basis_kw):
+            if f.get("경로") == "일반" and new:
+                errs.append(f"{tid}: 메인 키워드 「{mk}」가 키워드 근거에 없음 — 자동완성·知恵袋에서 확인한 말만 메인으로 (D87)")
+            elif "원문 제목" not in basis_kw:
+                warns.append(f"{tid}: 메인 키워드 「{mk}」가 키워드 근거에 없음 — 새 이름이라 자동완성이 없으면 근거에 「원문 제목」 (D87)")
         if mk and not JA.search(mk):
             warns.append(f"{tid}: 메인 키워드에 일본어가 없음 '{mk}'")
         tt = f.get("가제목", "")
@@ -168,25 +214,29 @@ def main():
             tot = total(s)
             if tot != int(sm.group(6)):
                 errs.append(f"{tid}: 총점 {sm.group(6)} ≠ 계산값 {tot}")
-            # D80: 수요 5 = 질문형 3개 이상 + 知恵袋 반복, 또는 트렌드 급상승. 큰 키워드의 자동완성 개수만으로는 5가 아니다
-            if s["수요"] == 5:
-                q = sum(1 for x in subs if any(t in x for t in Q_TAILS))
-                basis = f.get("키워드 근거", "") + f.get("점수 근거", "")
-                if q < 3 and "트렌드" not in basis:
-                    warns.append(f"{tid}: 수요 5인데 질문형 서브 키워드 {q}개·트렌드 없음 — 수요 5 기준 확인 (D80)")
+            # D87: 수요 = 질문형 서브 키워드 수로 한 칸씩 (0→1, 1→2, 2→3, 3+→4, 5 = 3+ + 知恵袋 반복 또는 트렌드)
+            cap = demand_cap(q, basis_kw + f.get("점수 근거", ""))
+            if s["수요"] > cap:
+                (errs if new else warns).append(
+                    f"{tid}: 수요 {s['수요']} > 질문형 {q}개의 상한 {cap} — 수요 점수표대로 (D87)")
         if f.get("경로") == "속보" and not re.search(r"\d{4}-\d{2}-\d{2}", f.get("마감", "")):
             errs.append(f"{tid}: 속보는 마감 날짜 필요 (발표 + 72시간)")
+        # D86: 속보의 보안 축은 급한 보안만 (실제 악용 중인 취약점·일본 중소기업 경로의 사고)
+        urgent = f.get("급한 보안", "").strip().startswith("예")
+        if f.get("경로") == "속보" and f.get("주제 축") == "보안" and not urgent:
+            errs.append(f"{tid}: 보안 속보는 「급한 보안: 예 — 근거」가 있어야 순위표에 — 급하지 않으면 「1차에서 빠진 후보」로 (D86)")
         if f.get("실습") and not any(f["실습"].startswith(t) for t in TRIALS):
             errs.append(f"{tid}: 실습 값 '{f['실습']}' (에이전트 가능 / 사람 필요 / 해당 없음 으로 시작)")
         details[tid] = {"axis": f.get("주제 축"), "route": f.get("경로"), "total": tot, "title": tt,
                         "type": f.get("글 종류"), "rec": f.get("추천", "").strip(),
-                        "trial": f.get("실습", ""), "gate_fail": gate_fail, "main_kw": f.get("메인 키워드", "")}
+                        "trial": f.get("실습", ""), "gate_fail": gate_fail, "main_kw": f.get("메인 키워드", ""),
+                        "urgent": urgent and f.get("주제 축") == "보안"}
 
     # 순위표
-    tables = TABLES_PM if front.get("slot") == "pm" else TABLES_AM
+    tables = TABLES
     picked = "☑" in text
     marks = {}
-    for title, route, ai, upd in tables:
+    for title, route, _ in tables:
         mm = re.search(re.escape(title) + r"[^\n]*\n((?:\|.*\n)+)", text)
         if not mm:
             errs.append(f"순위표 없음: {title}")
@@ -195,7 +245,8 @@ def main():
         if len(rows) > 5:
             errs.append(f"{title}: {len(rows)}개 (최대 5개)")
         prev = 999
-        marks[title] = 0
+        marks[title] = []
+        urgent_rows = []
         for r in rows:
             c = [x.strip() for x in r.strip().strip("|").split("|")]
             if len(c) < 10:
@@ -204,14 +255,15 @@ def main():
             mark, tid, tot, carry = c[0], c[2], c[6], c[9]
             if mark not in MARKS:
                 errs.append(f"{title}: {tid} 선택 값 '{mark}' (☐ ○ ☑)")
-            if mark in ("○", "☑"):
-                marks[title] += 1
             if carry != "-" and not re.match(r"topics/[\w.-]+\.md T\d+$", carry):
                 errs.append(f"{title}: {tid} 이월 칸 형식 '{carry}' (- 또는 'topics/파일.md T03')")
             d = details.get(tid)
             if not d:
                 errs.append(f"{title}: {tid} 상세 없음")
                 continue
+            urgent_rows.append(d["urgent"])
+            if mark in ("○", "☑"):
+                marks[title].append(d["urgent"])
             if mark in ("○", "☑") and d.get("gate_fail"):
                 errs.append(f"{title}: {tid} 「{d['main_kw']}」는 이길 여지 문턱 미달(작은 사이트 0 + 자료 판정 3 이하) — "
                             f"더 구체적인 말을 메인으로 다시 세거나 추천에서 건너뛴다 (D80)")
@@ -219,10 +271,8 @@ def main():
                 errs.append(f"{title}: {tid}는 ○인데 상세에 「추천:」 이유가 없음")
             if d["route"] != route:
                 errs.append(f"{title}: {tid}의 경로는 {d['route']}")
-            if ai is not None and (d["axis"] == "AI") != ai:
-                errs.append(f"{title}: {tid}의 주제 축은 {d['axis']}")
-            if upd != d["title"].startswith("[更新]"):
-                errs.append(f"{title}: {tid} — 개편 표에는 「[更新]」 글만, 새 글 표에는 새 글만")
+            if d["title"].startswith("[更新]"):
+                errs.append(f"{title}: {tid} — 개편은 회차 몫에 없다. 「1차에서 빠진 후보」에 업데이트 제안으로 (D72)")
             if str(d["total"]) != tot:
                 errs.append(f"{title}: {tid} 총점 {tot} ≠ 상세 {d['total']}")
             if c[3] != d["title"]:
@@ -231,7 +281,7 @@ def main():
                 if int(tot) > prev:
                     errs.append(f"{title}: 총점 내림차순이 아님 ({tid})")
                 prev = int(tot)
-        marks[title] = (marks[title], len(rows))
+        marks[title] = (marks[title], urgent_rows)
     # 깊이 새 글 몫 (D72): 화·금 저녁 = 개발, 그 밖(주 8회) = AI. 후보가 없을 수 있어 경고
     dm = re.search(r"(\d{4})-(\d{2})-(\d{2})-(am|pm)", Path(a.file).name)
     if dm:
@@ -243,20 +293,18 @@ def main():
             d = details.get(c[2]) if len(c) > 2 else None
             if d and d["axis"] != want_axis:
                 warns.append(f"깊이 새 글 표({want_axis} 몫)에 {d['axis']} 후보 {c[2]} — {want_axis} 후보가 없거나 검색 수요 5일 때만 (추천에 이유)")
-    # 추천 ○ 개수: 표마다 1개, 속보는 한쪽이 비면 다른 쪽 2개
-    names = [t[0] for t in tables]
-    for i, title in enumerate(names):
+    # 추천 ○ 개수: 속보 2 · 깊이 1. 속보에 급한 보안이 있으면 ○ 중 급한 보안 1개 + 그 밖 1개 (D86)
+    for title, _, want_n in tables:
         if title not in marks:
             continue
-        n, rows = marks[title]
-        want = 1 if rows else 0
-        if i < 2:
-            other = marks.get(names[1 - i], (0, 0))
-            if rows and other[1] == 0:
-                want = 2 if rows >= 2 else 1
-        if n != want:
-            msg = f"{title}: 추천 ○ {n}개 (기대 {want}개)"
-            (warns if picked else errs).append(msg)
+        chosen, rows = marks[title]
+        want = min(want_n, len(rows))
+        msgs = []
+        if len(chosen) != want:
+            msgs.append(f"{title}: 추천 ○ {len(chosen)}개 (기대 {want}개)")
+        if want_n == 2 and any(rows) and not all(rows) and len(chosen) == 2 and sum(chosen) != 1:
+            msgs.append(f"{title}: 급한 보안이 있으면 ○는 급한 보안 1 + 그 밖 1 (지금 급한 보안 {sum(chosen)}개, D86)")
+        (warns if picked else errs).extend(msgs)
 
     # URL
     for u in sorted(set(URL_RE.findall(text))):
