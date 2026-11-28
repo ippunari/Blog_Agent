@@ -337,6 +337,7 @@ th{background:var(--code);font-size:13px}
     <li>분량 기준 → <code>rules/blog-draft.md</code> (D47, 일반 글은 상위 글 중앙값 기준 / 속보는 1500~max(3000, 중앙값×1.2), D69) / 상자 표기(<code>:::box</code> 등) → blog-publish 변환과 짝</li>
     <li>그림 표시 <code>&lt;!-- 그림 N --&gt;</code> → <code>check_draft.py</code> 「그림 표시」 + blog-publish <code>build_publish.py</code> figslot·<code>find_images.py --slot</code>와 짝 (D97)</li>
     <li>구조 되풀이 기준 → <code>check_draft.py</code> <code>TALK_ABOUT</code>·<code>LIST_SD_MIN</code>·<code>PARA_CV_MIN</code> (D97 — 사람이 괜찮다고 본 글에서 경고가 쏟아지면 푼다)</li>
+    <li>이름·괄호·굵은 글씨 원칙 → <code>rules/voice-hikari.md</code> 7-5-2 / 전문어 상한에서 노트 사실의 이름 제외 → <code>rules/glossary.md</code> 2-1 + <code>check_draft.py</code> <code>notewords</code> (D98)</li>
   </ul></div>
 </div>
 

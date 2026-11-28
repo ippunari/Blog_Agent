@@ -15,6 +15,7 @@ drafts/<slug>.md 를 설계안·조사 노트·규칙과 맞춰 본다.
 14. 글 뼈대 순서·필수 상자, 차별 포인트 필수, 문단 독립성, 대책 없는 경고 문단, 용어집에 없는 전문어 수 (D47)
 15. 그림 표시 <!-- 그림 N --> 가 설계안 「그림 자리」 N번째 행의 섹션·사실 옆에 있는지 (D96·D97)
 16. 구조 되풀이 경고: 문장 시작·섹션 첫 이음말·목록 길이·문단 길이·글 자체를 말하는 문장 (D97, 경고만)
+17. 「**제목**：설명」 목록·읽점이 든 괄호 경고, 노트 사실에 나온 말은 전문어로 세지 않음 (D98)
 10. 상자 형식, 「ヒカリちゃんの案内」 첫 줄, 짧은 인용 2개까지, 원문(일본어) 25자 이상 같은 부분이 인용 밖에 있는지
 11. 용어: 사이트 용어집의 괄호 풀이가 첫 등장에 있는지, 피하는 말 (rules/glossary.md)
 12. 문체 경고: 80자 넘는 문장, 「！」, 「〜ね/〜よ」 끝맺음, 표시 없는 사실 문장 후보
@@ -515,12 +516,19 @@ def main():
     gp = HERE / "glossary_site.json"
     if gp.exists():
         g = json.loads(gp.read_text())
-        txt = strip_tags(body_join)
+        # 제목(# 줄)은 괄호를 달 수 없으니 첫 등장에서 뺀다 (D98)
+        txt = strip_tags("\n".join(l for l in body_join.splitlines() if not l.startswith("# ")))
+        bases = [t["base"] for t in g["terms"] if len(t["base"]) >= 2]
         for t in g["terms"]:
             b, pl = t["base"], t["plain"]
             if not pl or len(b) < 2 or b not in txt:
                 continue
-            pos = txt.find(b)
+            # 더 긴 용어집 말(「APIキー」)의 일부인 「API」는 그 자리에서 세지 않는다 (D98)
+            longer = [lb for lb in bases if b in lb and lb != b]
+            covered = {i for lb in longer for m_ in re.finditer(re.escape(lb), txt) for i in range(m_.start(), m_.end())}
+            pos = next((m_.start() for m_ in re.finditer(re.escape(b), txt) if m_.start() not in covered), None)
+            if pos is None:
+                continue
             win = txt[max(0, pos - 30):pos + len(b) + len(pl) + 6]
             if pl not in win and pl[:6] not in win:
                 W(f"용어 「{b}」 첫 등장에 용어집 괄호 풀이가 없음: （{pl}）")
@@ -696,6 +704,20 @@ def main():
             W(f"본문 문단 {len(paras)}개의 길이가 고름 (변동계수 {cv:.2f}) — 짧은 문단·긴 문단을 섞는다 (D97)")
     if first_openers:
         W(f"글 자체를 말하는 문장 {len(first_openers)}개 — 바로 내용을 쓴다 (D97): " + " / ".join(first_openers[:5]))
+    # D98 (voice-hikari.md 7-5-2): 굵은 글씨 + 콜론 목록, 내용을 채운 괄호
+    boldcolon = [f"{i+1+OFF}행" for i, l in enumerate(lines[:faq_start]) if re.match(r"^\s*(-|\d+\.)\s*\*\*[^*]+\*\*\s*[：:]", l)]
+    if boldcolon:
+        W(f"「**제목**：설명」 목록 {len(boldcolon)}개 — 굵게 하지 말고 문장으로 시작한다 (D98): " + " / ".join(boldcolon[:6]))
+    gl_paren = {m for t_ in (g["terms"] if gp.exists() else []) for m in re.findall(r"[（(]([^）)]+)[）)]", t_["term"])}
+    stuffed = []
+    for i, l in enumerate(lines[:faq_start]):
+        if in_box[i] or l.startswith(("#", ">", "|", "<!--")):
+            continue
+        for m_ in re.finditer(r"（([^（）]{2,})）", strip_tags(l)):
+            if re.search(r"[、。]", m_.group(1)) and m_.group(1) not in gl_paren:
+                stuffed.append(f"{i+1+OFF}행 「（{m_.group(1)[:14]}…）」")
+    if stuffed:
+        W(f"읽점·마침표가 든 괄호 {len(stuffed)}개 — 설명은 괄호 밖 문장으로 (D98): " + " / ".join(stuffed[:5]))
 
     # --- 문단 독립성·경고 문장 (voice-hikari.md 2-3, D47)
     deictic, alarm = [], []
@@ -719,6 +741,8 @@ def main():
             known.add(t["base"]); known.add(t["term"])
         kwtxt = f["main_keyword"] + " " + f["sub_keywords"] + " " + f["event_keywords"] + " " + faq_kw
         srcnames = " ".join(r[3] for r in facts.values() if len(r) > 3)
+        # D98: 노트 사실·원문 문장에 나온 말은 그 글의 정해진 이름 — 상한에 세지 않는다 (바꿔 말하지 않게)
+        notewords = " ".join(" ".join(r[1:3]) for r in facts.values() if len(r) > 2)
         prose = "\n".join(l for i, l in body_lines if not l.startswith((":::", "#")) and
                           not any(b["type"] == "cta" and b["start"] < i <= b["start"] + len(b["lines"]) for b in boxes))
         txt2 = re.sub(r"\]\(https?://[^)]+\)", "]", strip_tags(prose))
@@ -730,7 +754,7 @@ def main():
         jargon = sorted(c for c in cands
                         if c not in COMMON_KATA and c not in NOT_JARGON and c not in PLACE_KATA
                         and not any(c in k or k in c for k in known if len(k) >= 3)
-                        and norm(c) not in norm(kwtxt) and c not in srcnames)
+                        and norm(c) not in norm(kwtxt) and c not in srcnames and c not in notewords)
         cap_t = TERM_CAP["속보" if short else "일반"]
         if len(jargon) > cap_t:
             W(f"용어집에 없는 전문어 {len(jargon)}개 (상한 {cap_t}) — 빼기·행동으로 바꾸기·괄호 풀이, 남기면 초안 메모 「용어집 추가 후보」: {', '.join(jargon[:12])}")
