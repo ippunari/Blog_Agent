@@ -378,7 +378,7 @@ th{background:var(--code);font-size:13px}
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">다듬기 대기</span>)</li>
       <li><code>drafts/&lt;slug&gt;.md</code>, <code>factcheck/&lt;slug&gt;.md</code> (<code>result: 통과</code>가 아니면 멈춤)</li>
-      <li><code>textlintrc.json</code>·<code>prh-hikari.yml</code> (교정 사전), 루트 <code>package.json</code>의 textlint (+ preset-ai-writing — AI 문투, 경고만, D99)</li>
+      <li><code>textlintrc.json</code>·<code>prh-hikari.yml</code> (교정 사전), 루트 <code>package.json</code>의 textlint (+ preset-ai-writing — AI 문투, 경고만, D99) · <code>vendor/yomiyasu/</code> (MIT, v3.4.1 고정, D101)</li>
     </ul></div>
     <div><h4>출력</h4><ul>
       <li><code>drafts/&lt;slug&gt;.md</code> 다듬은 본문 + 머리 메타 (<code>seo_title</code>·<code>meta</code>·<code>og_title</code>·<code>og_description</code>·<code>excerpt</code>·<code>slug</code>) + 「다듬기 메모」</li>
@@ -390,14 +390,16 @@ th{background:var(--code);font-size:13px}
     <dt>카드 상태</dt><dd><span class="tag t-status">다듬기 대기</span> → <span class="tag t-status">발행 준비</span></dd>
     <dt><span class="tag t-human">◆ 사람</span></dt><dd>없음 (사람은 다음 단계 미리보기에서 본다)</dd>
     <dt>스크립트</dt><dd><ul>
-      <li><code>check_polish.py</code> textlint·문장 길이 80자·「〜ね/〜よ」·같은 어미 3연속 등 (<code>--strip-invisible</code> 특수 문자 제거, <code>--write-memo</code> 체크리스트 표)</li>
+      <li><code>check_polish.py</code> textlint·문장 길이 80자·「〜ね/〜よ」·같은 어미 3연속 등 (<code>--strip-invisible</code> 특수 문자 제거, <code>--write-memo</code> 체크리스트 표) + yomiyasu lint 경고·같은 말 몰림·「版」 (D100·D101)</li>
+      <li><code>check_polish.py --snapshot</code>(시작) → <code>--meaning-diff</code>(재대조 전): 숫자·부정·의무가 바뀐 문장 → 재대조 대상에 더함. 사본 <code>drafts/.before-polish/</code>는 로컬만 (D101)</li>
       <li>빌려 씀: blog-factcheck <code>check_factcheck.py --recheck</code> — 다듬기·편집자 검토를 모두 끝낸 뒤 <b>한 번만</b>, 「재대조 대상」만 서브 에이전트에게 (D61)</li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-polish.md</code>, <code>rules/voice-hikari.md</code> 7장 やわらかく読める日本語 (D49), <code>rules/glossary.md</code></dd>
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>교정 규칙 → <code>prh-hikari.yml</code>(바꿀 말 사전)·<code>textlintrc.json</code>, 그 밖의 문체 검사 → <code>check_polish.py</code></li>
-    <li>한자 연속 예외 이름 끝말 → <code>NAME_SUFFIX</code> / 흐린 말·횟수 → <code>VAGUE_WORDS</code>·<code>VAGUE_MAX</code> / 문장 길이 경고 71자·긴 문장 문단 40자 → <code>check()</code> (D78) / 편집자가 볼 것(일반론 지우기·문단별 확인·영어로 되돌려 보기 D99) → <code>naturalness_review.md</code> / AI 문투 경고에서 넘길 메시지 → <code>check()</code>의 <code>AI_PRESET</code> 부분</li>
+    <li>한자 연속 예외 이름 끝말 → <code>NAME_SUFFIX</code> / 흐린 말·횟수 → <code>VAGUE_WORDS</code>·<code>VAGUE_MAX</code> / 문장 길이 경고 71자·긴 문장 문단 40자 → <code>check()</code> (D78) / 편집자가 볼 것(일반론 지우기·문단별 확인·영어로 되돌려 보기 D99) → <code>naturalness_review.md</code> / AI 문투 경고에서 넘길 메시지 → <code>check()</code>의 <code>AI_PRESET</code> 부분 / yomiyasu에서 뺄 규칙 → <code>YOMI_SKIP</code>·<code>YOMI_INFO_KEEP</code>, 판 올리기 → <code>vendor/yomiyasu/VERSION.md</code> / 같은 말 상한 → <code>REPEAT_MAX</code> (D100)</li>
+    <li>우선순위: 자연스러움이 먼저, 예외 4가지(사실·검색어·80자·「〜ね/〜ですよ」) → <code>rules/voice-hikari.md</code> 7-0 (D100)</li>
     <li>메타 길이 규격 → <code>rules/blog-polish.md</code> 「메타 정보」 (excerpt에 리드 문장 금지, D52)</li>
   </ul></div>
 </div>

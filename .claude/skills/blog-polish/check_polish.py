@@ -4,6 +4,8 @@
 drafts/<slug>.md 를 rules/voice-hikari.md 7장(D49)·rules/common.md 4·6장·rules/blog-polish.md로 본다.
  1. textlint (preset-japanese·히라가나·한자 연속·중복 표현·prh 사전) — 본문만 떼어 낸 사본으로. 원문 인용(>)과 「」『』 안은 제외
     preset-ai-writing(AI 문투: 목록 꾸밈·과장·강조·콜론·간결성)은 경고만, 「する必要があります」 제안은 넘김 (D99)
+    yomiyasu lint(vendor/, 판 고정 — 직역어·비유 동사·決まり文句 등)도 경고만, 참고(info)는 개수만 (D101)
+    같은 말 몰림(確かめ 등)·「版」·한 문단에 같은 긴 이름 3번 (D100)
     (문장 길이는 「」 안까지 세야 하므로 textlint가 아니라 이 스크립트가 본다: 80자 초과 오류, 71~80자 경고, D78)
  2. 보이지 않는 특수 문자 (파일 전체)
  3. 「〜ね。」「〜よ。」 끝맺음 (질문 「？」 문장은 제외), 같은 어미 3연속, 「〜てください」 문단당 2회, 「ぜひ」 글당 1회
@@ -17,6 +19,8 @@ drafts/<slug>.md 를 rules/voice-hikari.md 7장(D49)·rules/common.md 4·6장·r
   python3 -I check_polish.py drafts/<slug>.md                 점검
   python3 -I check_polish.py drafts/<slug>.md --strip-invisible  보이지 않는 특수 문자를 지운다 (파일을 고침)
   python3 -I check_polish.py drafts/<slug>.md --write-memo       「## 다듬기 메모」의 자동 칸(지표·SEO 체크리스트)을 채운다
+  python3 -I check_polish.py drafts/<slug>.md --snapshot         다듬기 시작 때 사본 (drafts/.before-polish/, 로컬만)
+  python3 -I check_polish.py drafts/<slug>.md --meaning-diff     사본과 비교 — 뜻이 바뀔 위험 문장 (재대조 대상에 더함)
 종료 코드 0 = 통과(경고만 있을 수 있음), 1 = 오류
 """
 import argparse
@@ -74,6 +78,21 @@ CONCLUSION_RE = re.compile(r"結論から(言うと|言えば|いうと|いえ�
 # D78: 한자 6자 연속 금지의 예외 — 기관·법률·직함 이름 (줄이면 사실이 흐려진다: 最高研究責任者 → 研究部門の責任者)
 NAME_SUFFIX = re.compile(r"(委員会|機構|協会|研究所|大学|省|庁|局|法|条例|責任者|担当者|部長|課長|社長|会長|理事長|長官|大臣|本部|機関|裁判所|銀行)$")
 KANJI_RANGE = {"default": (25, 35), "보안 사고 해설": (25, 38), "보안 대책 가이드": (25, 38)}
+# D100: 같은 말이 한 글에 몰리면 단조롭다 — 글당 이 횟수를 넘으면 경고 (「」 안 인용 제외)
+REPEAT_MAX = {"確かめ": (4, "見る・調べる・聞く・チェックする 등으로 나누거나 문장을 합친다"),
+              "確認し": (4, "見る・調べる・聞く 등으로"),
+              "する必要があります": (3, "섹션당 1번. 나머지는 「〜してください」나 출처를 주어로 「〇〇は〜よう求めています」 (강도는 그대로, 7-4-2)"),
+              "おすすめします": (2, "「〜がおすすめです」「〜と安心です」로 섞는다"),
+              "しましょう": (4, "「〜してください」「〜と安心です」로 섞는다")}
+# D100: 「アプリの版」 — 일본 독자는 「バージョン」 (일상 가타카나를 한자 한 글자로 바꾸지 않는다, 7-1)
+VERSION_KANJI = re.compile(r"(アプリ|ソフト(ウェア)?|ブラウザー?|OS|[A-Za-z][A-Za-z0-9 ・]*)の版|版の番号|版を(確か|調べ|見)")
+# D101: yomiyasu (vendor/yomiyasu, MIT, 판 고정) — 경고로만. 우리 글 틀·다른 점검과 겹치거나 부딪치는 규칙은 뺀다
+YOMI = HERE / "vendor" / "yomiyasu"
+YOMI_SKIP = {"excess_list",        # 글 뼈대(わかること·3行まとめ·순서 목록)가 목록이다 (D47)
+             "bold_label_list",    # check_draft(D98)·preset-ai-writing(D99)가 잡는다
+             "excess_bold",        # H2마다 굵은 직답 1문장이 규칙이다 (voice-hikari.md 2장)
+             "sentence_length"}    # 문장 길이는 이 스크립트가 (80자)
+YOMI_INFO_KEEP = {"calque", "translated_term", "metaphor_label", "ai_phrase", "thin_evaluation", "slop_vocabulary"}
 
 
 def unquote(s):
@@ -198,6 +217,45 @@ def run_textlint(root, copy_text):
         return None, "textlint 실행 실패: " + (r.stderr or r.stdout)[:300]
     msgs = [m for f in data for m in f.get("messages", [])]
     return msgs, None
+
+
+def run_yomiyasu(root, copy_text):
+    """yomiyasu_lint를 본문 사본(표준 입력)에 돌린다. 용어집 말은 allow.txt로 뺀다 (D101)"""
+    lint = YOMI / "yomiyasu_lint.py"
+    if not lint.exists():
+        return None, "vendor/yomiyasu 없음"
+    with tempfile.TemporaryDirectory() as td:
+        (Path(td) / "allow.txt").write_text("\n".join(sorted(w for w in glossary_words(root) if len(w) >= 2)) + "\n")
+        r = subprocess.run([sys.executable, "-I", str(lint), "--json", "--doc-type", "article", "--reader", "general",
+                            "--words", td, "-"], input=copy_text, capture_output=True, text=True, cwd=root)
+    try:
+        return json.loads(r.stdout).get("findings", []), None
+    except json.JSONDecodeError:
+        return None, "yomiyasu 실행 실패: " + (r.stderr or r.stdout)[:300]
+
+
+def meaning_diff(root, before, after):
+    """다듬기 전 사본과 지금 초안을 yomiyasu_diff로 비교 — 숫자·부정·조사 바뀜 등 「뜻이 바뀔 위험」만 (D101)"""
+    # 사본은 점으로 시작하는 폴더라 yomiyasu가 파일로는 읽지 않는다 → 표준 입력으로
+    r = subprocess.run([sys.executable, "-I", str(YOMI / "yomiyasu_diff.py"), "--no-words", "--json",
+                        "-", str(Path(after).resolve().relative_to(root))],
+                       input=Path(before).read_text(), capture_output=True, text=True, cwd=root)
+    try:
+        d = json.loads(r.stdout)
+    except json.JSONDecodeError:
+        return None, "yomiyasu_diff 실행 실패: " + (r.stderr or r.stdout)[:300]
+    # 같은 문장이 여러 종류(숫자·부정·의무…)로 나오면 한 줄로 묶는다
+    grouped = {}
+    for m in d.get("meaning_risks", []):
+        key = re.sub(r"\*\*", "", m.get("new", ""))
+        g = grouped.setdefault(key, [m.get("new_line") or m.get("old_line"), [], m.get("old", ""), m.get("new", "")])
+        if m.get("kind") and m["kind"] not in g[1]:
+            g[1].append(m["kind"])
+    return [(ln, "·".join(k), old, new) for ln, k, old, new in grouped.values()], None
+
+
+def snapshot_path(dp):
+    return dp.parent / ".before-polish" / dp.name
 
 
 def metrics(text, bl):
@@ -328,6 +386,26 @@ def check(a, root):
                 continue
             E(f"{m['line']}행 textlint [{rid}] {m['message'].splitlines()[0]}")
 
+    # 1-2. yomiyasu (D101) — 경고만. 「주제 뒤 읽점」(pause_comma)·「AではなくB」 같은 참고(info)는 개수만
+    copy = lint_copy(text, bl)
+    yf, yerr = run_yomiyasu(root, copy)
+    yinfo = 0
+    if yerr:
+        W(yerr)
+    else:
+        for m in yf:
+            rule = m.get("rule", "")
+            if rule in YOMI_SKIP or (rule == "calque" and "言い方: 版）" in m.get("message", "")):
+                continue   # 「版」은 아래 우리 점검(D100)이 잡는다
+            if m.get("severity") == "info" and rule not in YOMI_INFO_KEEP:
+                yinfo += 1
+                continue
+            msg = m.get("message", "").split("。")[0]
+            W(f"{m.get('line')}행 yomiyasu [{rule}] {msg}: 「{m.get('snippet', '')[:30]}…」")
+        if yinfo:
+            W(f"yomiyasu 참고 {yinfo}건(주제 뒤 읽점·「AではなくB」 등) — 자연스러우면 그대로. 보려면 "
+              f"`python3 -I {YOMI.relative_to(root) if YOMI.is_relative_to(root) else YOMI}/yomiyasu_lint.py --doc-type article <초안>`")
+
     # 3·4·5. 문장·문단
     paras = prose_paragraphs(bl)
     all_s = [(i, s) for _, ss, _ in paras for i, s in ss]
@@ -359,6 +437,13 @@ def check(a, root):
             W(f"흐린 말 「{w}」 {c}회 — 글당 {VAGUE_MAX}회까지. 숫자·대상·이유를 구체적으로 쓴다 (7-5, D78)")
     if len(CONCLUSION_RE.findall(joined_uq)) > 1:
         E(f"「結論から言うと」 {len(CONCLUSION_RE.findall(joined_uq))}회 — 되풀이하지 않는다. 결론은 그냥 먼저 쓴다 (7-5, D78)")
+    for w, (mx, how) in REPEAT_MAX.items():
+        c = joined_uq.count(w)
+        if c > mx:
+            W(f"「{w}」 {c}회 — 같은 말이 몰림(글당 {mx}회까지 권장). {how} (7-2, D100)")
+    for i, s in all_s:
+        if VERSION_KANJI.search(unquote(s)):
+            W(f"{i+1}행 「版」 — 앱·소프트웨어의 판이면 「バージョン」 (일상 가타카나를 한자로 바꾸지 않는다, 7-1, D100): 「{s[:30]}…」")
     zehi = joined.count("ぜひ")
     if zehi > 1:
         E(f"「ぜひ」 {zehi}회 — 글당 1회까지 (7-5)")
@@ -367,6 +452,10 @@ def check(a, root):
         kd = txt.count("てください") + txt.count("でください")
         if kd > 2:
             E(f"{start+1}행 문단 「〜てください」 {kd}회 — 문단당 2회까지 (7-4)")
+        # D100: 한 문단에 같은 긴 이름(가타카나·영문 6자 이상)이 3번 — 두 번째부터는 줄여 부른다 (문단 첫 문장만 이름 그대로)
+        for nm in set(re.findall(r"[A-Za-z][A-Za-z0-9 .・]{5,}[A-Za-z0-9]|[ァ-ヶー・]{6,}", unquote(txt))):
+            if unquote(txt).count(nm) >= 3:
+                W(f"{start+1}행 문단에 「{nm.strip()}」 {unquote(txt).count(nm)}회 — 두 번째부터는 「アプリ」「この機能」처럼 줄여 부른다 (7-5-2, D100)")
         if txt.count("することで") > 1:
             W(f"{start+1}행 문단 「〜することで」 {txt.count('することで')}회 — 문단당 1회까지 (7-5)")
         if is_list:
@@ -516,6 +605,8 @@ def main():
     ap.add_argument("--root", default=".")
     ap.add_argument("--strip-invisible", action="store_true")
     ap.add_argument("--write-memo", action="store_true")
+    ap.add_argument("--snapshot", action="store_true", help="다듬기 시작 때 초안 사본을 drafts/.before-polish/에 둔다 (D101)")
+    ap.add_argument("--meaning-diff", action="store_true", help="사본과 지금 초안을 비교해 뜻이 바뀔 위험 문장을 보인다 (D101)")
     a = ap.parse_args()
     root = Path(a.root).resolve()
     if a.strip_invisible:
@@ -524,6 +615,26 @@ def main():
         n = len(INVISIBLE.findall(t))
         p.write_text(INVISIBLE.sub(lambda m: " " if m.group(0) == " " else "", t))
         print(f"보이지 않는 특수 문자 {n}개를 지움 (NBSP는 공백으로)")
+        return 0
+    dp = Path(a.file)
+    if a.snapshot:
+        sp = snapshot_path(dp)
+        sp.parent.mkdir(exist_ok=True)
+        sp.write_text(dp.read_text())
+        print(f"다듬기 전 사본: {sp}")
+        return 0
+    if a.meaning_diff:
+        sp = snapshot_path(dp)
+        if not sp.exists():
+            print(f"사본 없음 — 다듬기 시작 때 --snapshot ({sp})")
+            return 1
+        risks, err = meaning_diff(root, sp, dp)
+        if err:
+            print("❌ " + err)
+            return 1
+        for ln, kind, old, new in risks:
+            print(f"⚠ {ln or '-'}행 뜻이 바뀔 위험 [{kind}]\n    전: {old[:90]}\n    후: {new[:90]}")
+        print(f"뜻이 바뀔 위험 {len(risks)}건 — 이 문장들을 재대조 대상에 더한다 (SKILL 4장)" if risks else "뜻이 바뀔 위험 없음")
         return 0
     errs, warns, stats = check(a, root)
     if a.write_memo:

@@ -523,6 +523,12 @@ def main():
             b, pl = t["base"], t["plain"]
             if not pl or len(b) < 2 or b not in txt:
                 continue
+            # D100: 영문 이름의 읽는 법(풀이가 가타카나뿐 — 「Anthropic（アンソロピック）」)은 붙이지 않아도 된다.
+            # 널리 아는 이름(ChatGPT·Google 등)에 붙이면 오히려 어색하다 — 붙일지는 쓰는 사람이 정한다 (glossary.md 2장)
+            # 약어(API·CPI)의 풀이는 읽는 법이 아니라 설명이므로 그대로 본다
+            if (re.fullmatch(r"[A-Za-z0-9 .\-]+", b.split("(")[0].split("（")[0]) and not re.fullmatch(r"[A-Z]{2,6}", b)
+                    and re.fullmatch(r"[ァ-ヶー・･\s]+", pl)):
+                continue
             # 더 긴 용어집 말(「APIキー」)의 일부인 「API」는 그 자리에서 세지 않는다 (D98)
             longer = [lb for lb in bases if b in lb and lb != b]
             covered = {i for lb in longer for m_ in re.finditer(re.escape(lb), txt) for i in range(m_.start(), m_.end())}
