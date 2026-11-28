@@ -102,12 +102,23 @@ def decode(body, ctype):
 
 def to_text(raw, ctype):
     if "pdf" in ctype or raw[:5] == b"%PDF-":
-        if not shutil.which("pdftotext"):
-            raise RuntimeError("PDF — pdftotext 없음. HTML 판을 찾거나 사람에게 알린다")
-        p = subprocess.run(["pdftotext", "-layout", "-", "-"], input=raw, capture_output=True)
-        if p.returncode != 0:
-            raise RuntimeError("PDF 변환 실패")
-        return "", p.stdout.decode("utf-8", "replace"), []
+        if shutil.which("pdftotext"):
+            p = subprocess.run(["pdftotext", "-layout", "-", "-"], input=raw, capture_output=True)
+            if p.returncode != 0:
+                raise RuntimeError("PDF 변환 실패")
+            return "", p.stdout.decode("utf-8", "replace"), []
+        try:  # pdftotext가 없으면 pypdf (pip3 install pypdf, 2026-11-28)
+            import io
+            import pypdf
+        except ImportError:
+            raise RuntimeError("PDF — pdftotext·pypdf 없음. `pip3 install pypdf` 또는 HTML 판을 찾는다")
+        try:
+            r = pypdf.PdfReader(io.BytesIO(raw))
+            pages = [(pg.extract_text() or "") for pg in r.pages]
+        except Exception as e:
+            raise RuntimeError(f"PDF 변환 실패 ({type(e).__name__})")
+        title = ((r.metadata or {}).get("/Title") or "").strip() if r.metadata else ""
+        return title, "\n\n".join(f"--- p.{i + 1}\n{t}" for i, t in enumerate(pages)), []
     doc = decode(raw, ctype)
     if "html" not in ctype and "<html" not in doc[:3000].lower():
         return "", doc, []

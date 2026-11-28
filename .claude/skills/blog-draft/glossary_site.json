@@ -1,8 +1,8 @@
 {
- "updated_at": "2026-11-20T16:28+09:00",
+ "updated_at": "2026-11-22T09:05+09:00",
  "source": "https://atatakaidigital.com/ja/glossary",
  "_note": "사이트 용어집 사본 (초안 점검용). 원본은 사이트. rules/glossary.md",
- "count": 437,
+ "count": 438,
  "terms": [
   {
    "term": "アイスタイル",
@@ -327,6 +327,15 @@
    "category": "AI用語",
    "desc": "オンデバイスAIは、遠くのサーバーではなく手元のスマートフォンやパソコンの中で直接動くAIです。入力した内容が端末の外に出ないので個人情報を守りやすく、インターネットがなくても使えます。",
    "url": "https://atatakaidigital.com/ja/glossary/on-device-ai"
+  },
+  {
+   "term": "オントロジー",
+   "base": "オントロジー",
+   "plain": "",
+   "en": "Ontology",
+   "category": "AI用語",
+   "desc": "オントロジーとは、仕事で使う言葉が何を指し、それぞれがどう結びつくかを整理したものです。",
+   "url": "https://atatakaidigital.com/ja/glossary/ontology"
   },
   {
    "term": "カード情報の非保持化",

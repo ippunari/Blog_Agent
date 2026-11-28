@@ -117,6 +117,9 @@ def main():
         return
     if not a.published:
         ap.error("공표 일시 또는 --carry가 필요하다")
+    if not re.search(r"\d{4}-\d{2}-\d{2}[T ]\d{1,2}:\d{2}", a.published):
+        sys.exit("오류: 공표 시각이 없음 — 날짜만이면 「확인된 가장 늦은 시각」(그날 공표가 있었다는 가장 이른 흔적: "
+                 "문서 갱신 시각·첫 보도 시각, 없으면 그날 23:59 발표 회사 시간대)을 JST로 바꿔 넣는다 (D94)")
     dl, ext = deadline(a.published)
     now = parse(a.now) if a.now else datetime.now(JST)
     if str(dl.year) not in holiday_years():

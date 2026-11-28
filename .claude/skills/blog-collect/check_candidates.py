@@ -74,6 +74,11 @@ def main():
             problems.append(f"{cid}: 주제 축 '{vals['주제 축']}'")
         if vals.get("예상 글 종류") and vals["예상 글 종류"].strip() not in TYPES:
             problems.append(f"{cid}: 예상 글 종류 '{vals['예상 글 종류']}'")
+        # D94: B·C 대표 출처인데 1차 출처가 있으면 발표 일시는 1차 출처 날짜로
+        if (vals.get("등급", "").strip() in ("B", "C") and vals.get("1차 출처", "").strip().startswith("있음")
+                and "1차 출처" not in vals.get("발표 일시", "")):
+            problems.append(f"{cid}: 1차 출처가 있으면 발표 일시는 1차 출처의 공표 일시 + 「(JST, 1차 출처)」 "
+                            f"— 시각이 없으면 「YYYY-MM-DD (1차 출처, 시각 미공개)」 (D94)")
         summ = vals.get("한국어 요약", "")
         if len(SENT_END.findall(summ)) > 2:
             problems.append(f"{cid}: 한국어 요약이 2문장을 넘음")

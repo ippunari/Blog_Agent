@@ -262,6 +262,9 @@ def main():
             errs.append(f"{tid}: 보안 속보는 「급한 보안: 예 — 근거」가 있어야 순위표에 — 급하지 않으면 「1차에서 빠진 후보」로 (D86)")
         if f.get("실습") and not any(f["실습"].startswith(t) for t in TRIALS):
             errs.append(f"{tid}: 실습 값 '{f['실습']}' (에이전트 가능 / 사람 필요 / 해당 없음 으로 시작)")
+        if f.get("경로") == "속보" and f.get("실습", "").startswith("사람"):
+            (errs if new else warns).append(
+                f"{tid}: 속보는 사람 실습을 넣지 않는다 — 실습 「해당 없음」 (72시간 마감, D79)")
         details[tid] = {"axis": f.get("주제 축"), "route": f.get("경로"), "total": tot, "title": tt,
                         "type": f.get("글 종류"), "rec": f.get("추천", "").strip(),
                         "trial": f.get("실습", ""), "gate_fail": gate_fail, "main_kw": f.get("메인 키워드", ""),

@@ -116,8 +116,9 @@ def clean_title(t):
 
 def source_li(s):
     dates = []
-    if s["pdate"] not in ("", "-"):
-        dates.append("・".join(jdate(d.strip()) for d in s["pdate"].split(",")) + "発表")
+    pds = [d.strip() for d in s["pdate"].split(",") if re.match(r"\d{4}-\d{2}-\d{2}$", d.strip())]   # 「-」(미확인)는 빼고 날짜만
+    if pds:
+        dates.append("・".join(jdate(d) for d in pds) + "発表")
     if re.match(r"\d{4}-\d{2}-\d{2}", s["cdate"]):
         dates.append(jdate(s["cdate"][:10]) + "確認")
     dom = urlparse(s["url"]).netloc.removeprefix("www.")

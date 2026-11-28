@@ -181,7 +181,7 @@ th{background:var(--code);font-size:13px}
     <dt><span class="tag t-human">◆ 사람</span></dt><dd>없음 (Drive 문서는 읽고 댓글만)</dd>
     <dt>스크립트</dt><dd><ul>
       <li><code>fetch_feeds.py</code> 피드·KEV·트렌드·자동완성·추적 제품을 한 번에 가져옴 → <code>$SP/fetch.json</code>, <code>fetch.titles.txt</code> (출처 상태 ok·empty·error, 반응 수 はてブ·HN)</li>
-      <li><code>check_candidates.py</code> 필수 항목·값·<b>수집 데이터에 없는 URL</b>·counts·검색 안 한 출처(<code>search_done.txt</code>)·언어별 줄 점검 (건수 상한·하한은 보지 않음, D84)</li>
+      <li><code>check_candidates.py</code> 필수 항목·값·<b>수집 데이터에 없는 URL</b>·counts·검색 안 한 출처(<code>search_done.txt</code>)·언어별 줄 점검 (건수 상한·하한은 보지 않음, D84) + B·C 출처인데 1차 출처가 있으면 발표 일시가 1차 출처 날짜인지 (D94)</li>
       <li><code>export_doc.py</code> Drive용 보기 사본 md 만들기</li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-collect.md</code> (출처 표·등급 A~D·중복 처리)</dd>
@@ -219,9 +219,9 @@ th{background:var(--code);font-size:13px}
     <dt>스크립트</dt><dd><ul>
       <li><code>list_posts.py</code> 사이트맵에서 기존 글 제목·메타 → <code>existing_posts.json</code>·<code>.titles.txt</code>·<code>.stale.txt</code></li>
       <li><code>suggest.py</code> 키워드 자동완성 (축별 질문형 꼬리말, D43)</li>
-      <li><code>check_topics.py</code> 점수 1~5·총점 재계산·순위표 구성·URL 점검 + 키워드(D80: 상위 구성 검색어·속보 사건어·이길 여지 문턱 / D87: 메인이 근거에 그대로·서브 일본어 질문형·사건어 경고·수요 상한) + 속보 ○ 2개·보안은 「급한 보안」만(D86)</li>
+      <li><code>check_topics.py</code> 점수 1~5·총점 재계산·순위표 구성·URL 점검 + 키워드(D80: 상위 구성 검색어·속보 사건어·이길 여지 문턱 / D87: 메인이 근거에 그대로·서브 일본어 질문형·사건어 경고·수요 상한) + 속보 ○ 2개·보안은 「급한 보안」만(D86) + 속보는 사람 실습 없음(D79)</li>
       <li><code>export_sheet.py</code> 순위표 → 시트용 xlsx</li>
-      <li><code>deadline.py</code> 속보 마감 = 공표 + 72시간, 업무 시간(평일 9~18시) 밖이면 다음 업무일 12:00 · 남은 업무 시간 (D88 — blog-research도 씀)</li>
+      <li><code>deadline.py</code> 속보 마감 = 공표 + 72시간, 업무 시간(평일 9~18시) 밖이면 다음 업무일 12:00 · 남은 업무 시간 (D88 — blog-research도 씀). 시각 없는 날짜는 받지 않는다 — 확인된 가장 늦은 시각으로 (D94)</li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-topic.md</code> (주제 축·점수표·속보/일반 판정·회차 운영·시트 칸), <code>rules/blog-perspective.md</code> (대표 한마디)</dd>
   </dl>
@@ -238,7 +238,7 @@ th{background:var(--code);font-size:13px}
 <!-- 4 research -->
 <div class="card" id="research">
   <div class="card-head"><span class="n">4</span><h3>blog-research — 조사</h3><code>/blog-research [slug]</code> · <code>실습 끝났어 &lt;slug&gt;</code></div>
-  <p>1차 출처까지 찾아가 원문을 저장하고, 사실마다 원문 문장·등급·확인일을 붙인 조사 노트를 만든다. 일반 글은 경쟁 글·차별 포인트·상위 글 분량, AI 실습 글은 직접 써 본 결과까지.</p>
+  <p>1차 출처까지 찾아가 원문을 저장하고, 사실마다 원문 문장·등급·확인일을 붙인 조사 노트를 만든다. 상위 글 분량은 모든 글(속보는 상한 참고용, D58·D69), 일반 글은 경쟁 글·차별 포인트, AI 실습 글은 직접 써 본 결과까지. 사건어가 메인에 없는 속보는 사건어로도 검색해 일본어 해설 유무를 적는다 (D93).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">조사 대기</span>·<span class="tag t-status">기존 글 업데이트</span>)</li>
@@ -249,7 +249,7 @@ th{background:var(--code);font-size:13px}
     </ul></div>
     <div><h4>출력</h4><ul>
       <li><code>research/&lt;slug&gt;.md</code> — 요약·핵심 사실표(S1…)·수치표·경쟁 글·차별 포인트·상위 글 분량·직접 써 본 결과</li>
-      <li>카드: <code>research:</code> 줄, 속보는 확인한 <code>deadline</code></li>
+      <li>카드: <code>research:</code> 줄, 속보는 확인한 <b>1차 출처</b> 공표 시각으로 <code>deadline</code> (<code>blog-topic/deadline.py</code>, 업무 시간 기준 D88 · 날짜만이면 확인된 가장 늦은 시각 D94)</li>
       <li>사람 실습: <code>03_Blog/trials</code> 실습 문서, 카드 <code>trial_doc</code>·<code>trial_due</code> (기한 = +1주 17:00)</li>
     </ul></div>
   </div>
@@ -257,7 +257,7 @@ th{background:var(--code);font-size:13px}
     <dt>카드 상태</dt><dd><span class="tag t-status">조사 대기</span> → <span class="tag t-status">설계 대기</span></dd>
     <dt><span class="tag t-human">◆ 사람</span></dt><dd><code>trial: 사람</code> 카드만 — <b>기다리지 않는다</b>: 자리 표시로 Ghost 초안(<code>[실습 필요]</code>)까지 간 뒤, 팀원이 실습 문서대로 해 보고 결과 기입 → 「실습 끝났어 &lt;slug&gt;」 → 노트 → 설계 행 → 초안 섹션 → 재대조 → 같은 초안 갱신 (D79). 속보는 사람 실습 없음. <code>converted_from: 속보</code> 카드는 노트에 일반 범위만 보충</dd>
     <dt>스크립트</dt><dd><ul>
-      <li><code>fetch_page.py</code> 페이지를 본문 텍스트 + 링크 목록으로 저장 (원문 문장의 증거, 다른 스킬도 씀)</li>
+      <li><code>fetch_page.py</code> 페이지를 본문 텍스트 + 링크 목록으로 저장 (원문 문장의 증거, 다른 스킬도 씀). PDF는 pdftotext, 없으면 <code>pypdf</code> (<code>pip3 install pypdf</code>)</li>
       <li><code>body_chars.py</code> 경쟁 글 본문 글자 수·중앙값 (D47)</li>
       <li><code>check_research.py</code> 원문 문장이 저장한 페이지에 실제로 있는지·등급·날짜·URL 점검</li>
       <li><code>export_trial.py</code> 사람 실습 문서 md 만들기 / <code>drive_folders.json</code> trials 폴더 ID</li>
