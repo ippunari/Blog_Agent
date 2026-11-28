@@ -273,13 +273,14 @@ th{background:var(--code);font-size:13px}
 <!-- 5 outline -->
 <div class="card" id="outline">
   <div class="card-head"><span class="n">5</span><h3>blog-outline — 설계</h3><code>/blog-outline [slug]</code></div>
-  <p>카드와 조사 노트로 글의 설계도를 만든다: 제목 후보 3개(추천 1)·메타·검색 의도·훅·도입부·질문형 H2 목차(직답·쓸 사실·형식·분량)·차별 포인트·FAQ·CTA·내부 링크·역링크·태그·SNS 포인트·갱신 조건.</p>
+  <p>카드와 조사 노트로 글의 설계도를 만든다: 제목 후보 3개(추천 1)·메타·검색 화면(AI 개요·関連する質問, D95)·검색 의도·훅·도입부·질문형 H2 목차(직답·쓸 사실·형식·분량)·차별 포인트·그림 자리(D96)·FAQ·CTA·내부 링크·역링크·태그·SNS 포인트·갱신 조건.</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">설계 대기</span>)</li>
       <li><code>research/&lt;slug&gt;.md</code> (없으면 멈춤)</li>
       <li><code>topics/existing_posts.json</code> (하루 넘었으면 먼저 갱신)</li>
       <li>역링크 후보 기존 글 (실제 H2 이름 확인용), 개편이면 대상 글</li>
+      <li>Google 일본 검색 화면 (메인 키워드 그대로, ego-browser — 못 보면 「못 봄」으로 계속)</li>
     </ul></div>
     <div><h4>출력</h4><ul>
       <li><code>outlines/&lt;slug&gt;.md</code> 설계안</li>
@@ -291,7 +292,8 @@ th{background:var(--code);font-size:13px}
     <dt>카드 상태</dt><dd><span class="tag t-status">설계 대기</span> → <span class="tag t-status">초안 대기</span> (사람 실습 결과 전이어도 — 「◆ 실습 대기」 행은 자리 표시, D79)</dd>
     <dt><span class="tag t-human">◆ 사람</span></dt><dd>없음. 실습 결과가 오면 「使ってみた」 행만 채운다(상태는 그대로). D80 이전 카드는 키워드를 새 기준으로 갱신 — 메인 키워드도 묻지 않고 바꾼다</dd>
     <dt>스크립트</dt><dd><ul>
-      <li><code>check_outline.py</code> 제목 28~35자·메타 80~120자·slug·H2 4~8개·직답 40~80자 등 (<code>--verify-links</code> 역링크 위치 확인)</li>
+      <li><code>serp_view.py</code> 검색 화면 관찰 — AI 개요 유무·답 형식·인용 출처(추정)·関連する質問·상위 10개 → <code>$SP/serp/serp.json</code> (AI 개요 문장은 사실 근거 아님, D95)</li>
+      <li><code>check_outline.py</code> 제목 28~35자·메타 80~120자·slug·H2 4~8개·직답 40~80자·검색 화면·그림 자리(속보 2·일반 4, 편집부 그림은 S번호) 등 (<code>--verify-links</code> 역링크 위치 확인)</li>
       <li>빌려 씀: blog-topic <code>suggest.py</code>, blog-research <code>fetch_page.py</code></li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-outline.md</code>, <code>rules/common.md</code> 1장 CTA 버튼 표·6장 SEO</dd>
@@ -300,6 +302,8 @@ th{background:var(--code);font-size:13px}
     <li>제목·메타 길이, H2 수 → <code>rules/blog-outline.md</code> + <code>check_outline.py</code></li>
     <li>속보 × 글 종류 목차 틀 → <code>rules/blog-outline.md</code> (D44) / CTA 문구·링크 → <code>common.md</code> 1장</li>
     <li>AI 글이 만드는 내용이면 주 CTA를 견적·상담 문의로(D89) / 카드 사건어 「(메인에 없음)」 → <code>event_keywords</code>(D90) → SKILL.md 2·3장 + <code>rules/blog-outline.md</code></li>
+    <li>검색 화면에서 무엇을 뽑고 어디에 쓰는지 → <code>rules/blog-outline.md</code> 「검색 화면 관찰」 + <code>serp_view.py</code> (Google 화면이 바뀌면 여기) (D95)</li>
+    <li>그림 종류·장수 → <code>rules/blog-outline.md</code> 「그림 자리」 + <code>check_outline.py</code> <code>FIG_MAX</code> — 발행 쪽은 blog-publish 2-2 (D96)</li>
   </ul></div>
 </div>
 
@@ -403,6 +407,7 @@ th{background:var(--code);font-size:13px}
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">발행 준비</span>)</li>
       <li><code>drafts/&lt;slug&gt;.md</code> (머리 메타 포함)</li>
+      <li><code>outlines/&lt;slug&gt;.md</code> 「그림 자리」 — 본문 이미지는 이 표부터 (D96)</li>
       <li><code>template/hikari-base.css</code>·<code>extra.css</code> 사이트 기사 템플릿, <code>cta.json</code> CTA, <code>tags.json</code> 사이트 실제 태그·글 머리 보드</li>
       <li>카드 <code>site_axis:</code> — 사이트 태그·글 머리만 다른 축으로 (사람이 정한 카드만, D68)</li>
       <li><code>.env</code> (로컬, git 제외 — 사람이 직접): <code>GHOST_ADMIN_URL</code>·<code>GHOST_ADMIN_API_KEY</code>, (선택) <code>OPENAI_API_KEY</code></li>

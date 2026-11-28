@@ -21,6 +21,9 @@ outlines/<slug>.md 를 읽어 rules/common.md 1·4·6장, rules/blog-outline.md 
 15. 실습: trial 사람이고 노트에 결과가 없으면 「◆ 실습 대기」 행 (자리 표시로 초안·업로드까지 간다, D79)
 16. SNS 포인트·대표 한마디·금지 표현
 17. 키워드 (D80): 속보 메인 키워드는 카드 「사건어」로 시작, 카드 상위 구성 검색어 = 메인 키워드
+18. 검색 화면 (D95): AI 개요 있음/없음·関連する質問 줄 (못 봤으면 「못 봄 — 이유」). FAQ 근거로 関連する質問도 받는다
+19. 그림 자리 (D96): 속보 2·일반 4개까지, 섹션이 목차에 있음, 편집부 그림은 노트 S번호, 종류는 편집부 그림/사진
+    (18·19는 created_at 2026-11-28 이후 설계안만 오류, 그 전 설계안은 경고)
 
 사용법:
   python3 -I check_outline.py outlines/<slug>.md [--root .] [--verify-links]
@@ -55,6 +58,9 @@ LENGTH_RANGE = [("속보", (1500, 3000)), ("사용법", (4000, 8000)), ("업무 
 FIXED = {"속보": (200 + 150 + 0 + 80 + 100, 50, 80), "일반": (200 + 150 + 100 + 100 + 200, 60, 80)}
 DRAFT_RATIO = 0.9
 BOX_ONLY = ("3行まとめ", "代表ヤン")
+NEW_SECTIONS = ["검색 화면", "그림 자리"]   # D95·D96
+NEW_SECTIONS_FROM = "2026-11-28"
+FIG_MAX = {"속보": 2, "일반": 4}         # D55·D96
 S_RE = re.compile(r"S\d+")
 
 
@@ -147,6 +153,11 @@ def main():
     for s in SECTIONS:
         if s not in sec:
             E(f"절 「## {s}」 없음")
+    new_rule = f.get("created_at", "")[:10] >= NEW_SECTIONS_FROM   # D95·D96 이전 설계안은 경고만
+    for s_ in NEW_SECTIONS:
+        if s_ not in sec:
+            (E if new_rule else W)(f"절 「## {s_}」 없음" + ("" if new_rule else " (D95·D96 이전 설계안 — 경고만)"))
+            sec[s_] = []
     if f.get("kind") == "개편" and "개편" not in sec:
         E("개편 글인데 「## 개편」 절 없음")
     if errs:
@@ -435,6 +446,42 @@ def main():
     if route != "속보" and "경쟁 글 공통 핵심" not in "\n".join(sec["차별 포인트 배치"]):
         W("일반 글: 「경쟁 글 공통 핵심:」(경쟁 글이 모두 다루는 것)이 목차에 있는지 적는다")
 
+    # 검색 화면 (D95)
+    serp = "\n".join(sec.get("검색 화면", []))
+    if serp.strip() and "못 봄" not in serp:
+        if not re.search(r"AI 개요:\s*(있음|없음)", serp):
+            (E if new_rule else W)("「검색 화면」에 「AI 개요: 있음|없음」 줄이 없음 (D95)")
+        if "関連する質問" not in serp:
+            (E if new_rule else W)("「검색 화면」에 「関連する質問:」 줄이 없음 (없으면 「関連する質問: 없음」, D95)")
+        if not has_kw(serp, main_kw):
+            W("「검색 화면」 검색어가 메인 키워드와 다름 — 메인 키워드 그대로 본다 (D95)")
+        for i in set(S_RE.findall(serp)):
+            E(f"「검색 화면」에 S번호 {i} — AI 개요는 사실 근거가 아니다 (철칙 4, D95)")
+    elif not serp.strip() and new_rule:
+        E("「검색 화면」이 비어 있음 — serp_view.py 결과 또는 「못 봄 — 이유」 (D95)")
+
+    # 그림 자리 (D96)
+    figs = [r for r in table(sec.get("그림 자리", [])) if len(r) >= 4]
+    fig_txt = "\n".join(sec.get("그림 자리", []))
+    if new_rule and not figs and "없음" not in fig_txt:
+        E("「그림 자리」가 비어 있음 — 표 또는 「- 없음 (이유)」 (D96)")
+    cap = FIG_MAX["속보" if route == "속보" else "일반"]
+    if len(figs) > cap:
+        E(f"그림 자리 {len(figs)}개 (규칙: {'속보' if route == '속보' else '일반'} {cap}개까지, D55·D96)")
+    for r in figs:
+        no, kind_, what, facts = r[:4]
+        if no not in toc_nos:
+            E(f"그림 자리 섹션 「{no}」이 목차에 없음")
+        if not ("편집부 그림" in kind_ or "사진" in kind_):
+            E(f"그림 자리 {no} 종류 「{kind_}」 — 「편집부 그림 — …」 또는 「사진 — …」 (D96)")
+        ids = set(S_RE.findall(facts))
+        if "편집부 그림" in kind_ and not ids:
+            E(f"그림 자리 {no} 편집부 그림에 쓸 사실 S번호가 없음 — 노트 사실로만 그린다 (철칙 4, D96)")
+        for i in ids - note_ids:
+            E(f"그림 자리 {no} 쓸 사실 {i}가 조사 노트에 없음")
+        if what in ("", "-"):
+            E(f"그림 자리 {no} 「보여 줄 것」이 비어 있음")
+
     # FAQ
     faq = table(sec["FAQ"])
     want = (2, 2) if route == "속보" else (3, 5)
@@ -446,8 +493,9 @@ def main():
             if not src or src == "-":
                 E(f"FAQ 「{r[0]}」 근거 검색어 없음 (실제 검색 질문만)")
             else:
-                if not any(has_kw(ln, src) for ln in card_lines):  # 카드는 「php 脆弱性 cve / パッチ」처럼 줄여 적음
-                    E(f"FAQ 근거 검색어 「{src}」가 카드에 기록된 검색어가 아님 — 실제로 확인한 검색어만")
+                serp_lines = [ln for ln in sec.get("검색 화면", []) if "関連する質問" in ln]
+                if not any(has_kw(ln, src) for ln in card_lines + serp_lines):  # 카드는 「php 脆弱性 cve / パッチ」처럼 줄여 적음
+                    E(f"FAQ 근거 검색어 「{src}」가 카드에 기록된 검색어도, 검색 화면 「関連する質問」도 아님 — 실제로 확인한 검색어만 (D95)")
                 if not has_kw(r[0], src):
                     E(f"FAQ 질문 「{r[0]}」에 근거 검색어 「{src}」의 단어가 다 들어 있지 않음 (검색 질문 그대로)")
         ids = set(S_RE.findall(" ".join(r)))
