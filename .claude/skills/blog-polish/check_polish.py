@@ -6,6 +6,7 @@ drafts/<slug>.md 를 rules/voice-hikari.md 7장(D49)·rules/common.md 4·6장·r
     preset-ai-writing(AI 문투: 목록 꾸밈·과장·강조·콜론·간결성)은 경고만, 「する必要があります」 제안은 넘김 (D99)
     yomiyasu lint(vendor/, 판 고정 — 직역어·비유 동사·決まり文句 등)도 경고만, 참고(info)는 개수만 (D101)
     같은 말 몰림(確かめ 등)·「版」·한 문단에 같은 긴 이름 3번 (D100)
+    「初期設定」 통일·번역투 3꼴 (D102)
     (문장 길이는 「」 안까지 세야 하므로 textlint가 아니라 이 스크립트가 본다: 80자 초과 오류, 71~80자 경고, D78)
  2. 보이지 않는 특수 문자 (파일 전체)
  3. 「〜ね。」「〜よ。」 끝맺음 (질문 「？」 문장은 제외), 같은 어미 3연속, 「〜てください」 문단당 2회, 「ぜひ」 글당 1회
@@ -66,6 +67,9 @@ JUDGE = [(re.compile(r"を行(う|い|っ|わ|え)"), "「〜を行う」 → �
          (re.compile(r"[一-龯ァ-ヶー」）A-Za-z0-9]は[、「（A-Za-z0-9一-龯ぁ-んァ-ヶ][^。]*?[一-龯ァ-ヶー」）A-Za-z0-9]は[、\s]"), "「〜は、〜は、」 は가 두 번 — 하나를 「〜が」「〜について」로 바꾸거나 두 문장으로 (7-2-3)"),
          (re.compile(r"(?<!と)としています|としていました"), "문서 말투 「〜としています」 — 「〜と書かれています」「〜と説明しています」 (7-2-2, D57)"),
          (re.compile(r"(?<!その)ときだけ|のときに限り"), "조건은 「〜場合」가 자연스럽다 (「〜場合に限られます」「〜場合だけです」) (7-2-3)"),
+         # D102: 기본값은 「初期設定」 하나로 / 영어 동사를 그대로 옮긴 꼴 (valid for · count toward · has)
+         (re.compile(r"初めの状態|初めは(無効|有効|オフ|オン|組織)|初めから(無効|有効)"), "기본값은 「初期設定」 (「初期設定では無効です」) — 「初めの状態」「初めは」로 흩어 쓰지 않는다 (7-2-3, D102)"),
+         (re.compile(r"だけに有効|(版|バージョン)に有効|に数えられ(ます|る|ません)|アイコンを持(ち|つ)"), "번역투 (valid for / count toward / has) → 「〜限り」「〜に含まれます」「アイコンがつき」 (7-2-2, D102)"),
          (re.compile(r"とよいでしょう|が望ましい(です)?|(?<!が)基本です"), "해야 할 일이면 「〜する必要があります」, 선택이면 「〜がおすすめです」 (7-4-2)")]
 OK_END = set("すんうたるだかぬねよ")  # です·ます·ません·でしょう·ました·ある… 로 끝나면 体言止め 아님
 # 「い」로 끝나는 말: 형용사·ない·たい·ください는 괜찮고, 「違い」「扱い」 같은 명사는 体言止め
@@ -540,7 +544,7 @@ def checklist(text, f, root):
     ok = lambda c: "통과" if c else "미통과"  # noqa: E731
     rows = [
         ("SEO 1 쓰기 전", ok("검색 의도" in osec and "겹침 구분" in osec), "설계안 「검색 의도」「겹침 구분」"),
-        ("SEO 2 제목", ok(28 <= width(title) <= 35 and has_kw(title[:12], kw) and title.count("【") <= 1 and not same_title),
+        ("SEO 2 제목", ok(28 <= width(title) <= 35 and has_kw(title[:max(12, len(kw) + 4)], kw) and title.count("【") <= 1 and not same_title),
          f"전각 {width(title):g}자, 키워드 앞쪽, 기존 글과 {'같음' if same_title else '다름'}"),
         ("SEO 3 메타 설명", ok(80 <= width(meta) <= 120 and has_kw(meta[:50], kw)), f"전각 {width(meta):g}자, 앞 50자에 키워드"),
         ("SEO 4 slug", ok(bool(re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+){2,4}", f.get("slug", "")))), f.get("slug", "")),
@@ -633,7 +637,7 @@ def main():
             print("❌ " + err)
             return 1
         for ln, kind, old, new in risks:
-            print(f"⚠ {ln or '-'}행 뜻이 바뀔 위험 [{kind}]\n    전: {old[:90]}\n    후: {new[:90]}")
+            print(f"⚠ {ln or '-'}행 뜻이 바뀔 위험 [{kind}]\n    전: {(old or '(없음)')[:90]}\n    후: {(new or '(없음)')[:90]}")
         print(f"뜻이 바뀔 위험 {len(risks)}건 — 이 문장들을 재대조 대상에 더한다 (SKILL 4장)" if risks else "뜻이 바뀔 위험 없음")
         return 0
     errs, warns, stats = check(a, root)
