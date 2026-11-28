@@ -533,6 +533,13 @@ def main():
     img_table = "| 번호 | 종류 | 넣은 곳 | 출처 · 라이선스 | 설명 | 판단 |\n|---|---|---|---|---|---|\n" + "\n".join(
         f"| {it['n']} | {it['kind']} | 섹션 {it['section']} | {it.get('page', '편집부 작성')} · {it['license']} | {it['caption']} | "
         f"{'남김(기본)' if it.get('keep', True) else '뺌'} |" for it in imgs) if imgs else "- 없음"
+    # D103: 조사 노트 「이미지 후보」(공식 화면 등) — 권리 승인 전에는 글에 넣지 않고 사람에게 보여 주기만
+    official = "- 없음"
+    note_p = root / fm.get("research", "-")
+    if note_p.is_file():
+        mm = re.search(r"^## 이미지 후보\s*\n(.*?)(?=^## |\Z)", note_p.read_text(), re.M | re.S)
+        if mm and mm.group(1).strip():
+            official = mm.group(1).strip()
 
     sec_html = []
     for n, s in enumerate(sections, 1):
@@ -750,6 +757,10 @@ draft: {a.draft}
 {img_table}
 - 빼려면 에이전트에게 「이미지 N 빼」 → find_images.py drop → 파일을 다시 만든다
 - 사진은 원본 사이트(Wikimedia 등)의 주소를 그대로 쓴다. Ghost API 연동 뒤에는 Ghost에 올려서 바꾼다
+
+## 4-3. 공식 화면 이미지 후보 (⚠ 대표 + 기술 보안팀 승인 전에는 글에 넣지 않는다, D55·D103)
+{official}
+- 승인이 나면 인용(출처·페이지 링크 캡션)으로 넣을 수 있다 — 어떤 화면이 글 이해에 도움이 되는지 보는 용도
 
 ## 5. ◆ 미리보기 확인 (사람)
 - [ ] 제목에 「{TRIAL_TITLE.strip()}」, 본문에 「{TRIAL_MARK}」 상자가 **없다** (있으면 발행하지 않는다, D79)

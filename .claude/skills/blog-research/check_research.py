@@ -80,6 +80,8 @@ def main():
     for s in SECTIONS:
         if not any(h.startswith(s) for h in heads):
             errs.append(f"절 「## {s}」 없음")
+    if not any(h.startswith("이미지 후보") for h in heads):
+        warns.append("절 「## 이미지 후보」 없음 — 1차 출처의 화면·도해 후보(URL·페이지·내용·S번호·이용 조건), 없으면 「없음」 (D103)")
 
     pages = load_pages(a.pages)
     search = set()

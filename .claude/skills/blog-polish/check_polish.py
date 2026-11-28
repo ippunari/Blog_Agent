@@ -501,6 +501,9 @@ def check(a, root):
     if not draft_ok:
         E("초안 점검(check_draft.py) 불통과 — 다듬다가 깨진 것:\n" + "\n".join(
             "    " + l for l in r.stdout.splitlines() if l.startswith("❌")))
+    for l in r.stdout.splitlines():   # D103: 처음 읽는 사람 기준 경고(정의 먼저·되풀이·メニュー·公式ヘルプ·영어 화면 이름)도 다듬기에서 보인다
+        if l.startswith("⚠") and "(D103)" in l:
+            W(l[1:].strip() + " — 초안 점검")
     return errs, warns, {"kanji": ratio, "sentences": len(all_s),
                          "long": sum(1 for _, s in all_s if jlen(s) > 60),
                          "textlint": 0 if msgs is None else sum(not m.get("ruleId", "").startswith(AI_PRESET) for m in msgs), "draft_ok": draft_ok}

@@ -454,6 +454,54 @@ def main():
                         W(f"3行まとめ 「{it.strip()[:25]}…」가 리드 「{ls.strip()[:25]}…」와 거의 같은 말 — "
                           "3行まとめ는 리드에 없는 판단 기준·할 일로 (D53)")
 
+    # --- D103: 처음 읽는 사람이 알 수 있게 (경고만)
+    def overlap(a_, b_):
+        x, y = bigr(a_), bigr(b_)
+        return len(x & y) / min(len(x), len(y)) if x and y else 0
+    # ① 리드 ↔ 案内 ↔ 첫 H2 직답·첫 문단 — 같은 사실을 세 번 말하지 않는다 (역할: 리드=정의+훅+직답 / 案内=읽는 순서 / 첫 H2=더 자세히)
+    guide_s = [x for b_ in boxes if b_["type"] == "guide" for l_ in b_["lines"] for x in sentences(l_)
+               if x.strip() and "こんにちは" not in x]
+    h2_idx = [i for i, l_ in enumerate(lines) if l_.startswith("## ")]
+    first_sec = []
+    if h2_idx:
+        nxt = h2_idx[1] if len(h2_idx) > 1 else len(lines)
+        for l_ in lines[h2_idx[0] + 1:nxt]:
+            if l_.strip() and not l_.startswith(("<!--", "|", ":::", "#")):
+                first_sec += sentences(l_.replace("**", ""))
+            if len(first_sec) >= 3:
+                break
+    for ls in lead_sents:
+        for g in guide_s:
+            if overlap(ls, g) > 0.6:
+                W(f"案内 「{plain(g)[:25]}…」가 리드 「{plain(ls)[:25]}…」와 거의 같은 말 — 案内는 이 글을 읽는 순서·약속만 (D103)")
+        for t_ in first_sec:
+            if overlap(ls, t_) > 0.6:
+                W(f"첫 섹션 「{plain(t_)[:25]}…」가 리드 「{plain(ls)[:25]}…」와 거의 같은 말 — 첫 H2는 리드보다 자세한 내용으로 시작 (D103)")
+    # ② 정의 먼저 — 「〜とは」 서브 키워드가 있으면 첫 H2가 정의, 리드 첫 문장도 무엇인지부터
+    to_kw = [k.strip() for k in f["sub_keywords"].split("/") if "とは" in k]
+    if to_kw and h2_idx:
+        h1 = lines[h2_idx[0]][3:]
+        if "とは" not in h1:
+            W(f"「{to_kw[0]}」 검색어가 있는데 첫 H2가 정의가 아님 (「{h1[:20]}…」) — 독자가 모르는 말이면 「〇〇とは？」를 먼저 (D103)")
+        if lead_sents and not re.search(r"とは|のこと|という|ための", lead_sents[0]):
+            W(f"리드 첫 문장이 정의가 아님 (「{plain(lead_sents[0])[:25]}…」) — 「〇〇とは何か」 한 문장 → 무슨 일 (D103)")
+    # ③ 머리 문장(메타·리드·3行まとめ)에 제공 조건·덩그러니 「メニュー」
+    heads = [("메타", f["meta"])] + [("리드", x) for x in lead_sents] + [
+        ("3行まとめ", l_) for b_ in boxes if b_["type"] == "box" and "3行まとめ" in b_["label"] for l_ in b_["lines"]]
+    for where, t_ in heads:
+        if re.search(r"ベータ|順次提供|順次", t_):
+            W(f"{where}에 제공 조건(ベータ·順次) — 머리 문장은 핵심만, 조건은 본문 해당 섹션에서 (D103): 「{plain(t_)[:30]}…」")
+        if "メニュー" in t_ and not re.search(r"「[^」]+」", t_.split("メニュー")[0][-25:] + "メニュー" + t_.split("メニュー", 1)[1][:25]):
+            W(f"{where}에 「メニュー」만 — 어느 앱의 어디·무엇을 누르면 나오는지, 또는 항목 이름(「…」)을 (D103): 「{plain(t_)[:30]}…」")
+    # ④ 출처 부르는 말·영어 화면 이름
+    for i_, l_ in enumerate(lines):
+        if re.search(r"公式ヘルプ|公式の(日本語の)?ヘルプ", l_):
+            W(f"{i_+1+OFF}행 「公式ヘルプ」 — 출처는 발행처 + 문서 종류로 (「Anthropicのヘルプセンター」「Googleのブログ」) (D103)")
+        for m_ in re.findall(r"「([A-Z][A-Za-z]+(?: [A-Za-z]+){1,4})」", l_):
+            if not re.search(r" [a-z]", m_):
+                continue   # 「Claude Apps」 같은 고유 이름(폴더·제품)은 그대로 — 「Install as app」 같은 메뉴 문구만
+            W(f"{i_+1+OFF}행 영어 화면 이름 「{m_}」 — 일본어 화면 이름이 노트에 있으면 그것만 쓴다 (D103)")
+
     for k in [f["main_keyword"]] + [x.strip() for x in f["sub_keywords"].split("/")]:
         if "とは" in k:
             phrase = k.replace("とは", "").strip()
@@ -564,7 +612,7 @@ def main():
             if in_box[i] and any(b["type"] in ("guide", "cta") and b["start"] < i for b in boxes
                                  if b["start"] < i <= b["start"] + len(b["lines"])):
                 continue
-            if not TAG_RE.search(s) and re.search(r"\d|[A-Za-z]{3,}|「[^」]{4,}」", strip_tags(p)) \
+            if not TAG_RE.search(s) and re.search(r"\d|「[^」]{4,}」", strip_tags(p)) \
                     and not l.lstrip().startswith(("**",)) and not re.search(r"\]\(https?://", s):
                 cand.append(f"{i+1+OFF}행 「{p[:24]}…」")
     if long_s:

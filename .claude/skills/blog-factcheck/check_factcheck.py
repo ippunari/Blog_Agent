@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """blog-factcheck: 사실 대조 보고서 만들기·점검 (rules/blog-factcheck.md, D48)
 
-대조 단위 = 초안의 사실 문장(표시 [S번호]가 붙은 문장·표 행) + 제목 + 메타 설명 + 표시 없는 사실 문장 후보.
+대조 단위 = 초안의 사실 문장(표시 [S번호]가 붙은 문장·표 행) + 제목 + 메타 설명 + 표시 없는 사실 문장 후보(숫자·「」 이름, D103).
+원문 페이지는 다시 열지 않는다 — 노트의 원어 원문 문장과 대조 (D103). 노트 확인일이 오래된 출처만 다시 연다.
 판정(일치·고침·뺌·설명)은 에이전트가 원문을 읽고 적는다. 스크립트는 빠진 것·남은 것·형식만 본다.
 
 사용법:
@@ -107,7 +108,7 @@ def units(text):
             return
         tags = TAG_RE.findall(raw)
         tagged = bool(tags)
-        cand = bool(re.search(r"\d|[A-Za-z]{3,}|「[^」]{4,}」", d))
+        cand = bool(re.search(r"\d|「[^」]{4,}」", d))   # D103: 사실 표지 = 숫자·날짜·「」 이름. 영문 제품명만 든 설명 문장은 대조 단위가 아니다
         if not tagged and not cand and pos not in ("제목", "메타"):
             return
         core = core or diff or pos.startswith(CORE_POS) or bool(DATE_RE.search(d))
@@ -208,8 +209,8 @@ def need_reopen(route, groups, units_, today):
         why = []
         if route == "속보" and "A" in g["grades"]:
             why.append("속보 A")
-        if core_s & set(g["sids"]):
-            why.append("핵심")
+        # D103: 핵심 문장이라고 원문 페이지를 다시 열지 않는다 — 노트에 원어 원문 문장이 있다.
+        #       노트 확인일이 오래된 출처만 다시 연다. 속보의 「발표가 바뀌었나」는 blog-publish 발행 직전 한 번
         for c in g["checked"]:
             try:
                 d = datetime.strptime(c, "%Y-%m-%d").date()
@@ -273,7 +274,7 @@ rechecked_at: -
 - 고친 것: (짧게)
 
 ## 출처 다시 열기
-- 다시 열기: 속보 A = 속보의 1차 출처(발표 변경 확인) / 핵심 = 핵심 문장의 출처(앞뒤 확인) / {STALE_DAYS}일 지남 = 노트 확인일이 오래됨
+- 다시 열기: {STALE_DAYS}일 지남 = 노트 확인일이 오래된 출처만 (D103 — 나머지는 노트의 원어 원문 문장과 대조, 속보 발표 변경은 발행 직전 blog-publish)
 - 결과: 그대로 / 바뀜(영향 없음: …) / 바뀜(영향 있음: …) / 열리지 않음
 
 {chr(10).join(src)}
@@ -281,7 +282,7 @@ rechecked_at: -
 ## 대조표
 - 판정: 일치 / 고침 / 뺌 / 설명(사실 아님) — 불일치·확인 불가는 고치거나 빼고 「고침」「뺌」으로 바꾼다
 - 고친 행은 「문장」 칸을 고친 뒤의 문장으로 바꾸고, 전 문장은 「고친 내용」에
-- 근거: S번호 + 원문 대조 결과. 핵심(●) 행은 원문 「페이지」 앞뒤를 본 결과까지
+- 근거: S번호 + 노트 원어 원문 문장과의 대조 결과 (D103 — 원문 페이지는 다시 열지 않음). 대조 단위는 숫자·날짜·이름·범위·조건·누가 말했나가 든 문장만
 
 {chr(10).join(rows)}
 
@@ -471,8 +472,6 @@ def check(a, root, recheck=False):
                 E(f"#{r['no']} {r['pos']}: 근거에 S번호가 없음 (제목·메타도 원문과 대조, D47 보강)")
             if tg and not (tg & set(S_RE.findall(r["basis"]))):
                 E(f"#{r['no']} 근거에 S번호가 없음 ({', '.join(sorted(tg))})")
-            if r["core"] == "●" and tg and "페이지" not in r["basis"]:
-                E(f"#{r['no']} 핵심(●) 문장인데 근거에 원문 「페이지」 앞뒤를 본 결과가 없음")
             if not r["basis"]:
                 E(f"#{r['no']} 근거가 비어 있음")
             if v == "일치" and r["tags"] in ("-", "") and r["pos"] not in ("제목", "메타") and "(H" not in r["pos"]:

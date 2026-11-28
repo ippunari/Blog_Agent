@@ -88,6 +88,8 @@ echo "<html><body style='margin:0'><iframe src='file://$P/preview.html' style='w
 "$C" --headless=new --disable-gpu --hide-scrollbars --user-data-dir=$SP/chrome --allow-file-access-from-files --window-size=600,10000 --screenshot=$SP/pv-m.png "file://$SP/m.html"
 ```
   (긴 그림은 Pillow로 2,000~2,500px씩 잘라서 본다)
+- **속보는 1차 출처를 한 번 다시 본다** (D103): 노트 A등급 URL을 `fetch_page.py`로 열어 노트 원문 문장이 그대로 있는지 확인 — 바뀌었으면 멈추고 blog-research로 (사실 대조는 원문 페이지를 다시 열지 않는다)
+- 노트 「이미지 후보」가 있으면 ghost.md 4-3에 「승인 뒤 사용 가능」으로 자동으로 나온다 — 글에는 넣지 않는다 (D55)
 - 카드 머리에 `publish: publish/<slug>/ (YYYY-MM-DD)` 추가. 상태는 「발행 준비」 그대로 (◆ 미리보기 대기)
 
 ## 3-2. Ghost에 초안 올리기 (D62)

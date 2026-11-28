@@ -238,7 +238,7 @@ th{background:var(--code);font-size:13px}
 <!-- 4 research -->
 <div class="card" id="research">
   <div class="card-head"><span class="n">4</span><h3>blog-research — 조사</h3><code>/blog-research [slug]</code> · <code>실습 끝났어 &lt;slug&gt;</code></div>
-  <p>1차 출처까지 찾아가 원문을 저장하고, 사실마다 원문 문장·등급·확인일을 붙인 조사 노트를 만든다. 상위 글 분량은 모든 글(속보는 상한 참고용, D58·D69), 일반 글은 경쟁 글·차별 포인트, AI 실습 글은 직접 써 본 결과까지. 사건어가 메인에 없는 속보는 사건어로도 검색해 일본어 해설 유무를 적는다 (D93).</p>
+  <p>1차 출처까지 찾아가 원문을 저장하고, 사실마다 원문 문장·등급·확인일을 붙인 조사 노트를 만든다. 상위 글 분량은 모든 글(속보는 상한 참고용, D58·D69), 일반 글은 경쟁 글·차별 포인트, AI 실습 글은 직접 써 본 결과까지. 사건어가 메인에 없는 속보는 사건어로도 검색해 일본어 해설 유무를 적는다 (D93). 1차 출처의 화면·도해는 「이미지 후보」로 모으기만 한다 — 글에 넣는 것은 권리 승인 뒤 (D103).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">조사 대기</span>·<span class="tag t-status">기존 글 업데이트</span>)</li>
@@ -273,7 +273,7 @@ th{background:var(--code);font-size:13px}
 <!-- 5 outline -->
 <div class="card" id="outline">
   <div class="card-head"><span class="n">5</span><h3>blog-outline — 설계</h3><code>/blog-outline [slug]</code></div>
-  <p>카드와 조사 노트로 글의 설계도를 만든다: 제목 후보 3개(추천 1)·메타·검색 화면(AI 개요·関連する質問, D95)·검색 의도·훅·도입부·질문형 H2 목차(직답·쓸 사실·형식·분량)·차별 포인트·그림 자리(D96)·FAQ·CTA·내부 링크·역링크·태그·SNS 포인트·갱신 조건.</p>
+  <p>카드와 조사 노트로 글의 설계도를 만든다: 제목 후보 3개(추천 1)·메타·검색 화면(AI 개요·関連する質問, D95)·검색 의도·훅·도입부·질문형 H2 목차(직답·쓸 사실·형식·분량)·차별 포인트·그림 자리(D96)·FAQ·CTA·내부 링크·역링크·태그·SNS 포인트·갱신 조건. 「〜とは」 검색어가 있으면 정의 H2를 먼저, 리드·案内·첫 H2 역할을 나누고, 머리 문장에 제공 조건(ベータ)을 넣지 않는다 (D103).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">설계 대기</span>)</li>
@@ -310,7 +310,7 @@ th{background:var(--code);font-size:13px}
 <!-- 6 draft -->
 <div class="card" id="draft">
   <div class="card-head"><span class="n">6</span><h3>blog-draft — 초안</h3><code>/blog-draft [slug]</code></div>
-  <p>설계안의 H2·직답·CTA·내부 링크를 그대로 따라 ヒカリちゃん 목소리로 일본어 본문을 쓴다. 사실 문장마다 <code>[S번호]</code>, 첫 등장 용어는 사이트 용어집 괄호 풀이. 설계안 그림 자리마다 그림이 뒷받침하는 블록 위에 <code>&lt;!-- 그림 N --&gt;</code> (D97).</p>
+  <p>설계안의 H2·직답·CTA·내부 링크를 그대로 따라 ヒカリちゃん 목소리로 일본어 본문을 쓴다. <b>번역하지 않고 설명부터</b> 쓰고, 숫자·날짜·이름·범위·조건이 든 사실 문장에만 <code>[S번호]</code> (D103). 끝에 처음 읽는 사람 검토(서브 에이전트, <code>reader_check.md</code>), 첫 등장 용어는 사이트 용어집 괄호 풀이. 설계안 그림 자리마다 그림이 뒷받침하는 블록 위에 <code>&lt;!-- 그림 N --&gt;</code> (D97).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">초안 대기</span>)</li>
@@ -344,7 +344,7 @@ th{background:var(--code);font-size:13px}
 <!-- 7 factcheck -->
 <div class="card" id="factcheck">
   <div class="card-head"><span class="n">7</span><h3>blog-factcheck — 사실 대조</h3><code>/blog-factcheck [slug] [--recheck]</code></div>
-  <p>초안의 사실 문장을 노트의 원어 원문 문장과 한 문장씩 대조(일치/고침/뺌/설명)한다. 핵심 문장(제목·메타·리드·3行まとめ·차별 포인트·H2 직답·날짜·시점 문장 — 숫자만 든 문장은 아님, D77)은 원문 페이지를 다시 열어 앞뒤까지 본다(속보도 핵심 문장의 출처만, D61). 틀린 문장만 고친다. 다듬기 뒤 재대조는 사실 표지가 바뀐 문장만.</p>
+  <p>초안의 <b>사실 문장만</b>(숫자·날짜·이름·범위·조건·누가 말했나) 노트의 원어 원문 문장과 대조(일치/고침/뺌/설명)한다. 원문 페이지는 다시 열지 않는다 — 노트 확인일 7일 지난 출처만 (D103). 틀린 문장만 고친다. 다듬기 뒤 재대조는 사실 표지가 바뀐 문장만, 다듬기 세션이 노트와 (D103).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">대조 대기</span>)</li>
@@ -398,7 +398,7 @@ th{background:var(--code);font-size:13px}
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>교정 규칙 → <code>prh-hikari.yml</code>(바꿀 말 사전)·<code>textlintrc.json</code>, 그 밖의 문체 검사 → <code>check_polish.py</code></li>
-    <li>한자 연속 예외 이름 끝말 → <code>NAME_SUFFIX</code> / 흐린 말·횟수 → <code>VAGUE_WORDS</code>·<code>VAGUE_MAX</code> / 문장 길이 경고 71자·긴 문장 문단 40자 → <code>check()</code> (D78) / 편집자가 볼 것(일반론 지우기·문단별 확인·영어로 되돌려 보기 D99) → <code>naturalness_review.md</code> / AI 문투 경고에서 넘길 메시지 → <code>check()</code>의 <code>AI_PRESET</code> 부분 / yomiyasu에서 뺄 규칙 → <code>YOMI_SKIP</code>·<code>YOMI_INFO_KEEP</code>, 판 올리기 → <code>vendor/yomiyasu/VERSION.md</code> / 같은 말 상한 → <code>REPEAT_MAX</code> (D100) / 「初期設定」·번역투 3꼴 → <code>JUDGE</code> 끝 두 줄, まとめ 되풀이·내건 숫자 → <code>naturalness_review.md</code> (D102)</li>
+    <li>한자 연속 예외 이름 끝말 → <code>NAME_SUFFIX</code> / 흐린 말·횟수 → <code>VAGUE_WORDS</code>·<code>VAGUE_MAX</code> / 문장 길이 경고 71자·긴 문장 문단 40자 → <code>check()</code> (D78) / 편집자가 볼 것(일반론 지우기·문단별 확인·영어로 되돌려 보기 D99) → <code>naturalness_review.md</code> / AI 문투 경고에서 넘길 메시지 → <code>check()</code>의 <code>AI_PRESET</code> 부분 / yomiyasu에서 뺄 규칙 → <code>YOMI_SKIP</code>·<code>YOMI_INFO_KEEP</code>, 판 올리기 → <code>vendor/yomiyasu/VERSION.md</code> / 같은 말 상한 → <code>REPEAT_MAX</code> (D100) / 「初期設定」·번역투 3꼴 → <code>JUDGE</code> 끝 두 줄, まとめ 되풀이·내건 숫자 → <code>naturalness_review.md</code> (D102) / 초안 점검의 D103 경고를 보이는 곳 → <code>check()</code> 「8. 초안 점검」 / 재대조는 이 세션이 노트와(서브 에이전트 없음), 편집자 지적은 원인 문장 고치기 → <code>SKILL.md</code> 3-8·4장 (D103)</li>
     <li>우선순위: 자연스러움이 먼저, 예외 4가지(사실·검색어·80자·「〜ね/〜ですよ」) → <code>rules/voice-hikari.md</code> 7-0 (D100)</li>
     <li>메타 길이 규격 → <code>rules/blog-polish.md</code> 「메타 정보」 (excerpt에 리드 문장 금지, D52)</li>
   </ul></div>

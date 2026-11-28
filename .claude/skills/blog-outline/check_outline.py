@@ -313,6 +313,15 @@ def main():
     body = [r for r in h2s if not any(n in r[2] for n in NON_BODY_H2)]
     if not 4 <= len(h2s) <= 8:
         E(f"H2 {len(h2s)}개 (SOURCES 제외, 규칙: 4~8)")
+    # D103: 「〜とは」 서브 키워드 = 독자가 그 말을 모른다는 신호 → 정의 H2를 먼저 (속보도)
+    to_kw = [k for k in subs if "とは" in k]
+    if to_kw and body and "とは" not in body[0][2]:
+        W(f"「{to_kw[0]}」 검색어가 있는데 첫 H2가 정의가 아님 (「{body[0][2][:20]}…」) — 「〇〇とは？」를 먼저, 「何が起きた？」는 그다음 (D103)")
+    meta_d = " ".join(l for l in sec["메타 설명"] if l.strip() and not l.startswith("-"))
+    if re.search(r"ベータ|順次", meta_d):
+        W("메타 설명에 제공 조건(ベータ·順次) — 머리 문장은 핵심만, 조건은 본문 섹션에서 (D103)")
+    if re.search(r"公式ヘルプ|公式の(日本語の)?ヘルプ", "\n".join("\n".join(v) for v in sec.values())):
+        W("「公式ヘルプ」 — 출처는 발행처 + 문서 종류로 (「Anthropicのヘルプセンター」「Googleのブログ」) (D103)")
     used_s, total, with_kw = set(), 0, 0
     answers = []
     for r in toc:
