@@ -3,6 +3,7 @@
 
 drafts/<slug>.md 를 rules/voice-hikari.md 7장(D49)·rules/common.md 4·6장·rules/blog-polish.md로 본다.
  1. textlint (preset-japanese·히라가나·한자 연속·중복 표현·prh 사전) — 본문만 떼어 낸 사본으로. 원문 인용(>)과 「」『』 안은 제외
+    preset-ai-writing(AI 문투: 목록 꾸밈·과장·강조·콜론·간결성)은 경고만, 「する必要があります」 제안은 넘김 (D99)
     (문장 길이는 「」 안까지 세야 하므로 textlint가 아니라 이 스크립트가 본다: 80자 초과 오류, 71~80자 경고, D78)
  2. 보이지 않는 특수 문자 (파일 전체)
  3. 「〜ね。」「〜よ。」 끝맺음 (질문 「？」 문장은 제외), 같은 어미 3연속, 「〜てください」 문단당 2회, 「ぜひ」 글당 1회
@@ -272,6 +273,9 @@ def check_meta(f, text, E, W):
     return title
 
 
+AI_PRESET = "@textlint-ja/ai-writing/"  # preset-ai-writing의 ruleId 앞부분
+
+
 def check(a, root):
     errs, warns = [], []
     E, W = errs.append, warns.append
@@ -314,7 +318,15 @@ def check(a, root):
                 run = m["message"].rsplit(":", 1)[-1].strip()
                 if NAME_SUFFIX.search(run) or run in glossary_words(root):
                     continue
-            E(f"{m['line']}행 textlint [{m.get('ruleId', '')}] {m['message'].splitlines()[0]}")
+            rid = m.get("ruleId", "")
+            # preset-ai-writing(D99): AI 문투 후보 — 사실·인용 문장도 걸리므로 경고만 (판단해서 고친다)
+            if rid.startswith(AI_PRESET):
+                # 「する必要があります」를 「してください」로 바꾸라는 제안은 7-4-2(D52)와 부딪친다 — 넘긴다
+                if "義務表現" in m["message"]:
+                    continue
+                W(f"{m['line']}행 textlint [{rid[len(AI_PRESET):]}] {m['message'].splitlines()[0]}")
+                continue
+            E(f"{m['line']}행 textlint [{rid}] {m['message'].splitlines()[0]}")
 
     # 3·4·5. 문장·문단
     paras = prose_paragraphs(bl)
@@ -398,7 +410,7 @@ def check(a, root):
             "    " + l for l in r.stdout.splitlines() if l.startswith("❌")))
     return errs, warns, {"kanji": ratio, "sentences": len(all_s),
                          "long": sum(1 for _, s in all_s if jlen(s) > 60),
-                         "textlint": 0 if msgs is None else len(msgs), "draft_ok": draft_ok}
+                         "textlint": 0 if msgs is None else sum(not m.get("ruleId", "").startswith(AI_PRESET) for m in msgs), "draft_ok": draft_ok}
 
 
 def checklist(text, f, root):

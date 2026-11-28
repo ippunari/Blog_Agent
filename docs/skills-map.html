@@ -378,7 +378,7 @@ th{background:var(--code);font-size:13px}
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">다듬기 대기</span>)</li>
       <li><code>drafts/&lt;slug&gt;.md</code>, <code>factcheck/&lt;slug&gt;.md</code> (<code>result: 통과</code>가 아니면 멈춤)</li>
-      <li><code>textlintrc.json</code>·<code>prh-hikari.yml</code> (교정 사전), 루트 <code>package.json</code>의 textlint</li>
+      <li><code>textlintrc.json</code>·<code>prh-hikari.yml</code> (교정 사전), 루트 <code>package.json</code>의 textlint (+ preset-ai-writing — AI 문투, 경고만, D99)</li>
     </ul></div>
     <div><h4>출력</h4><ul>
       <li><code>drafts/&lt;slug&gt;.md</code> 다듬은 본문 + 머리 메타 (<code>seo_title</code>·<code>meta</code>·<code>og_title</code>·<code>og_description</code>·<code>excerpt</code>·<code>slug</code>) + 「다듬기 메모」</li>
@@ -397,7 +397,7 @@ th{background:var(--code);font-size:13px}
   </dl>
   <div class="fix"><h4>고칠 때</h4><ul>
     <li>교정 규칙 → <code>prh-hikari.yml</code>(바꿀 말 사전)·<code>textlintrc.json</code>, 그 밖의 문체 검사 → <code>check_polish.py</code></li>
-    <li>한자 연속 예외 이름 끝말 → <code>NAME_SUFFIX</code> / 흐린 말·횟수 → <code>VAGUE_WORDS</code>·<code>VAGUE_MAX</code> / 문장 길이 경고 71자·긴 문장 문단 40자 → <code>check()</code> (D78) / 편집자가 볼 것(일반론 지우기 등) → <code>naturalness_review.md</code></li>
+    <li>한자 연속 예외 이름 끝말 → <code>NAME_SUFFIX</code> / 흐린 말·횟수 → <code>VAGUE_WORDS</code>·<code>VAGUE_MAX</code> / 문장 길이 경고 71자·긴 문장 문단 40자 → <code>check()</code> (D78) / 편집자가 볼 것(일반론 지우기·문단별 확인·영어로 되돌려 보기 D99) → <code>naturalness_review.md</code> / AI 문투 경고에서 넘길 메시지 → <code>check()</code>의 <code>AI_PRESET</code> 부분</li>
     <li>메타 길이 규격 → <code>rules/blog-polish.md</code> 「메타 정보」 (excerpt에 리드 문장 금지, D52)</li>
   </ul></div>
 </div>

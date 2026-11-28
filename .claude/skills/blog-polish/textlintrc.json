@@ -30,6 +30,11 @@
       "rulePaths": [
         "./prh-hikari.yml"
       ]
+    },
+    "@textlint-ja/preset-ai-writing": {
+      "ai-tech-writing-guideline": {
+        "enableDocumentAnalysis": false
+      }
     }
   }
 }
