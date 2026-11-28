@@ -183,8 +183,11 @@ def blocks(lines):
             continue
         if ln.startswith("<!--"):
             m = re.match(r"<!--\s*(\d{2})\s+(.+?)\s*-->$", ln)
+            mf = re.match(r"<!--\s*그림\s*(\d+)\s*-->$", ln)
             if m:
                 out.append(("label", (m.group(1), m.group(2))))
+            elif mf:   # 그림 자리 (D97) — 이 자리에 images.json의 slot 그림을 넣는다
+                out.append(("figslot", int(mf.group(1))))
             elif not re.match(r"<!--\s*차별 \d+\s*-->$", ln):
                 W(f"모르는 주석 — 지움: {ln[:40]}")
             i += 1
@@ -499,6 +502,9 @@ def main():
         if cur is None:
             E(f"H2 앞에 블록: {kind}")
             continue
+        if kind == "figslot" and cur["faq"]:
+            W(f"FAQ 안의 <!-- 그림 {d} --> — FAQ에는 그림을 넣지 않는다")
+            continue
         if cur["faq"]:
             if kind == "h3":
                 faq_items.append({"q": d, "a": []})
@@ -531,8 +537,15 @@ def main():
     sec_html = []
     for n, s in enumerate(sections, 1):
         parts = []
-        figs = [figure(it, out_dir, it["n"]) for it in imgs_keep if it.get("section") == n]
+        slots = {d for k, d in s["blocks"] if k == "figslot"}
+        for it in imgs_keep:
+            if it.get("section") == n and it.get("slot") and it["slot"] not in slots:
+                W(f"이미지 {it['n']}: 그림 {it['slot']} 표시가 섹션 {n}에 없음 — 직답 아래에 넣는다")
+        figs = [figure(it, out_dir, it["n"]) for it in imgs_keep if it.get("section") == n and it.get("slot") not in slots]
         for kind, d in s["blocks"]:
+            if kind == "figslot":   # D97: 초안의 <!-- 그림 N --> 자리 (그림이 뒷받침하는 블록 바로 위)
+                parts.extend(figure(it, out_dir, it["n"]) for it in imgs_keep if it.get("section") == n and it.get("slot") == d)
+                continue
             if kind == "box" and d[0] == "cta":
                 c = cta_parts(d[1], d[2], inline, cta_map)
                 if c:

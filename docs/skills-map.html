@@ -310,11 +310,11 @@ th{background:var(--code);font-size:13px}
 <!-- 6 draft -->
 <div class="card" id="draft">
   <div class="card-head"><span class="n">6</span><h3>blog-draft — 초안</h3><code>/blog-draft [slug]</code></div>
-  <p>설계안의 H2·직답·CTA·내부 링크를 그대로 따라 ヒカリちゃん 목소리로 일본어 본문을 쓴다. 사실 문장마다 <code>[S번호]</code>, 첫 등장 용어는 사이트 용어집 괄호 풀이.</p>
+  <p>설계안의 H2·직답·CTA·내부 링크를 그대로 따라 ヒカリちゃん 목소리로 일본어 본문을 쓴다. 사실 문장마다 <code>[S번호]</code>, 첫 등장 용어는 사이트 용어집 괄호 풀이. 설계안 그림 자리마다 그림이 뒷받침하는 블록 위에 <code>&lt;!-- 그림 N --&gt;</code> (D97).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
       <li><code>briefs/&lt;slug&gt;.md</code> (<span class="tag t-status">초안 대기</span>)</li>
-      <li><code>outlines/&lt;slug&gt;.md</code> (없으면 멈춤), <code>research/&lt;slug&gt;.md</code></li>
+      <li><code>outlines/&lt;slug&gt;.md</code> (없으면 멈춤 — 「검색 화면」·「그림 자리」 포함), <code>research/&lt;slug&gt;.md</code></li>
       <li><code>glossary_site.json</code> 사이트 용어집 사본 (하루 넘으면 갱신)</li>
     </ul></div>
     <div><h4>출력</h4><ul>
@@ -326,7 +326,7 @@ th{background:var(--code);font-size:13px}
     <dt>카드 상태</dt><dd><span class="tag t-status">초안 대기</span> → <span class="tag t-status">대조 대기</span></dd>
     <dt><span class="tag t-human">◆ 사람</span></dt><dd>없음</dd>
     <dt>스크립트</dt><dd><ul>
-      <li><code>check_draft.py</code> 설계안과 H2·제목 일치, 직답 길이, S번호가 노트에 있는지, 실습·대표 의견 지어내기(철칙 1), 금지 표현, 표기 (<code>--write-sources</code>). 사람 실습 결과 전이면 <code>:::trial 実習待ち</code> 자리 표시 상자 1개 필수 (D79)</li>
+      <li><code>check_draft.py</code> 설계안과 H2·제목 일치, 직답 길이, S번호가 노트에 있는지, 실습·대표 의견 지어내기(철칙 1), 금지 표현, 표기 (<code>--write-sources</code>). 사람 실습 결과 전이면 <code>:::trial 実習待ち</code> 자리 표시 상자 1개 필수 (D79). 그림 표시가 설계안 그림 자리의 섹션·사실 옆에 있는지(D97), 구조 되풀이 경고 — 문장 시작·섹션 첫 이음말·목록/문단 길이·글 자체를 말하는 문장 (D97, 경고만)</li>
       <li><code>glossary_sync.py</code> 사이트 <code>/ja/glossary</code> → <code>glossary_site.json</code></li>
     </ul></dd>
     <dt>규칙</dt><dd><code>rules/blog-draft.md</code>, <code>rules/voice-hikari.md</code> (목소리·상자 부품), <code>rules/glossary.md</code></dd>
@@ -335,6 +335,8 @@ th{background:var(--code);font-size:13px}
     <li>ヒカリちゃん 말투·쓰지 않는 말 → <code>rules/voice-hikari.md</code> (+ 금지 표현은 <code>check_draft.py</code>)</li>
     <li>전문어 개수에서 빼는 말(영문 이름·코드·괄호 풀이·나라 이름) → <code>check_draft.py</code> 「용어 수준」·<code>NOT_JARGON</code>·<code>PLACE_KATA</code>·<code>COMMON_KATA</code> (D78)</li>
     <li>분량 기준 → <code>rules/blog-draft.md</code> (D47, 일반 글은 상위 글 중앙값 기준 / 속보는 1500~max(3000, 중앙값×1.2), D69) / 상자 표기(<code>:::box</code> 등) → blog-publish 변환과 짝</li>
+    <li>그림 표시 <code>&lt;!-- 그림 N --&gt;</code> → <code>check_draft.py</code> 「그림 표시」 + blog-publish <code>build_publish.py</code> figslot·<code>find_images.py --slot</code>와 짝 (D97)</li>
+    <li>구조 되풀이 기준 → <code>check_draft.py</code> <code>TALK_ABOUT</code>·<code>LIST_SD_MIN</code>·<code>PARA_CV_MIN</code> (D97 — 사람이 괜찮다고 본 글에서 경고가 쏟아지면 푼다)</li>
   </ul></div>
 </div>
 
@@ -433,7 +435,7 @@ th{background:var(--code);font-size:13px}
       <li><code>build_publish.py</code> 초안 → HTML 카드 2개·미리보기·ghost.md·ghost.json (<code>[S]</code> 삭제, <code>:::</code> 상자 → 템플릿, <code>hta-top</code> 보드, FAQ JSON-LD, <code>--check-links</code>)</li>
       <li><code>make_hero_ai.py</code> 대표 이미지 후보 — 초안 요약(제목·3行まとめ·H2)을 프롬프트에, 기본 Codex(ChatGPT 구독) / <code>--engine api</code></li>
       <li><code>make_hero.py</code> → 1800×945 WebP 200KB 이하 + 사이트 표시 미리보기(21:9 위·왼쪽 기준·카드 겹침)</li>
-      <li><code>find_images.py</code> 본문 이미지 (편집부 그림·미국 연방 PD·Commons CC)</li>
+      <li><code>find_images.py</code> 본문 이미지 (편집부 그림·미국 연방 PD·Commons CC). 그림 자리 N번째는 <code>--slot N</code> → 초안 <code>&lt;!-- 그림 N --&gt;</code> 자리에 (D97)</li>
       <li><code>ghost_upload.py</code> Ghost <b>초안만</b> 만들기·갱신 (발행·예약·이메일·삭제 요청은 막음, <code>--dry-run</code>)</li>
       <li><code>after_publish.py</code> URL·공개 글 점검(<code>[실습 필요]</code>·「◆ 실습 필요」가 남으면 오류, D79)·역링크·카드 완료·done 이동 (<code>--scheduled</code>, <code>--verify-live</code>)</li>
     </ul></dd>

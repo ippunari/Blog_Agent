@@ -13,6 +13,8 @@ drafts/<slug>.md 를 설계안·조사 노트·규칙과 맞춰 본다.
  8. CTA 버튼 문구·링크, 내부 링크 URL·앵커가 설계안 그대로, FAQ 질문이 H3로 있는지
  9. 분량: 하한 이상·상한 90% 이하 (표시·Markdown 기호·SOURCES·초안 메모 제외), 부품 분량
 14. 글 뼈대 순서·필수 상자, 차별 포인트 필수, 문단 독립성, 대책 없는 경고 문단, 용어집에 없는 전문어 수 (D47)
+15. 그림 표시 <!-- 그림 N --> 가 설계안 「그림 자리」 N번째 행의 섹션·사실 옆에 있는지 (D96·D97)
+16. 구조 되풀이 경고: 문장 시작·섹션 첫 이음말·목록 길이·문단 길이·글 자체를 말하는 문장 (D97, 경고만)
 10. 상자 형식, 「ヒカリちゃんの案内」 첫 줄, 짧은 인용 2개까지, 원문(일본어) 25자 이상 같은 부분이 인용 밖에 있는지
 11. 용어: 사이트 용어집의 괄호 풀이가 첫 등장에 있는지, 피하는 말 (rules/glossary.md)
 12. 문체 경고: 80자 넘는 문장, 「！」, 「〜ね/〜よ」 끝맺음, 표시 없는 사실 문장 후보
@@ -70,7 +72,27 @@ COMMON_KATA = {"ホームページ", "サーバー", "レンタルサーバー",
                "システム", "ニュース", "リスト", "ページ", "スマホ", "パソコン", "インターネット", "アップデート", "アプリ",
                "ソフトウェア", "プログラム", "コード", "テスト", "メッセージ", "ブラウザー", "ブログ", "サイトヘルス", "タブ",
                "クリック", "ボタン", "スケジュール", "カレンダー", "トラブル", "ポイント", "ケース", "ステップ", "コスト",
-               "ニーズ", "メーカー", "リスク", "イメージ", "ヒカリ", "ヒカリちゃん", "ホスティング", "ホスティングサービス", "チェックリスト", "マニュアル"}
+               "ニーズ", "メーカー", "リスク", "イメージ", "ヒカリ", "ヒカリちゃん", "ホスティング", "ホスティングサービス", "チェックリスト", "マニュアル",
+               # D97: 앱 설치 글에서 빼기 어려운 PC 일상어 (2026-11-28 Claude 아티팩트 글에서 상한 6을 혼자 넘음)
+               "インストール", "アンインストール", "アイコン", "ウィンドウ", "オンライン", "サインイン", "ショートカット", "スタートメニュー", "タイトル"}
+
+
+FIG_RULE_FROM = "2026-11-28"   # D96 설계안 「그림 자리」가 생긴 날 — 그 전 설계안은 그림 표시를 보지 않는다
+# D97 ② 구조 되풀이 (경고만): 글 자체를 말하는 문장 시작 — 「について解説します」 등 리드 쪽은 check_polish(7-5)가 본다
+TALK_ABOUT = re.compile(r"^(重要なのは|大切なのは|ポイントは|注目すべきは|ここでは|ここからは|本記事では|この記事では)")
+LIST_SD_MIN = 3.0    # 4항목 이상 목록의 글자 수 표준편차가 이보다 작으면 경고
+PARA_CV_MIN = 0.2    # 본문 문단 6개 이상의 길이 변동계수가 이보다 작으면 경고
+
+
+def block_after(lines, i):
+    """i행 표시 주석 바로 아래 블록 (빈 줄·다른 주석은 건너뛰고, 빈 줄 없는 연속 줄)"""
+    j = i + 1
+    while j < len(lines) and (not lines[j].strip() or lines[j].strip().startswith("<!--")):
+        j += 1
+    blk = []
+    while j < len(lines) and lines[j].strip() and not lines[j].startswith(("## ", "<!--")):
+        blk.append(lines[j]); j += 1
+    return blk
 
 
 def strip_tags(s):
@@ -433,9 +455,11 @@ def main():
 
     for k in [f["main_keyword"]] + [x.strip() for x in f["sub_keywords"].split("/")]:
         if "とは" in k:
-            term = k.replace("とは", "").strip().split()[0]
-            if f"{term}とは、" not in body_join:
-                E(f"「{k}」: 「{term}とは、〜です。」 정의 문장이 없음 (AEO)")
+            phrase = k.replace("とは", "").strip()
+            # 「〜とは、」 앞부분에 키워드 낱말이 모두 있으면 정의 문장 (「Claude アーティファクトの「公開」とは、」도 됨)
+            defs = [re.sub(r"[「」『』*]", "", d) for d in re.findall(r"([^。\n]*?)とは、", body_join)]
+            if not any(has_kw(d, phrase) for d in defs):
+                E(f"「{k}」: 「{phrase}とは、〜です。」 정의 문장이 없음 (AEO)")
 
     # --- CTA·내부 링크·FAQ
     cta_box = "\n".join("\n".join(b["lines"]) for b in boxes if b["type"] == "cta")
@@ -548,14 +572,8 @@ def main():
     for i, l in enumerate(lines):
         m_ = re.match(r"^<!--\s*차별\s*(\d+)\s*-->\s*$", l.strip())
         if m_:
-            j = i + 1
-            while j < len(lines) and (not lines[j].strip() or lines[j].strip().startswith("<!--")):
-                j += 1
-            blk = []
-            while j < len(lines) and lines[j].strip() and not lines[j].startswith(("## ", "<!--")):
-                blk.append(lines[j]); j += 1
             sec_h = next((hh for hh, s0, e0 in sec_ranges if s0 <= i < e0), None)
-            marks.setdefault(m_.group(1), []).append((i, sec_h, blk))
+            marks.setdefault(m_.group(1), []).append((i, sec_h, block_after(lines, i)))
     changed = "\n".join(memo.splitlines())
     placed, ok = 0, 0
     for r in table(osec.get("차별 포인트 배치", [])):
@@ -598,6 +616,86 @@ def main():
         E("설계안 「차별 포인트 배치」에 섹션을 정한 항목이 없음 — blog-outline으로 (D47)")
     elif not ok:
         E("차별 포인트가 본문에 하나도 없음 — 새 가치 없는 글은 내지 않는다 (D47, scaled content abuse)")
+
+    # --- 그림 표시 (D97 ①, D96): 설계안 「## 그림 자리」 표의 N번째 행 → 그 섹션 안, 그림이 뒷받침하는 블록 바로 위에 <!-- 그림 N -->
+    # blog-publish가 이 자리에 그림을 넣는다 (find_images.py --slot N). D96 이전 설계안이면 점검하지 않는다
+    fig_rows = [r for r in table(osec.get("그림 자리", [])) if len(r) >= 4 and re.match(r"\d{2}", r[0])]
+    fig_marks = {}
+    for i, l in enumerate(lines):
+        m_ = re.match(r"^<!--\s*그림\s*(\d+)\s*-->\s*$", l.strip())
+        if m_:
+            fig_marks.setdefault(int(m_.group(1)), []).append((i, next((hh for hh, s0, e0 in sec_ranges if s0 <= i < e0), None), block_after(lines, i)))
+    if of.get("created_at", "")[:10] >= FIG_RULE_FROM:
+        for k, r in enumerate(fig_rows, 1):
+            h = no2h.get(r[0][:2])
+            hits = [x for x in fig_marks.get(k, []) if x[1] == h]
+            if not hits:
+                where = [x[1] for x in fig_marks.get(k, [])]
+                if re.search(rf"그림 {k}\s*[—-]", changed):   # 「그림 N — 이유」 형식만 (다른 메모 속 「그림 2의」는 아님)
+                    W(f"그림 {k} ({r[0]} {r[1][:16]})을 두지 않음 — 초안 메모의 이유 확인")
+                else:
+                    E(f"그림 {k} ({r[0]} {r[1][:16]}): 섹션 「{h}」에 <!-- 그림 {k} --> 표시가 없음"
+                      + (f" — 지금 「{where[0]}」에 있음" if where else "") + " (설계안 그림 자리대로, 빼면 초안 메모 「설계와 달라진 점」에 「그림 N — 이유」, D97)")
+                continue
+            if len(hits) > 1:
+                E(f"<!-- 그림 {k} --> 표시가 {len(hits)}개 — 하나만")
+            sids = set(S_RE.findall(r[3]))
+            if r[1].startswith("편집부") and sids and not any(f"[{x}]" in "\n".join(hits[0][2]) for x in sids):
+                E(f"{hits[0][0]+1+OFF}행 그림 {k}: 표시 아래 블록에 그 그림의 사실({', '.join(sorted(sids))})이 없음 — 그림이 뒷받침하는 사실 바로 위에 (D97)")
+        for k, lst in fig_marks.items():
+            if not 1 <= k <= len(fig_rows):
+                E(f"{lst[0][0]+1+OFF}행 <!-- 그림 {k} -->: 설계안 「그림 자리」에 {k}번째 행이 없음")
+    elif fig_marks:
+        W("D96 이전 설계안인데 <!-- 그림 N --> 표시가 있음 — 설계안에 그림 자리가 없으면 표시를 뺀다")
+
+    # --- 구조 되풀이 (D97 ②, 경고만): 말투를 고쳐도 남는 모양. 굵은 직답·상자·표·CTA·FAQ는 사이트 형식이라 뺀다
+    faq_start = next((s0 for hh, s0, e0 in sec_ranges if "FAQ" in hh or "よくある質問" in hh), len(lines))
+    paras, starts, lists, first_openers = [], [], [], []
+    cur_list, sec_first = [], {}
+    for i, l in enumerate(lines[:faq_start]):
+        st = l.strip()
+        in_sec = next((hh for hh, s0, e0 in sec_ranges if s0 < i < e0), None)
+        is_item = bool(re.match(r"^(-|\d+\.(?!\d))\s", st))
+        if cur_list and not is_item:
+            lists.append(cur_list); cur_list = []
+        if not in_sec or in_box[i] or not st or st.startswith(("#", "|", ">", "<!--", "**", ":::")):
+            continue
+        p_ = plain(l)
+        if is_item:
+            cur_list.append(len(re.sub(r"\s", "", p_)))
+            continue
+        paras.append(len(re.sub(r"\s", "", p_)))
+        if in_sec not in sec_first:
+            sec_first[in_sec] = p_
+        for s in sentences(p_):
+            m_ = re.match(r"^(.{1,6}?)(?:[、]|(?<=[^\s])[はがをにでも](?=.))", s.strip())
+            starts.append(m_.group(1) if m_ else s.strip()[:4])
+            if TALK_ABOUT.match(s.strip()):
+                first_openers.append(f"{i+1+OFF}행 「{s.strip()[:14]}…」")
+    if cur_list:
+        lists.append(cur_list)
+    if len(starts) >= 12:
+        from collections import Counter
+        top = Counter(starts).most_common(3)
+        share = sum(c for _, c in top) / len(starts)
+        if share > 0.25 and top[0][1] >= 3:
+            W(f"문장 시작이 되풀이됨 — 많이 쓴 시작 3개가 {share:.0%} ({' · '.join(f'「{w}」{c}' for w, c in top)}). 주어·순서를 바꿔 본다 (D97)")
+    joints = [h for h, p_ in sec_first.items() if re.match(r"^(まず|次に|また|さらに|そして)", p_)]
+    if len(sec_first) >= 4 and len(joints) * 2 >= len(sec_first):
+        W(f"섹션 첫 본문 문단 {len(joints)}/{len(sec_first)}개가 「まず・次に・また・さらに・そして」로 시작 — 내용으로 시작한다 (D97)")
+    for ls_ in lists:
+        if len(ls_) >= 4:
+            mean = sum(ls_) / len(ls_)
+            sd = (sum((x - mean) ** 2 for x in ls_) / len(ls_)) ** 0.5
+            if sd < LIST_SD_MIN:
+                W(f"목록 {len(ls_)}항목의 길이가 거의 같음 (평균 {mean:.0f}자, 표준편차 {sd:.1f}) — 항목마다 필요한 만큼 쓴다 (D97)")
+    if len(paras) >= 6:
+        mean = sum(paras) / len(paras)
+        cv = ((sum((x - mean) ** 2 for x in paras) / len(paras)) ** 0.5) / mean if mean else 1
+        if cv < PARA_CV_MIN:
+            W(f"본문 문단 {len(paras)}개의 길이가 고름 (변동계수 {cv:.2f}) — 짧은 문단·긴 문단을 섞는다 (D97)")
+    if first_openers:
+        W(f"글 자체를 말하는 문장 {len(first_openers)}개 — 바로 내용을 쓴다 (D97): " + " / ".join(first_openers[:5]))
 
     # --- 문단 독립성·경고 문장 (voice-hikari.md 2-3, D47)
     deictic, alarm = [], []

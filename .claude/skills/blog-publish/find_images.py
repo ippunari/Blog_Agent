@@ -10,7 +10,7 @@
 사용법:
   python3 -I find_images.py search "server room" [--n 8]                 # Commons 후보 (라이선스 걸러서)
   python3 -I find_images.py add-commons "File:XXX.jpg" <slug> --section 2 --alt "..." --caption "..."
-  python3 -I find_images.py add-diagram <svg파일> <slug> --section 1 --alt "..." --caption "...（出典：…）"
+  python3 -I find_images.py add-diagram <svg파일> <slug> --section 1 [--slot N] --alt "..." --caption "...（出典：…）"
   python3 -I find_images.py add-usgov <이미지URL> <slug> --page <실린 페이지 URL> --agency CISA --section 3 --alt "..." --caption "..."
   python3 -I find_images.py list <slug>
   python3 -I find_images.py drop <slug> <번호>        # 사람이 「이미지 N 빼」라고 하면
@@ -101,6 +101,7 @@ def main():
         x.add_argument("src"); x.add_argument("slug")
         x.add_argument("--section", type=int, required=True, help="몇 번째 본문 H2 아래에 (1부터)")
         x.add_argument("--alt", required=True); x.add_argument("--caption", required=True)
+        x.add_argument("--slot", type=int, help="설계안 그림 자리 N번째 행 — 초안의 <!-- 그림 N --> 자리에 넣는다 (D97)")
         if name == "add-usgov":
             x.add_argument("--page", required=True); x.add_argument("--agency", required=True)
     l = sub.add_parser("list"); l.add_argument("slug")
@@ -120,7 +121,7 @@ def main():
     if a.cmd == "list":
         _, items = load(a.slug, root)
         for it in items:
-            print(f"{it['n']}. [{'남김' if it.get('keep', True) else '뺌'}] {it['kind']} 섹션{it['section']} {it['license']} — {it['caption'][:40]}")
+            print(f"{it['n']}. [{'남김' if it.get('keep', True) else '뺌'}] {it['kind']} 섹션{it['section']}{' 그림' + str(it['slot']) if it.get('slot') else ''} {it['license']} — {it['caption'][:40]}")
         return
     if a.cmd == "drop":
         p, items = load(a.slug, root)
@@ -134,6 +135,8 @@ def main():
     check_text(a)
     p, items = load(a.slug, root)
     base = {"section": a.section, "alt": a.alt.strip(), "caption": a.caption.strip(), "checked": today, "keep": True}
+    if a.slot:
+        base["slot"] = a.slot
     if a.cmd == "add-commons":
         r = commons_info(titles=a.src)
         if not r:

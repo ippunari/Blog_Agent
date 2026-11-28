@@ -53,9 +53,10 @@ python3 -I .claude/skills/blog-publish/make_hero.py <원본> <slug> --alt "<일�
 ## 2-2. 본문 이미지 (에이전트, D55) — 사람은 ◆ 미리보기에서 남김/뺌만
 rules/blog-publish.md 「본문 이미지」. 속보 1~2장, 일반 2~4장. 섹션 내용과 직접 관련된 것만 (꾸밈용 금지)
 - **설계안 「## 그림 자리」 표부터** 만든다 (D96): 그 섹션·종류·보여 줄 것·쓸 사실 그대로. 다듬은 초안에서 그 섹션이 빠졌거나 사실이 바뀌었으면 건너뛰고 ghost.md에 「그림 자리 n 건너뜀 — 이유」. 표에 없는 그림은 더 맞는 자리가 보일 때만 더한다 (장수 상한 안에서). 「없음」이면 억지로 찾지 않는다
+- **놓는 자리** (D97): 그림 자리 N번째 행의 그림은 `--slot N`을 붙여 올린다 → 초안의 `<!-- 그림 N -->` 자리(그림이 뒷받침하는 블록 바로 위)에 들어간다. 표시가 없으면 섹션 직답 바로 아래 (build_publish가 경고)
 ```bash
 I=.claude/skills/blog-publish/find_images.py
-python3 -I $I add-diagram publish/<slug>/img/<이름>.svg <slug> --section N --alt "…" --caption "…出典：…（図：編集部作成）"
+python3 -I $I add-diagram publish/<slug>/img/<이름>.svg <slug> --section N --slot K --alt "…" --caption "…出典：…（図：編集部作成）"
 python3 -I $I search "<영어 검색어>"            # Commons 후보 (라이선스·상표 제한·부적절 맥락은 자동으로 거름)
 python3 -I $I add-commons "File:…" <slug> --section N --alt "…" --caption "…（イメージ）"
 python3 -I $I add-usgov <이미지URL> <slug> --page <실린 페이지> --agency CISA --section N --alt "…" --caption "…"

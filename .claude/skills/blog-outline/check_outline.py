@@ -194,7 +194,7 @@ def main():
     if route == "속보":
         if not ev:
             W("카드에 「사건어:」 없음 — D80 이전 카드면 2장대로 키워드를 갱신 (속보 메인 키워드 = 사건어로 시작)")
-        elif not norm(main_kw).startswith(norm(ev.group(1).split("(")[0].strip())):
+        elif "(메인에 없음)" not in ev.group(1) and not norm(main_kw).startswith(norm(ev.group(1).split("(")[0].strip())):   # D90 ④: 사건어가 자동완성에 없으면 메인은 넓은 말
             E(f"속보 메인 키워드 「{main_kw}」가 사건어 「{ev.group(1).strip()}」로 시작하지 않음 (D80)")
     cq = re.search(r"상위 구성 검색어:\s*([^\n(]+)", card)
     if cq and norm(cq.group(1).strip()) != norm(main_kw):
