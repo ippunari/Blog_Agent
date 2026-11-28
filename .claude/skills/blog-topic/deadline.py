@@ -9,15 +9,18 @@
 사용법:
   python3 -I deadline.py "2026-11-26 03:54"            → 마감
   python3 -I deadline.py "2026-11-26 03:54" --now "2026-11-28 00:20"  → 마감 + 남은 업무 시간
-blog-research·check_topics.py도 이 파일을 쓴다 (마감 계산은 한 곳에서)
+python3 -I deadline.py --carry topics --now "2026-11-30 08:00"  → 깊이 이월로 볼 topics 파일 (최근 5 업무일, D92)
+blog-research·check_topics.py도 이 파일을 쓴다 (마감·업무일 계산은 한 곳에서)
 """
 import argparse
+import os
 import re
 import sys
 from datetime import datetime, timedelta, timezone
 
 JST = timezone(timedelta(hours=9))
 WORK_START, WORK_END, NOON = 9, 18, 12
+CARRY_WORKDAYS = 5      # 깊이 이월: 순위표 날짜 다음 날부터 오늘까지 업무일이 이 수 이하 (D92)
 NEED_HOURS = 3          # 추천에 필요한 남은 업무 시간 (잠정 — 운영하며 실제로 재서 고친다, D88)
 # 일본 공휴일 (内閣府 「国民の祝日」). blog-publish/build_publish.py JP_HOLIDAYS와 같은 목록 — 둘 다 고친다
 JP_HOLIDAYS = {
@@ -76,15 +79,44 @@ def work_hours_left(now, dl):
     return total
 
 
+def workdays_since(d, now):
+    """d(날짜) 다음 날부터 now 날짜까지의 업무일 수"""
+    d, now = d.astimezone(JST).date(), now.astimezone(JST).date()
+    n, cur = 0, d + timedelta(days=1)
+    while cur <= now:
+        if cur.weekday() < 5 and cur.strftime("%Y-%m-%d") not in JP_HOLIDAYS:
+            n += 1
+        cur += timedelta(days=1)
+    return n
+
+
+def carry_files(topics_dir, now, limit=CARRY_WORKDAYS):
+    """깊이 이월로 볼 topics 파일 (YYYY-MM-DD-am|pm.md, 최근 limit 업무일, 오래된 순)"""
+    out = []
+    for f in sorted(os.listdir(topics_dir)):
+        m = re.fullmatch(r"(\d{4}-\d{2}-\d{2})-(am|pm)\.md", f)
+        if m and workdays_since(parse(m.group(1)), now) <= limit:
+            out.append(os.path.join(topics_dir, f))
+    return out
+
+
 def holiday_years():
     return {h[:4] for h in JP_HOLIDAYS}
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("published", help="원래 공표 일시 (JST) 예: 2026-11-26 03:54")
+    ap.add_argument("published", nargs="?", help="원래 공표 일시 (JST) 예: 2026-11-26 03:54")
     ap.add_argument("--now", help="지금 시각 (생략하면 현재)")
+    ap.add_argument("--carry", metavar="TOPICS_DIR", help="깊이 이월로 볼 topics 파일 목록 (최근 5 업무일, D92)")
     a = ap.parse_args()
+    if a.carry:
+        now = parse(a.now) if a.now else datetime.now(JST)
+        for f in carry_files(a.carry, now):
+            print(f)
+        return
+    if not a.published:
+        ap.error("공표 일시 또는 --carry가 필요하다")
     dl, ext = deadline(a.published)
     now = parse(a.now) if a.now else datetime.now(JST)
     if str(dl.year) not in holiday_years():

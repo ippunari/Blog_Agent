@@ -199,7 +199,7 @@ th{background:var(--code);font-size:13px}
   <p>후보에 일본어 검색어를 찾고 점수를 매겨 순위표를 내고, 추천 ○를 넣은 시트를 기록용으로 올리고(아침 3 · 저녁 3 — 속보 2(급한 보안이 있으면 그중 1, D86)·깊이 새 글 1, D72), 확인을 기다리지 않고 ○ 주제의 카드를 바로 만든다 (D67).</p>
   <div class="io">
     <div><h4>입력</h4><ul>
-      <li>새 <code>candidates/</code> 파일 + 앞 <code>topics/</code> 파일 (이월 후보)</li>
+      <li>새 <code>candidates/</code> 파일 + 앞 <code>topics/</code> 파일 (이월 후보 — 속보는 바로 앞 1개, 깊이는 최근 5 업무일 <code>deadline.py --carry</code>, D92)</li>
       <li><code>briefs/*.md</code> (이미 확정된 주제는 뺌)</li>
       <li><code>experience.json</code> 회사 경험 점수 (D39 — 값은 D71: AI 활용·도입·개발 중심)</li>
       <li><code>topics/existing_posts.json</code> 기존 글 목록 (1키워드 1글)</li>
