@@ -512,6 +512,9 @@ def checklist(text, f, root):
     lines = main.splitlines()
     h2 = [l[3:].strip() for l in lines if l.startswith("## ")]
     is_faq = lambda h: h.strip().upper() == "FAQ" or "よくある質問" in h or "（FAQ）" in h   # D54
+    # D102: 질문형 서브 키워드는 H2 또는 FAQ 질문(H3)에 그대로 — 짧은 답이면 FAQ 자리가 자연스럽다
+    faq_at = next((i for i, l in enumerate(lines) if l.startswith("## ") and is_faq(l[3:])), None)
+    faq_h3 = [l[4:].strip() for l in lines[faq_at:] if l.startswith("### ")] if faq_at is not None else []
     h2q = [h for h in h2 if not is_faq(h)]
     h3_before = any(l.startswith("### ") for l in lines[:next((i for i, l in enumerate(lines) if l.startswith("## ")), 0)])
     kw = f.get("main_keyword", "")
@@ -550,8 +553,8 @@ def checklist(text, f, root):
         ("SEO 4 slug", ok(bool(re.fullmatch(r"[a-z0-9]+(-[a-z0-9]+){2,4}", f.get("slug", "")))), f.get("slug", "")),
         ("SEO 5 소제목", ok(4 <= len(h2q) <= 8 and all(h.endswith("？") or "？" in h for h in h2q) and not h3_before),
          f"H2 {len(h2q)}개 (FAQ 제외), 모두 질문형"),
-        ("SEO 6 본문", ok(has_kw(lead200, kw) and all(any(has_kw(h, s) for h in h2) for s in subs)),
-         "첫 200자에 메인 키워드, 질문형 서브 키워드가 H2에 / 분량·차별 포인트는 초안 점검"),
+        ("SEO 6 본문", ok(has_kw(lead200, kw) and all(any(has_kw(h, s) for h in h2 + faq_h3) for s in subs)),
+         "첫 200자에 메인 키워드, 질문형 서브 키워드가 H2·FAQ 질문에 / 분량·차별 포인트는 초안 점검"),
         ("SEO 7 내부 링크", ok(2 <= len(inner) and not any(t.strip() in ("こちら", "ここ") for t, _ in inner)),
          f"본문 {len(inner)}개, 「こちら」 앵커 없음 / 기존 글에서 새 글로 역링크는 blog-publish 뒤"),
         ("SEO 8 외부 링크", "통과" if not outer else "사람 확인", f"본문 외부 링크 {len(outer)}개 / 출처는 SOURCES(사실 대조 통과)"),
